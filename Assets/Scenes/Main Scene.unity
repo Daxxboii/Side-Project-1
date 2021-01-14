@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: School
       objectReference: {fileID: 0}
+    - target: {fileID: 5447331667604542231, guid: 4a0500dba1632cb42a8f547b91f35c89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cfc039ddbf5e2d64b81fd90a1dafca08, type: 2}
     - target: {fileID: 6212560199443480455, guid: 4a0500dba1632cb42a8f547b91f35c89,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -388,8 +393,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.4811321, g: 0.74924874, b: 1, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1460,7 +1465,7 @@ MonoBehaviour:
     tempInMe: {fileID: 0}
   _camera:
     cameraTransform: {fileID: 719313560}
-    cameraSensitivity: 10
+    cameraSensitivity: 5
     cameraPitch: 0
     lookInput: {x: 0, y: 0}
     leftFingerID: 0
@@ -1521,8 +1526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975358506}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -55.56, y: 11.49, z: 14.303}
-  m_LocalScale: {x: 1, y: 1.4959725, z: 1}
+  m_LocalPosition: {x: -66.5, y: 1.6, z: 12.6}
+  m_LocalScale: {x: 1, y: 1.3, z: 1}
   m_Children:
   - {fileID: 719313560}
   - {fileID: 334407283}
@@ -1856,7 +1861,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c438e5c679f1be040a135443008e2fce, type: 2}
+  - {fileID: 2100000, guid: cfc039ddbf5e2d64b81fd90a1dafca08, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
