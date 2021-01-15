@@ -52,7 +52,8 @@ namespace Scripts.Player
         LocoMotionVariables motionVariables;
         [SerializeField]
         PickitUpVariables pickUpVariables;
-
+        [SerializeField]
+        Scripts.Objects.ObjectController oc;
 
         [Serializable]
         private struct CameraSettings
@@ -138,11 +139,13 @@ namespace Scripts.Player
         {
             Collider c;
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
+            Color Temp;
+            
+            if (Physics.Raycast(transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
             {
                 c = hit.collider;
                 pickUpVariables.tempInMe = hit.transform.gameObject;
-                Color Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
+                Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
                 if (c.tag == "pickup")
                 {
                     if (pickUpVariables.isFull)
@@ -158,6 +161,15 @@ namespace Scripts.Player
             else
             {
                 pickUpVariables.tempInMe = null;
+            }
+        }
+
+        public void PickUpObject()
+        {
+            if(pickUpVariables.tempInMe != null)
+            {
+                oc.getnum(pickUpVariables.tempInMe);
+                Destroy(pickUpVariables.tempInMe);
             }
         }
 
