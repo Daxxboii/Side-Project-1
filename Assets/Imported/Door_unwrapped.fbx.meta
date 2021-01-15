@@ -3,7 +3,17 @@ guid: 060e53b7e4d95f54c8130254b4387d9a
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door_material
+    second: {fileID: 2100000, guid: dc30db1f47f78dd4c97898cc3ed02d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 86111a2cff0df96408146c95ff1778f5, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -34,7 +44,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 150
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -81,7 +91,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 150
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
