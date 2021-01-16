@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.009021859, g: 0.013081882, b: 0.020743724, a: 1}
+  m_IndirectSpecularColor: {r: 0.008864175, g: 0.012999165, b: 0.020187272, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -163,7 +163,7 @@ BoxCollider:
   m_GameObject: {fileID: 121882127}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -825,7 +825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &441743349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,7 @@ BoxCollider:
   m_GameObject: {fileID: 643093782}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1225,6 +1225,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Basketball_Court_Final
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879270039666311648, guid: cf9fd37966ae7824f907b28c8aa69a98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879270039666311648, guid: cf9fd37966ae7824f907b28c8aa69a98,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879270039666311648, guid: cf9fd37966ae7824f907b28c8aa69a98,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879270039666311648, guid: cf9fd37966ae7824f907b28c8aa69a98,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879270039666311648, guid: cf9fd37966ae7824f907b28c8aa69a98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9fd37966ae7824f907b28c8aa69a98, type: 3}
@@ -1432,6 +1457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door_unwrapped (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 060e53b7e4d95f54c8130254b4387d9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2754259124331378346, guid: 060e53b7e4d95f54c8130254b4387d9a,
         type: 3}
@@ -1940,6 +1970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 2071282239}
+  oc: {fileID: 868583798}
   motionVariables:
     speed: 10
     Chasedspeed: 15
@@ -1957,7 +1988,6 @@ MonoBehaviour:
     isFull: 0
     Range: 4
     tempInMe: {fileID: 0}
-  oc: {fileID: 868583798}
   _camera:
     cameraTransform: {fileID: 719313560}
     cameraSensitivity: 5
@@ -2940,6 +2970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door_unwrapped
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 060e53b7e4d95f54c8130254b4387d9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2754259124331378346, guid: 060e53b7e4d95f54c8130254b4387d9a,
         type: 3}
