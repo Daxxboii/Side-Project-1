@@ -49,12 +49,11 @@ namespace Scripts.Player
         [SerializeField]
         Joystick joystick;
         [SerializeField]
-        Scripts.Objects.ObjectController oc;
-        [SerializeField]
         LocoMotionVariables motionVariables;
         [SerializeField]
         PickitUpVariables pickUpVariables;
-        
+        [SerializeField]
+        Scripts.Objects.ObjectController oc;
 
         [Serializable]
         private struct CameraSettings
