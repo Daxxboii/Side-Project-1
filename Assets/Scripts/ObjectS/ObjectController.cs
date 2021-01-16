@@ -16,7 +16,7 @@ namespace Scripts.Objects
             {
                 if(!hadnsFull)
                 {
-                    had = Instantiate(have, hand.position, hand.rotation);
+                    had = Instantiate(have, hand.position, hand.r``otation);
                     had.transform.SetParent(hand.transform);
                     hadnsFull = true;
                 }
