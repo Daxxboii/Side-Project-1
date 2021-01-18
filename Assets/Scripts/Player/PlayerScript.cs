@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using System;
 
 namespace Scripts.Player
@@ -30,8 +29,7 @@ namespace Scripts.Player
     {
         [Tooltip("layerSelection for pickable items")]
         public LayerMask pickables;
-        [Tooltip("color selection")]
-        public Color HaveSpace, DontHaveSpace;
+        
         [Tooltip("Is inventory full or not")]
         public bool isFull;
         [Tooltip("how far should be the object in order to pickup")]
@@ -142,35 +140,28 @@ namespace Scripts.Player
             RaycastHit hit;
             Color Temp;
             
-            if (Physics.Raycast(transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
-            {
-                c = hit.collider;
-                pickUpVariables.tempInMe = hit.transform.gameObject;
-                Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
-                if (c.tag == "pickup")
+            
+                if (Physics.Raycast(transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
                 {
-                    if (pickUpVariables.isFull)
-                    {
-                        c.transform.gameObject.GetComponent<Renderer>().material.color = pickUpVariables.DontHaveSpace;
-                    }
-                    else if (!pickUpVariables.isFull)
-                    {
-                        c.transform.gameObject.GetComponent<Renderer>().material.color = pickUpVariables.HaveSpace;
-                    }
+                    c = hit.collider;
+                    pickUpVariables.tempInMe = hit.transform.gameObject;
+                    Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
                 }
-            }
-            else
-            {
-                pickUpVariables.tempInMe = null;
-            }
+                else
+                {
+                    pickUpVariables.tempInMe = null;
+                }
+            
         }
 
         public void PickUpObject()
         {
-            if(pickUpVariables.tempInMe != null)
-            {
-                oc.getnum(pickUpVariables.tempInMe);
-                Destroy(pickUpVariables.tempInMe);
+            if (oc.had == null) {
+                if (pickUpVariables.tempInMe != null)
+                {
+                    oc.getnum(pickUpVariables.tempInMe);
+                    Destroy(pickUpVariables.tempInMe);
+                }
             }
         }
 
