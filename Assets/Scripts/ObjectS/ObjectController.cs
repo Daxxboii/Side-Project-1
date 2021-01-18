@@ -4,14 +4,19 @@ using System.ComponentModel;
 using System.Numerics;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Objects
 {
     public class ObjectController : MonoBehaviour
     {
+        
         public GameObject have, had, havetemp;
         public Transform hand, objectsT;
         public bool hadnsFull;
+        [SerializeField]
+        GameObject pickup, dropButton;
+        
         void Update()
         {
             if(have != null)
@@ -29,6 +34,11 @@ namespace Scripts.Objects
         public void getnum(GameObject o)
         {
             have = o;
+            if(have != null)
+            {
+                pickup.SetActive(false);
+                dropButton.SetActive(true);
+            }
         }
         public void drop()
         {
@@ -39,6 +49,8 @@ namespace Scripts.Objects
             Destroy(had);
             had = null;
             hadnsFull = false;
+            pickup.SetActive(true);
+            dropButton.SetActive(false);
         }
     }
 }

@@ -75,6 +75,7 @@ namespace Scripts.Player
             ch = GetComponent<CharacterController>();
             FpsCam = GetComponentInChildren<Camera>();
             motionVariables.SpeedTemp = motionVariables.speed;
+            joystick = FindObjectOfType<FixedJoystick>();
 
             //###### for camera
 
@@ -83,7 +84,6 @@ namespace Scripts.Player
             _camera.rightFingerID = -1;
 
             _camera.halfScreenWidth = Screen.width / 2;
-
         }
        
 
