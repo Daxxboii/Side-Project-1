@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,12 +9,12 @@ namespace LoneWolfStudios.Control
     public class AIController : MonoBehaviour
     {
         public float wanderRadius;
-        public float wanderTimer;
+        public float wanderTimer, chaseDistance, attackRange;
 
         private Transform target;
         private NavMeshAgent agent;
         private float timer;
-
+        
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -21,6 +22,7 @@ namespace LoneWolfStudios.Control
         }
         private void Update()
         {
+            
             timer += Time.deltaTime;
 
             if (timer >= wanderTimer)
@@ -29,7 +31,9 @@ namespace LoneWolfStudios.Control
                 agent.SetDestination(newPos);
                 timer = 0;
             }
+
         }
+        
         public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
         {
             Vector3 randDirection = Random.insideUnitSphere * dist;
