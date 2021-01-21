@@ -9,7 +9,8 @@ namespace LoneWolfStudios.Control
     public class AIController : MonoBehaviour
     {
         public float wanderRadius;
-        public float wanderTimer, chaseDistance, attackRange;
+        public float wanderTimer, fieldOfView = 110f, range;
+        Vector3 playerLastInSight;
 
         private Transform target;
         private NavMeshAgent agent;
@@ -22,16 +23,45 @@ namespace LoneWolfStudios.Control
         }
         private void Update()
         {
-            
-            timer += Time.deltaTime;
-
-            if (timer >= wanderTimer)
+            var player = GameObject.FindWithTag("Player");
+            if (isinFrontOFMe(player))
             {
-                Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-                agent.SetDestination(newPos);
-                timer = 0;
+                Debug.Log("chaising");
+                agent.SetDestination(player.transform.position);
             }
+            else if (!isinFrontOFMe(player))
+            {
+                Debug.Log("patoling");
+                timer += Time.deltaTime;
 
+                if (timer >= wanderTimer)
+                {
+
+                    Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                    agent.SetDestination(newPos);
+                    timer = 0;
+                }
+            }
+        }
+        bool isinFrontOFMe(GameObject player)
+        {
+            
+            Vector3 direction = player.transform.position - transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);
+            if (angle < fieldOfView * 0.5f)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, range))
+                {
+                    Debug.DrawRay(transform.position, direction, Color.black);
+                    return true;
+                    
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
         }
         
         public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
