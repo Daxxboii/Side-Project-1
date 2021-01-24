@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 namespace Scripts.Player
 {
@@ -21,7 +22,9 @@ namespace Scripts.Player
         [Tooltip("gravity")]
         public float Gravity;
 
-        public bool gettingChased;
+        public float crouchspeed, chasedcrouchspeed, crouchHightn, crouchHightTemp;
+
+        public bool gettingChased, CroutchButtonPressed;
     }
 
     [System.Serializable]
@@ -76,7 +79,7 @@ namespace Scripts.Player
             FpsCam = GetComponentInChildren<Camera>();
             motionVariables.SpeedTemp = motionVariables.speed;
             joystick = FindObjectOfType<FixedJoystick>();
-
+            motionVariables.crouchHightTemp = ch.height;
             //###### for camera
 
             // id = -1 means no finger is touching the screen
@@ -107,7 +110,7 @@ namespace Scripts.Player
 
             move = x * transform.right + z * transform.forward;
 
-            if (motionVariables.gettingChased)
+            if (motionVariables.gettingChased && !motionVariables.CroutchButtonPressed)
             {
                 motionVariables.speed = motionVariables.Chasedspeed;
                 motionVariables.ChaseStart += Time.deltaTime;
@@ -119,12 +122,26 @@ namespace Scripts.Player
                 }
             }
 
+            if(motionVariables.CroutchButtonPressed)
+            {
+                ch.height = motionVariables.crouchHightn;
+                motionVariables.speed = motionVariables.crouchspeed;
+            }
+            else if(!motionVariables.CroutchButtonPressed)
+            {
+                ch.height = motionVariables.crouchHightTemp;
+                motionVariables.speed = motionVariables.SpeedTemp;
+            }
             if(ch.isGrounded == false)
             {
                 move += Physics.gravity * Time.deltaTime * motionVariables.Gravity;
             }
 
             ch.Move(move * Time.deltaTime * motionVariables.speed);
+        }
+        public void Crouch()
+        {
+            motionVariables.CroutchButtonPressed = !motionVariables.CroutchButtonPressed;
         }
         private void OnTriggerEnter(Collider other)
         {
