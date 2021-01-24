@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3398117724964107542}
   - component: {fileID: 3398117724964107543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player tourch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3398117725750790028}
   - component: {fileID: 3398117725750790029}
   - component: {fileID: 3398117725750790018}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3398117725901411438}
   - component: {fileID: 3398117725901411437}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 3398117726024668983}
   - component: {fileID: 3398117726024668980}
   - component: {fileID: 3398117726024668976}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -382,7 +382,12 @@ MonoBehaviour:
     ChaseStart: 0
     SpeedTemp: 0
     Gravity: 9.8
+    crouchspeed: 5
+    chasedcrouchspeed: 6
+    crouchHightn: 1
+    crouchHightTemp: 0
     gettingChased: 0
+    CroutchButtonPressed: 0
   pickUpVariables:
     pickables:
       serializedVersion: 2
@@ -407,7 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3398117726439668584}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ground check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
