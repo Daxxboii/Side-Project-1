@@ -176,7 +176,7 @@ namespace Scripts.Player
             if (oc.had == null) {
                 if (pickUpVariables.tempInMe != null)
                 {
-                    oc.getnum(pickUpVariables.tempInMe);
+                    oc.GetIT(pickUpVariables.tempInMe);
                     Destroy(pickUpVariables.tempInMe);
                 }
             }
