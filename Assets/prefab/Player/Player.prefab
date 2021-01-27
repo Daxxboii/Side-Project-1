@@ -256,7 +256,6 @@ MonoBehaviour:
   had: {fileID: 0}
   havetemp: {fileID: 0}
   hand: {fileID: 3398117725901411438}
-  objectsT: {fileID: 0}
   hadnsFull: 0
   pickup: {fileID: 0}
   dropButton: {fileID: 0}
@@ -273,6 +272,7 @@ GameObject:
   - component: {fileID: 3398117726024668983}
   - component: {fileID: 3398117726024668980}
   - component: {fileID: 3398117726024668976}
+  - component: {fileID: 1641973040}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -403,6 +403,22 @@ MonoBehaviour:
     leftFingerID: 0
     rightFingerID: 0
     halfScreenWidth: 0
+--- !u!114 &1641973040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398117726024668977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fcc1bdc0b9cd841aa176d124097568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 4
+  hidableLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &3398117726439668585
 GameObject:
   m_ObjectHideFlags: 0

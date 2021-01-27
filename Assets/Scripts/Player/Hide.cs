@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -7,39 +8,31 @@ namespace Scripts.Player
 {
     public class Hide : MonoBehaviour
     {
-        GameObject hideButton;
-        [SerializeField] float range = 4f;
-        [SerializeField] LayerMask hidableLayer;
-
-        private void Awake()
-        {
-            hideButton = GameObject.Find("hide");
-            hideButton.SetActive(false);
-           
-        }
-
-        private void Update()
+        public static event Action<bool, GameObject> isHideing;
+        [SerializeField] LayerMask hideableLayer;
+        [SerializeField] float range;
+        HidingController h;
+        public void OnHideButtonPressed()
         {
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.forward, out hit, range, hidableLayer))
-                hideButton.SetActive(true);
-            else
-                hideButton.SetActive(false);
-
-        }
-        public void OnButtonPressed()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, range, hidableLayer))
+            if(Physics.Raycast(transform.position,transform.forward,out hit, range, hideableLayer ))
             {
-                if(hit.collider.tag == "Hideable")
+                h = hit.transform.gameObject.GetComponent<HidingController>();
+                if (hit.collider.CompareTag("Hideable"))
                 {
-                    HidingController hc = hit.transform.gameObject.GetComponent<HidingController>();
-                    hc.GiveItToMe();
-                    
+                    h.enabled = true;
+                    if (isHideing != null)
+                        isHideing(true, this.gameObject);
                 }
-                
             }
+        }
+        public void OnUnHideButtonPressed()
+        {
+            Debug.Log("manish smex");
+            
+            if (isHideing != null)
+                isHideing(false, this.gameObject);
+            h.enabled = false;
         }
     }
 }
