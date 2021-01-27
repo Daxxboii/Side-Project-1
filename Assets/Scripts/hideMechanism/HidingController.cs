@@ -1,33 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Scripts.Player;
 public class HidingController : MonoBehaviour
 {
-    [SerializeField] GameObject cam, Unhide, player, FPSC;
-    private void Awake()
+    [SerializeField] GameObject cam;
+    MeshRenderer player;
+    private void OnEnable()
     {
-        Unhide = GameObject.Find("unhide");
-        Unhide.SetActive(false);
-        cam = this.gameObject.transform.GetChild(0).gameObject;
-        player = GameObject.Find("Player");
-        FPSC = GameObject.Find("FpsCanvas");
-        
+        Hide.isHideing += OnHideing;
     }
-
-    public void GiveItToMe()
+    public void OnHideing(bool h, GameObject g)
     {
-        player.SetActive(false);
-        Unhide.SetActive(true);
-        cam.SetActive(true);
-        FPSC.SetActive(false);
+        player = g.transform.gameObject.GetComponent<MeshRenderer>();
+        if(h == true)
+        {
+            cam.SetActive(true);
+            player.enabled = false;
+            Debug.Log("loda");
+        }
+        else if(h == false)
+        {
+            cam.SetActive(false);
+            player.enabled = true;
+            Debug.Log("loda2");
+        }
     }
-
-    public void back()
+    private void OnDisable()
     {
-        player.SetActive(true);
-        Unhide.SetActive(false);
-        cam.SetActive(false);
-        FPSC.SetActive(true);
+        Hide.isHideing -= OnHideing;
     }
 }
