@@ -158,7 +158,7 @@ namespace Scripts.Player
             Color Temp;
             
             
-                if (Physics.Raycast(transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
+                if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
                 {
                     c = hit.collider;
                     pickUpVariables.tempInMe = hit.transform.gameObject;

@@ -5,24 +5,24 @@ using Scripts.Player;
 public class HidingController : MonoBehaviour
 {
     [SerializeField] GameObject cam;
-    MeshRenderer player;
+    GameObject player;
     private void OnEnable()
     {
         Hide.isHideing += OnHideing;
     }
     public void OnHideing(bool h, GameObject g)
     {
-        player = g.transform.gameObject.GetComponent<MeshRenderer>();
+        player = g.transform.gameObject;
         if(h == true)
         {
             cam.SetActive(true);
-            player.enabled = false;
+            player.SetActive(false);
             Debug.Log("loda");
         }
         else if(h == false)
         {
             cam.SetActive(false);
-            player.enabled = true;
+            player.SetActive(true);
             Debug.Log("loda2");
         }
     }
