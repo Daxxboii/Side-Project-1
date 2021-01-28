@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using System.Threading;
 
 namespace Scripts.Player
 {
@@ -28,11 +29,11 @@ namespace Scripts.Player
     }
 
     [System.Serializable]
-    public struct PickitUpVariables 
+    public struct PickitUpVariables
     {
         [Tooltip("layerSelection for pickable items")]
         public LayerMask pickables;
-        
+
         [Tooltip("Is inventory full or not")]
         public bool isFull;
         [Tooltip("how far should be the object in order to pickup")]
@@ -55,7 +56,16 @@ namespace Scripts.Player
         LocoMotionVariables motionVariables;
         [SerializeField]
         PickitUpVariables pickUpVariables;
-        
+        [SerializeField]
+        IntractionSettings ic = new IntractionSettings();
+
+        [Serializable]
+        struct IntractionSettings
+        {
+            public float IntractionRange, autoCloseTimer, timer;
+            public LayerMask IntractableObjects;
+            public Animator _anim;
+        }
 
         [Serializable]
         private struct CameraSettings
@@ -65,13 +75,13 @@ namespace Scripts.Player
             [Tooltip("Camera Pitch (limit of top and bottom)")] public float cameraPitch;
             [Tooltip("Camera Inout")] public Vector2 lookInput;
 
-           public int leftFingerID, rightFingerID;
-           public float halfScreenWidth;
+            public int leftFingerID, rightFingerID;
+            public float halfScreenWidth;
         }
 
         [SerializeField]
         private CameraSettings _camera = new CameraSettings { };
-        
+
 
         private void Awake()
         {
@@ -88,7 +98,7 @@ namespace Scripts.Player
 
             _camera.halfScreenWidth = Screen.width / 2;
         }
-       
+
 
         private void Update()
         {
@@ -97,7 +107,7 @@ namespace Scripts.Player
 
             GetTouchInput();
 
-            if(_camera.rightFingerID != -1)
+            if (_camera.rightFingerID != -1)
             {
                 LookAround();
             }
@@ -122,17 +132,17 @@ namespace Scripts.Player
                 }
             }
 
-            if(motionVariables.CroutchButtonPressed)
+            if (motionVariables.CroutchButtonPressed)
             {
                 ch.height = motionVariables.crouchHightn;
                 motionVariables.speed = motionVariables.crouchspeed;
             }
-            else if(!motionVariables.CroutchButtonPressed)
+            else if (!motionVariables.CroutchButtonPressed)
             {
                 ch.height = motionVariables.crouchHightTemp;
                 motionVariables.speed = motionVariables.SpeedTemp;
             }
-            if(ch.isGrounded == false)
+            if (ch.isGrounded == false)
             {
                 move += Physics.gravity * Time.deltaTime * motionVariables.Gravity;
             }
@@ -145,7 +155,7 @@ namespace Scripts.Player
         }
         private void OnTriggerEnter(Collider other)
         {
-            if(other.tag == "Enemy")
+            if (other.tag == "Enemy")
             {
                 motionVariables.gettingChased = true;
             }
@@ -156,24 +166,25 @@ namespace Scripts.Player
             Collider c;
             RaycastHit hit;
             Color Temp;
-            
-            
-                if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
-                {
-                    c = hit.collider;
-                    pickUpVariables.tempInMe = hit.transform.gameObject;
-                    Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
-                }
-                else
-                {
-                    pickUpVariables.tempInMe = null;
-                }
-            
+
+
+            if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
+            {
+                c = hit.collider;
+                pickUpVariables.tempInMe = hit.transform.gameObject;
+                Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
+            }
+            else
+            {
+                pickUpVariables.tempInMe = null;
+            }
+
         }
 
         public void PickUpObject()
         {
-            if (oc.had == null) {
+            if (oc.had == null)
+            {
                 if (pickUpVariables.tempInMe != null)
                 {
                     oc.GetIT(pickUpVariables.tempInMe);
@@ -185,21 +196,21 @@ namespace Scripts.Player
         void GetTouchInput()
         {
             //Iterate through all detected touches
-            for(int i = 0; i < Input.touchCount; i++ )
+            for (int i = 0; i < Input.touchCount; i++)
             {
                 Touch t = Input.GetTouch(i);
 
                 //check touch phase
-                switch(t.phase)
+                switch (t.phase)
                 {
                     case TouchPhase.Began:
 
-                        if(t.position.x < _camera.halfScreenWidth && _camera.leftFingerID == -1)
+                        if (t.position.x < _camera.halfScreenWidth && _camera.leftFingerID == -1)
                         {
                             _camera.leftFingerID = t.fingerId;
                             Debug.Log("Tracking left finger with ID: " + _camera.leftFingerID);
                         }
-                        else if(t.position.x > _camera.halfScreenWidth && _camera.rightFingerID == -1)
+                        else if (t.position.x > _camera.halfScreenWidth && _camera.rightFingerID == -1)
                         {
                             _camera.rightFingerID = t.fingerId;
                             Debug.Log("Tracking right finger with ID: " + _camera.rightFingerID);
@@ -207,13 +218,13 @@ namespace Scripts.Player
                         break;
                     case TouchPhase.Ended:
                     case TouchPhase.Canceled:
-                       
-                        if(t.fingerId == _camera.leftFingerID)
+
+                        if (t.fingerId == _camera.leftFingerID)
                         {
                             _camera.leftFingerID = -1;
                             Debug.Log("Stopped tracking left finger");
                         }
-                        else if(t.fingerId == _camera.rightFingerID)
+                        else if (t.fingerId == _camera.rightFingerID)
                         {
                             _camera.rightFingerID = -1;
                             Debug.Log("Sropped tracking right finger");
@@ -222,7 +233,7 @@ namespace Scripts.Player
                     case TouchPhase.Moved:
 
                         //get input to look around
-                        if(t.fingerId == _camera.rightFingerID)
+                        if (t.fingerId == _camera.rightFingerID)
                         {
                             _camera.lookInput = t.deltaPosition * _camera.cameraSensitivity * Time.deltaTime;
                         }
@@ -231,15 +242,16 @@ namespace Scripts.Player
                     case TouchPhase.Stationary:
 
                         //set lookInput to zero if finger is still;
-                        if(t.fingerId == _camera.rightFingerID)
+                        if (t.fingerId == _camera.rightFingerID)
                         {
                             _camera.lookInput = Vector2.zero;
                         }
                         break;
-    
+
                 }
             }
         }
+
 
         void LookAround()
         {
@@ -249,6 +261,28 @@ namespace Scripts.Player
 
             //Yaw (Right & Left)
             transform.Rotate(transform.up, _camera.lookInput.x);
+        }
+        public void playerInteraction()
+        {
+            Debug.Log("0");
+            RaycastHit hit;
+            if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, ic.IntractionRange, ic.IntractableObjects))
+            {
+                Debug.Log("1");
+                ic._anim = hit.collider.gameObject.GetComponentInParent<Animator>();
+                if (hit.collider.CompareTag("Door"))
+                {
+                    Debug.Log("2");
+                    IntractWithDoor(ic._anim);
+                }
+                
+            }
+        }
+        void IntractWithDoor(Animator a)
+        {
+            a.SetBool("Open", true);
+            Debug.Log("4");
+            
         }
     }
 }
