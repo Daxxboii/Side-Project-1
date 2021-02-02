@@ -262,6 +262,10 @@ namespace Scripts.Player
             //Yaw (Right & Left)
             transform.Rotate(transform.up, _camera.lookInput.x);
         }
+        /// <summary>
+        ///  animations
+        ///  added unlocked doors animations
+        /// </summary>
         public void playerInteraction()
         {
             Debug.Log("0");
