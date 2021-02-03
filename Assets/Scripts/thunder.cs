@@ -6,7 +6,7 @@ public class thunder : MonoBehaviour
 {
     [SerializeField] float timer, timer1, timer2;
     [SerializeField] AudioSource Thunder;
-    [SerializeField] GameObject Thunder;
+    [SerializeField] GameObject Tlight;
     private void Awake()
     {
 
@@ -15,12 +15,18 @@ public class thunder : MonoBehaviour
     {
         timer += Time.time;
         float T = Random.Range(timer1, timer2);
-        if(timer > T)
+        if (timer > T)
         {
+            if (Time.time > 0.3)
+            {
+                Tlight.SetActive(true);
+            }
             Debug.Log("1");
             Thunder.Play();
-            
+
             timer = 0;
+            Tlight.SetActive(false);
         }
+        
     }
 }
