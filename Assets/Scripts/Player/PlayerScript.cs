@@ -46,7 +46,7 @@ namespace Scripts.Player
     public class PlayerScript : MonoBehaviour
     {
         [SerializeField] LayerMask IC;
-        bool open, hiding;
+        bool open, hiding, holding;
         CharacterController ch;
         Vector3 move;
         Camera FpsCam;
@@ -141,6 +141,7 @@ namespace Scripts.Player
                     {
                         bc.PickUp.SetActive(true);
                         bc.DropDown.SetActive(false);
+                        
                     }
                     else if(oc.had != null)
                     {
@@ -170,9 +171,10 @@ namespace Scripts.Player
             else
             {
                 if(hiding == false)
-                {
                     bc.unhide.SetActive(false);
-                }
+                
+                
+
                 bc.PickUp.SetActive(false);
                 bc.hide.SetActive(false);
                 bc.intract.SetActive(false);
@@ -252,6 +254,7 @@ namespace Scripts.Player
             {
                 if (pickUpVariables.tempInMe != null)
                 {
+                    holding = true;
                     oc.GetIT(pickUpVariables.tempInMe);
                     Destroy(pickUpVariables.tempInMe);
                 }

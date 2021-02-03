@@ -15,14 +15,12 @@ namespace Scripts.Objects
         public GameObject have, had, havetemp;
         public Transform hand;
         public bool hadnsFull;
-        public GameObject pickup, dropButton;
 
 
         private void Awake()
         {
-            pickup = GameObject.Find("pickup");
-            dropButton = GameObject.Find("Throw");
-            dropButton.SetActive(false);
+            
+            
         }
 
         void Equip()
@@ -43,8 +41,6 @@ namespace Scripts.Objects
             if (have != null)
             {
                 havetemp = have;
-                pickup.SetActive(false);
-                dropButton.SetActive(true);
                 Equip();
             }
             
@@ -62,8 +58,6 @@ namespace Scripts.Objects
             Destroy(had);
             had = null;
             hadnsFull = false;
-            pickup.SetActive(true);
-            dropButton.SetActive(false);
         }
 
         public void Swap()
