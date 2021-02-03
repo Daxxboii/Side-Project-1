@@ -45,6 +45,7 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
+        bool open;
         CharacterController ch;
         Vector3 move;
         Camera FpsCam;
@@ -268,25 +269,22 @@ namespace Scripts.Player
         /// </summary>
         public void playerInteraction()
         {
-            Debug.Log("0");
             RaycastHit hit;
             if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, ic.IntractionRange, ic.IntractableObjects))
             {
-                Debug.Log("1");
+                open =! open;
                 ic._anim = hit.collider.gameObject.GetComponentInParent<Animator>();
                 if (hit.collider.CompareTag("Door"))
                 {
-                    Debug.Log("2");
                     IntractWithDoor(ic._anim);
                 }
                 
             }
+            
         }
         void IntractWithDoor(Animator a)
         {
-            a.SetBool("Open", true);
-            Debug.Log("4");
-            
+            a.SetBool("Open", open);
         }
     }
 }
