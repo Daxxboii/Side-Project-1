@@ -6,6 +6,7 @@ public class thunder : MonoBehaviour
 {
     [SerializeField] float timer, timer1, timer2;
     [SerializeField] AudioSource Thunder;
+    [SerializeField] GameObject Thunder;
     private void Awake()
     {
 
@@ -18,6 +19,7 @@ public class thunder : MonoBehaviour
         {
             Debug.Log("1");
             Thunder.Play();
+            
             timer = 0;
         }
     }
