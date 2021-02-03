@@ -45,7 +45,8 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
-        bool open;
+        [SerializeField] LayerMask IC;
+        bool open, hiding;
         CharacterController ch;
         Vector3 move;
         Camera FpsCam;
@@ -59,10 +60,18 @@ namespace Scripts.Player
         PickitUpVariables pickUpVariables;
         [SerializeField]
         IntractionSettings ic = new IntractionSettings();
+        [SerializeField]
+        buttons bc = new buttons();
+        [Serializable]
+        struct buttons
+        {
 
+            public GameObject PickUp, DropDown, hide, intract, unhide;
+        }
         [Serializable]
         struct IntractionSettings
         {
+
             public float IntractionRange, autoCloseTimer, timer;
             public LayerMask IntractableObjects;
             public Animator _anim;
@@ -86,6 +95,11 @@ namespace Scripts.Player
 
         private void Awake()
         {
+            bc.DropDown.SetActive(false);
+            bc.PickUp.SetActive(false);
+            bc.hide.SetActive(false);
+            bc.unhide.SetActive(false);
+            bc.intract.SetActive(false);
             ch = GetComponent<CharacterController>();
             FpsCam = GetComponentInChildren<Camera>();
             motionVariables.SpeedTemp = motionVariables.speed;
@@ -112,8 +126,58 @@ namespace Scripts.Player
             {
                 LookAround();
             }
+            ActivasionOfButtons();
         }
+            
+        void ActivasionOfButtons()
+        {
+            RaycastHit h;
+            if(Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward,out h, 4f ,IC))
+            {
+                
+                if(h.collider.gameObject.layer == LayerMask.NameToLayer("Pickups"))
+                {
+                    if(oc.had == null)
+                    {
+                        bc.PickUp.SetActive(true);
+                        bc.DropDown.SetActive(false);
+                    }
+                    else if(oc.had != null)
+                    {
+                        bc.PickUp.SetActive(false);
+                        bc.DropDown.SetActive(true);
+                    }
+                }
+                
 
+                if (h.collider.gameObject.layer == LayerMask.NameToLayer("hideable"))
+                {
+                    bc.hide.SetActive(true);
+                    bc.unhide.SetActive(false);
+                    hiding = true;
+                }
+                if (hiding == true)
+                {
+                    bc.unhide.SetActive(true);
+                    hiding = false;
+                }
+                if (h.collider.gameObject.layer == LayerMask.NameToLayer("Interactiables"))
+                {
+                    bc.intract.SetActive(true);
+                }
+                
+            }
+            else
+            {
+                if(hiding == false)
+                {
+                    bc.unhide.SetActive(false);
+                }
+                bc.PickUp.SetActive(false);
+                bc.hide.SetActive(false);
+                bc.intract.SetActive(false);
+            }
+        }
         void LocoMotion()
         {
             float x = joystick.Horizontal;
