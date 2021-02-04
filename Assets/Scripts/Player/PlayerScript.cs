@@ -12,6 +12,7 @@ namespace Scripts.Player
     {
         [Tooltip("Base Speed")]
         public float speed;
+
         [Tooltip("Speed While Getting hased")]
         public float Chasedspeed;
         [Tooltip("max time for chaseing")]
@@ -23,7 +24,7 @@ namespace Scripts.Player
         [Tooltip("gravity")]
         public float Gravity;
 
-        public float crouchspeed, chasedcrouchspeed, crouchHightn, crouchHightTemp;
+        public float crouchspeed, chasedcrouchspeed, crouchHightn, crouchHightTemp, health, attackTimer, AttackTime;
 
         public bool gettingChased, CroutchButtonPressed;
     }
@@ -125,10 +126,39 @@ namespace Scripts.Player
             if (_camera.rightFingerID != -1)
             {
                 LookAround();
+                
             }
             ActivasionOfButtons();
+            TakeDamage();
         }
-            
+
+        void TakeDamage()
+        {
+            if(GhostInAttackRange() < 3f)
+            {
+                motionVariables.attackTimer += Time.deltaTime;
+                if(motionVariables.attackTimer > motionVariables.AttackTime)
+                {
+                    motionVariables.health--;
+                    motionVariables.attackTimer = 0.0f;
+                }
+            }
+            if(motionVariables.health <= 0)
+            {
+                PlayerDeath();
+            }
+        }
+        void PlayerDeath()
+        {
+            this.gameObject.SetActive(false);
+        }
+        
+        float GhostInAttackRange()
+        {
+            GameObject ghost = GameObject.FindWithTag("enemy");
+            return Vector3.Distance(transform.position, ghost.transform.position);
+        }
+        
         void ActivasionOfButtons()
         {
             RaycastHit h;
@@ -353,5 +383,6 @@ namespace Scripts.Player
         {
             a.SetBool("Open", open);
         }
+        
     }
 }
