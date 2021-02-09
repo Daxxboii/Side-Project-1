@@ -164,51 +164,37 @@ namespace Scripts.Player
             RaycastHit h;
             if(Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward,out h, 4f ,IC))
             {
-                
-                if(h.collider.gameObject.layer == LayerMask.NameToLayer("Pickups"))
+                if(h.collider.tag == "pickup")
                 {
-                    if(oc.had == null)
-                    {
-                        bc.PickUp.SetActive(true);
-                        bc.DropDown.SetActive(false);
-                        
-                    }
-                    else if(oc.had != null)
-                    {
-                        bc.PickUp.SetActive(false);
-                        bc.DropDown.SetActive(true);
-                    }
+                    bc.PickUp.SetActive(true);
                 }
-                
-
-                if (h.collider.gameObject.layer == LayerMask.NameToLayer("hideable"))
+                else if(oc.had != null)
+                {
+                    bc.DropDown.SetActive(true);
+                }
+                if(h.collider.tag == "Hideable")
                 {
                     bc.hide.SetActive(true);
-                    bc.unhide.SetActive(false);
-                    hiding = true;
+                    
                 }
-                if (hiding == true)
-                {
-                    bc.unhide.SetActive(true);
-                    hiding = false;
-                }
-                if (h.collider.gameObject.layer == LayerMask.NameToLayer("Interactiables"))
+                if(h.collider.tag == "Door")
                 {
                     bc.intract.SetActive(true);
                 }
-                
             }
             else
             {
-                if(hiding == false)
-                    bc.unhide.SetActive(false);
-                
-                
-
+                if (oc.had == null)
+                    bc.DropDown.SetActive(false);
                 bc.PickUp.SetActive(false);
-                bc.hide.SetActive(false);
                 bc.intract.SetActive(false);
+                bc.hide.SetActive(false);
+                if (hiding)
+                    bc.unhide.SetActive(true);
+                else
+                    bc.unhide.SetActive(false);
             }
+            
         }
         void LocoMotion()
         {
@@ -228,17 +214,6 @@ namespace Scripts.Player
                     motionVariables.gettingChased = false;
                 }
             }
-
-            if (motionVariables.CroutchButtonPressed)
-            {
-                ch.height = motionVariables.crouchHightn;
-                motionVariables.speed = motionVariables.crouchspeed;
-            }
-            else if (!motionVariables.CroutchButtonPressed)
-            {
-                ch.height = motionVariables.crouchHightTemp;
-                motionVariables.speed = motionVariables.SpeedTemp;
-            }
             if (ch.isGrounded == false)
             {
                 move += Physics.gravity * Time.deltaTime * motionVariables.Gravity;
@@ -249,6 +224,16 @@ namespace Scripts.Player
         public void Crouch()
         {
             motionVariables.CroutchButtonPressed = !motionVariables.CroutchButtonPressed;
+            if (motionVariables.CroutchButtonPressed)
+            {
+                ch.height = motionVariables.crouchHightn;
+                motionVariables.speed = motionVariables.crouchspeed;
+            }
+            else if (!motionVariables.CroutchButtonPressed)
+            {
+                ch.height = motionVariables.crouchHightTemp;
+                motionVariables.speed = motionVariables.SpeedTemp;
+            }
         }
         private void OnTriggerEnter(Collider other)
         {

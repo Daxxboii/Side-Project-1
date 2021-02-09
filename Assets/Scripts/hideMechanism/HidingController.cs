@@ -17,13 +17,11 @@ public class HidingController : MonoBehaviour
         {
             cam.SetActive(true);
             player.SetActive(false);
-            Debug.Log("loda");
         }
         else if(h == false)
         {
             cam.SetActive(false);
             player.SetActive(true);
-            Debug.Log("loda2");
         }
     }
     private void OnDisable()
