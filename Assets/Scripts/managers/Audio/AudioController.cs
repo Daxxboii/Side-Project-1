@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -36,7 +37,24 @@ namespace unityCore
             }
 
 
+            private class AudioJob 
+            {
+                public AudioAction action;
+                public AudioType type;
 
+                public AudioJob(AudioAction _action, AudioType _type)
+                {
+                    action = _action;
+                    type = _type;
+                }
+            }
+
+            private enum AudioAction
+            {
+                START,
+                STOP,
+                RESTART
+            }
 
 
 
@@ -64,17 +82,17 @@ namespace unityCore
 
             public void PlayAudio(AudioType _type)
             {
-
+                AddJob(new AudioJob(AudioAction.START , _type));
             }
 
             public void StopAudio(AudioType _type)
             {
-
+                AddJob(new AudioJob(AudioAction.STOP, _type));
             }
 
             public void RestartAudio(AudioType _type)
             {
-
+                AddJob(new AudioJob(AudioAction.RESTART, _type));
             }
 
             #endregion
@@ -116,6 +134,10 @@ namespace unityCore
                         }
                     }
                 }
+            }
+            private void AddJob(AudioJob _job)
+            {
+                
             }
             #endregion
 
