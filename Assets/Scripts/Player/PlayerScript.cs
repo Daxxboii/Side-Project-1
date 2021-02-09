@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using unityCore.Audio;
 using UnityEngine.UI;
 using System.Threading;
 
@@ -46,6 +47,7 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
+        public AudioController audioController;
         [SerializeField] LayerMask IC;
         bool open, hiding, holding;
         CharacterController ch;
