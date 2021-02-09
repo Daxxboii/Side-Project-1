@@ -119,7 +119,11 @@ namespace unityCore
             }
             private void Dispose()
             {
-                
+                foreach(DictionaryEntry _entry in m_jobTable)
+                {
+                    IEnumerator _job = (IEnumerator)_entry.Value;
+                    StopCoroutine(_job);
+                }
             }
             private void GenerateAudio()
             {
@@ -144,6 +148,44 @@ namespace unityCore
                 m_jobTable.Add(_job.type, JobRunner);
                 log("Start job on" + _job.type + "with operation" + _job.action);
             }
+
+            private IEnumerator RunAudioJob(AudioJob _job)
+            {
+                AudioTrack _track = (AudioTrack)m_audioTable[_job.type];
+                _track.source.clip = GetAudioClipFromAudioTrack(_job.type, _track);
+
+                switch (_job.action)
+                {
+                    case AudioAction.START:
+                        _track.source.Play();
+
+                        break;
+                    case AudioAction.STOP:
+                        
+                        _track.source.Stop();
+                        break;
+
+                    case AudioAction.RESTART:
+                        _track.source.Stop();
+                        _track.source.Play();
+                        break;
+                }
+                m_audioTable.Remove(_job.type);
+                yield return null;
+            }
+
+            public AudioClip GetAudioClipFromAudioTrack(AudioType _type ,AudioTrack _track)
+            {
+               foreach (AudioObject _obj in _track.audio)
+                {
+                    if(_obj.type == _type)
+                    {
+                        return _obj.Clip;
+                    }
+                }
+                return null;
+            }
+
             private void RemoveConflictingJobs(AudioType _type)
             {
                 if(m_jobTable.ContainsKey(_type))
@@ -163,6 +205,16 @@ namespace unityCore
                     }
 
                 }
+            }
+            private void RemoveJob(AudioType _type)
+            {
+                if(!m_jobTable.ContainsKey(_type))
+                {
+                    return;
+                }
+                IEnumerator _RunningJob = (IEnumerator)m_jobTable[_type];
+                StopCoroutine(_RunningJob);
+                m_jobTable.Remove(_type);
             }
             #endregion
 
