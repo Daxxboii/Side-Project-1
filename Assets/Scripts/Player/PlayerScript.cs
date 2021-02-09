@@ -218,7 +218,7 @@ namespace Scripts.Player
             {
                 move += Physics.gravity * Time.deltaTime * motionVariables.Gravity;
             }
-            SoundManager.PlaySound();
+            
             ch.Move(move * Time.deltaTime * motionVariables.speed);
         }
         public void Crouch()
