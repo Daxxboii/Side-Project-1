@@ -137,7 +137,32 @@ namespace unityCore
             }
             private void AddJob(AudioJob _job)
             {
-                
+                //Remove job which are coexisting and can make skertie and manish mad
+                RemoveConflictingJobs(_job.type);
+                //Add jobs
+                IEnumerator JobRunner = RunAudioJob(_job);
+                m_jobTable.Add(_job.type, JobRunner);
+                log("Start job on" + _job.type + "with operation" + _job.action);
+            }
+            private void RemoveConflictingJobs(AudioType _type)
+            {
+                if(m_jobTable.ContainsKey(_type))
+                {
+                    RemoveJob(_type);
+                }
+                AudioType _conflictAudio = AudioType.None;
+                foreach(DictionaryEntry _entry in m_jobTable)
+                {
+                    AudioType _audioType = (AudioType)_entry.Key;
+                    AudioTrack _audioTrackInUse = (AudioTrack)m_audioTable[_audioType];
+                    AudioTrack _audioTrackNeeded = (AudioTrack)m_audioTable[_type];
+                    if (_audioTrackNeeded.source == _audioTrackInUse.source)
+                    {
+                        //conflict
+                        _conflictAudio = _audioType;
+                    }
+
+                }
             }
             #endregion
 
