@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d188d67e6f98044831915c129c34b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   tracks:
   - source: {fileID: 249525317}
     audio:
@@ -886,7 +886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &468838430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1641,6 +1641,11 @@ PrefabInstance:
       propertyPath: bc.unhide
       value: 
       objectReference: {fileID: 1512336112}
+    - target: {fileID: 3398117726024668976, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
+        type: 3}
+      propertyPath: audioController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3398117726024668977, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
         type: 3}
       propertyPath: m_Name
@@ -1700,6 +1705,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398117726024668981, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398117726024668981, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398117726024668981, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a4514d2a474f2c47b3ae088e8ebc163, type: 3}
@@ -2347,7 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b58f21f5f378f148bcdf2cb5fda6b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioController: {fileID: 21055847}
+  audioController: {fileID: 0}
 --- !u!4 &1699067281
 Transform:
   m_ObjectHideFlags: 0

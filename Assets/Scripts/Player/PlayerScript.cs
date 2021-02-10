@@ -225,6 +225,7 @@ namespace Scripts.Player
         }
         public void Crouch()
         {
+            
             motionVariables.CroutchButtonPressed = !motionVariables.CroutchButtonPressed;
             if (motionVariables.CroutchButtonPressed)
             {

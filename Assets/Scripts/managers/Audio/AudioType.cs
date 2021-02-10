@@ -4,9 +4,12 @@
     {
         public enum AudioType {
             None,
-            ST_01,
-            SF_X01
-
+            MainMenuAudio,
+            SoundTrack01, 
+            SoundTrack02,
+            SoundTrack03, 
+            SoundTrack04, 
+            SoundTrack05
         }
     }
 }
