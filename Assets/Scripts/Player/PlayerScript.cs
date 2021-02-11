@@ -8,78 +8,20 @@ using System.Threading;
 
 namespace Scripts.Player
 {
-    [System.Serializable]
-    public struct LocoMotionVariables
-    {
-        [Tooltip("Base Speed")]
-        public float speed;
-
-        [Tooltip("Speed While Getting hased")]
-        public float Chasedspeed;
-        [Tooltip("max time for chaseing")]
-        public float ChaseTime;
-        [Tooltip("if enemy hits the collider this timer will start")]
-        public float ChaseStart;
-        [Tooltip("saved base speed inside of it")]
-        public float SpeedTemp;
-        [Tooltip("gravity")]
-        public float Gravity;
-
-        public float crouchspeed, chasedcrouchspeed, crouchHightn, crouchHightTemp, health, attackTimer, AttackTime;
-
-        public bool gettingChased, CroutchButtonPressed;
-    }
-
-    [System.Serializable]
-    public struct PickitUpVariables
-    {
-        [Tooltip("layerSelection for pickable items")]
-        public LayerMask pickables;
-
-        [Tooltip("Is inventory full or not")]
-        public bool isFull;
-        [Tooltip("how far should be the object in order to pickup")]
-        public float Range;
-
-        public GameObject tempInMe;
-    }
-
 
     public class PlayerScript : MonoBehaviour
     {
-        public AudioController audioController;
-        [SerializeField] LayerMask IC;
-        bool open, hiding, holding;
-        CharacterController ch;
-        Vector3 move;
-        Camera FpsCam;
         [SerializeField]
-        Joystick joystick;
+        private Joystick joystick;
+        private Vector3 move, moveT;
+        private CharacterController ch;
         [SerializeField]
-        Scripts.Objects.ObjectController oc;
+        private AudioController ac;
+        private Animator anim;
         [SerializeField]
-        LocoMotionVariables motionVariables;
+        private MovementVariable mv = new MovementVariable();
         [SerializeField]
-        PickitUpVariables pickUpVariables;
-        [SerializeField]
-        IntractionSettings ic = new IntractionSettings();
-        [SerializeField]
-        buttons bc = new buttons();
-        [Serializable]
-        struct buttons
-        {
-
-            public GameObject PickUp, DropDown, hide, intract, unhide;
-        }
-        [Serializable]
-        struct IntractionSettings
-        {
-
-            public float IntractionRange, autoCloseTimer, timer;
-            public LayerMask IntractableObjects;
-            public Animator _anim;
-        }
-
+        CameraSettings _camera = new CameraSettings();
         [Serializable]
         private struct CameraSettings
         {
@@ -91,23 +33,16 @@ namespace Scripts.Player
             public int leftFingerID, rightFingerID;
             public float halfScreenWidth;
         }
-
-        [SerializeField]
-        private CameraSettings _camera = new CameraSettings { };
-
-
+        [Serializable]
+        private struct MovementVariable
+        {
+            public float speed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime;
+            public bool isMoveing, isCroutching, IsGettingChased, isDead;
+        }
         private void Awake()
         {
-            bc.DropDown.SetActive(false);
-            bc.PickUp.SetActive(false);
-            bc.hide.SetActive(false);
-            bc.unhide.SetActive(false);
-            bc.intract.SetActive(false);
-            ch = GetComponent<CharacterController>();
-            FpsCam = GetComponentInChildren<Camera>();
-            motionVariables.SpeedTemp = motionVariables.speed;
-            joystick = FindObjectOfType<FixedJoystick>();
-            motionVariables.crouchHightTemp = ch.height;
+            ch = gameObject.GetComponent<CharacterController>();
+            anim = gameObject.GetComponent<Animator>();
             //###### for camera
 
             // id = -1 means no finger is touching the screen
@@ -117,166 +52,30 @@ namespace Scripts.Player
             _camera.halfScreenWidth = Screen.width / 2;
         }
 
-
         private void Update()
         {
-            LocoMotion();
-            PickItUp();
-
+            Locomotion();
             GetTouchInput();
 
             if (_camera.rightFingerID != -1)
             {
                 LookAround();
-                
-            }
-            ActivasionOfButtons();
-            TakeDamage();
-        }
 
-        void TakeDamage()
-        {
-            if(GhostInAttackRange() < 3f)
-            {
-                motionVariables.attackTimer += Time.deltaTime;
-                if(motionVariables.attackTimer > motionVariables.AttackTime)
-                {
-                    motionVariables.health--;
-                    motionVariables.attackTimer = 0.0f;
-                }
-            }
-            if(motionVariables.health <= 0)
-            {
-                PlayerDeath();
             }
         }
-        void PlayerDeath()
-        {
-            this.gameObject.SetActive(false);
-        }
-        
-        float GhostInAttackRange()
-        {
-            GameObject ghost = GameObject.FindWithTag("enemy");
-            return Vector3.Distance(transform.position, ghost.transform.position);
-        }
-        
-        void ActivasionOfButtons()
-        {
-            RaycastHit h;
-            if(Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward,out h, 4f ,IC))
-            {
-                if(h.collider.tag == "pickup")
-                {
-                    bc.PickUp.SetActive(true);
-                }
-                else if(oc.had != null)
-                {
-                    bc.DropDown.SetActive(true);
-                }
-                if(h.collider.tag == "Hideable")
-                {
-                    bc.hide.SetActive(true);
-                    
-                }
-                if(h.collider.tag == "Door")
-                {
-                    bc.intract.SetActive(true);
-                }
-            }
-            else
-            {
-                if (oc.had == null)
-                    bc.DropDown.SetActive(false);
-                bc.PickUp.SetActive(false);
-                bc.intract.SetActive(false);
-                bc.hide.SetActive(false);
-                if (hiding)
-                    bc.unhide.SetActive(true);
-                else
-                    bc.unhide.SetActive(false);
-            }
-            
-        }
-        void LocoMotion()
+        private void Locomotion()
         {
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
 
             move = x * transform.right + z * transform.forward;
-
-            if (motionVariables.gettingChased && !motionVariables.CroutchButtonPressed)
+            
+            if(ch.isGrounded == false)
             {
-                motionVariables.speed = motionVariables.Chasedspeed;
-                motionVariables.ChaseStart += Time.deltaTime;
-                if (motionVariables.ChaseStart > motionVariables.ChaseTime)
-                {
-                    motionVariables.speed = motionVariables.SpeedTemp;
-                    motionVariables.ChaseStart = 0.0f;
-                    motionVariables.gettingChased = false;
-                }
-            }
-            if (ch.isGrounded == false)
-            {
-                move += Physics.gravity * Time.deltaTime * motionVariables.Gravity;
+                move += Physics.gravity * Time.deltaTime * mv.gravity;
             }
             
-            ch.Move(move * Time.deltaTime * motionVariables.speed);
-        }
-        public void Crouch()
-        {
-            
-            motionVariables.CroutchButtonPressed = !motionVariables.CroutchButtonPressed;
-            if (motionVariables.CroutchButtonPressed)
-            {
-                ch.height = motionVariables.crouchHightn;
-                motionVariables.speed = motionVariables.crouchspeed;
-            }
-            else if (!motionVariables.CroutchButtonPressed)
-            {
-                ch.height = motionVariables.crouchHightTemp;
-                motionVariables.speed = motionVariables.SpeedTemp;
-            }
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.tag == "Enemy")
-            {
-                motionVariables.gettingChased = true;
-            }
-        }
-
-        void PickItUp()
-        {
-            Collider c;
-            RaycastHit hit;
-            Color Temp;
-
-
-            if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, pickUpVariables.Range, pickUpVariables.pickables))
-            {
-                c = hit.collider;
-                pickUpVariables.tempInMe = hit.transform.gameObject;
-                Temp = c.transform.gameObject.GetComponent<Renderer>().material.color;
-            }
-            else
-            {
-                pickUpVariables.tempInMe = null;
-            }
-
-        }
-
-        public void PickUpObject()
-        {
-            if (oc.had == null)
-            {
-                if (pickUpVariables.tempInMe != null)
-                {
-                    holding = true;
-                    oc.GetIT(pickUpVariables.tempInMe);
-                    Destroy(pickUpVariables.tempInMe);
-                }
-            }
+            ch.Move(move * Time.deltaTime * mv.speed);
         }
 
         void GetTouchInput()
@@ -351,26 +150,8 @@ namespace Scripts.Player
         /// <summary>
         ///  animations
         ///  added unlocked doors animations
-        /// </summary>
-        public void playerInteraction()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out hit, ic.IntractionRange, ic.IntractableObjects))
-            {
-                open =! open;
-                ic._anim = hit.collider.gameObject.GetComponentInParent<Animator>();
-                if (hit.collider.CompareTag("Door"))
-                {
-                    IntractWithDoor(ic._anim);
-                }
-                
-            }
-            
-        }
-        void IntractWithDoor(Animator a)
-        {
-            a.SetBool("Open", open);
-        }
-        
+        /// </summary
+
     }
+
 }
