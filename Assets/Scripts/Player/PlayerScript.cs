@@ -5,6 +5,7 @@ using System;
 using unityCore.Audio;
 using UnityEngine.UI;
 using System.Threading;
+using Scripts.Objects;
 
 namespace Scripts.Player
 {
@@ -12,8 +13,12 @@ namespace Scripts.Player
     public class PlayerScript : MonoBehaviour
     {
         [SerializeField]
+        ObjectController oc;
+        [SerializeField]
         private Joystick joystick;
         private Vector3 move, moveT;
+        [SerializeField]
+        Camera FPScam;
         private CharacterController ch;
         [SerializeField]
         private AudioController ac;
@@ -22,6 +27,8 @@ namespace Scripts.Player
         private MovementVariable mv = new MovementVariable();
         [SerializeField]
         CameraSettings _camera = new CameraSettings();
+        [SerializeField]
+        Pickups p = new Pickups();
         [Serializable]
         private struct CameraSettings
         {
@@ -37,8 +44,16 @@ namespace Scripts.Player
         private struct MovementVariable
         {
             public float speed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime;
-            public bool isMoveing, isCroutching, IsGettingChased, isDead;
         }
+        [Serializable]
+        private struct Pickups
+        {
+            public GameObject PickedUpObject;
+            public float range;
+            public LayerMask pickableLayer;
+        }
+
+        
         private void Awake()
         {
             ch = gameObject.GetComponent<CharacterController>();
@@ -69,7 +84,7 @@ namespace Scripts.Player
             float z = joystick.Vertical;
 
             move = x * transform.right + z * transform.forward;
-            
+           
             if(ch.isGrounded == false)
             {
                 move += Physics.gravity * Time.deltaTime * mv.gravity;
@@ -78,6 +93,25 @@ namespace Scripts.Player
             ch.Move(move * Time.deltaTime * mv.speed);
         }
 
+        public void Pickup()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, p.range, p.pickableLayer))
+            {
+                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool")
+                {
+                    p.PickedUpObject = hit.collider.gameObject;
+                    if(p.PickedUpObject != null)
+                    {
+                        send(p.PickedUpObject);
+                    }
+                }
+            }
+        }
+        void send(GameObject obj)
+        {
+            
+        }
         void GetTouchInput()
         {
             //Iterate through all detected touches
@@ -132,7 +166,7 @@ namespace Scripts.Player
                             _camera.lookInput = Vector2.zero;
                         }
                         break;
-
+                        
                 }
             }
         }
