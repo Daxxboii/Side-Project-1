@@ -103,15 +103,12 @@ namespace Scripts.Player
                     p.PickedUpObject = hit.collider.gameObject;
                     if(p.PickedUpObject != null)
                     {
-                        send(p.PickedUpObject);
+                        oc.bring(p.PickedUpObject);
                     }
                 }
             }
         }
-        void send(GameObject obj)
-        {
-            
-        }
+        
         void GetTouchInput()
         {
             //Iterate through all detected touches
