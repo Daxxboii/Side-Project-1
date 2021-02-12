@@ -10,15 +10,14 @@ namespace Scripts.Objects
 {
     public class ObjectController : MonoBehaviour
     {
+        [SerializeField]
         GameObject have, had;
         bool isHolding;
         Rigidbody rb;
-        [SerializeField]
-        Transform hand;
         void equip()
         {
-            had = Instantiate(have, hand.transform.position, hand.transform.rotation);
-            had.transform.SetParent(hand);
+            had = Instantiate(have, transform.position, transform.rotation);
+            had.transform.SetParent(this.transform);
             rb = had.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.useGravity = false;
@@ -27,15 +26,15 @@ namespace Scripts.Objects
         public void bring(GameObject o)
         {
             have = o;
-            if(!isHolding)
-                equip();
+            Debug.Log("hi");
+            equip();
         }
 
         public void DropDown()
         {
             rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
-            had = Instantiate(have, hand.transform.position, hand.transform.rotation);
+            Instantiate(have, transform.position, transform.rotation);
             had = null;
             have = null;
             isHolding = false;

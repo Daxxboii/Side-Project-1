@@ -111,7 +111,7 @@ namespace Scripts.Player
         public void Crouch()
         {
             mv.isCrouching = !mv.isCrouching;
-            if (mv.isCrouching = false)
+            if (mv.isCrouching == false)
             {
                 ch.height = mv.hight;
                 mv.speed = mv.tempSpeed;
@@ -145,12 +145,13 @@ namespace Scripts.Player
             RaycastHit hit;
             if(Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, p.range, p.pickableLayer))
             {
-                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickups")
+                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickup")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
                     if(p.PickedUpObject != null)
                     {
                         oc.bring(p.PickedUpObject);
+                        Destroy(p.PickedUpObject);
                     }
                 }
             }
