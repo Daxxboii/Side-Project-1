@@ -9,7 +9,7 @@ using Scripts.Objects;
 
 namespace Scripts.Player
 {
-
+    
     public class PlayerScript : MonoBehaviour
     {
         [SerializeField]
@@ -43,7 +43,8 @@ namespace Scripts.Player
         [Serializable]
         private struct MovementVariable
         {
-            public float speed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime;
+            public float speed, tempSpeed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime;
+            public bool isJumping, isCrouching, isGettingChased;
         }
         [Serializable]
         private struct Pickups
@@ -56,6 +57,7 @@ namespace Scripts.Player
         
         private void Awake()
         {
+            mv.tempSpeed = mv.speed;
             ch = gameObject.GetComponent<CharacterController>();
             anim = gameObject.GetComponent<Animator>();
             //###### for camera
@@ -84,21 +86,66 @@ namespace Scripts.Player
             float z = joystick.Vertical;
 
             move = x * transform.right + z * transform.forward;
-           
-            if(ch.isGrounded == false)
+
+            
+
+            if(mv.isGettingChased && !mv.isCrouching)
+            {
+                mv.speed = mv.crouchSpeed;
+                mv.SpeedBoosttimerStart += Time.deltaTime;
+                if (mv.SpeedBoosttimerStart > mv.MAxSpeedBoostTime)
+                {
+                    mv.speed = mv.tempSpeed;
+                    mv.SpeedBoosttimerStart = 0.0f;
+                    mv.isGettingChased = false;
+                }
+            }
+            if (ch.isGrounded == false)
             {
                 move += Physics.gravity * Time.deltaTime * mv.gravity;
             }
             
             ch.Move(move * Time.deltaTime * mv.speed);
         }
+        //crouch
+        public void Crouch()
+        {
+            mv.isCrouching = !mv.isCrouching;
+            if (mv.isCrouching = false)
+            {
+                ch.height = mv.hight;
+                mv.speed = mv.tempSpeed;
+            }
+            else
+            {
+                ch.height = mv.crouchHight;
+                mv.speed = mv.crouchSpeed;
+            }
+        }
 
+        void isGettingChased()
+        {
+            if (ChasingMe() >= 7f)
+            {
+                mv.isGettingChased = true;
+            }
+            else
+                mv.isGettingChased = false;
+        }
+
+        float ChasingMe()
+        {
+            GameObject e = GameObject.FindWithTag("Enemy");
+            return Vector3.Distance(transform.position, e.transform.position);
+        }
+        
+        //pickups
         public void Pickup()
         {
             RaycastHit hit;
             if(Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, p.range, p.pickableLayer))
             {
-                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool")
+                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickups")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
                     if(p.PickedUpObject != null)
@@ -108,6 +155,7 @@ namespace Scripts.Player
                 }
             }
         }
+
         
         void GetTouchInput()
         {
@@ -181,7 +229,7 @@ namespace Scripts.Player
         /// <summary>
         ///  animations
         ///  added unlocked doors animations
-        /// </summary
+        /// </summary>
 
     }
 
