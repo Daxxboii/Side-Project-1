@@ -29,6 +29,17 @@ namespace Scripts.Player
         CameraSettings _camera = new CameraSettings();
         [SerializeField]
         Pickups p = new Pickups();
+        [SerializeField]
+        IntractionSettings it = new IntractionSettings();
+        [Serializable]
+        private struct IntractionSettings 
+        {
+            public float range;
+            public LayerMask Intractable;
+            public Animator anim;
+            public bool IsOpened;
+        }
+
         [Serializable]
         private struct CameraSettings
         {
@@ -173,12 +184,12 @@ namespace Scripts.Player
                         if (t.position.x < _camera.halfScreenWidth && _camera.leftFingerID == -1)
                         {
                             _camera.leftFingerID = t.fingerId;
-                            Debug.Log("Tracking left finger with ID: " + _camera.leftFingerID);
+                            
                         }
                         else if (t.position.x > _camera.halfScreenWidth && _camera.rightFingerID == -1)
                         {
                             _camera.rightFingerID = t.fingerId;
-                            Debug.Log("Tracking right finger with ID: " + _camera.rightFingerID);
+                            
                         }
                         break;
                     case TouchPhase.Ended:
@@ -187,12 +198,12 @@ namespace Scripts.Player
                         if (t.fingerId == _camera.leftFingerID)
                         {
                             _camera.leftFingerID = -1;
-                            Debug.Log("Stopped tracking left finger");
+                            
                         }
                         else if (t.fingerId == _camera.rightFingerID)
                         {
                             _camera.rightFingerID = -1;
-                            Debug.Log("Sropped tracking right finger");
+                            
                         }
                         break;
                     case TouchPhase.Moved:
@@ -232,6 +243,31 @@ namespace Scripts.Player
         ///  added unlocked doors animations
         /// </summary>
 
+
+        public void PlayerInteraction()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
+            {
+                it.anim = hit.transform.GetComponentInParent<Animator>();
+                if(hit.collider.tag == "Door")
+                {
+                    it.IsOpened = !it.IsOpened;
+                    IntractWithDoor(it.IsOpened);
+                }
+            }
+        }
+        void IntractWithDoor(bool o)
+        {
+            if(o)
+            {
+                it.anim.SetBool("Open", true);
+            }
+            else if (!o)
+            {
+                it.anim.SetBool("Open", false);
+            }
+        }
     }
 
 }
