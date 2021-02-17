@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0.8509804}
   m_FogMode: 3
   m_FogDensity: 0.03
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
     m_PVREnvironmentMIS: 1
-    m_PVRCulling: 1
+    m_PVRCulling: 0
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
@@ -52678,6 +52678,11 @@ PrefabInstance:
       propertyPath: m_SensorSize.x
       value: 53.7
       objectReference: {fileID: 0}
+    - target: {fileID: 3398117725750790028, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
+        type: 3}
+      propertyPath: far clip plane
+      value: 67.29
+      objectReference: {fileID: 0}
     - target: {fileID: 3398117726024668976, guid: 8a4514d2a474f2c47b3ae088e8ebc163,
         type: 3}
       propertyPath: bc.unhide
@@ -63053,7 +63058,7 @@ Transform:
   m_LocalScale: {x: 0.07986456, y: 0.056881685, z: 0.03506685}
   m_Children: []
   m_Father: {fileID: 1319756845}
-  m_RootOrder: 30
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!64 &1424422073
 MeshCollider:
