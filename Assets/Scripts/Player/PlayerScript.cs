@@ -68,7 +68,7 @@ namespace Scripts.Player
         
         private void Awake()
         {
-            //Application.targetFrameRate = 60;
+           Application.targetFrameRate = 60;
             mv.tempSpeed = mv.speed;
             ch = gameObject.GetComponent<CharacterController>();
             anim = gameObject.GetComponent<Animator>();
