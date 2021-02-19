@@ -32,6 +32,7 @@ namespace Scripts.Objects
 
         public void DropDown()
         {
+            had.transform.SetParent(null);
             rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
             Instantiate(have, transform.position, transform.rotation);
