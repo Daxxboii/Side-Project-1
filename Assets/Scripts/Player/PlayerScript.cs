@@ -12,6 +12,8 @@ namespace Scripts.Player
     
     public class PlayerScript : MonoBehaviour
     {
+        public static event Action<bool, int> TellStory;
+        int StoryNo;
         [SerializeField]
         ObjectController oc;
         [SerializeField]
