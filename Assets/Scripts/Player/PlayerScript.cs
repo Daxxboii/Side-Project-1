@@ -13,7 +13,6 @@ namespace Scripts.Player
     public class PlayerScript : MonoBehaviour
     {
         public static event Action<bool, int> TellStory;
-        int StoryNo;
         [SerializeField]
         ObjectController oc;
         [SerializeField]
@@ -85,6 +84,7 @@ namespace Scripts.Player
 
         private void Update()
         {
+            
             Locomotion();
             GetTouchInput();
 

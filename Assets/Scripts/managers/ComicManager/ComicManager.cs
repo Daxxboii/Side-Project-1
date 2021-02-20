@@ -9,84 +9,58 @@ namespace unityCore
     {
         public class ComicManager : MonoBehaviour
         {
-            public ComicManager instance;
+            [SerializeField]
+            GameObject panel, canvas;
+            [SerializeField]
+            chapter[] ch;
+            [SerializeField]
+            Material pannelMaterial;
+            int eventNumber;
+            
 
-            public Comic[] comic;
-
-            private Hashtable m_ComicTable;
-            private Hashtable m_jobtable;
-
-            enum ComicAction
+            [System.Serializable]
+            public class chapter
             {
-                next,
-                previous,
-                restart,
-                Exit
+                public int chapternumber;
+                public pages[] _pages;
             }
 
             [System.Serializable]
-            public class Comic
+            public class pages
             {
-                public Chapter[] chapter;
+                public Material coverPage;
+                public Material PageMeterial;
             }
 
-            [System.Serializable]
-            public class Chapter
-            {
-                public Pages[] pages;
-            }
-            [System.Serializable]
-            public class Pages 
-            {
-                public Material page;
-            }
-
-            #region Unity Functions
             private void Awake()
             {
-                if (!instance)
-                {
-                    Configure();
-                }
+                pannelMaterial = panel.gameObject.GetComponent<Material>();
+                panel.SetActive(false);
+                canvas.SetActive(false);
             }
-            #endregion
 
-            #region Public Functions
-
-            #endregion
-
-            #region Private functions
-            private void Configure()
+            private void OnEnable()
             {
-                instance = this;
-                m_ComicTable = new Hashtable();
-                m_jobtable = new Hashtable();
-                GenerateComicTable();
-
-
+                PlayerScript.TellStory += ComicBookOpen;
             }
-            private void GenerateComicTable()
+
+            void ComicBookOpen(bool  open, int chapter)
             {
-                foreach(Comic _comic in comic)
+                if (open)
                 {
-                    foreach(Chapter _chapter in _comic.chapter)
-                    {
-                        foreach (Pages _pages in _chapter.pages)
-                        {
-                            if(m_ComicTable.ContainsKey(_pages.page))
-                            {
-                                Debug.Log("page allredy exist");
-                            }
-                            else
-                            {
-                                m_ComicTable.Add(_pages.page, _chapter);
-                            }
-                        }
-                    }
+                    OpenChapter(chapter);
                 }
+                else
+                    return;
             }
-            #endregion
 
+            void OpenChapter(int chapterNumber)
+            {
+                panel.SetActive(true);
+                canvas.SetActive(true);
+
+                pannelMaterial = ch[1]._pages[1].coverPage;
+            }
         }
     }
 }
