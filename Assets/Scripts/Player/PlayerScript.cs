@@ -124,15 +124,17 @@ namespace Scripts.Player
         //crouch
         public void Crouch()
         {
-            TellStory(true, 1);
+            
             mv.isCrouching = !mv.isCrouching;
             if (mv.isCrouching == false)
             {
+                TellStory(true, 0);
                 ch.height = mv.hight;
                 mv.speed = mv.tempSpeed;
             }
             else
             {
+                TellStory(false, 0);
                 ch.height = mv.crouchHight;
                 mv.speed = mv.crouchSpeed;
             }
