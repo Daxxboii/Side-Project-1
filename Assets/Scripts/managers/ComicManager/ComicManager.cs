@@ -35,8 +35,7 @@ namespace unityCore
             private void Awake()
             {
                 pannelMaterial = panel.gameObject.GetComponent<Material>();
-                panel.SetActive(false);
-                canvas.SetActive(false);
+                
             }
 
             private void OnEnable()
@@ -59,7 +58,6 @@ namespace unityCore
                 panel.SetActive(true);
                 canvas.SetActive(true);
 
-                pannelMaterial = ch[1]._pages[1].coverPage;
             }
         }
     }

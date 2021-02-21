@@ -124,6 +124,7 @@ namespace Scripts.Player
         //crouch
         public void Crouch()
         {
+            TellStory(true, 1);
             mv.isCrouching = !mv.isCrouching;
             if (mv.isCrouching == false)
             {
