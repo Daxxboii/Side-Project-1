@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scripts.Player;
 using UnityEngine.UI;
+using unityCore.Audio;
 
 namespace unityCore
 {
@@ -26,7 +27,6 @@ namespace unityCore
             [System.Serializable]
             public class chapter
             {
-                public int chapternumber;
                 public pages[] _pages;
             }
 
@@ -73,8 +73,8 @@ namespace unityCore
             }
             public void Next()
             {
-                if(n == 2)
-                {
+                if(n == ch[CurChapter]._pages.Length - 1)
+                { 
                     n = 0;
                     panelImage = ch[CurChapter]._pages[n].PageImage;
                     change();
