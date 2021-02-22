@@ -12,6 +12,7 @@ namespace Scripts.Player
     
     public class PlayerScript : MonoBehaviour
     {
+        public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
         [SerializeField]
         ObjectController oc;
@@ -124,14 +125,17 @@ namespace Scripts.Player
         //crouch
         public void Crouch()
         {
+            
             mv.isCrouching = !mv.isCrouching;
             if (mv.isCrouching == false)
             {
+                
                 ch.height = mv.hight;
                 mv.speed = mv.tempSpeed;
             }
             else
             {
+                
                 ch.height = mv.crouchHight;
                 mv.speed = mv.crouchSpeed;
             }

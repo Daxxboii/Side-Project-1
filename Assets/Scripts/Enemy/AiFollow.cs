@@ -30,7 +30,7 @@ public class AiFollow : MonoBehaviour
 
     
 
-    private Vector3 _randomSpawanLocation; //    
+    private Vector3 _randomSpawanLocation;   
 
     [Header("Timer")]
     [SerializeField]

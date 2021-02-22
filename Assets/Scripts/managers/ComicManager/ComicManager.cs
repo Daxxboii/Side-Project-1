@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts.Player;
+using UnityEngine.UI;
+using unityCore.Audio;
 
 namespace unityCore
 {
@@ -12,29 +14,30 @@ namespace unityCore
             [SerializeField]
             GameObject panel, canvas;
             [SerializeField]
-            chapter[] ch;
+            Sprite panelImage;
             [SerializeField]
-            Material pannelMaterial;
-            int eventNumber;
+            int n = 0;
+            [SerializeField]
+            chapter[] ch;
+
+            int CurChapter;
+            
             
 
             [System.Serializable]
             public class chapter
             {
-                public int chapternumber;
                 public pages[] _pages;
             }
 
             [System.Serializable]
             public class pages
             {
-                public Material coverPage;
-                public Material PageMeterial;
+                public Sprite PageImage;
             }
 
             private void Awake()
             {
-                pannelMaterial = panel.gameObject.GetComponent<Material>();
                 panel.SetActive(false);
                 canvas.SetActive(false);
             }
@@ -48,19 +51,64 @@ namespace unityCore
             {
                 if (open)
                 {
-                    OpenChapter(chapter);
+                    panel.SetActive(true);
+                    canvas.SetActive(true);
+                    CurChapter = chapter;
+                    StartComic(chapter);
                 }
                 else
-                    return;
+                {
+                    ExtiComic();
+                }
+                    
             }
-
-            void OpenChapter(int chapterNumber)
+            private void change()
             {
-                panel.SetActive(true);
-                canvas.SetActive(true);
-
-                pannelMaterial = ch[1]._pages[1].coverPage;
+                panel.gameObject.gameObject.GetComponent<Image>().sprite = panelImage;
             }
+            public void StartComic(int chapterNumber)
+            {
+                panelImage = ch[chapterNumber]._pages[0].PageImage;
+                change();
+            }
+            public void Next()
+            {
+                if(n == ch[CurChapter]._pages.Length - 1)
+                { 
+                    n = 0;
+                    panelImage = ch[CurChapter]._pages[n].PageImage;
+                    change();
+                }
+                else
+                {
+                    n++;
+                    panelImage = ch[CurChapter]._pages[n].PageImage;
+                    change();
+                }
+
+            }
+
+            public void back()
+            {
+                if (n == 0)
+                {
+                    n = 2;
+                    panelImage = ch[CurChapter]._pages[n].PageImage;
+                    change();
+                }
+                else
+                {
+                    n--;
+                    panelImage = ch[CurChapter]._pages[n].PageImage;
+                    change();
+                }
+            }
+            public void ExtiComic()
+            {
+                panel.SetActive(false);
+                canvas.SetActive(false);
+            }
+
         }
     }
 }
