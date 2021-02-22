@@ -10,6 +10,7 @@ namespace unityCore
     {
         public class EventManager : MonoBehaviour
         {
+            /*
             [SerializeField]
             VideoPlayer CutscenePlayer;
 
@@ -82,6 +83,7 @@ namespace unityCore
 
 
             #endregion
+            */
         }
     }
 }
