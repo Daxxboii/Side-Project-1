@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;````````````````
 using UnityEngine;
 using System;
 using unityCore.Audio;
@@ -9,7 +8,7 @@ using Scripts.Objects;
 
 namespace Scripts.Player
 {
-    
+
     public class PlayerScript : MonoBehaviour
     {
         public static event Action<bool, int> PlayCutscene;
