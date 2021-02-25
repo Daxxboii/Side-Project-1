@@ -1,4 +1,4 @@
-﻿using System.Collections;````````````````
+﻿using System.Collections;
 using UnityEngine;
 using System;
 using unityCore.Audio;
@@ -129,7 +129,7 @@ namespace Scripts.Player
             if (mv.isCrouching == false)
             {
                 
-                ch.height = mv.hight;
+                ch.height = mv.tempHight;
                 mv.speed = mv.tempSpeed;
             }
             else
