@@ -131,7 +131,7 @@ namespace Scripts.Player
                 bu.intract.SetActive(false);
                 if(oc.had == null)
                 {
-                    bu.hide.SetActive(false);
+                    bu.dropdown.SetActive(false);
                 }
                 if(this.gameObject.active == true)
                 {
