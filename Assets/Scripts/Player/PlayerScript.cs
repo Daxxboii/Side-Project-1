@@ -11,6 +11,7 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
+        
         public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
         [SerializeField]
@@ -32,6 +33,8 @@ namespace Scripts.Player
         Pickups p = new Pickups();
         [SerializeField]
         IntractionSettings it = new IntractionSettings();
+        [SerializeField]
+        Buttons bu = new Buttons();
         [Serializable]
         private struct IntractionSettings 
         {
@@ -65,7 +68,12 @@ namespace Scripts.Player
             public float range;
             public LayerMask pickableLayer;
         }
-
+        [Serializable]
+        private struct Buttons
+        {
+            public GameObject pickup, dropdown, hide, unhide, intract;
+            public LayerMask LM;
+        }
         
         private void Awake()
         {
@@ -87,13 +95,51 @@ namespace Scripts.Player
             
             Locomotion();
             GetTouchInput();
-
+            ButtonsAD();
             if (_camera.rightFingerID != -1)
             {
                 LookAround();
 
             }
         }
+
+        void ButtonsAD()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(FPScam.transform.position, transform.forward,out hit, 4f, bu.LM))
+            {
+               
+                if (hit.transform.tag == "Door")
+                {
+                    bu.intract.SetActive(true);
+                }
+                if (hit.transform.tag == "pickup")
+                {
+                    bu.pickup.SetActive(true);
+                    bu.dropdown.SetActive(true);
+                }
+                if (hit.transform.tag == "Hideable")
+                {
+                    bu.hide.SetActive(true);
+                    bu.unhide.SetActive(true);
+                }
+            }
+            else
+            {
+                bu.pickup.SetActive(false);
+                bu.hide.SetActive(false);
+                bu.intract.SetActive(false);
+                if(oc.had == null)
+                {
+                    bu.hide.SetActive(false);
+                }
+                if(this.gameObject.active == true)
+                {
+                    bu.unhide.SetActive(false);
+                }
+            }
+        }
+
         private void Locomotion()
         {
             float x = joystick.Horizontal;

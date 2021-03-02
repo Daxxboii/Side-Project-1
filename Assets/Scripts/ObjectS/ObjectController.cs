@@ -10,8 +10,8 @@ namespace Scripts.Objects
 {
     public class ObjectController : MonoBehaviour
     {
-        [SerializeField]
-        GameObject have, had;
+        
+        public GameObject have, had;
         bool isHolding;
         Rigidbody rb;
         void equip()
@@ -27,6 +27,7 @@ namespace Scripts.Objects
         {
             have = o;
             Debug.Log("hi");
+            
             equip();
         }
 
