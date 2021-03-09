@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas,UnhideCanvas;
+    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas;
     private void Awake()
     {
         Time.timeScale = 1;
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
+        FpsCanvas.SetActive(false);
 
     }
     public void settings()
@@ -55,7 +56,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         FpsCanvas.SetActive(true);
-        UnhideCanvas.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+    public void back()
+    {
+        settingsMenu.SetActive(true);
         pauseMenu.SetActive(false);
     }
 }
