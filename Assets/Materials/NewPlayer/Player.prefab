@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5235837793138407854}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.42, y: 0, z: 0}
+  m_LocalPosition: {x: -0.42, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235837792897737997}
@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 5235837793348171653}
   - component: {fileID: 5235837793348171655}
   - component: {fileID: 5235837793348171652}
+  - component: {fileID: 733930403}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -326,16 +327,22 @@ MonoBehaviour:
     speed: 10
     tempSpeed: 0
     gravity: 9.8
-    hight: 0
+    hight: 2.5
     tempHight: 2.5
     ChaseSpeed: 15
     crouchSpeed: 6
     crouchHight: 1.25
     SpeedBoosttimerStart: 3
     MAxSpeedBoostTime: 0
+    crawlHeight: 0
+    CrawlSpeed: 0
     isJumping: 0
     isCrouching: 0
+    isVenting: 0
     isGettingChased: 0
+    vent:
+      serializedVersion: 2
+      m_Bits: 0
   _camera:
     cameraTransform: {fileID: 5235837792897737997}
     cameraSensitivity: 0
@@ -363,6 +370,7 @@ MonoBehaviour:
     hide: {fileID: 0}
     unhide: {fileID: 0}
     intract: {fileID: 0}
+    crouch: {fileID: 0}
     LM:
       serializedVersion: 2
       m_Bits: 24832
@@ -382,3 +390,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   range: 4
+--- !u!135 &733930403
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5235837793348171657}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
