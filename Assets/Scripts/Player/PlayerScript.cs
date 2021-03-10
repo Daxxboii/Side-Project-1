@@ -94,7 +94,7 @@ namespace Scripts.Player
 
         private void Update()
         {
-            crawl();
+            
             Locomotion();
             GetTouchInput();
             ButtonsAD();
@@ -182,7 +182,6 @@ namespace Scripts.Player
             }
             else
             {
-                
                 ch.height = mv.crouchHight;
                 mv.speed = mv.crouchSpeed;
             }
@@ -202,23 +201,6 @@ namespace Scripts.Player
         {
             GameObject e = GameObject.FindWithTag("Enemy");
             return Vector3.Distance(transform.position, e.transform.position);
-        }
-        //crawl
-        void crawl()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, mv.vent))
-            {
-                ch.height = mv.crawlHeight;
-                mv.speed = mv.CrawlSpeed;
-                bu.crouch.SetActive(false);
-            }
-            else
-            {
-                ch.height = mv.tempSpeed;
-                mv.speed = mv.tempSpeed;
-                bu.crouch.SetActive(true);
-            }
         }
 
         //pickups
