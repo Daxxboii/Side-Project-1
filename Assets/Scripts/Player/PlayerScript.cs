@@ -5,6 +5,7 @@ using unityCore.Audio;
 using UnityEngine.UI;
 using System.Threading;
 using Scripts.Objects;
+using Boo.Lang.Environments;
 
 namespace Scripts.Player
 {
@@ -58,8 +59,9 @@ namespace Scripts.Player
         [Serializable]
         private struct MovementVariable
         {
-            public float speed, tempSpeed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime;
-            public bool isJumping, isCrouching, isGettingChased;
+            public float speed, tempSpeed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime, crawlHeight, CrawlSpeed;
+            public bool isJumping, isCrouching,isVenting,isGettingChased;
+            public LayerMask vent;
         }
         [Serializable]
         private struct Pickups
@@ -71,7 +73,7 @@ namespace Scripts.Player
         [Serializable]
         private struct Buttons
         {
-            public GameObject pickup, dropdown, hide, unhide, intract;
+            public GameObject pickup, dropdown, hide, unhide, intract, crouch;
             public LayerMask LM;
         }
         
@@ -92,7 +94,7 @@ namespace Scripts.Player
 
         private void Update()
         {
-            
+            crawl();
             Locomotion();
             GetTouchInput();
             ButtonsAD();
@@ -201,7 +203,24 @@ namespace Scripts.Player
             GameObject e = GameObject.FindWithTag("Enemy");
             return Vector3.Distance(transform.position, e.transform.position);
         }
-        
+        //crawl
+        void crawl()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, mv.vent))
+            {
+                ch.height = mv.crawlHeight;
+                mv.speed = mv.CrawlSpeed;
+                bu.crouch.SetActive(false);
+            }
+            else
+            {
+                ch.height = mv.tempSpeed;
+                mv.speed = mv.tempSpeed;
+                bu.crouch.SetActive(true);
+            }
+        }
+
         //pickups
         public void Pickup()
         {
