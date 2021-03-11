@@ -11,7 +11,7 @@ namespace Scripts.Objects
     public class ObjectController : MonoBehaviour
     {
         
-        public GameObject have, had;
+        public GameObject have, had, had2;
         bool isHolding;
         Rigidbody rb;
         void equip()
@@ -36,8 +36,8 @@ namespace Scripts.Objects
             had.transform.SetParent(null);
             rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
-            Instantiate(have, transform.position, transform.rotation);
             had = null;
+            rb = null;
             have = null;
             isHolding = false;
         }

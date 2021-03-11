@@ -32,6 +32,7 @@ public class ButtonOpen : MonoBehaviour
             if(hit.transform.CompareTag("Hideable"))
             {
                 Hide.SetActive(true);
+                Unhide.SetActive(false);
             }
             if (hit.transform.CompareTag("pickup"))
             {
@@ -46,11 +47,8 @@ public class ButtonOpen : MonoBehaviour
             Pickup.SetActive(false);
             Drop.SetActive(false);
             Unhide.SetActive(false);
-            if (oc.had == null)
-            {
-                Drop.SetActive(false);
-            }
-            else
+            Hide.SetActive(false);
+            if (oc.had != null)
             {
                 Drop.SetActive(true);
             }

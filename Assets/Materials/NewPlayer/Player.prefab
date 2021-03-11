@@ -266,7 +266,6 @@ GameObject:
   - component: {fileID: 5235837793348171653}
   - component: {fileID: 5235837793348171655}
   - component: {fileID: 5235837793348171652}
-  - component: {fileID: 733930403}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -365,16 +364,6 @@ MonoBehaviour:
       m_Bits: 16384
     anim: {fileID: 0}
     IsOpened: 0
-  bu:
-    pickup: {fileID: 0}
-    dropdown: {fileID: 0}
-    hide: {fileID: 0}
-    unhide: {fileID: 0}
-    intract: {fileID: 0}
-    crouch: {fileID: 0}
-    LM:
-      serializedVersion: 2
-      m_Bits: 24832
 --- !u!114 &5235837793348171652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,16 +380,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   range: 4
---- !u!135 &733930403
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5235837793348171657}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4
-  m_Center: {x: 0, y: 0, z: 0}
