@@ -12,7 +12,8 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
-        
+        [SerializeField]
+        int CloseTime;
         public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
         [SerializeField]
@@ -35,7 +36,7 @@ namespace Scripts.Player
         [SerializeField]
         IntractionSettings it = new IntractionSettings();
         [SerializeField]
-        Buttons bu = new Buttons();
+        
         [Serializable]
         private struct IntractionSettings 
         {
@@ -70,12 +71,6 @@ namespace Scripts.Player
             public float range;
             public LayerMask pickableLayer;
         }
-        [Serializable]
-        private struct Buttons
-        {
-            public GameObject pickup, dropdown, hide, unhide, intract, crouch;
-            public LayerMask LM;
-        }
         
         private void Awake()
         {
@@ -97,7 +92,6 @@ namespace Scripts.Player
             
             Locomotion();
             GetTouchInput();
-            ButtonsAD();
             if (_camera.rightFingerID != -1)
             {
                 LookAround();
@@ -105,42 +99,7 @@ namespace Scripts.Player
             }
         }
 
-        void ButtonsAD()
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(FPScam.transform.position, transform.forward,out hit, 4f, bu.LM))
-            {
-               
-                if (hit.transform.tag == "Door")
-                {
-                    bu.intract.SetActive(true);
-                }
-                if (hit.transform.tag == "pickup")
-                {
-                    bu.pickup.SetActive(true);
-                    bu.dropdown.SetActive(true);
-                }
-                if (hit.transform.tag == "Hideable")
-                {
-                    bu.hide.SetActive(true);
-                    bu.unhide.SetActive(true);
-                }
-            }
-            else
-            {
-                bu.pickup.SetActive(false);
-                bu.hide.SetActive(false);
-                bu.intract.SetActive(false);
-                if(oc.had == null)
-                {
-                    bu.dropdown.SetActive(false);
-                }
-                if(this.gameObject.active == true)
-                {
-                    bu.unhide.SetActive(false);
-                }
-            }
-        }
+        
 
         private void Locomotion()
         {
@@ -303,23 +262,26 @@ namespace Scripts.Player
             if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
             {
                 it.anim = hit.transform.GetComponentInParent<Animator>();
-                if(hit.collider.tag == "Door")
+                if (hit.collider.tag == "Door")
                 {
-                    it.IsOpened = !it.IsOpened;
-                    IntractWithDoor(it.IsOpened);
+                    IntractWithDoor();
                 }
             }
         }
-        void IntractWithDoor(bool o)
+        void IntractWithDoor()
         {
-            if(o)
+            if(it.anim.GetBool("IsOpen") == false)
             {
-                it.anim.SetBool("Open", true);
+                it.anim.SetBool("IsOpen", true);
+                StartCoroutine(closeDoor());
             }
-            else if (!o)
-            {
-                it.anim.SetBool("Open", false);
-            }
+            
+        }
+        
+        IEnumerator closeDoor()
+        {
+            yield return new WaitForSeconds(CloseTime);
+            it.anim.SetBool("IsOpen", false);
         }
     }
 
