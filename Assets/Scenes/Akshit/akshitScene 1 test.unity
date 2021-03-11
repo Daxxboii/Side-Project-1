@@ -696,7 +696,6 @@ GameObject:
   - component: {fileID: 243218618}
   - component: {fileID: 243218617}
   - component: {fileID: 243218623}
-  - component: {fileID: 243218622}
   m_Layer: 8
   m_Name: Cube (1)
   m_TagString: pickup
@@ -794,18 +793,6 @@ Transform:
   m_Father: {fileID: 1034818638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &243218622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243218616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2577631a05711449617092062292c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &243218623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3492,6 +3479,7 @@ MonoBehaviour:
   Intract: {fileID: 565231906}
   Pickup: {fileID: 501131756}
   Drop: {fileID: 1500704654}
+  cam: {fileID: 2049337753}
   lm:
     serializedVersion: 2
     m_Bits: 24832
@@ -3830,6 +3818,12 @@ Transform:
   m_Father: {fileID: 1034818638}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &2049337753 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5235837792897737992, guid: a9cc92c9c522c01418e53f509c7e588c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5235837792283805726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117176480
 GameObject:
   m_ObjectHideFlags: 0

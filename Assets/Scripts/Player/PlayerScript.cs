@@ -171,12 +171,14 @@ namespace Scripts.Player
                 if(hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickup")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
+                    //p.PickedUpObject.GetComponent<Outline>().enabled = true;
                     if(p.PickedUpObject != null)
                     {
                         oc.bring(p.PickedUpObject);
                         Destroy(p.PickedUpObject);
                     }
                 }
+                
             }
         }
 

@@ -9,6 +9,8 @@ public class ButtonOpen : MonoBehaviour
     [SerializeField]
     GameObject Player, Hide, Unhide, Intract, Pickup, Drop;
     [SerializeField]
+    Camera cam;
+    [SerializeField]
     LayerMask lm;
     [SerializeField]
     ObjectController oc;
@@ -23,7 +25,7 @@ public class ButtonOpen : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Player.activeInHierarchy == true && Physics.Raycast(Player.transform.position, Player.transform.forward, out hit, 4f, lm))
+        if(Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 4f, lm))
         {
             if(hit.transform.CompareTag("Door"))
             {
