@@ -34,18 +34,6 @@ namespace Scripts.Player
         [SerializeField]
         Pickups p = new Pickups();
         [SerializeField]
-        IntractionSettings it = new IntractionSettings();
-        [SerializeField]
-        
-        [Serializable]
-        private struct IntractionSettings 
-        {
-            public float range;
-            public LayerMask Intractable;
-            public Animator anim;
-            public bool IsOpened;
-        }
-
         [Serializable]
         private struct CameraSettings
         {
@@ -257,7 +245,7 @@ namespace Scripts.Player
         ///  added unlocked doors animations
         /// </summary>
 
-
+        /*
         public void PlayerInteraction()
         {
             RaycastHit hit;
@@ -284,7 +272,7 @@ namespace Scripts.Player
         {
             yield return new WaitForSeconds(CloseTime);
             it.anim.SetBool("IsOpen", false);
-        }
+        }*/
     }
 
 }
