@@ -488,8 +488,7 @@ GameObject:
   - component: {fileID: 3273204261910054121}
   - component: {fileID: 558422464}
   - component: {fileID: 558422463}
-  - component: {fileID: 558422461}
-  - component: {fileID: 558422462}
+  - component: {fileID: 3478418610919809319}
   m_Layer: 14
   m_Name: Door_unwrapped
   m_TagString: Door
@@ -560,19 +559,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5234495, y: 0.15644847, z: 3.1519494}
   m_Center: {x: 0.0051290165, y: 0.017152699, z: 1.5678488}
---- !u!114 &558422461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5223594635194917162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2577631a05711449617092062292c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &558422462
+--- !u!114 &3478418610919809319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,8 +572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  outlineWidth: 10
+  outlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  outlineWidth: 7
   precomputeOutline: 1
   bakeKeys:
   - {fileID: 6274059880062070182, guid: 060e53b7e4d95f54c8130254b4387d9a, type: 3}
