@@ -20,8 +20,9 @@ public class ButtonOpen : MonoBehaviour
         Pickup.SetActive(false);
         Intract.SetActive(false);
         Hide.SetActive(false);
+        Drop.SetActive(false);
+        Pickup.SetActive(false);
     }
-
     void Update()
     {
         RaycastHit hit;

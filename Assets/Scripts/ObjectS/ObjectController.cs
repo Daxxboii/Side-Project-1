@@ -14,6 +14,13 @@ namespace Scripts.Objects
         public GameObject have, had, had2;
         bool isHolding;
         Rigidbody rb;
+        private void Update()
+        {
+            if(had != null)
+            {
+                had.GetComponent<Outline>().enabled = false;
+            }
+        }
         void equip()
         {
             had = Instantiate(have, transform.position, transform.rotation);
@@ -27,7 +34,6 @@ namespace Scripts.Objects
         {
             have = o;
             Debug.Log("hi");
-            
             equip();
         }
 

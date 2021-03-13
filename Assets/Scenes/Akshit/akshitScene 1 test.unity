@@ -2496,6 +2496,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5235837792283805726}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1078337627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078337626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d1ec55b4dcc2e42adde613aaf857e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2049337753}
+  lm:
+    serializedVersion: 2
+    m_Bits: 24832
+  oc: {fileID: 1328558513}
 --- !u!114 &1085374361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5235837793348171655, guid: a9cc92c9c522c01418e53f509c7e588c,
@@ -4041,6 +4058,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5235837793348171652, guid: a9cc92c9c522c01418e53f509c7e588c,
+        type: 3}
+      propertyPath: hideableLayer.m_Bits
+      value: 8192
+      objectReference: {fileID: 0}
     - target: {fileID: 5235837793348171654, guid: a9cc92c9c522c01418e53f509c7e588c,
         type: 3}
       propertyPath: m_LocalPosition.x
