@@ -21,10 +21,14 @@ public class LitUp : MonoBehaviour
             outline = hit.transform.gameObject.GetComponent<Outline>();
             outline.enabled = true;
         }
-        else 
+        else
         {
-            outline.enabled = false;
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
         }
         
+
     }
 }
