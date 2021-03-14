@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354935998}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235837793348171654}
@@ -106,13 +106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396694517}
-  m_LocalRotation: {x: 0.7068989, y: 0.017145645, z: -0.017145645, w: 0.7068989}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 236.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235837793348171654}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
 --- !u!20 &1396694521
 Camera:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ Camera:
   far clip plane: 1000
   field of view: 11.7
   orthographic: 0
-  orthographic size: 50.05
+  orthographic size: 39.61
   m_Depth: 0.08
   m_CullingMask:
     serializedVersion: 2
@@ -535,7 +535,7 @@ MonoBehaviour:
   FPScam: {fileID: 5235837792897737992}
   ac: {fileID: 0}
   mv:
-    speed: 2
+    speed: 3.5
     tempSpeed: 0
     gravity: 9.8
     hight: 2.5
@@ -556,8 +556,8 @@ MonoBehaviour:
       m_Bits: 0
   _camera:
     cameraTransform: {fileID: 5235837792897737997}
-    cameraSensitivity: 0
-    cameraPitch: 0
+    cameraSensitivity: 10
+    cameraPitch: 2
     lookInput: {x: 0, y: 0}
     leftFingerID: 0
     rightFingerID: 0
