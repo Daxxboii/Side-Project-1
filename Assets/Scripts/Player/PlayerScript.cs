@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Threading;
 using Scripts.Objects;
 
-
 namespace Scripts.Player
 {
 
@@ -35,8 +34,9 @@ namespace Scripts.Player
         [Serializable]
         private struct PlayerHealthVariables
         {
-            public float health, RegenTime;
+            public float health, maxHealth, RegenTime, timer;
             public bool isDead;
+            public Slider HealthSlider;
         }
         [Serializable]
         private struct CameraSettings
@@ -74,7 +74,18 @@ namespace Scripts.Player
 
         private void Update()
         {
-            
+
+            PlayerHealth();
+            healthUpdate();
+            if(_hv.health < _hv.maxHealth)
+            {
+                _hv.timer += Time.deltaTime;
+                if(_hv.timer > _hv.RegenTime)
+                {
+                    _hv.health++;
+                    _hv.timer = 0.0f;
+                }
+            }
             Locomotion();
             GetTouchInput();
             if (_camera.rightFingerID != -1)
@@ -224,15 +235,12 @@ namespace Scripts.Player
             {
                 _hv.isDead = true;
             }
-            else if(_hv.health < 100)
-            {
-                StartCoroutine(Regenrate());
-            }
         }
-        IEnumerator Regenrate()
+        
+        
+        public void healthUpdate()
         {
-            yield return new WaitForSeconds(_hv.RegenTime);
-            _hv.health++;
+            _hv.HealthSlider.value = _hv.health;
         }
     }
 

@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 namespace LoneWolfStudios.Control
 {
-    public class AIController : MonoBehaviour
+    public class GirlAiGhost : MonoBehaviour
     {
         public float wanderRadius;
         public float wanderTimer, fieldOfView = 110f, range;
         Vector3 playerLastInSight;
-
+        [SerializeField]
         private Transform target;
+        [SerializeField]
         private NavMeshAgent agent;
+        [SerializeField]
         private float timer;
-        
+
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -44,7 +47,7 @@ namespace LoneWolfStudios.Control
         }
         bool isinFrontOFMe(GameObject player)
         {
-            
+
             Vector3 direction = player.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle < fieldOfView * 0.5f)
@@ -54,7 +57,7 @@ namespace LoneWolfStudios.Control
                 {
                     Debug.DrawRay(transform.position, direction, Color.black);
                     return true;
-                    
+
                 }
                 else
                     return false;
@@ -62,7 +65,7 @@ namespace LoneWolfStudios.Control
             else
                 return false;
         }
-        
+
         public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
         {
             Vector3 randDirection = Random.insideUnitSphere * dist;
@@ -77,4 +80,3 @@ namespace LoneWolfStudios.Control
         }
     }
 }
-
