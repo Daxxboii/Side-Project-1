@@ -12,8 +12,6 @@ namespace Scripts.Player
 
     public class PlayerScript : MonoBehaviour
     {
-        [SerializeField]
-        int CloseTime;
         public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
         [SerializeField]
@@ -26,14 +24,20 @@ namespace Scripts.Player
         private CharacterController ch;
         [SerializeField]
         private AudioController ac;
-        private Animator anim;
+        [SerializeField]
+        private Animator camAnim;
         [SerializeField]
         private MovementVariable mv = new MovementVariable();
         [SerializeField]
         CameraSettings _camera = new CameraSettings();
         [SerializeField]
-        Pickups p = new Pickups();
-        [SerializeField]
+        PlayerHealthVariables _hv = new PlayerHealthVariables();
+        [Serializable]
+        private struct PlayerHealthVariables
+        {
+            public float health, RegenTime;
+            public bool isDead;
+        }
         [Serializable]
         private struct CameraSettings
         {
@@ -52,20 +56,13 @@ namespace Scripts.Player
             public bool isJumping, isCrouching,isVenting,isGettingChased;
             public LayerMask vent;
         }
-        [Serializable]
-        private struct Pickups
-        {
-            public GameObject PickedUpObject;
-            public float range;
-            public LayerMask pickableLayer;
-        }
+        
         
         private void Awake()
         {
            Application.targetFrameRate = 60;
             mv.tempSpeed = mv.speed;
             ch = gameObject.GetComponent<CharacterController>();
-            anim = gameObject.GetComponent<Animator>();
             //###### for camera
 
             // id = -1 means no finger is touching the screen
@@ -83,7 +80,6 @@ namespace Scripts.Player
             if (_camera.rightFingerID != -1)
             {
                 LookAround();
-
             }
         }
 
@@ -94,6 +90,14 @@ namespace Scripts.Player
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
 
+           if(joystick.Direction.x > 0 || joystick.Direction.y > 0)
+            {
+                camAnim.SetBool("IsMoving", true);
+            }
+            else
+            {
+                camAnim.SetBool("IsMoving", false);
+            }
             move = x * transform.right + z * transform.forward;
 
             
@@ -133,7 +137,6 @@ namespace Scripts.Player
                 mv.speed = mv.crouchSpeed;
             }
         }
-
         void isGettingChased()
         {
             if (ChasingMe() >= 7f)
@@ -143,34 +146,11 @@ namespace Scripts.Player
             else
                 mv.isGettingChased = false;
         }
-
         float ChasingMe()
         {
             GameObject e = GameObject.FindWithTag("Enemy");
             return Vector3.Distance(transform.position, e.transform.position);
         }
-
-        //pickups
-        public void Pickup()
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, p.range, p.pickableLayer))
-            {
-                if(hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickup")
-                {
-                    p.PickedUpObject = hit.collider.gameObject;
-                    //p.PickedUpObject.GetComponent<Outline>().enabled = true;
-                    if(p.PickedUpObject != null)
-                    {
-                        oc.bring(p.PickedUpObject);
-                        Destroy(p.PickedUpObject);
-                    }
-                }
-                
-            }
-        }
-
-        
         void GetTouchInput()
         {
             //Iterate through all detected touches
@@ -229,8 +209,6 @@ namespace Scripts.Player
                 }
             }
         }
-
-
         void LookAround()
         {
             //Camera Pitch (Up & Down) 
@@ -240,39 +218,22 @@ namespace Scripts.Player
             //Yaw (Right & Left)
             transform.Rotate(transform.up, _camera.lookInput.x);
         }
-        /// <summary>
-        ///  animations
-        ///  added unlocked doors animations
-        /// </summary>
-
-        /*
-        public void PlayerInteraction()
+        void PlayerHealth()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
+            if(_hv.health <= 0)
             {
-                it.anim = hit.transform.GetComponentInParent<Animator>();
-                if (hit.collider.tag == "Door")
-                {
-                    IntractWithDoor();
-                }
+                _hv.isDead = true;
+            }
+            else if(_hv.health < 100)
+            {
+                StartCoroutine(Regenrate());
             }
         }
-        void IntractWithDoor()
+        IEnumerator Regenrate()
         {
-            if(it.anim.GetBool("IsOpen") == false)
-            {
-                it.anim.SetBool("IsOpen", true);
-                StartCoroutine(closeDoor());
-            }
-            
+            yield return new WaitForSeconds(_hv.RegenTime);
+            _hv.health++;
         }
-        
-        IEnumerator closeDoor()
-        {
-            yield return new WaitForSeconds(CloseTime);
-            it.anim.SetBool("IsOpen", false);
-        }*/
     }
 
 }
