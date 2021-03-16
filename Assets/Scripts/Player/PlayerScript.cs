@@ -58,7 +58,7 @@ namespace Scripts.Player
         {
             GetTouchInput();
 
-            if (rightFingerId != -1)
+            if (rightFingerId == -1)
             {
                 Debug.Log("Rotating");
                 LookAround();
@@ -180,12 +180,12 @@ namespace Scripts.Player
             if(isCrouching == false)
             {
                 speed = TempSpeed;
-                characterController.height = Mathf.Lerp(crouchHight, tempHeight, 1f *Time.deltaTime); ;
+                characterController.height = tempHeight;
             }
             else
             {
                 speed = CrouchSpeed;
-                characterController.height = Mathf.Lerp(tempHeight, crouchHight, 1f * Time.deltaTime); ;
+                characterController.height =crouchHight;
             }
         }
         public void Crawl()
@@ -194,12 +194,12 @@ namespace Scripts.Player
             if (IsCrawlling == false)
             {
                 speed = TempSpeed;
-                characterController.height = Mathf.Lerp(crawlheight, tempHeight, 1f * Time.deltaTime);
+                characterController.height = tempHeight;
             }
             else
             {
                 speed = crawlSpeed;
-                characterController.height = Mathf.Lerp(tempHeight, crawlheight, 1f * Time.deltaTime);
+                characterController.height = crawlheight;
             }
         }
         public void Sprint()
