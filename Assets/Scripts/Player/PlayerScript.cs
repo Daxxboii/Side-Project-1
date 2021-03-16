@@ -13,95 +13,148 @@ namespace Scripts.Player
     {
         public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
-        [SerializeField]
-        ObjectController oc;
-        [SerializeField]
-        private Joystick joystick;
-        private Vector3 move, moveT;
-        [SerializeField]
-        Camera FPScam;
-        private CharacterController ch;
-        [SerializeField]
-        private AudioController ac;
-        [SerializeField]
-        private Animator camAnim;
-        [SerializeField]
-        private MovementVariable mv = new MovementVariable();
-        [SerializeField]
-        CameraSettings _camera = new CameraSettings();
-        [SerializeField]
-        PlayerHealthVariables _hv = new PlayerHealthVariables();
-        [Serializable]
-        private struct PlayerHealthVariables
-        {
-            public float health, maxHealth, RegenTime, timer;
-            public bool isDead;
-            public Slider HealthSlider;
-        }
-        [Serializable]
-        private struct CameraSettings
-        {
-            [Tooltip("Reference to camera")] public Transform cameraTransform;
-            [Tooltip("Camera Sensitivity")] public float cameraSensitivity;
-            [Tooltip("Camera Pitch (limit of top and bottom)")] public float cameraPitch;
-            [Tooltip("Camera Inout")] public Vector2 lookInput;
-
-            public int leftFingerID, rightFingerID;
-            public float halfScreenWidth;
-        }
-        [Serializable]
-        private struct MovementVariable
-        {
-            public float speed, tempSpeed, gravity, hight, tempHight, ChaseSpeed, crouchSpeed, crouchHight, SpeedBoosttimerStart, MAxSpeedBoostTime, crawlHeight, CrawlSpeed;
-            public bool isJumping, isCrouching,isVenting,isGettingChased;
-            public LayerMask vent;
-        }
+        [SerializeField] private Joystick joystick;
         
-        
-        private void Awake()
+
+        [SerializeField] private Transform cameraTransform;
+        [SerializeField] private CharacterController characterController;
+        [SerializeField] private Animator camAnim;
+
+        // Player settings
+        [SerializeField] private float cameraSensitivity;
+        [SerializeField] float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, tempHeight, crouchHight, crawlheight, Health, RegenTimer;
+        private bool isSprinting, isCrouching, IsCrawlling, isDead, canSprint;
+        private Vector3 move;
+        // Touch detection
+        private int leftFingerId, rightFingerId;
+        private float halfScreenWidth;
+
+        // Camera control
+        private Vector2 lookInput;
+        private float cameraPitch;
+
+        // Player movement
+        private Vector2 moveTouchStartPosition;
+        private Vector2 moveInput;
+
+        // Start is called before the first frame update
+        void Start()
         {
-           Application.targetFrameRate = 60;
-            mv.tempSpeed = mv.speed;
-            ch = gameObject.GetComponent<CharacterController>();
-            //###### for camera
+            TempSpeed = speed;
+            characterController = gameObject.GetComponent<CharacterController>();
+            tempHeight = characterController.height;
+            height = characterController.height;
+            TempSpeed = speed;
+            // id = -1 means the finger is not being tracked
+            leftFingerId = -1;
+            rightFingerId = -1;
 
-            // id = -1 means no finger is touching the screen
-            _camera.leftFingerID = -1;
-            _camera.rightFingerID = -1;
-
-            _camera.halfScreenWidth = Screen.width / 2;
+            // only calculate once
+            halfScreenWidth = Screen.width / 2;
         }
 
-        private void Update()
+        // Update is called once per frame
+        void Update()
         {
-
-            PlayerHealth();
-            healthUpdate();
-            if(_hv.health < _hv.maxHealth)
-            {
-                _hv.timer += Time.deltaTime;
-                if(_hv.timer > _hv.RegenTime)
-                {
-                    _hv.health++;
-                    _hv.timer = 0.0f;
-                }
-            }
-            Locomotion();
             GetTouchInput();
-            if (_camera.rightFingerID != -1)
+
+            if (rightFingerId != -1)
             {
+                Debug.Log("Rotating");
                 LookAround();
             }
+            LocoMotion();
         }
 
-        
-
-        private void Locomotion()
+        void GetTouchInput()
         {
+            // Iterate through all the detected touches
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+
+                Touch t = Input.GetTouch(i);
+
+                // Check each touch's phase
+                switch (t.phase)
+                {
+                    case TouchPhase.Began:
+
+                        if (t.position.x < halfScreenWidth && leftFingerId == -1)
+                        {
+                            // Start tracking the left finger if it was not previously being tracked
+                            leftFingerId = t.fingerId;
+
+                            // Set the start position for the movement control finger
+                            moveTouchStartPosition = t.position;
+                        }
+                        else if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                        {
+                            // Start tracking the rightfinger if it was not previously being tracked
+                            rightFingerId = t.fingerId;
+                        }
+
+                        break;
+                    case TouchPhase.Ended:
+                    case TouchPhase.Canceled:
+
+                        if (t.fingerId == leftFingerId)
+                        {
+                            // Stop tracking the left finger
+                            leftFingerId = -1;
+                            Debug.Log("Stopped tracking left finger");
+                        }
+                        else if (t.fingerId == rightFingerId)
+                        {
+                            // Stop tracking the right finger
+                            rightFingerId = -1;
+                            Debug.Log("Stopped tracking right finger");
+                        }
+
+                        break;
+                    case TouchPhase.Moved:
+
+                        // Get input for looking around
+                        if (t.fingerId == rightFingerId)
+                        {
+                            lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                        }
+                        else if (t.fingerId == leftFingerId)
+                        {
+
+                            // calculating the position delta from the start position
+                            moveInput = t.position - moveTouchStartPosition;
+                        }
+
+                        break;
+                    case TouchPhase.Stationary:
+                        // Set the look input to zero if the finger is still
+                        if (t.fingerId == rightFingerId)
+                        {
+                            lookInput = Vector2.zero;
+                        }
+                        break;
+                }
+            }
+        }
+
+        void LookAround()
+        {
+
+            // vertical (pitch) rotation
+            cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
+            cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+
+            // horizontal (yaw) rotation
+            transform.Rotate(transform.up, lookInput.x);
+        }
+
+        void LocoMotion()
+        {
+            
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
 
-           if(joystick.Direction.x > 0 || joystick.Direction.y > 0)
+            if (joystick.Direction.x > 0 || joystick.Direction.y > 0)
             {
                 camAnim.SetBool("IsMoving", true);
             }
@@ -109,139 +162,60 @@ namespace Scripts.Player
             {
                 camAnim.SetBool("IsMoving", false);
             }
+
             move = x * transform.right + z * transform.forward;
 
-            
 
-            if(mv.isGettingChased && !mv.isCrouching)
+
+            if (characterController.isGrounded == false)
             {
-                mv.speed = mv.crouchSpeed;
-                mv.SpeedBoosttimerStart += Time.deltaTime;
-                if (mv.SpeedBoosttimerStart > mv.MAxSpeedBoostTime)
-                {
-                    mv.speed = mv.tempSpeed;
-                    mv.SpeedBoosttimerStart = 0.0f;
-                    mv.isGettingChased = false;
-                }
+                move += Physics.gravity * Time.deltaTime * 9.5f;
             }
-            if (ch.isGrounded == false)
-            {
-                move += Physics.gravity * Time.deltaTime * mv.gravity;
-            }
-            
-            ch.Move(move * Time.deltaTime * mv.speed);
+            characterController.Move(move * Time.deltaTime * speed);
+
         }
-        //crouch
-        public void Crouch()
+        public void croutch()
         {
-            
-            mv.isCrouching = !mv.isCrouching;
-            if (mv.isCrouching == false)
+            isCrouching = !isCrouching;
+            if(isCrouching == false)
             {
-                
-                ch.height = mv.tempHight;
-                mv.speed = mv.tempSpeed;
+                speed = TempSpeed;
+                characterController.height = Mathf.Lerp(crouchHight, tempHeight, 1f *Time.deltaTime); ;
             }
             else
             {
-                ch.height = mv.crouchHight;
-                mv.speed = mv.crouchSpeed;
+                speed = CrouchSpeed;
+                characterController.height = Mathf.Lerp(tempHeight, crouchHight, 1f * Time.deltaTime); ;
             }
         }
-        void isGettingChased()
+        public void Crawl()
         {
-            if (ChasingMe() >= 7f)
+            IsCrawlling = !IsCrawlling;
+            if (IsCrawlling == false)
             {
-                mv.isGettingChased = true;
+                speed = TempSpeed;
+                characterController.height = Mathf.Lerp(crawlheight, tempHeight, 1f * Time.deltaTime);
             }
             else
-                mv.isGettingChased = false;
-        }
-        float ChasingMe()
-        {
-            GameObject e = GameObject.FindWithTag("Enemy");
-            return Vector3.Distance(transform.position, e.transform.position);
-        }
-        void GetTouchInput()
-        {
-            //Iterate through all detected touches
-            for (int i = 0; i < Input.touchCount; i++)
             {
-                Touch t = Input.GetTouch(i);
-
-                //check touch phase
-                switch (t.phase)
-                {
-                    case TouchPhase.Began:
-
-                        if (t.position.x < _camera.halfScreenWidth && _camera.leftFingerID == -1)
-                        {
-                            _camera.leftFingerID = t.fingerId;
-                            
-                        }
-                        else if (t.position.x > _camera.halfScreenWidth && _camera.rightFingerID == -1)
-                        {
-                            _camera.rightFingerID = t.fingerId;
-                            
-                        }
-                        break;
-                    case TouchPhase.Ended:
-                    case TouchPhase.Canceled:
-
-                        if (t.fingerId == _camera.leftFingerID)
-                        {
-                            _camera.leftFingerID = -1;
-                            
-                        }
-                        else if (t.fingerId == _camera.rightFingerID)
-                        {
-                            _camera.rightFingerID = -1;
-                            
-                        }
-                        break;
-                    case TouchPhase.Moved:
-
-                        //get input to look around
-                        if (t.fingerId == _camera.rightFingerID)
-                        {
-                            _camera.lookInput = t.deltaPosition * _camera.cameraSensitivity * Time.deltaTime;
-                        }
-                        break;
-
-                    case TouchPhase.Stationary:
-
-                        //set lookInput to zero if finger is still;
-                        if (t.fingerId == _camera.rightFingerID)
-                        {
-                            _camera.lookInput = Vector2.zero;
-                        }
-                        break;
-                        
-                }
+                speed = crawlSpeed;
+                characterController.height = Mathf.Lerp(tempHeight, crawlheight, 1f * Time.deltaTime);
             }
         }
-        void LookAround()
+        public void Sprint()
         {
-            //Camera Pitch (Up & Down) 
-            _camera.cameraPitch = Mathf.Clamp(_camera.cameraPitch - _camera.lookInput.y, -90.0f, 90.0f);
-            _camera.cameraTransform.localRotation = Quaternion.Euler(_camera.cameraPitch, 0f, 0f);
-
-            //Yaw (Right & Left)
-            transform.Rotate(transform.up, _camera.lookInput.x);
-        }
-        void PlayerHealth()
-        {
-            if(_hv.health <= 0)
+            if(canSprint == true)
             {
-                _hv.isDead = true;
+                speed = SprintSpeed;
+                canSprint = false;
+                StartCoroutine(SprintS());
             }
         }
-        
-        
-        public void healthUpdate()
+        IEnumerator SprintS()
         {
-            _hv.HealthSlider.value = _hv.health;
+            yield return new WaitForSeconds(3f);
+            speed = TempSpeed;
         }
+
     }
-
 }
