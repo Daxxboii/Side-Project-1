@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235837793348171654}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!212 &1354936000
 SpriteRenderer:
@@ -111,7 +111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235837793348171654}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
 --- !u!20 &1396694521
 Camera:
@@ -187,6 +187,37 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1348551790576420897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1965476543638270224}
+  m_Layer: 11
+  m_Name: cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1965476543638270224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348551790576420897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5235837792897737997}
+  m_Father: {fileID: 5235837793348171654}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5235837792897013413
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,13 +337,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5235837792897737996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5235837792897013410}
   - {fileID: 5235837793138407852}
-  m_Father: {fileID: 5235837793348171654}
+  m_Father: {fileID: 1965476543638270224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5235837792897737992
@@ -493,9 +524,9 @@ Transform:
   m_LocalPosition: {x: 3.1641276, y: 2.9416537, z: -3.3226228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5235837792897737997}
   - {fileID: 1396694518}
   - {fileID: 1354935999}
+  - {fileID: 1965476543638270224}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -529,45 +560,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0309efacdf9db64aa6ba52da5a91e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CloseTime: 15
-  oc: {fileID: 5235837793138407855}
   joystick: {fileID: 0}
-  FPScam: {fileID: 5235837792897737992}
-  ac: {fileID: 0}
-  mv:
-    speed: 3.5
-    tempSpeed: 0
-    gravity: 9.8
-    hight: 2.5
-    tempHight: 2.5
-    ChaseSpeed: 15
-    crouchSpeed: 6
-    crouchHight: 1.25
-    SpeedBoosttimerStart: 3
-    MAxSpeedBoostTime: 0
-    crawlHeight: 0
-    CrawlSpeed: 0
-    isJumping: 0
-    isCrouching: 0
-    isVenting: 0
-    isGettingChased: 0
-    vent:
-      serializedVersion: 2
-      m_Bits: 0
-  _camera:
-    cameraTransform: {fileID: 5235837792897737997}
-    cameraSensitivity: 10
-    cameraPitch: 2
-    lookInput: {x: 0, y: 0}
-    leftFingerID: 0
-    rightFingerID: 0
-    halfScreenWidth: 0
-  p:
-    PickedUpObject: {fileID: 0}
-    range: 4
-    pickableLayer:
-      serializedVersion: 2
-      m_Bits: 256
+  cameraTransform: {fileID: 0}
+  characterController: {fileID: 0}
+  camAnim: {fileID: 0}
+  cameraSensitivity: 0
+  TempSpeed: 0
+  speed: 0
+  CrouchSpeed: 0
+  crawlSpeed: 0
+  SprintSpeed: 0
+  height: 0
+  tempHeight: 0
+  crouchHight: 0
+  crawlheight: 0
+  Health: 0
+  RegenTimer: 0
 --- !u!114 &5235837793348171652
 MonoBehaviour:
   m_ObjectHideFlags: 0

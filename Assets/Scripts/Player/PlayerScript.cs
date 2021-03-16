@@ -58,7 +58,7 @@ namespace Scripts.Player
         {
             GetTouchInput();
 
-            if (rightFingerId == -1)
+            if (rightFingerId != -1)
             {
                 Debug.Log("Rotating");
                 LookAround();
