@@ -8,6 +8,7 @@ namespace LoneWolfStudios.Control
 {
     public class GirlAiGhost : MonoBehaviour
     {
+
         public float wanderRadius;
         public float wanderTimer, fieldOfView = 110f, range;
         Vector3 playerLastInSight;
@@ -15,25 +16,39 @@ namespace LoneWolfStudios.Control
         private Transform target;
         [SerializeField]
         private NavMeshAgent agent;
-        [SerializeField]
+       // [SerializeField]
         private float timer;
+        private GameObject player;
+
+
+        [SerializeField]
+        public Animator Girl_animator;
+
+
+
 
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             timer = wanderTimer;
+           //Tracker because gameobject being tracked by navmesh should be grounded
+
+            player = GameObject.FindWithTag("Tracker");
         }
         private void Update()
         {
-            var player = GameObject.FindWithTag("Player");
+            
+             
             if (isinFrontOFMe(player))
             {
-                Debug.Log("chaising");
+               // Debug.Log("chaising");
                 agent.SetDestination(player.transform.position);
+                Animations(2);
             }
             else if (!isinFrontOFMe(player))
             {
-                Debug.Log("patoling");
+                //   Debug.Log("patoling");
+                Animations(1);
                 timer += Time.deltaTime;
 
                 if (timer >= wanderTimer)
@@ -77,6 +92,11 @@ namespace LoneWolfStudios.Control
             NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
             return navHit.position;
+        }
+
+        private void Animations(int walk_state)
+        {
+            Girl_animator.SetInteger("Walk_State", walk_state);
         }
     }
 }
