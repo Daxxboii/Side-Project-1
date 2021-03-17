@@ -31,6 +31,7 @@ namespace LoneWolfStudios.Control
         [SerializeField]
         private float Cooldown_period;
 
+        private Vector3 newPos;
 
         private void Start()
         {
@@ -43,12 +44,13 @@ namespace LoneWolfStudios.Control
         }
         private void Update()
         {
+          //  Debug.Log(Vector3.Distance(transform.position, player.transform.position));
             if (!cooldown)
             {
 
                 if (isinFrontOFMe(player))
                 {
-                    // Debug.Log("chaising");
+                     Debug.Log("chaising");
                     agent.SetDestination(player.transform.position);
                     Animations(2, 0);
                     Attack();
@@ -56,17 +58,23 @@ namespace LoneWolfStudios.Control
 
                 else if (!isinFrontOFMe(player))
                 {
-                    //   Debug.Log("patoling");
-                    Animations(1, 0);
-                    timer += Time.deltaTime;
 
+                  if(Vector3.Distance(transform.position, newPos) < 0.5)
+                    {
+                      Animations(-1, 0);
+                    }
+                    else
+                    {
+                        Animations(1, 0);
+                    }
+                    timer += Time.deltaTime;
                     if (timer >= wanderTimer)
                     {
-
-                        Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                         newPos = RandomNavSphere(transform.position, wanderRadius, -1);
                         agent.SetDestination(newPos);
                         timer = 0;
                     }
+
                 }
             }
         }
@@ -120,6 +128,7 @@ namespace LoneWolfStudios.Control
                 if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
                 {
                     cooldown = true;
+                    agent.isStopped = true;
                     Hits_taken++;
                     Animations(-1, 1);
                     Invoke("ReActivate", Cooldown_period);
@@ -135,6 +144,7 @@ namespace LoneWolfStudios.Control
         void ReActivate()
         {
             cooldown = false;
+            agent.isStopped = false;
         }
     }
 }
