@@ -89,11 +89,17 @@ namespace LoneWolfStudios.Control
                 if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, range))
                 {
                     Debug.DrawRay(transform.position, direction, Color.black);
-                    return true;
+                    if (hit.transform.gameObject.tag == "Player")
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
 
                 }
                 else
                     return false;
+
             }
             else
                 return false;
