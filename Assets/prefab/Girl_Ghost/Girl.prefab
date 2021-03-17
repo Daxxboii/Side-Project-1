@@ -1476,10 +1476,14 @@ MonoBehaviour:
   wanderRadius: 30
   wanderTimer: 10
   fieldOfView: 180
-  range: 15
+  range: 50
   target: {fileID: 0}
   agent: {fileID: 2539888587293606567}
+  cooldown: 0
   Girl_animator: {fileID: 2539888587293606564}
+  No_of_hits: 3
+  attack_distance: 3
+  Cooldown_period: 5
 --- !u!195 &2539888587293606567
 NavMeshAgent:
   m_ObjectHideFlags: 0
