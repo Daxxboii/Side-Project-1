@@ -8,7 +8,7 @@ namespace LoneWolfStudios.Control
 {
     public class GirlAiGhost : MonoBehaviour
     {
-
+        float a;
         public float wanderRadius;
         public float wanderTimer, fieldOfView = 110f, range;
         Vector3 playerLastInSight;
@@ -20,7 +20,7 @@ namespace LoneWolfStudios.Control
         private float timer;
         private GameObject player;
         [SerializeField]
-        private bool cooldown;
+        private bool cooldown, chasing;
 
         [SerializeField]
         private Animator Girl_animator;
@@ -50,31 +50,45 @@ namespace LoneWolfStudios.Control
 
                 if (isinFrontOFMe(player))
                 {
-                     Debug.Log("chaising");
+                    chasing = true;
+                    Debug.Log("chaising");
                     agent.SetDestination(player.transform.position);
                     Animations(2, 0);
                     Attack();
                 }
-
                 else if (!isinFrontOFMe(player))
                 {
+                    if(chasing)
+                    {
+                        agent.SetDestination(player.transform.position);
+                        a += Time.deltaTime;
+                        if(a >= 5f)
+                        {
+                            chasing = false;
+                            a = 0.0f;
+                        }
+                    }
+                    else if (!chasing)
+                    {
+                        if (Vector3.Distance(transform.position, newPos) < 0.5)
+                        {
+                            Animations(-1, 0);
+                        }
+                        else
+                        {
+                            Animations(1, 0);
+                        }
 
-                  if(Vector3.Distance(transform.position, newPos) < 0.5)
-                    {
-                      Animations(-1, 0);
+                        {
+                            timer += Time.deltaTime;
+                            if (timer >= wanderTimer)
+                            {
+                                newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                                agent.SetDestination(newPos);
+                                timer = 0;
+                            }
+                        }
                     }
-                    else
-                    {
-                        Animations(1, 0);
-                    }
-                    timer += Time.deltaTime;
-                    if (timer >= wanderTimer)
-                    {
-                         newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-                        agent.SetDestination(newPos);
-                        timer = 0;
-                    }
-
                 }
             }
         }
