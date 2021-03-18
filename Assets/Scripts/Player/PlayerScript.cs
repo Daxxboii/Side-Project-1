@@ -5,26 +5,30 @@ using unityCore.Audio;
 using UnityEngine.UI;
 using System.Threading;
 using Scripts.Objects;
+using LoneWolfStudios.Control;
 
 namespace Scripts.Player
 {
-
     public class PlayerScript : MonoBehaviour
     {
+        [SerializeField]
+        GirlAiGhost gi;
+        [SerializeField] private Camera fpsCam;
         public static event Action<bool, int> PlayCutscene;
         public static event Action<bool, int> TellStory;
         [SerializeField] private Joystick joystick;
         
 
-        [SerializeField] private Transform cameraTransform;
+        [SerializeField] private Transform cameraTransform, ghost;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Animator camAnim;
 
         // Player settings
-        [SerializeField] private float cameraSensitivity;
+        [SerializeField] private float cameraSensitivity, deathAnimationtime;
         [SerializeField] float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, tempHeight, crouchHight, crawlheight, Health, RegenTimer;
-        private bool isSprinting, isCrouching, IsCrawlling, isDead, canSprint;
+        private bool isSprinting, isCrouching, IsCrawlling, canSprint;
         private Vector3 move;
+        public bool isDead;
         // Touch detection
         private int leftFingerId, rightFingerId;
         private float halfScreenWidth;
@@ -56,14 +60,24 @@ namespace Scripts.Player
         // Update is called once per frame
         void Update()
         {
-            GetTouchInput();
-
-            if (rightFingerId != -1)
+            if (Health <= 0)
             {
-                Debug.Log("Rotating");
-                LookAround();
+                gi.Cooldown_period = 0;
+                isDead = true;
+                fpsCam.transform.LookAt(ghost);
+                Invoke("playerDeath", deathAnimationtime);
             }
-            LocoMotion();
+            if (!isDead)
+            {
+                GetTouchInput();
+
+                if (rightFingerId != -1)
+                {
+                    Debug.Log("Rotating");
+                    LookAround();
+                }
+                LocoMotion();
+            }
         }
 
         void GetTouchInput()
@@ -217,5 +231,14 @@ namespace Scripts.Player
             speed = TempSpeed;
         }
 
+        public void PlayerTakeDamage(float hminus)
+        {
+            
+            Health -= hminus;
+        }
+        void playerDeath()
+        {
+
+        }
     }
 }

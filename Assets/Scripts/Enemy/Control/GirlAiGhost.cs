@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using Scripts.Player;
 
 namespace LoneWolfStudios.Control
 {
     public class GirlAiGhost : MonoBehaviour
     {
+        [SerializeField] PlayerScript ps;
         float a;
         public float wanderRadius;
         public float wanderTimer, fieldOfView = 110f, range;
@@ -25,11 +26,11 @@ namespace LoneWolfStudios.Control
         [SerializeField]
         private Animator Girl_animator;
         [SerializeField]
-        private int No_of_hits,Hits_taken;
+        private int damage;
         [SerializeField]
         private float attack_distance;
-        [SerializeField]
-        private float Cooldown_period;
+        
+        public float Cooldown_period;
 
         private Vector3 newPos;
 
@@ -37,7 +38,6 @@ namespace LoneWolfStudios.Control
         {
             agent = GetComponent<NavMeshAgent>();
             timer = wanderTimer;
-            Hits_taken = 0;
            //Tracker because gameobject being tracked by navmesh should be grounded
             player = GameObject.FindWithTag("Tracker");
             cooldown = false;
@@ -143,20 +143,20 @@ namespace LoneWolfStudios.Control
 
         private void Attack()
         {
-            if (Hits_taken < No_of_hits)
+            if (ps.isDead == false)
             {
                 if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
                 {
                     cooldown = true;
                     agent.isStopped = true;
-                    Hits_taken++;
+                    ps.PlayerTakeDamage(damage);
                     Animations(-1, 1);
                     Invoke("ReActivate", Cooldown_period);
                 }
             }
-            else
+            else if(ps.isDead)
             {
-                Animations(2, 2);
+               Animations(2, 2);
               //  Debug.Log("kill;");
             }
         }
@@ -165,6 +165,7 @@ namespace LoneWolfStudios.Control
         {
             cooldown = false;
             agent.isStopped = false;
+           
         }
     }
 }
