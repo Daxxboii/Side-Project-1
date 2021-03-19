@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1354935999}
   - component: {fileID: 1354936000}
   m_Layer: 15
-  m_Name: New Sprite
+  m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ Light:
   m_InnerSpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -325,7 +325,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -591,11 +591,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0309efacdf9db64aa6ba52da5a91e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gi: {fileID: 0}
+  fpsCam: {fileID: 5235837792897737992}
   joystick: {fileID: 0}
   cameraTransform: {fileID: 1965476543638270224}
+  ghost: {fileID: 0}
   characterController: {fileID: 5235837793348171653}
   camAnim: {fileID: 180888622}
   cameraSensitivity: 10
+  deathAnimationtime: 3
   TempSpeed: 0
   speed: 3.5
   CrouchSpeed: 1.75
@@ -605,8 +609,9 @@ MonoBehaviour:
   tempHeight: 0
   crouchHight: 2
   crawlheight: 1.25
-  Health: 0
+  Health: 50
   RegenTimer: 0
+  isDead: 0
 --- !u!114 &5235837793348171652
 MonoBehaviour:
   m_ObjectHideFlags: 0
