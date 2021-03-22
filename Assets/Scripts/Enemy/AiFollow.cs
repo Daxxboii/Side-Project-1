@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Player;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,8 +15,10 @@ public class AiFollow : MonoBehaviour
     private bool _isPlayerIdle;
     [SerializeField]
     private GameObject _player;
-
-
+    [SerializeField]
+    PlayerScript ps;
+    [SerializeField]
+    Animator anim;
     [Header("Variable depending on NavMesh and agent")]
     [SerializeField, Tooltip("set threshold of how big area to sample to check if player is on nav mesh or not.")]
     private float _agentThreshHold;
@@ -79,9 +82,10 @@ public class AiFollow : MonoBehaviour
             _agent.enabled = false;
             _timer = 0f;
         }
+
         
-        
-        if(_isVisible == false && _isPlayerIdle == true)
+
+        if (_isVisible == false && _isPlayerIdle == true)
         {
             _agent.enabled = true;
 
@@ -114,6 +118,11 @@ public class AiFollow : MonoBehaviour
             Debug.Log("New Pos: " + newPos);
 
             _agent.SetDestination(_player.transform.position);
+            if(Vector3.Distance(_player.transform.position, transform.position) < 1)
+            {
+                ps.PlayerTakeDamage(100f);
+                anim.SetBool("IsInHitRad", true);
+            }
         }           
 
     }
