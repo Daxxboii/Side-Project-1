@@ -5,9 +5,9 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    
     public static event Action<bool> OnPlayerHiding;
     public static event Action<bool> OnPlayerIdle;
+
 
     [SerializeField]
     private float _speed;
@@ -56,16 +56,9 @@ public class Player : MonoBehaviour
         velocity = transform.TransformDirection(velocity);
 
         _controller.Move(velocity * Time.deltaTime);
-       
 
-        if (velocity.x == 0.0f)
-        {
-            OnPlayerIdle(true);            
-        }        
-        else
-        {
-            OnPlayerIdle(false);
-        }
+
+        
     }
 
     void CameraControl()

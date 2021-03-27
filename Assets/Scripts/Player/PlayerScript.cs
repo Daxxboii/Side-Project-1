@@ -9,8 +9,11 @@ using LoneWolfStudios.Control;
 
 namespace Scripts.Player
 {
+   
     public class PlayerScript : MonoBehaviour
     {
+        public static event Action<bool> OnPlayerHiding;
+        public static event Action<bool> OnPlayerIdle;
         [SerializeField]
         GirlAiGhost gi;
         [SerializeField] private Camera fpsCam;
@@ -179,6 +182,7 @@ namespace Scripts.Player
 
             move = x * transform.right + z * transform.forward;
 
+            
 
 
             if (characterController.isGrounded == false)
@@ -186,7 +190,14 @@ namespace Scripts.Player
                 move += Physics.gravity * Time.deltaTime * 9.5f;
             }
             characterController.Move(move * Time.deltaTime * speed);
-
+            if (move.x == 0.0f)
+            {
+                OnPlayerIdle(true);
+            }
+            else
+            {
+                OnPlayerIdle(false);
+            }
         }
         public void croutch()
         {
