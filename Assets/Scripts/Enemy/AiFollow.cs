@@ -13,7 +13,8 @@ namespace Scripts.Enemy
             [Header("Variable depending on player")]
             [SerializeField]
             static public bool _isVisible;
-            
+            [SerializeField]
+            float daimage;
             [SerializeField]
             private bool _isPlayerHiding;
             [SerializeField]
@@ -51,14 +52,20 @@ namespace Scripts.Enemy
             }
             void Update()
             {
-
                 Movement();
-
-
+                Attak();
             }
-            float AttackRange()
+            void Attak()
             {
-                return Vector3.Distance(_player.transform.position, transform.position);
+                if(inAttackRange() < 2f)
+                {
+                    ps.PlayerTakeDamage(daimage);
+                }
+            }
+            float inAttackRange()
+            {
+                return Vector3.Distance(_player.transform.position, gameObject.transform.position);
+                return Vector3.Distance(_player.transform.position, gameObject.transform.position);
             }
             void Movement()
             {
@@ -121,11 +128,14 @@ namespace Scripts.Enemy
                     Debug.Log("New Pos: " + newPos);
 
                     _agent.SetDestination(_player.transform.position);
-
+                   
                 }
 
             }
-
+            float inAttackRnage()
+            {
+                return Vector3.Distance(_player.transform.position, transform.position);
+            }
             
             private void OnEnable()
             {

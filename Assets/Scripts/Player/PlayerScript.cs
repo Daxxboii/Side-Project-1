@@ -246,6 +246,7 @@ namespace Scripts.Player
         {
             
             Health -= hminus;
+            Debug.Log("OWO");
         }
         void playerDeath()
         {
