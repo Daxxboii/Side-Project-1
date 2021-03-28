@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Scripts.Player;
+
 namespace Scripts.Enemy
 {
     namespace PrincipalMad
@@ -24,16 +25,11 @@ namespace Scripts.Enemy
             private GameObject player;
             [SerializeField]
             private bool cooldown, chasing;
-
-            [SerializeField]
-            private Animator Girl_animator;
             [SerializeField]
             private int damage;
             [SerializeField]
             private float attack_distance;
-
             public float Cooldown_period;
-
             private Vector3 newPos;
 
             private void Start()
@@ -55,7 +51,7 @@ namespace Scripts.Enemy
                         chasing = true;
                         Debug.Log("chaising");
                         agent.SetDestination(player.transform.position);
-                        Animations(2, 0);
+                       
                         Attack();
                     }
                     else if (!isinFrontOFMe(player))
@@ -74,11 +70,11 @@ namespace Scripts.Enemy
                         {
                             if (Vector3.Distance(transform.position, newPos) < 0.5)
                             {
-                                Animations(-1, 0);
+                                
                             }
                             else
                             {
-                                Animations(1, 0);
+                                
                             }
 
                             {
@@ -137,11 +133,6 @@ namespace Scripts.Enemy
              * walk state 2 is chasing
              * walk state 1 is walking 
              */
-            private void Animations(int walk_state, int hit_state)
-            {
-                Girl_animator.SetInteger("Hit_State", hit_state);
-                Girl_animator.SetInteger("Walk_State", walk_state);
-            }
 
             private void Attack()
             {
@@ -152,13 +143,13 @@ namespace Scripts.Enemy
                         cooldown = true;
                         agent.isStopped = true;
                         ps.PlayerTakeDamage(damage);
-                        Animations(-1, 1);
+                        
                         Invoke("ReActivate", Cooldown_period);
                     }
                 }
                 else if (ps.isDead)
                 {
-                    Animations(2, 2);
+                    
                     //  Debug.Log("kill;");
                 }
             }
@@ -169,6 +160,7 @@ namespace Scripts.Enemy
                 agent.isStopped = false;
 
             }
+
         }
     }
 }
