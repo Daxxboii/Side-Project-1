@@ -57,14 +57,16 @@ namespace Scripts.Enemy
             }
             void Attak()
             {
-                if(inAttackRange() < 2f)
+                if (ps.isDead == false)
                 {
-                    ps.PlayerTakeDamage(daimage);
+                    if (inAttackRange() < 2f)
+                    {
+                        ps.PlayerTakeDamage(daimage);
+                    }
                 }
             }
             float inAttackRange()
             {
-                return Vector3.Distance(_player.transform.position, gameObject.transform.position);
                 return Vector3.Distance(_player.transform.position, gameObject.transform.position);
             }
             void Movement()

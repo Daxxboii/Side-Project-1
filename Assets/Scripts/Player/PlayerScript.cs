@@ -5,7 +5,7 @@ using unityCore.Audio;
 using UnityEngine.UI;
 using System.Threading;
 using Scripts.Objects;
-using LoneWolfStudios.Control;
+using Scripts.Enemy.girlHostile;
 
 namespace Scripts.Player
 {
