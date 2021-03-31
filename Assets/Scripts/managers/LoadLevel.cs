@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.WSA;
+
 using UnityEngine.UI;
 public class LoadLevel : MonoBehaviour
 {
