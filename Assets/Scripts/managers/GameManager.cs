@@ -4,14 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas;
+    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu;
     private void Awake()
     {
         Time.timeScale = 1;
-    }
-    public void Play()
-    {
-        SceneManager.LoadScene(1);
     }
     public void credits()
     {
@@ -36,12 +32,24 @@ public class GameManager : MonoBehaviour
     public void settings()
     {
         settingsMenu.SetActive(true);
+
         pauseMenu.SetActive(false);
+    }
+    public void settings2()
+    {
+        settingsMenu.SetActive(true);
+
+        MainMenu.SetActive(false);
     }
     public void BackToPause()
     {
         settingsMenu.SetActive(false);
         pauseMenu.SetActive(true);
+    }
+    public void BackToPause2()
+    {
+        settingsMenu.SetActive(false);
+        MainMenu.SetActive(true);
     }
     public void playerDeath()
     {
