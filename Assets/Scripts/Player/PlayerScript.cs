@@ -12,8 +12,13 @@ namespace Scripts.Player
    
     public class PlayerScript : MonoBehaviour
     {
+        //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
+        private static float sensi = 10;
         public static event Action<bool> OnPlayerHiding;
         public static event Action<bool> OnPlayerIdle;
+
+
+
         [SerializeField]
         GirlAiGhost gi;
         [SerializeField] private Camera fpsCam;
@@ -72,6 +77,7 @@ namespace Scripts.Player
             }
             if (!isDead)
             {
+                cameraSensitivity = sensi;
                 GetTouchInput();
 
                 if (rightFingerId != -1)
@@ -235,6 +241,11 @@ namespace Scripts.Player
                 canSprint = false;
                 StartCoroutine(SprintS());
             }
+        }
+
+        static public void SetSensi(float S)
+        {
+            sensi = S;
         }
         IEnumerator SprintS()
         {
