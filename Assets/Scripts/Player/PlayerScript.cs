@@ -50,7 +50,7 @@ namespace Scripts.Player
         private Vector2 moveInput;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();

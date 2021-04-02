@@ -14,9 +14,9 @@ public class ButtonOpen : MonoBehaviour
     LayerMask lm;
     [SerializeField]
     ObjectController oc;
-    void Start()
+    void Awake()
     {
-        Player = GameObject.FindWithTag("Player");
+       // Player = GameObject.FindWithTag("Player");
         Pickup.SetActive(false);
         Intract.SetActive(false);
         Hide.SetActive(false);
