@@ -3,11 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Scripts.Timeline;
 namespace Scripts.Player
 {
     public class PickUpScript : MonoBehaviour
     {
+        [SerializeField]
+        Timeline_Manager tm;
         [SerializeField]
         ObjectController oc;
         [SerializeField]
@@ -21,25 +23,24 @@ namespace Scripts.Player
             public float range;
             public LayerMask pickableLayer;
         }
-        void Update()
-        {
-
-        }
+      
         public void Pickup()
         {
             RaycastHit hit;
             if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, p.range, p.pickableLayer))
             {
-                if (hit.collider.tag == "Key" || hit.collider.tag == "Tool" || hit.collider.tag == "pickup")
+                if (hit.collider.tag == "Key"  || hit.collider.tag == "pickup")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
-                    //p.PickedUpObject.GetComponent<Outline>().enabled = true;
+                
                     if (p.PickedUpObject != null)
                     {
                         oc.bring(p.PickedUpObject);
                         Destroy(p.PickedUpObject);
                     }
                 }
+
+              
 
             }
         }

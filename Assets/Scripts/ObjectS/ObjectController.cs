@@ -6,6 +6,7 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace Scripts.Objects
 {
     public class ObjectController : MonoBehaviour
@@ -14,7 +15,7 @@ namespace Scripts.Objects
         public GameObject have, had, had2;
         bool isHolding;
         Rigidbody rb;
-        private void Update()
+        private void FixedUpdate()
         {
             if(had != null)
             {

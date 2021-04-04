@@ -4,64 +4,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonOpen : MonoBehaviour
+namespace Scripts.Buttons
 {
-    [SerializeField]
-    GameObject Player, Hide, Unhide, Intract, Pickup, Drop;
-    [SerializeField]
-    Camera cam;
-    [SerializeField]
-    LayerMask lm;
-    [SerializeField]
-    ObjectController oc;
-    void Awake()
+    public class ButtonOpen : MonoBehaviour
     {
-       // Player = GameObject.FindWithTag("Player");
-        Pickup.SetActive(false);
-        Intract.SetActive(false);
-        Hide.SetActive(false);
-        Drop.SetActive(false);
-        Pickup.SetActive(false);
-    }
-    void Update()
-    {
-        RaycastHit hit;
-        if(Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 4f, lm))
-        {
-            if(hit.transform.CompareTag("Door"))
-            {
-                Intract.SetActive(true);
-            }
-            if(hit.transform.CompareTag("Hideable"))
-            {
-                Hide.SetActive(true);
-                Unhide.SetActive(false);
-            }
-            if (hit.transform.CompareTag("pickup"))
-            {
-                Pickup.SetActive(true);
-            }
-            
+        [SerializeField]
+        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline;
+        [SerializeField]
+        Camera cam;
+        [SerializeField]
+        LayerMask lm;
+        [SerializeField]
+        ObjectController oc;
 
-        }
-        else
+        public RaycastHit hit;
+        void Awake()
         {
-            Intract.SetActive(false);
+            // Player = GameObject.FindWithTag("Player");
             Pickup.SetActive(false);
-            Drop.SetActive(false);
-            Unhide.SetActive(false);
+            Intract.SetActive(false);
             Hide.SetActive(false);
-            if (oc.had != null)
+            Unhide.SetActive(false);
+            Drop.SetActive(false);
+            Pickup.SetActive(false);
+            Timeline.SetActive(false);
+        }
+        void Update()
+        {
+
+            if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
             {
-                Drop.SetActive(true);
-            }
-            if(Player.activeInHierarchy == true)
-            {
-                Unhide.SetActive(false);
+                if (hit.transform.CompareTag("Door"))
+                {
+                    Intract.SetActive(true);
+                }
+                if (hit.transform.CompareTag("Hideable"))
+                {
+                    Hide.SetActive(true);
+                    Unhide.SetActive(false);
+                }
+                if (hit.transform.CompareTag("pickup"))
+                {
+                    Pickup.SetActive(true);
+                }
+                if (hit.transform.CompareTag("Timeline") && oc.had != null)
+                {
+                    Timeline.SetActive(true);
+                
+                }
+                if (hit.transform.CompareTag("Timeline_independent") )
+                {
+                    Timeline.SetActive(true);
+
+                }
+
+
+
             }
             else
             {
-                Unhide.SetActive(true);
+                Intract.SetActive(false);
+                Pickup.SetActive(false);
+                Drop.SetActive(false);
+                Unhide.SetActive(false);
+                Hide.SetActive(false);
+                Timeline.SetActive(false);
+                if (oc.had != null)
+                {
+                    Drop.SetActive(true);
+                }
+              /*  if (Player.activeInHierarchy == true)
+                {
+                    Unhide.SetActive(false);
+                }
+                else
+                {
+                    Unhide.SetActive(true);
+                } */
             }
         }
     }

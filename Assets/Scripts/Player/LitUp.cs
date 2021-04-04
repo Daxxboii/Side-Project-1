@@ -16,7 +16,7 @@ public class LitUp : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 4f, lm))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
         {
             outline = hit.transform.gameObject.GetComponent<Outline>();
             outline.enabled = true;
