@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace Scripts.Buttons
 {
     public class ButtonOpen : MonoBehaviour
     {
         [SerializeField]
-        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline;
+        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment;
         [SerializeField]
         Camera cam;
         [SerializeField]
         LayerMask lm;
         [SerializeField]
         ObjectController oc;
+
+      
 
         public RaycastHit hit;
         void Awake()
@@ -28,6 +31,7 @@ namespace Scripts.Buttons
             Drop.SetActive(false);
             Pickup.SetActive(false);
             Timeline.SetActive(false);
+            Error_comment.SetActive(false);
         }
         void Update()
         {
@@ -47,16 +51,18 @@ namespace Scripts.Buttons
                 {
                     Pickup.SetActive(true);
                 }
-                if (hit.transform.CompareTag("Timeline") && oc.had != null)
+                if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
                 
                 }
-                if (hit.transform.CompareTag("Timeline_independent") )
+                 
+                else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                    Timeline.SetActive(true);
-
+                    Error_comment.SetActive(true);
                 }
+
+              
 
 
 
@@ -69,6 +75,7 @@ namespace Scripts.Buttons
                 Unhide.SetActive(false);
                 Hide.SetActive(false);
                 Timeline.SetActive(false);
+                Error_comment.SetActive(false);
                 if (oc.had != null)
                 {
                     Drop.SetActive(true);
