@@ -7,7 +7,7 @@ public class Animations_menu : MonoBehaviour
     [SerializeField]
     private Animator camera;
 
-   public void Awake()
+   public void _Back()
     {
         camera.SetInteger("State", 0);
     }
@@ -26,5 +26,11 @@ public class Animations_menu : MonoBehaviour
     {
         camera.SetInteger("State", 3);
     }
+    public void _Credits()
+    {
+        camera.SetInteger("State", 4);
+    }
+   
+
 
 }

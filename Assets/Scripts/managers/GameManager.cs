@@ -5,20 +5,27 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu;
+    [SerializeField] int delay;
+    private bool over;
+   
     private void Awake()
     {
         Time.timeScale = 1;
     }
     public void credits()
     {
-        SceneManager.LoadScene(2);
+        pauseMenu.SetActive(false);
     }
     public void Exit()
     {
-        Application.Quit();
+      
+       
+            Application.Quit();
+        
     }
     public void restart()
     {
+  
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
@@ -31,25 +38,36 @@ public class GameManager : MonoBehaviour
     }
     public void settings()
     {
-        settingsMenu.SetActive(true);
 
-        pauseMenu.SetActive(false);
+     
+            settingsMenu.SetActive(true);
+
+            pauseMenu.SetActive(false);
+        
     }
     public void settings2()
     {
-        settingsMenu.SetActive(true);
+       
+       
+            settingsMenu.SetActive(true);
 
-        MainMenu.SetActive(false);
+            MainMenu.SetActive(false);
+        
     }
     public void BackToPause()
     {
-        settingsMenu.SetActive(false);
-        pauseMenu.SetActive(true);
+     
+            settingsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+        
     }
     public void BackToPause2()
     {
-        settingsMenu.SetActive(false);
-        MainMenu.SetActive(true);
+        
+       
+            settingsMenu.SetActive(false);
+            MainMenu.SetActive(true);
+        
     }
     public void playerDeath()
     {
@@ -57,8 +75,11 @@ public class GameManager : MonoBehaviour
     }
     public void BackToMenu()
     {
+       
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        settingsMenu.SetActive(false);
+        MainMenu.SetActive(true);
+
     }
     public void resume()
     {
@@ -68,7 +89,11 @@ public class GameManager : MonoBehaviour
     }
     public void back()
     {
-        settingsMenu.SetActive(true);
-        pauseMenu.SetActive(false);
+       
+      
+            settingsMenu.SetActive(true);
+            pauseMenu.SetActive(false);
+        
     }
+   
 }

@@ -7,6 +7,7 @@ public class LoadLevel : MonoBehaviour
 {
     public GameObject LoadingScreen;
     public Slider slider;
+    public int delay;
     public void loadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsyncronasly(sceneIndex));
@@ -14,9 +15,9 @@ public class LoadLevel : MonoBehaviour
     }
     IEnumerator LoadAsyncronasly( int sceneIndex)
     {
-        if (sceneIndex == 1)
+        if (sceneIndex == 1 || sceneIndex == 2)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(delay);
         }
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         LoadingScreen.SetActive(true);
