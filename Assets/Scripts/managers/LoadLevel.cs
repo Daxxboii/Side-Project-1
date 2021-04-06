@@ -14,8 +14,13 @@ public class LoadLevel : MonoBehaviour
     }
     IEnumerator LoadAsyncronasly( int sceneIndex)
     {
+        if (sceneIndex == 1)
+        {
+            yield return new WaitForSeconds(5);
+        }
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         LoadingScreen.SetActive(true);
+      
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
