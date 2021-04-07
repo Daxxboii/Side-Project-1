@@ -5,10 +5,18 @@ using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Scripts.Objects;
 using Scripts.Buttons;
+using TMPro;
 namespace Scripts.Timeline
+
 {
     public class Timeline_Manager : MonoBehaviour
     {
+        string file;
+        string text;
+        [SerializeField]
+        private TextMeshProUGUI comments;
+        [HideInInspector]
+        public  int index;
         [SerializeField]
         ObjectController oc;
         [SerializeField]
@@ -54,23 +62,45 @@ namespace Scripts.Timeline
             cutscene_player.transform.eulerAngles = rotation;
         }
 
-      public  void TimeLine_Activator()
+        public void TimeLine_Activator()
         {
-           
-             Debug.Log(Current_cutscene);
+
+            Debug.Log(Current_cutscene);
             Current_cutscene++;
-           
+
             director.playableAsset = timeline_assets[Current_cutscene];
             director.time = 0;
             director.Play();
-        
+
             Destroy(oc.had);
             Button.SetActive(false);
 
 
-            
+
         }
 
+
+        void Start()
+        {
+            file = System.IO.Path.Combine(Application.streamingAssetsPath, "Subtitles.txt");
+         //   Debug.Log("filePath " + file);
+        }
+
+      public  void ReadFile()
+        {
+            string[] lines = System.IO.File.ReadAllLines(file);
+
+              text = lines[index++];
+
+            comments.text = text;
+        }
+        public void Silence()
+        {
+           
+
+            comments.text = "";
+        }
     }
+    
 }
 

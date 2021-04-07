@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+using TMPro;
 
 namespace Scripts.Buttons
 {
@@ -11,6 +11,8 @@ namespace Scripts.Buttons
     {
         [SerializeField]
         GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment;
+
+        TextMeshProUGUI comment;
         [SerializeField]
         Camera cam;
         [SerializeField]
@@ -31,7 +33,8 @@ namespace Scripts.Buttons
             Drop.SetActive(false);
             Pickup.SetActive(false);
             Timeline.SetActive(false);
-            Error_comment.SetActive(false);
+            Error_comment.SetActive(true);
+            comment = Error_comment.GetComponent<TextMeshProUGUI>();
         }
         void Update()
         {
@@ -41,27 +44,33 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("Door"))
                 {
                     Intract.SetActive(true);
+                 
                 }
                 if (hit.transform.CompareTag("Hideable"))
                 {
                     Hide.SetActive(true);
                     Unhide.SetActive(false);
+                 
                 }
                 if (hit.transform.CompareTag("pickup"))
                 {
                     Pickup.SetActive(true);
+                   
                 }
                 if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
-                
+                 
+
                 }
                  
                 else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                    Error_comment.SetActive(true);
+                  
+                    comment.text = "damn it's locked";
                 }
-
+               
+                
               
 
 
@@ -75,7 +84,8 @@ namespace Scripts.Buttons
                 Unhide.SetActive(false);
                 Hide.SetActive(false);
                 Timeline.SetActive(false);
-                Error_comment.SetActive(false);
+                comment.text = "";
+
                 if (oc.had != null)
                 {
                     Drop.SetActive(true);
