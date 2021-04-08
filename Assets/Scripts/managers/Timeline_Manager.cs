@@ -11,8 +11,10 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
-        string file;
-        string text;
+       
+       private string text;
+        [SerializeField]
+        TextAsset subtitles;
         [SerializeField]
         private TextMeshProUGUI comments;
         [HideInInspector]
@@ -34,23 +36,25 @@ namespace Scripts.Timeline
         private PlayableDirector director;
 
         [SerializeField]
-        private GameObject player;
+        private GameObject player,player_cam;
         [SerializeField]
-        private GameObject cutscene_player;
+        private GameObject cutscene_player,cutscene_cam;
 
         [SerializeField]
         private float y_offset;
 
         private Vector3 position;
-        private Vector3 rotation;
+        private Vector3 rotation,cam_rot;
         public void Translate_Player()
         {
             position = cutscene_player.transform.position;
             rotation = cutscene_player.transform.rotation.eulerAngles;
+            cam_rot = cutscene_cam.transform.rotation.eulerAngles;
             position.y -= y_offset;
 
             player.transform.position = position;
             player.transform.eulerAngles = rotation;
+            player_cam.transform.eulerAngles = cam_rot;
         }
         public void Translate_Cutscene()
         {
@@ -80,26 +84,23 @@ namespace Scripts.Timeline
         }
 
 
-        void Start()
-        {
-            file = System.IO.Path.Combine(Application.streamingAssetsPath, "Subtitles.txt");
-         //   Debug.Log("filePath " + file);
-        }
+  
 
       public  void ReadFile()
         {
-            string[] lines = System.IO.File.ReadAllLines(file);
-
-              text = lines[index++];
-
+      
+            string[] lines = subtitles.text.Split("\n"[0]);
+            text = lines[index++];
+         //   Debug.Log(text);
             comments.text = text;
         }
         public void Silence()
         {
-           
+         //   Debug.Log("sike");
 
             comments.text = "";
         }
+
     }
     
 }
