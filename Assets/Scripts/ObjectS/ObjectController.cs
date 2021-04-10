@@ -12,7 +12,7 @@ namespace Scripts.Objects
     public class ObjectController : MonoBehaviour
     {
         
-        public GameObject have, had, had2;
+        public GameObject have, had;
         bool isHolding;
         Rigidbody rb;
         private void FixedUpdate()
@@ -30,6 +30,7 @@ namespace Scripts.Objects
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.useGravity = false;
             isHolding = true;
+            have = null;
         }
         public void bring(GameObject o)
         {
@@ -41,16 +42,13 @@ namespace Scripts.Objects
         public void DropDown()
         {
             had.transform.SetParent(null);
-            rb.constraints = RigidbodyConstraints.None;
+          rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
             had = null;
             rb = null;
             have = null;
             isHolding = false;
         }
-        public void swap()
-        {
-
-        }
+      
     }
 }
