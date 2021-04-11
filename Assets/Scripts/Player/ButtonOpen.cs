@@ -10,7 +10,7 @@ namespace Scripts.Buttons
     public class ButtonOpen : MonoBehaviour
     {
         [SerializeField]
-        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment;
+        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment,note;
 
         TextMeshProUGUI comment;
         [SerializeField]
@@ -31,6 +31,7 @@ namespace Scripts.Buttons
             Hide.SetActive(false);
             Unhide.SetActive(false);
             Drop.SetActive(false);
+            note.SetActive(false);
             Pickup.SetActive(false);
             Timeline.SetActive(false);
             Error_comment.SetActive(true);
@@ -45,6 +46,11 @@ namespace Scripts.Buttons
                 {
                     Intract.SetActive(true);
                  
+                }
+                if (hit.transform.CompareTag("Note"))
+                {
+                   note.SetActive(true);
+
                 }
                 if (hit.transform.CompareTag("Hideable"))
                 {
@@ -84,6 +90,7 @@ namespace Scripts.Buttons
                 Unhide.SetActive(false);
                 Hide.SetActive(false);
                 Timeline.SetActive(false);
+                note.SetActive(false);
                 comment.text = "";
 
                 if (oc.had != null)

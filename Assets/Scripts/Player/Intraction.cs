@@ -2,16 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Scripts.Player
 {
     public class Intraction : MonoBehaviour
     {
         [SerializeField]
+        private TextMeshProUGUI note_text;
+        [SerializeField]
         IntractionSettings it = new IntractionSettings();
         [SerializeField]
         Camera FPScam;
+        Note_manager nm = null;
 
+        [SerializeField]
+        GameObject Note_panel;
         [Serializable]
         private struct IntractionSettings
         {
@@ -19,6 +25,11 @@ namespace Scripts.Player
             public LayerMask Intractable;
             public Animator anim;
             public bool IsOpened;
+        }
+
+        private void Start()
+        {
+            Note_panel.SetActive(false);
         }
         public void PlayerInteraction()
         {
@@ -30,9 +41,19 @@ namespace Scripts.Player
                 {
                     IntractWithDoor();
                 }
+
+                else if (hit.collider.tag == "Note")
+                {
+                  
+                    nm = hit.transform.GetComponent<Note_manager>();
+                    Note_Open();
+                    Destroy(hit.transform.gameObject);
+                }
+
+                
             }
         }
-        void IntractWithDoor()
+      void IntractWithDoor()
         {
             if (it.anim.GetBool("IsOpen") == false)
             {
@@ -46,6 +67,18 @@ namespace Scripts.Player
         {
             yield return new WaitForSeconds(it.CloseTime);
             it.anim.SetBool("IsOpen", false);
+        }
+
+       void Note_Open()
+        {
+            note_text.text = nm.text;
+            Note_panel.SetActive(true);
+
+        }
+
+        public void Note_Close()
+        {
+            Note_panel.SetActive(false);
         }
     }
 }
