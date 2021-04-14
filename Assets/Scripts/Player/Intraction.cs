@@ -47,7 +47,7 @@ namespace Scripts.Player
                   
                     nm = hit.transform.GetComponent<Note_manager>();
                     Note_Open();
-                    Destroy(hit.transform.gameObject);
+                    hit.transform.gameObject.SetActive(false);
                 }
 
                 

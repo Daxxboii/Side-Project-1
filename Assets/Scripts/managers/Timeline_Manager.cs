@@ -27,8 +27,8 @@ namespace Scripts.Timeline
 
         GameObject Button;
 
-        [SerializeField]
-        private int Current_cutscene;
+       
+        public int Current_cutscene;
         [SerializeField]
         private TimelineAsset[] timeline_assets;
 
@@ -69,14 +69,14 @@ namespace Scripts.Timeline
         public void TimeLine_Activator()
         {
 
-            Debug.Log(Current_cutscene);
+          //  Debug.Log(Current_cutscene);
             Current_cutscene++;
 
             director.playableAsset = timeline_assets[Current_cutscene];
             director.time = 0;
             director.Play();
-
-            Destroy(oc.had);
+            oc.had.SetActive(false);
+            oc.had = null;
             Button.SetActive(false);
 
 

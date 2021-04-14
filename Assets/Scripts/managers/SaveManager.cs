@@ -1,66 +1,132 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
+using Scripts.Timeline;
+using System.Collections.Generic;
+using System.Collections;
 
 public class SaveManager : MonoBehaviour
 {
+    public Serializer serializer;
+    public Vector3[] playerpos, cutscenepos, principalpos, girlpos, objpos;
+    [SerializeField]
+    public GameObject player, principal, girl, cutscene;
+    [SerializeField]
+    public Timeline_Manager tm;
+
+   
+    public bool[] active,colliders;
   
-    void Save()
+    public void Save()
     {
-        Debug.Log("Saveing...");
-       
-        FileStream file = new FileStream(Application.persistentDataPath + "/Saves/SaveFile.dat", FileMode.OpenOrCreate);
+        SaveVectors();
+        AddValues();
+        SaveList();
+        PlayerPrefs.Save();
+    }
+    //save
+    void SaveList()
+    {
+        serializer.Save();
+        active = new bool[serializer.objects.Length];
+        colliders = new bool[serializer.objects.Length];
 
-        try
+
+        for (int i = 0; i < serializer.objects.Length; i++)
         {
-           
-            BinaryFormatter formatter = new BinaryFormatter();
-            
+            if (serializer.objects[i] != null)
+            {
+                if (serializer.objects[i].activeSelf)
+                {
+                    active[i] = true;
+                }
+                else
+                {
+                    active[i] = false;
+                }
+                if (serializer.objects[i].GetComponent<Collider>().enabled)
+                {
+                    colliders[i] = true;
+                }
+                else
+                {
+                    colliders[i] = false;
+                }
 
-            /*formatter.Serialize(file, #### )    // replace ### with data type         
-             */
+            }
         }
+        PlayerPrefsX.SetBoolArray("active", active);
+    }
 
-        catch (SerializationException e)
-        {
-            Debug.LogError("There was an issue seriealizing the data: " + e.Message);
-        }
+    //save
+    void SaveVectors()
+    {
+        playerpos = new Vector3[2];
+        girlpos = new Vector3[2];
+        cutscenepos = new Vector3[2];
+        principalpos = new Vector3[2];
+        playerpos[0] = player.transform.position;
+        playerpos[1] = player.transform.rotation.eulerAngles;
+        principalpos[0] = principal.transform.position;
+        principalpos[1] = principal.transform.rotation.eulerAngles;
+        girlpos[0] = girl.transform.position;
+        girlpos[1] = girl.transform.rotation.eulerAngles;
+        cutscenepos[0] = cutscene.transform.position;
+        cutscenepos[1] = cutscene.transform.rotation.eulerAngles;
 
-        finally
-        {
-            file.Close();
-        }
+    }
+    //save
+    void AddValues()
+    {
+        //timeline
+        PlayerPrefs.SetInt("timeline_index", tm.Current_cutscene);
+        //positions
+        PlayerPrefsX.SetVector3Array("Playerpos", playerpos);
+        PlayerPrefsX.SetVector3Array("Cutscenepos", cutscenepos);
+        PlayerPrefsX.SetVector3Array("Girlpos", girlpos);
+        PlayerPrefsX.SetVector3Array("Principalpos", principalpos);
 
-        
 
     }
 
-    void Load()
+    //load
+    public void Load()
     {
-        Debug.Log("Loading...");
-
-        //reverse 
-
-        FileStream file = new FileStream(Application.persistentDataPath + "/Saves/SaveFile.dat", FileMode.Open);
-
-        try
+        //timeline
+        tm.Current_cutscene = PlayerPrefs.GetInt("timeline_index");
+        //positions
+        ApplyValues();
+        //active
+        Fetch();
+    
+    }
+    //load
+    void ApplyValues()
+    {
+        player.transform.position = PlayerPrefsX.GetVector3Array("Playerpos")[0];
+        player.transform.eulerAngles = PlayerPrefsX.GetVector3Array("Playerpos")[1];
+        girl.transform.position = PlayerPrefsX.GetVector3Array("Girlpos")[0];
+        girl.transform.eulerAngles = PlayerPrefsX.GetVector3Array("Girlpos")[1];
+        principal.transform.position = PlayerPrefsX.GetVector3Array("Principalpos")[0];
+        principal.transform.eulerAngles = PlayerPrefsX.GetVector3Array("Principalpos")[1];
+        cutscene.transform.position = PlayerPrefsX.GetVector3Array("Cutscenepos")[0];
+        cutscene.transform.eulerAngles = PlayerPrefsX.GetVector3Array("Cutscenepos")[1];
+    }
+    //load
+    void Fetch()
+    {
+        for (int i = 0; i < serializer.objects.Length-1; i++)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            // variable the load should be assigned to  = (typeCast) formatter.Deserialize(file);
+            if (serializer.objects[i] != null)
+            {
+                if (PlayerPrefsX.GetBoolArray("active")[i])
+                {
+                    serializer.objects[i].SetActive(true);
+                }
+                else
+                {
+                    serializer.objects[i].SetActive(false);
+                }
+            }
         }
-        
-        catch(SerializationException e)
-        {
-            Debug.LogError("Error Desrializing Data: " + e.Message);
-        }
-        
-        finally
-        {
-            file.Close();
-        }
-
     }
 }
