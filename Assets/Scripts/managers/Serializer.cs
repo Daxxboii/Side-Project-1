@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class Serializer : MonoBehaviour
 {
-
-   public GameObject[] objects;
-   
-    int index;
-    public void Save()
+    public string name;
+  public void Save()
     {
-        objects = new GameObject[5000];
-        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
-        {
-            objects[index] = go;
-            index++;
-        }
-     
-    }
+        name = "#" + (Random.value*1000).ToString();
+    } 
 }
