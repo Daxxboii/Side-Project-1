@@ -4,9 +4,43 @@ using UnityEngine;
 
 public class Serializer : MonoBehaviour
 {
+    [HideInInspector]
     public string name;
-  public void Save()
+    private int i;
+    public Vector3 loc, rot;
+    public bool collider_state;
+      void Start()
     {
-        name = "#" + (Random.value*1000).ToString();
+        Assign_id();
     } 
+    void Assign_id()
+    {
+        name = "#" +gameObject.name+(i++).ToString();
+    }
+    public void Assign_transforms()
+    {
+        loc = transform.position;
+        rot = transform.rotation.eulerAngles;
+    }
+
+    public void collider()
+    {
+        if (gameObject.GetComponent<Collider>()!=null)
+        {
+            if (gameObject.GetComponent<Collider>().enabled)
+            {
+                collider_state = true;
+            }
+            else
+            {
+                collider_state = false;
+            }
+
+        }
+
+        else
+        {
+            collider_state = false;
+        }
+    }
 }
