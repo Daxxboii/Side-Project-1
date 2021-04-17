@@ -9,11 +9,8 @@ public class Serializer : MonoBehaviour
     private int i;
     public Vector3 loc, rot;
     public bool collider_state;
-      void Start()
-    {
-        Assign_id();
-    } 
-    void Assign_id()
+   
+   public void Assign_id()
     {
         name = "#" +gameObject.name+(i++).ToString();
     }
@@ -35,12 +32,30 @@ public class Serializer : MonoBehaviour
             {
                 collider_state = false;
             }
-
         }
 
         else
         {
             collider_state = false;
+        }
+    }
+
+    public bool Rigidbody_Exists()
+    {
+        if ( gameObject.GetComponent<Rigidbody>() != null)
+        {
+            if(gameObject.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.None)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 }

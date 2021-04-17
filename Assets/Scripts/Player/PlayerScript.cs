@@ -195,7 +195,11 @@ namespace Scripts.Player
             {
                 move += Physics.gravity * Time.deltaTime * 9.5f;
             }
-            characterController.Move(move * Time.deltaTime * speed);
+
+         
+           characterController.Move(move * Time.deltaTime * speed);
+            
+              
             if (move.x == 0.0f)
             {
                 OnPlayerIdle(true);
