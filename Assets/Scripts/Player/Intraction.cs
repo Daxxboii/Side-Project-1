@@ -8,8 +8,7 @@ namespace Scripts.Player
 {
     public class Intraction : MonoBehaviour
     {
-        [SerializeField]
-        private SaveManager sm;
+       
         [SerializeField]
         private TextMeshProUGUI note_text;
         [SerializeField]
@@ -51,10 +50,7 @@ namespace Scripts.Player
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
                 }
-                else if (hit.collider.tag == "Save")
-                {
-                    sm.Save();
-                }
+               
 
 
             }

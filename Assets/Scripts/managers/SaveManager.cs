@@ -10,6 +10,7 @@ public class SaveManager : MonoBehaviour
     public Serializer[] serializers;
     private int index;
     public string[] id;
+    public ComicManager comic;
     public bool[] state,collider_state,rigidbodies;
     public Vector3[] location,rotation;
     public Timeline_Manager tm = null;
@@ -51,6 +52,8 @@ public class SaveManager : MonoBehaviour
         PlayerPrefsX.SetVector3Array("rotation", rotation);
         PlayerPrefsX.SetBoolArray("rigidbodies", rigidbodies);
         PlayerPrefs.SetInt("Current_cutscene", tm.Current_cutscene);
+        PlayerPrefs.SetInt("Comic_index", comic.comic_index);
+        PlayerPrefs.SetInt("Page_index", comic.page_index);
         PlayerPrefs.Save();
     }
 
@@ -125,7 +128,8 @@ public class SaveManager : MonoBehaviour
       rotation =  PlayerPrefsX.GetVector3Array("rotation");
       rigidbodies =  PlayerPrefsX.GetBoolArray("rigidbodies");
       tm.Current_cutscene =  PlayerPrefs.GetInt("Current_cutscene");
-
+        comic.comic_index = PlayerPrefs.GetInt("Comic_index");
+        comic.page_index = PlayerPrefs.GetInt("Page_index");
     }
 
     void assign()

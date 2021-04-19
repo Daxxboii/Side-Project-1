@@ -1,114 +1,61 @@
-﻿using System.Collections;
+﻿ using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts.Player;
 using UnityEngine.UI;
-using unityCore.Audio;
 
-namespace unityCore
+
+public class ComicManager : MonoBehaviour
 {
-    namespace Comic
+
+    [Serializable]
+    private struct Comic
     {
-        public class ComicManager : MonoBehaviour
-        {
-            [SerializeField]
-            GameObject panel, canvas;
-            [SerializeField]
-            Sprite panelImage;
-            [SerializeField]
-            int n = 0;
-            [SerializeField]
-            chapter[] ch;
-
-            int CurChapter;
-            
-            
-
-            [System.Serializable]
-            public class chapter
-            {
-                public pages[] _pages;
-            }
-
-            [System.Serializable]
-            public class pages
-            {
-                public Sprite PageImage;
-            }
-
-            private void Awake()
-            {
-                panel.SetActive(false);
-                canvas.SetActive(false);
-            }
-
-            private void OnEnable()
-            {
-                PlayerScript.TellStory += ComicBookOpen;
-            }
-
-            void ComicBookOpen(bool  open, int chapter)
-            {
-                if (open)
-                {
-                    panel.SetActive(true);
-                    canvas.SetActive(true);
-                    CurChapter = chapter;
-                    StartComic(chapter);
-                }
-                else
-                {
-                    ExtiComic();
-                }
-                    
-            }
-            private void change()
-            {
-                panel.gameObject.gameObject.GetComponent<Image>().sprite = panelImage;
-            }
-            public void StartComic(int chapterNumber)
-            {
-                panelImage = ch[chapterNumber]._pages[0].PageImage;
-                change();
-            }
-            public void Next()
-            {
-                if(n == ch[CurChapter]._pages.Length - 1)
-                { 
-                    n = 0;
-                    panelImage = ch[CurChapter]._pages[n].PageImage;
-                    change();
-                }
-                else
-                {
-                    n++;
-                    panelImage = ch[CurChapter]._pages[n].PageImage;
-                    change();
-                }
-
-            }
-
-            public void back()
-            {
-                if (n == 0)
-                {
-                    n = 2;
-                    panelImage = ch[CurChapter]._pages[n].PageImage;
-                    change();
-                }
-                else
-                {
-                    n--;
-                    panelImage = ch[CurChapter]._pages[n].PageImage;
-                    change();
-                }
-            }
-            public void ExtiComic()
-            {
-                panel.SetActive(false);
-                canvas.SetActive(false);
-            }
-
-        }
+        public Sprite[] images;
     }
+
+    [SerializeField]
+    private Comic[] comics;
+    [SerializeField]
+    private Image Panel;
+    [HideInInspector]
+    public int comic_index, page_index = 0;
+
+    private void Start()
+    {
+        Panel.sprite = comics[comic_index].images[page_index];
+    }
+    public void Comic_Open()
+    {
+        Time.timeScale = 0f;
+        Panel.gameObject.SetActive(true);
+    }
+    public void Comic_Close()
+    {
+        Time.timeScale = 1f;
+        Panel.gameObject.SetActive(false);
+        comic_index++;
+        page_index = 0;
+    }
+
+    public void Next()
+    {
+        if (page_index <= comics[comic_index].images.Length)
+        {
+            page_index++;
+        }
+        Panel.sprite = comics[comic_index].images[page_index];
+    }
+    public void Previous()
+    {
+        if (page_index != 0)
+        {
+            page_index--;
+        }
+        Panel.sprite = comics[comic_index].images[page_index];
+    }
+
 }
+
+

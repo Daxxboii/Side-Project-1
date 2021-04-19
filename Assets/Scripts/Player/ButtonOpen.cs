@@ -10,7 +10,7 @@ namespace Scripts.Buttons
     public class ButtonOpen : MonoBehaviour
     {
         [SerializeField]
-        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment,note,save;
+        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment,note,save,Comic;
 
         TextMeshProUGUI comment;
         [SerializeField]
@@ -31,6 +31,7 @@ namespace Scripts.Buttons
             Hide.SetActive(false);
             Unhide.SetActive(false);
             Drop.SetActive(false);
+            Comic.SetActive(false);
             note.SetActive(false);
             Pickup.SetActive(false);
             Timeline.SetActive(false);
@@ -46,11 +47,11 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("Door"))
                 {
                     Intract.SetActive(true);
-                 
+
                 }
                 if (hit.transform.CompareTag("Note"))
                 {
-                   note.SetActive(true);
+                    note.SetActive(true);
 
                 }
                 if (hit.transform.CompareTag("Save"))
@@ -62,13 +63,22 @@ namespace Scripts.Buttons
                 {
                     Hide.SetActive(true);
                     Unhide.SetActive(false);
-                 
+
                 }
                 if (hit.transform.CompareTag("pickup"))
                 {
                     Pickup.SetActive(true);
                    
                 }
+                if (hit.transform.CompareTag("Comic"))
+                {
+                    Comic.SetActive(true);
+                    hit.transform.gameObject.SetActive(false);
+
+                }
+
+
+
                 if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
@@ -78,7 +88,6 @@ namespace Scripts.Buttons
                  
                 else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                  
                     comment.text = "damn it's locked";
                 }
                
@@ -98,6 +107,7 @@ namespace Scripts.Buttons
                 Hide.SetActive(false);
                 Timeline.SetActive(false);
                 note.SetActive(false);
+                Comic.SetActive(false);
                 comment.text = "";
 
                 if (oc.had != null)
