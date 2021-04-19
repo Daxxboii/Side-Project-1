@@ -12,8 +12,8 @@ public class SaveManager : MonoBehaviour
     public string[] id;
     public bool[] state,collider_state,rigidbodies;
     public Vector3[] location,rotation;
-    public Timeline_Manager tm;
-    public int load_index;
+    public Timeline_Manager tm = null;
+   
     public void Start()
     {
         assign_id();
@@ -30,6 +30,12 @@ public class SaveManager : MonoBehaviour
             index++;
         }
         index = 0;
+    }
+
+    public void Loader(int load_index)
+    {
+        PlayerPrefs.SetInt("loadindex", load_index);
+        PlayerPrefs.Save();
     }
 
    public  void Save()
@@ -103,7 +109,7 @@ public class SaveManager : MonoBehaviour
     }
     public void Load()
     {
-        if (load_index == 1)
+        if (PlayerPrefs.GetInt("loadindex") == 1)
         {
             load_arrays();
             assign();

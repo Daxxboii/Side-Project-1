@@ -9,6 +9,8 @@ namespace Scripts.Player
     public class Intraction : MonoBehaviour
     {
         [SerializeField]
+        private SaveManager sm;
+        [SerializeField]
         private TextMeshProUGUI note_text;
         [SerializeField]
         IntractionSettings it = new IntractionSettings();
@@ -49,8 +51,12 @@ namespace Scripts.Player
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
                 }
+                else if (hit.collider.tag == "Save")
+                {
+                    sm.Save();
+                }
 
-                
+
             }
         }
       void IntractWithDoor()

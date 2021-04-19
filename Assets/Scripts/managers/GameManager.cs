@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu;
+    [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu;
     [SerializeField] int delay;
     private bool over;
    
@@ -18,10 +18,7 @@ public class GameManager : MonoBehaviour
     }
     public void Exit()
     {
-      
-       
             Application.Quit();
-        
     }
     public void restart()
     {
@@ -63,8 +60,7 @@ public class GameManager : MonoBehaviour
     }
     public void BackToPause2()
     {
-        
-       
+        SaveMenu.SetActive(false);
             settingsMenu.SetActive(false);
             MainMenu.SetActive(true);
         
@@ -89,11 +85,18 @@ public class GameManager : MonoBehaviour
     }
     public void back()
     {
-       
-      
-            settingsMenu.SetActive(true);
+        settingsMenu.SetActive(true);
             pauseMenu.SetActive(false);
-        
+    }
+    public void Save_menu()
+    {
+        SaveMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+        MainMenu.SetActive(false);
+    }
+    public void _Start()
+    {
+        SaveMenu.SetActive(false);
     }
    
 }

@@ -5,18 +5,20 @@ using UnityEngine;
 public class Animations_menu : MonoBehaviour
 {
     [SerializeField]
-    private Animator camera,settings,menu;
+    private Animator camera,settings,menu,save_manager;
    
    public void _Back()
     {
         camera.SetInteger("State", 0);
         settings.SetBool("Open", false);
         menu.SetBool("Open", true);
+        save_manager.SetBool("Open", false);
     }
 
     public void _Start()
     {
         camera.SetInteger("State", 1);
+        save_manager.SetBool("Open", true);
     }
 
     public void Settings()
@@ -35,6 +37,8 @@ public class Animations_menu : MonoBehaviour
         camera.SetInteger("State", 4);
     }
    
-
-
+   public void Start_2()
+    {
+        camera.SetInteger("State", 5);
+    }
 }
