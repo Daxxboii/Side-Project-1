@@ -1,23 +1,33 @@
 ﻿using UnityEngine;
-using System.IO;
 using Scripts.Timeline;
 using Scripts.Player;
-using System.Collections.Generic;
-using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class SaveManager : MonoBehaviour
 {
+    public bool saved;
     public Serializer[] serializers;
+    public Settings settings;
     private int index;
     public string[] id;
-    public ComicManager comic;
     public bool[] state,collider_state,rigidbodies;
     public Vector3[] location,rotation;
+    public ComicManager comic;
     public Timeline_Manager tm = null;
    
     public void Start()
     {
         assign_id();
+        if ( SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (PlayerPrefsX.GetBool("Saved"))
+            {
+                Load();
+            }
+         
+        }
+ 
     }
 
     void assign_id()
@@ -41,6 +51,7 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
+        saved = true;
         check_state();
         Save_transforms();
         Save_colliders();
@@ -54,6 +65,9 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Current_cutscene", tm.Current_cutscene);
         PlayerPrefs.SetInt("Comic_index", comic.comic_index);
         PlayerPrefs.SetInt("Page_index", comic.page_index);
+        PlayerPrefs.SetFloat("Volume", settings.volume);
+        PlayerPrefs.SetFloat("Senci", settings.senci);
+        PlayerPrefsX.SetBool("Saved", saved);
         PlayerPrefs.Save();
     }
 
@@ -112,6 +126,7 @@ public class SaveManager : MonoBehaviour
     }
     public void Load()
     {
+
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
             load_arrays();
