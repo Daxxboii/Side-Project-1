@@ -18,7 +18,7 @@ namespace Scripts.Player
         Note_manager nm = null;
 
         [SerializeField]
-        GameObject Note_panel;
+        GameObject Note_panel,map,minimap;
         [Serializable]
         private struct IntractionSettings
         {
@@ -50,7 +50,11 @@ namespace Scripts.Player
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
                 }
-               
+               else if(hit.collider.tag == "Map")
+                {
+                    map.SetActive(false);
+                    minimap.SetActive(true);
+                }
 
 
             }

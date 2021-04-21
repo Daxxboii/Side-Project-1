@@ -13,6 +13,7 @@ public class LitUp : MonoBehaviour
     Outline outline;
     [SerializeField]
     ObjectController oc;
+   
     void Update()
     {
         RaycastHit hit;
