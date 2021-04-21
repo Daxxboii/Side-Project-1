@@ -16,24 +16,26 @@ public class Settings : MonoBehaviour
 
     public void Start()
     {
+        music.value = volume;
+        sensitivity.value = senci;
         audiom.SetFloat("Volume", volume);
         PlayerScript.SetSensi(senci);
+        sensitivity.onValueChanged.AddListener(delegate { setaudio(); });
+        music.onValueChanged.AddListener(delegate { SetSencivity(); });
+       
 
     }
 
-    public void setaudio(Slider _volume)
+    public void setaudio()
     {
-        volume = _volume.value;
+        volume = music.value;
         audiom.SetFloat("Volume", volume);
-       
-       
     }
 
-    public void SetSencivity(Slider _senci)
+    public void SetSencivity()
     {
-        senci = _senci.value;
+        senci = sensitivity.value;
         PlayerScript.SetSensi(senci);
-       
     }
     
     

@@ -22,9 +22,13 @@ public class GameManager : MonoBehaviour
     }
     public void restart()
     {
-  
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     public void Pause()
     {

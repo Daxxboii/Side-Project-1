@@ -145,6 +145,8 @@ public class SaveManager : MonoBehaviour
       tm.Current_cutscene =  PlayerPrefs.GetInt("Current_cutscene");
         comic.comic_index = PlayerPrefs.GetInt("Comic_index");
         comic.page_index = PlayerPrefs.GetInt("Page_index");
+        settings.senci = PlayerPrefs.GetFloat("Senci");
+        settings.volume = PlayerPrefs.GetFloat("Volume");
     }
 
     void assign()
