@@ -41,4 +41,9 @@ public class Animations_menu : MonoBehaviour
     {
         camera.SetInteger("State", 5);
     }
+
+    public void About()
+    {
+        camera.SetInteger("State", 6);
+    }
 }
