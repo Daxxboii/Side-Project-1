@@ -5,7 +5,7 @@ using TMPro;
 public class Camcorder : MonoBehaviour
 {
 
-   private float time;
+   public float time;
     public TextMeshProUGUI timeText;
     // Update is called once per frame
     void Update()

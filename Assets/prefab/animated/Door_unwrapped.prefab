@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 5931272264890676256}
   - component: {fileID: 5120002410217882510}
   - component: {fileID: 4160853558513046007}
+  - component: {fileID: 7981856904734605830}
   m_Layer: 14
   m_Name: Door
   m_TagString: Door
@@ -403,8 +404,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5118687166728371526}
-  m_LocalRotation: {x: -3.5527137e-15, y: 1.4823077e-21, z: -3.5527137e-15, w: 1}
-  m_LocalPosition: {x: -0.6269989, y: -0.03315103, z: 1.5750006}
+  m_LocalRotation: {x: 8.4703295e-22, y: 4.2351647e-22, z: -3.5527145e-15, w: 1}
+  m_LocalPosition: {x: -0.6269964, y: -0.033152595, z: 1.5750021}
   m_LocalScale: {x: 1, y: 1, z: 1.0000001}
   m_Children:
   - {fileID: 656793646175108732}
@@ -476,6 +477,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2619086233303812490, guid: 060e53b7e4d95f54c8130254b4387d9a, type: 3}
+--- !u!114 &7981856904734605830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118687166728371526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: '#Door1'
+  loc: {x: -107.84775, y: 7.1507735, z: -45.971916}
+  rot: {x: 270, y: 180, z: 0}
+  collider_state: 1
 --- !u!1 &5223594635194917162
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +506,7 @@ GameObject:
   - component: {fileID: 558422464}
   - component: {fileID: 558422463}
   - component: {fileID: 3478418610919809319}
+  - component: {fileID: 2501709122317094054}
   m_Layer: 14
   m_Name: Door_unwrapped
   m_TagString: Door
@@ -503,7 +521,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5223594635194917162}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
+  m_LocalRotation: {x: -0.000000030908623, y: -0.7071068, z: -0.7071068, w: 0.000000030908623}
   m_LocalPosition: {x: -108.48, y: 5.56, z: -45.94}
   m_LocalScale: {x: 1.008395, y: 0.96276516, z: 1.0100133}
   m_Children:
@@ -1102,6 +1120,22 @@ MonoBehaviour:
     - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
     - {x: 0.57735026, y: -0.57735026, z: 0.57735026}
+--- !u!114 &2501709122317094054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223594635194917162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: '#Door_unwrapped1'
+  loc: {x: -108.48, y: 5.56, z: -45.94}
+  rot: {x: 270, y: 180, z: 0}
+  collider_state: 1
 --- !u!1 &5895438855066738165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1319,7 @@ BoxCollider:
   m_GameObject: {fileID: 8468963325392012245}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.0000008, y: 1.000001, z: 1.0000011}
   m_Center: {x: 0.000045776418, y: -0.000011920937, z: 0.000015258796}

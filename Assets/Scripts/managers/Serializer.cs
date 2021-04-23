@@ -13,6 +13,7 @@ public class Serializer : MonoBehaviour
    public void Assign_id()
     {
         name = "#" +gameObject.name+(i++).ToString();
+       
     }
     public void Assign_transforms()
     {

@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using Scripts.Timeline;
 using Scripts.Player;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 
 public class SaveManager : MonoBehaviour
 {
+  
     public bool saved;
     public Serializer[] serializers;
     public Settings settings;
@@ -13,11 +17,12 @@ public class SaveManager : MonoBehaviour
     public string[] id;
     public bool[] state,collider_state,rigidbodies;
     public Vector3[] location,rotation;
-    public ComicManager comic;
+    public ComicManager comic = null;
     public Timeline_Manager tm = null;
-   
+    public Camcorder cam = null;
     public void Start()
     {
+      //  Save();
         assign_id();
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -30,7 +35,7 @@ public class SaveManager : MonoBehaviour
  
     }
 
-    void assign_id()
+   void assign_id()
     {
         serializers = Resources.FindObjectsOfTypeAll<Serializer>();
         id = new string[serializers.Length];
@@ -66,6 +71,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Comic_index", comic.comic_index);
         PlayerPrefs.SetInt("Page_index", comic.page_index);
         PlayerPrefs.SetFloat("Volume", settings.volume);
+        PlayerPrefs.SetFloat("Time",cam.time);
         PlayerPrefs.SetFloat("Senci", settings.senci);
         PlayerPrefsX.SetBool("Saved", saved);
         PlayerPrefs.Save();
@@ -147,6 +153,7 @@ public class SaveManager : MonoBehaviour
         comic.page_index = PlayerPrefs.GetInt("Page_index");
         settings.senci = PlayerPrefs.GetFloat("Senci");
         settings.volume = PlayerPrefs.GetFloat("Volume");
+        cam.time = PlayerPrefs.GetFloat("Time");
     }
 
     void assign()
