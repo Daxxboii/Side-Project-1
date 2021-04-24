@@ -22,7 +22,8 @@ public class SaveManager : MonoBehaviour
     public Camcorder cam = null;
     public void Start()
     {
-      //  Save();
+       
+       //Save();
         assign_id();
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -135,6 +136,7 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
+            Debug.Log("load");
             load_arrays();
             assign();
         }
@@ -196,6 +198,10 @@ public class SaveManager : MonoBehaviour
         index = 0;
        
 
+    }
+    public void DeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
 
