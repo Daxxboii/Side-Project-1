@@ -17,9 +17,14 @@ namespace Scripts.Player
         public static event Action<bool> OnPlayerHiding;
         public static event Action<bool> OnPlayerIdle;
 
-
+        [SerializeField]
+        Sprite crouch,stand;
 
         [SerializeField]
+        Image Button;
+
+
+         [SerializeField]
         GirlAiGhost gi;
         [SerializeField] private Camera fpsCam;
         public static event Action<bool, int> PlayCutscene;
@@ -262,6 +267,18 @@ namespace Scripts.Player
             
             Health -= hminus;
             Debug.Log("OWO");
+        }
+
+        public void ChangeUI()
+        {
+            if (isCrouching)
+            {
+                Button.sprite = crouch;
+            }
+            else
+            {
+                 Button.sprite = stand;
+            }
         }
         void playerDeath()
         {
