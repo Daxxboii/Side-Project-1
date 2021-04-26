@@ -69,6 +69,8 @@ public class SaveManager : MonoBehaviour
         PlayerPrefsX.SetVector3Array("rotation", rotation);
         PlayerPrefsX.SetBoolArray("rigidbodies", rigidbodies);
         PlayerPrefs.SetInt("Current_cutscene", tm.Current_cutscene);
+        PlayerPrefs.SetInt("Subtitle_index", tm.index);
+        PlayerPrefs.SetInt("Objective_index", tm.objective_index);
         PlayerPrefs.SetInt("Comic_index", comic.comic_index);
         PlayerPrefs.SetInt("Page_index", comic.page_index);
         PlayerPrefs.SetFloat("Volume", settings.volume);
@@ -156,6 +158,8 @@ public class SaveManager : MonoBehaviour
         settings.senci = PlayerPrefs.GetFloat("Senci");
         settings.volume = PlayerPrefs.GetFloat("Volume");
         cam.time = PlayerPrefs.GetFloat("Time");
+       tm.index =  PlayerPrefs.GetInt("Subtitle_index");
+        tm.objective_index = PlayerPrefs.GetInt("Objective_index");
     }
 
     void assign()

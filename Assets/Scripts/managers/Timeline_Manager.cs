@@ -14,11 +14,11 @@ namespace Scripts.Timeline
        
        private string text;
         [SerializeField]
-        TextAsset subtitles;
+        TextAsset subtitles,objectives;
         [SerializeField]
-        private TextMeshProUGUI comments;
+        private TextMeshProUGUI comments,objective_text;
         [HideInInspector]
-        public  int index;
+        public int index,objective_index;
         [SerializeField]
         ObjectController oc;
         [SerializeField]
@@ -45,6 +45,14 @@ namespace Scripts.Timeline
 
         private Vector3 position;
         private Vector3 rotation,cam_rot;
+
+        string[] lines, objective_lines;
+
+        private void Start()
+        {
+              lines = subtitles.text.Split("\n"[0]);
+            objective_lines = objectives.text.Split("\n"[0]);
+        }
         public void Translate_Player()
         {
             position = cutscene_player.transform.position;
@@ -82,14 +90,8 @@ namespace Scripts.Timeline
 
 
         }
-
-
-  
-
       public  void ReadFile()
         {
-      
-            string[] lines = subtitles.text.Split("\n"[0]);
             text = lines[index++];
          //   Debug.Log(text);
             comments.text = text;
@@ -100,7 +102,11 @@ namespace Scripts.Timeline
 
             comments.text = "";
         }
-
+        public void ObjectiveList()
+        {
+            text = objective_lines[objective_index++];
+            objective_text.text = text;
+        }
     }
     
 }
