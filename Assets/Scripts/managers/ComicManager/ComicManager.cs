@@ -19,7 +19,7 @@ public class ComicManager : MonoBehaviour
     private Comic[] comics;
     [SerializeField]
     private Image Panel;
-    [HideInInspector]
+  //  [HideInInspector]
     public int comic_index, page_index = 0;
 
     private void Start()
@@ -28,6 +28,7 @@ public class ComicManager : MonoBehaviour
     }
     public void Comic_Open()
     {
+        Debug.Log("open");
         Time.timeScale = 0f;
         Panel.gameObject.SetActive(true);
     }

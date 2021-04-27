@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 using TMPro;
 
 namespace Scripts.Buttons
@@ -25,6 +25,8 @@ namespace Scripts.Buttons
         public RaycastHit hit;
         void Awake()
         {
+            Comic.GetComponent<Button>().onClick.AddListener(Destroy_comic);
+
             // Player = GameObject.FindWithTag("Player");
             Pickup.SetActive(false);
             map.SetActive(false);
@@ -39,6 +41,11 @@ namespace Scripts.Buttons
             save.SetActive(false);
             Error_comment.SetActive(true);
             comment = Error_comment.GetComponent<TextMeshProUGUI>();
+        }
+
+        void Destroy_comic()
+        {
+            hit.transform.gameObject.SetActive(false);
         }
         void Update()
         {
@@ -74,8 +81,7 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("Comic"))
                 {
                     Comic.SetActive(true);
-                    hit.transform.gameObject.SetActive(false);
-
+                  
                 }
 
                 if (hit.transform.CompareTag("Map"))
