@@ -1,0 +1,26 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Video;
+public class Intro : MonoBehaviour
+{
+    public VideoPlayer player;
+    public GameObject canvas;
+
+    private void Start()
+    {
+        player.Play();
+    }
+    private void Update()
+    {
+        if (player.isPlaying)
+        {
+            canvas.SetActive(false);
+        }
+        else
+        {
+            canvas.SetActive(true);
+           gameObject.SetActive(false);
+        }
+    }
+}
