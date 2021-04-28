@@ -12,9 +12,9 @@ namespace Scripts.Enemy
 
             [Header("Variable depending on player")]
             [SerializeField]
-            static public bool _isVisible;
+             public bool _isVisible;
             [SerializeField]
-            float daimage;
+            float daimage,follow_distance;
             [SerializeField]
             private bool _isPlayerHiding;
             [SerializeField]
@@ -35,7 +35,7 @@ namespace Scripts.Enemy
 
             private bool isAgentOnNavMesh;
             private Vector3 newPos;
-
+            VisiBility vis;
 
 
             private Vector3 _randomSpawanLocation;
@@ -49,9 +49,11 @@ namespace Scripts.Enemy
             void Start()
             {
                 _agent = GetComponent<NavMeshAgent>();
+                vis = _player.transform.GetComponent<VisiBility>();
             }
             void Update()
             {
+                _isVisible = vis.visible;
                 Movement();
                 Attak();
             }
@@ -62,6 +64,7 @@ namespace Scripts.Enemy
                     if (inAttackRange() < 2f)
                     {
                         ps.PlayerTakeDamage(daimage);
+                        transform.position = newPos;
                     }
                 }
             }
@@ -97,17 +100,14 @@ namespace Scripts.Enemy
 
 
 
-                if (_isVisible == false && _isPlayerIdle == true)
+                if (_isVisible == false)
                 {
                     _agent.enabled = true;
 
-                    _timer += Time.deltaTime;
-                    if (_timer > _idleWaitTime)
-                    {
-                        _timer = 0f;
+                   
                         float disatnce = Vector3.Distance(transform.position, _player.transform.position);
 
-                        if (disatnce > 40f)
+                        if (disatnce > follow_distance)
                         {
                             newPos = GetRandomPointNearPlayer();
 
@@ -115,8 +115,8 @@ namespace Scripts.Enemy
 
                             if (isAgentOnNavMesh == true)
                             {
-                                transform.position = newPos;
-                            }
+                            _agent.SetDestination(newPos);
+                        }
                             else
                             {
                                 newPos = GetRandomPointNearPlayer();
@@ -124,20 +124,17 @@ namespace Scripts.Enemy
 
 
                         }
-                        Debug.Log("Distance: " + disatnce);
-                    }
-                    Debug.Log("Is agent on Nav Mesh: " + isAgentOnNavMesh);
-                    Debug.Log("New Pos: " + newPos);
+                    else
+                    {
 
-                    _agent.SetDestination(_player.transform.position);
-                   
+                        _agent.SetDestination(_player.transform.position);
+
+                    }
+
                 }
 
             }
-            float inAttackRnage()
-            {
-                return Vector3.Distance(_player.transform.position, transform.position);
-            }
+        
             
             private void OnEnable()
             {
