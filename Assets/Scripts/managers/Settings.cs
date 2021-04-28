@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public float volume;
-    public float senci;
+    public float volume = 0f;
+    public float senci = 0.0f;
 
     [SerializeField]
     Slider sensitivity, music;
@@ -16,26 +16,45 @@ public class Settings : MonoBehaviour
 
     public void Start()
     {
-        music.value = volume;
-        sensitivity.value = senci;
-        audiom.SetFloat("Volume", volume);
-        PlayerScript.SetSensi(senci);
-        sensitivity.onValueChanged.AddListener(delegate { setaudio(); });
-        music.onValueChanged.AddListener(delegate { SetSencivity(); });
-       
+        sensitivity.minValue = 0.5f;
+        music.maxValue = 0f;
+        music.minValue = -50f;
+       if (PlayerPrefs.GetFloat("Volume") != 0)
+        {
+            music.value = PlayerPrefs.GetFloat("Volume");
+        }
+        else
+        {
+            music.value = volume;
+        }
+        if (PlayerPrefs.GetFloat("Senci") != 0)
+        {
+            sensitivity.value = PlayerPrefs.GetFloat("Senci");
+        }
+        else
+        {
+            sensitivity.value = senci;
+        }
 
+
+        sensitivity.value = senci;
+        audiom.SetFloat("Audio", volume);
+        PlayerScript.SetSensi(senci);
     }
 
     public void setaudio()
     {
         volume = music.value;
-        audiom.SetFloat("Volume", volume);
+        audiom.SetFloat("Audio", volume);
+        PlayerPrefs.SetFloat("Volume", volume);
     }
 
     public void SetSencivity()
     {
+      
         senci = sensitivity.value;
         PlayerScript.SetSensi(senci);
+        PlayerPrefs.SetFloat("Senci", senci);
     }
     
     

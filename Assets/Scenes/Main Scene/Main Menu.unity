@@ -2691,12 +2691,23 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.49
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1915651965}
+        m_MethodName: SetSencivity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &405070363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,7 +2753,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saved: 0
   serializers: []
-  settings: {fileID: 0}
   id: []
   state: 
   collider_state: 
@@ -7393,7 +7403,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1915651965}
+        m_MethodName: setaudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1301350381 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2553568085200867885, guid: 0f9394cdcfb16fd4b905302c9522bc87,
@@ -10203,6 +10224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915651964}
+  - component: {fileID: 1915651965}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -10224,6 +10246,23 @@ Transform:
   m_Father: {fileID: 437066086}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915651965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915651963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8432417a879fed46af3c3f448364560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 0
+  senci: 0.5
+  sensitivity: {fileID: 382985960}
+  music: {fileID: 1300685366}
+  audiom: {fileID: 24100000, guid: 55937a7e60357884da3cd77faf0783b4, type: 2}
 --- !u!1001 &1918992856
 PrefabInstance:
   m_ObjectHideFlags: 0

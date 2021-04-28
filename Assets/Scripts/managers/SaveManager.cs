@@ -12,7 +12,7 @@ public class SaveManager : MonoBehaviour
   
     public bool saved;
     public Serializer[] serializers;
-    public Settings settings;
+    
     private int index;
     public string[] id;
     public bool[] state,collider_state,rigidbodies;
@@ -22,9 +22,8 @@ public class SaveManager : MonoBehaviour
     public Camcorder cam = null;
     public void Start()
     {
-       
        //Save();
-        assign_id();
+       assign_id();
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (PlayerPrefsX.GetBool("Saved"))
@@ -33,20 +32,19 @@ public class SaveManager : MonoBehaviour
             }
          
         }
- 
     }
 
    void assign_id()
     {
         serializers = Resources.FindObjectsOfTypeAll<Serializer>();
-        id = new string[serializers.Length];
+       /* id = new string[serializers.Length];
         foreach (Serializer i in serializers)
         {
             serializers[index].Assign_id();
             id[index] = serializers[index].name;
             index++;
         }
-        index = 0;
+        index = 0;*/
     }
 
     public void Loader(int load_index)
@@ -72,10 +70,10 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Subtitle_index", tm.index);
         PlayerPrefs.SetInt("Objective_index", tm.objective_index);
         PlayerPrefs.SetInt("Comic_index", comic.comic_index);
-        PlayerPrefs.SetInt("Page_index", comic.page_index);
-        PlayerPrefs.SetFloat("Volume", settings.volume);
+    
+       
         PlayerPrefs.SetFloat("Time",cam.time);
-        PlayerPrefs.SetFloat("Senci", settings.senci);
+  
         PlayerPrefsX.SetBool("Saved", saved);
         PlayerPrefs.Save();
     }
@@ -154,9 +152,9 @@ public class SaveManager : MonoBehaviour
       rigidbodies =  PlayerPrefsX.GetBoolArray("rigidbodies");
       tm.Current_cutscene =  PlayerPrefs.GetInt("Current_cutscene");
         comic.comic_index = PlayerPrefs.GetInt("Comic_index");
-        comic.page_index = PlayerPrefs.GetInt("Page_index");
-        settings.senci = PlayerPrefs.GetFloat("Senci");
-        settings.volume = PlayerPrefs.GetFloat("Volume");
+       
+     
+      
         cam.time = PlayerPrefs.GetFloat("Time");
        tm.index =  PlayerPrefs.GetInt("Subtitle_index");
         tm.objective_index = PlayerPrefs.GetInt("Objective_index");
