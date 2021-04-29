@@ -13,6 +13,7 @@ public class ComicManager : MonoBehaviour
     private struct Comic
     {
         public Sprite[] images;
+        public string[] comic_text;
     }
 
     [SerializeField]
