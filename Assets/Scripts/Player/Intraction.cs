@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Scripts.Timeline;
 
 namespace Scripts.Player
 {
@@ -16,7 +17,8 @@ namespace Scripts.Player
         [SerializeField]
         Camera FPScam;
         Note_manager nm = null;
-
+        [SerializeField]
+        Timeline_Manager tm;
         [SerializeField]
         GameObject Note_panel,map,minimap;
         [Serializable]
@@ -49,6 +51,10 @@ namespace Scripts.Player
                     nm = hit.transform.GetComponent<Note_manager>();
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
+                    if (nm.objective)
+                    {
+                        tm.ObjectiveList();
+                    }
                 }
                else if(hit.collider.tag == "Map")
                 {
