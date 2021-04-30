@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Scripts.Timeline;
+using Scripts.Objects;
 
 namespace Scripts.Player
 {
     public class Intraction : MonoBehaviour
     {
-       
+        [SerializeField]
+        ObjectController oc;
         [SerializeField]
         private TextMeshProUGUI note_text;
         [SerializeField]
@@ -17,6 +19,7 @@ namespace Scripts.Player
         [SerializeField]
         Camera FPScam;
         Note_manager nm = null;
+        escape_door ed = null;
         [SerializeField]
         Timeline_Manager tm;
         [SerializeField]
@@ -44,7 +47,20 @@ namespace Scripts.Player
                 {
                     IntractWithDoor();
                 }
-
+                if (hit.transform.CompareTag("Escape Door"))
+                {
+                    ed = hit.transform.GetComponent<escape_door>();
+                   
+                    if (tm.Current_cutscene == 10)
+                    {
+                        ed.active = true;
+                        if (oc.had != null)
+                        {
+                            ed.over = true;
+                        }
+                    }
+                    ed.Activations();
+                }
                 else if (hit.collider.tag == "Note")
                 {
                   
@@ -62,6 +78,7 @@ namespace Scripts.Player
                     minimap.SetActive(true);
                 }
 
+               
 
             }
         }

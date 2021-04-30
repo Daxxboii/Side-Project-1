@@ -10,15 +10,19 @@ public class escape_door : MonoBehaviour
     public bool active;
     public bool over;
     Animator anim;
-
+    public GameObject note;
     private void Start()
     {
+       active =  PlayerPrefsX.GetBool("Active");
+        over = PlayerPrefsX.GetBool("Bool");
         anim = gameObject.GetComponent<Animator>();
+        Activations();
     }
-    private void FixedUpdate()
+    public void Activations()
     {
       if(active && !over)
         {
+            note.SetActive(true);
             anim.SetInteger("State", 1);
             foreach (GameObject i in objects)
             {
@@ -33,10 +37,13 @@ public class escape_door : MonoBehaviour
 
         else
         {
-            foreach(GameObject i in objects)
+            note.SetActive(false);
+            foreach (GameObject i in objects)
             {
                 i.SetActive(false);
             }
         }
+        PlayerPrefsX.SetBool("Active",active);
+        PlayerPrefsX.SetBool("Over", over);
     }
 }

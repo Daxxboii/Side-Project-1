@@ -12,7 +12,7 @@ namespace Scripts.Buttons
     {
         [SerializeField]
         GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment,note,save,Comic,map;
-
+        escape_door ed = null;
         TextMeshProUGUI comment;
         [SerializeField]
         Camera cam;
@@ -54,11 +54,13 @@ namespace Scripts.Buttons
 
             if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
             {
-                if (hit.transform.CompareTag("Door"))
+                if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door"))
                 {
                     Intract.SetActive(true);
 
                 }
+
+               
                 if (hit.transform.CompareTag("Note"))
                 {
                     note.SetActive(true);
