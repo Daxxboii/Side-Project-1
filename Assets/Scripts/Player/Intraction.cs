@@ -32,6 +32,7 @@ namespace Scripts.Player
             public Animator anim;
             public bool IsOpened;
         }
+        RaycastHit hit;
 
         private void Start()
         {
@@ -39,7 +40,7 @@ namespace Scripts.Player
         }
         public void PlayerInteraction()
         {
-            RaycastHit hit;
+      
             if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
             {
                 it.anim = hit.transform.GetComponentInParent<Animator>();
@@ -108,6 +109,12 @@ namespace Scripts.Player
         public void Note_Close()
         {
             Note_panel.SetActive(false);
+        }
+
+        public void Comic()
+        {
+            Debug.Log(hit.transform.gameObject.name);
+            hit.transform.gameObject.SetActive(false);
         }
     }
 }

@@ -40,7 +40,10 @@ namespace Scripts.Player
                        
                     }
                 }
-
+                else if(hit.collider.tag == "Doll")
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
               
 
             }

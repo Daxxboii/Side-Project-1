@@ -27,8 +27,6 @@ namespace Scripts.Buttons
         public RaycastHit hit;
         void Awake()
         {
-            Comic.GetComponent<Button>().onClick.AddListener(Destroy_comic);
-
             // Player = GameObject.FindWithTag("Player");
             Pickup.SetActive(false);
             map.SetActive(false);
@@ -45,10 +43,7 @@ namespace Scripts.Buttons
             comment = Error_comment.GetComponent<TextMeshProUGUI>();
         }
 
-        void Destroy_comic()
-        {
-            hit.transform.gameObject.SetActive(false);
-        }
+     
         void Update()
         {
 
@@ -77,7 +72,7 @@ namespace Scripts.Buttons
                     Unhide.SetActive(false);
 
                 }
-                if (hit.transform.CompareTag("pickup"))
+                if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll"))
                 {
                     Pickup.SetActive(true);
                     tm.ObjectiveList();
@@ -139,6 +134,8 @@ namespace Scripts.Buttons
                     Unhide.SetActive(true);
                 } */
             }
+
         }
+       
     }
 }

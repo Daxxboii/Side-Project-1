@@ -18,6 +18,9 @@ public class ComicManager : MonoBehaviour
     }
 
     [SerializeField]
+    Animator load;
+
+    [SerializeField]
     private Comic[] comics;
     [SerializeField]
     private Image Panel;
@@ -35,18 +38,20 @@ public class ComicManager : MonoBehaviour
     }
     public void Comic_Open()
     {
+        load.gameObject.SetActive(true);
+        load.SetBool("Open", true);
+        StopCoroutine(Load());
+        StartCoroutine(Load());
         if (comics[comic_index].objective)
         {
             tm.ObjectiveList();
         }
-        Debug.Log("open");
-        Time.timeScale = 0f;
-        Panel.gameObject.SetActive(true);
-        Panel.sprite = comics[comic_index].images[page_index];
-        subs.text = comics[comic_index].comic_text[page_index];
+
     }
     public void Comic_Close()
     {
+        load.gameObject.SetActive(false);
+        load.SetBool("Open", false);
         Time.timeScale = 1f;
         Panel.gameObject.SetActive(false);
         comic_index++;
@@ -74,6 +79,17 @@ public class ComicManager : MonoBehaviour
         subs.text = comics[comic_index].comic_text[page_index];
     }
 
+    IEnumerator Load()
+    {
+      
+        yield return new WaitForSeconds(1);
+        Panel.gameObject.SetActive(true);
+      
+        Panel.sprite = comics[comic_index].images[page_index];
+        subs.text = comics[comic_index].comic_text[page_index];
+        Time.timeScale = 0f;
+       
+    }
 }
 
 
