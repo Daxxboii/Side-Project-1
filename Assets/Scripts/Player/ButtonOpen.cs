@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Scripts.Timeline;
 
 namespace Scripts.Buttons
 {
@@ -19,7 +20,8 @@ namespace Scripts.Buttons
         LayerMask lm;
         [SerializeField]
         ObjectController oc;
-
+        [SerializeField]
+        Timeline_Manager tm;
       
 
         public RaycastHit hit;
@@ -76,6 +78,7 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("pickup"))
                 {
                     Pickup.SetActive(true);
+                    tm.ObjectiveList();
                    
                 }
                 if (hit.transform.CompareTag("Comic"))
