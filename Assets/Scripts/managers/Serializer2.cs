@@ -10,7 +10,7 @@ public class Serializer2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sm = Resources.FindObjectsOfTypeAll<SaveManager>();
+      /*  sm = Resources.FindObjectsOfTypeAll<SaveManager>();
         if (!sm[0].saved)
         {
             if (PlayerPrefsX.GetBool(name_of_bool))
@@ -27,7 +27,7 @@ public class Serializer2 : MonoBehaviour
         {
             gameObject.SetActive(true);
             PlayerPrefsX.SetBool(name_of_bool, true);
-        }
+        }*/
     }
 
     // Update is called once per frame

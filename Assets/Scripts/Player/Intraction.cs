@@ -11,6 +11,8 @@ namespace Scripts.Player
     public class Intraction : MonoBehaviour
     {
         [SerializeField]
+        Animator map_anim;
+        [SerializeField]
         ObjectController oc;
         [SerializeField]
         private TextMeshProUGUI note_text;
@@ -33,11 +35,13 @@ namespace Scripts.Player
             public bool IsOpened;
         }
         RaycastHit hit;
-
+        [SerializeField]
+        TextMeshProUGUI error_comment;
         private void Start()
         {
             Note_panel.SetActive(false);
         }
+
         public void PlayerInteraction()
         {
       
@@ -51,8 +55,8 @@ namespace Scripts.Player
                 if (hit.transform.CompareTag("Escape Door"))
                 {
                     ed = hit.transform.GetComponent<escape_door>();
-                   
-                    if (tm.Current_cutscene == 10)
+                    error_comment.text = "";
+                    if (tm.Current_cutscene == 11)
                     {
                         ed.active = true;
                         if (oc.had != null)
@@ -60,14 +64,24 @@ namespace Scripts.Player
                             ed.over = true;
                         }
                     }
+                    else
+                    {
+                        
+                        error_comment.text = "Get all the 5 objects listed to open the door";
+                    }
                     ed.Activations();
                 }
                 else if (hit.collider.tag == "Note")
                 {
                   
                     nm = hit.transform.GetComponent<Note_manager>();
+                
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
+                  foreach(GameObject i in nm.objects)
+                    {
+                        i.SetActive(true);
+                    }
                     if (nm.objective)
                     {
                         tm.ObjectiveList();
@@ -77,6 +91,7 @@ namespace Scripts.Player
                 {
                     map.SetActive(false);
                     minimap.SetActive(true);
+                    map_anim.SetBool("Open", true);
                 }
 
                
@@ -111,10 +126,10 @@ namespace Scripts.Player
             Note_panel.SetActive(false);
         }
 
-        public void Comic()
+      /*  public void Comic()
         {
             Debug.Log(hit.transform.gameObject.name);
             hit.transform.gameObject.SetActive(false);
-        }
+        }*/
     }
 }

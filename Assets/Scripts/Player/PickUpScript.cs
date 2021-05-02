@@ -32,7 +32,7 @@ namespace Scripts.Player
                 if (hit.collider.tag == "Key"  || hit.collider.tag == "pickup")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
-                
+                    tm.ObjectiveList();
                     if (p.PickedUpObject != null)
                     {
                         oc.bring(p.PickedUpObject);
@@ -44,7 +44,11 @@ namespace Scripts.Player
                 {
                     hit.transform.gameObject.SetActive(false);
                 }
-              
+                else if (hit.collider.tag == "Comic")
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
+
 
             }
         }

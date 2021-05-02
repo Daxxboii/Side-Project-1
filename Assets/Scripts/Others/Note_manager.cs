@@ -6,4 +6,5 @@ public class Note_manager : MonoBehaviour
 {
     public bool objective;
     public string text;
+    public GameObject[] objects;
 }

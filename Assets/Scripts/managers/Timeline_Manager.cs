@@ -47,13 +47,32 @@ namespace Scripts.Timeline
         private Vector3 rotation,cam_rot;
 
         string[] lines, objective_lines;
+        double length ,timer;
 
         private void Start()
         {
               lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
             ObjectiveList();
+          
         }
+        private void FixedUpdate()
+        {
+
+          /*  if(director.state == PlayState.Playing)
+            {
+                timer += Time.deltaTime;
+        
+                if (length < timer)
+                {
+                    director.Stop();
+                   
+                    timer = 0;
+                }
+            }*/
+          
+        }
+
         public void Translate_Player()
         {
             position = cutscene_player.transform.position;
@@ -79,15 +98,17 @@ namespace Scripts.Timeline
         {
 
           //  Debug.Log(Current_cutscene);
-            Current_cutscene++;
+          
 
             director.playableAsset = timeline_assets[Current_cutscene];
+            length = director.duration;
+            Current_cutscene++;
             director.time = 0;
             director.Play();
             oc.had.SetActive(false);
             oc.had = null;
             Button.SetActive(false);
-
+          
 
 
         }

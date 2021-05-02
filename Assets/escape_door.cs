@@ -8,10 +8,11 @@ public class escape_door : MonoBehaviour
     Timeline_Manager tm;
     public GameObject[] objects;
     public bool active;
+    public GameObject finger;
     public bool over;
     Animator anim;
     public GameObject note;
-    private void Start()
+    private void Awake()
     {
        active =  PlayerPrefsX.GetBool("Active");
         over = PlayerPrefsX.GetBool("Bool");
@@ -20,6 +21,7 @@ public class escape_door : MonoBehaviour
     }
     public void Activations()
     {
+        //all objects collected
       if(active && !over)
         {
             note.SetActive(true);
@@ -28,9 +30,9 @@ public class escape_door : MonoBehaviour
             {
                 i.SetActive(true);
             }
-
+            
         }
-
+      //even finger collected
       else if(active && over){
             anim.SetInteger("State", 2);
         }

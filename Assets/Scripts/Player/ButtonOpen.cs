@@ -75,7 +75,7 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll"))
                 {
                     Pickup.SetActive(true);
-                    tm.ObjectiveList();
+                    
                    
                 }
                 if (hit.transform.CompareTag("Comic"))
@@ -98,10 +98,13 @@ namespace Scripts.Buttons
                  
                 else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                    comment.text = "damn it's locked";
+                    comment.text = "I need a tool";
                 }
-               
-                
+
+                if (hit.transform.CompareTag("Obstacle"))
+                {
+                    comment.text = "Going there wont be a good idea";
+                }
               
 
 
