@@ -25,7 +25,7 @@ namespace Scripts.Player
         [SerializeField]
         Timeline_Manager tm;
         [SerializeField]
-        GameObject Note_panel,map,minimap;
+        GameObject Note_panel,map,minimap,fps_canvas;
         [Serializable]
         private struct IntractionSettings
         {
@@ -118,12 +118,15 @@ namespace Scripts.Player
         {
             note_text.text = nm.text;
             Note_panel.SetActive(true);
-
+            fps_canvas.SetActive(false);
+            Time.timeScale = 0f;
         }
 
         public void Note_Close()
         {
             Note_panel.SetActive(false);
+            fps_canvas.SetActive(true);
+            Time.timeScale = 1f;
         }
 
       /*  public void Comic()
