@@ -14,6 +14,7 @@ namespace Scripts.Enemy
             [SerializeField] PlayerScript ps;
             float a;
             public float wanderRadius;
+			public float nearplayer_spawn_distance;
             public float wanderTimer, fieldOfView = 110f, range;
             Vector3 playerLastInSight;
             [SerializeField]
@@ -40,7 +41,7 @@ namespace Scripts.Enemy
             private void Start()
             {
                 agent = GetComponent<NavMeshAgent>();
-                timer = wanderTimer;
+               
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 player = GameObject.FindWithTag("Tracker");
                 cooldown = false;
@@ -54,7 +55,7 @@ namespace Scripts.Enemy
                     if (isinFrontOFMe(player))
                     {
                         chasing = true;
-                        Debug.Log("chaising");
+                      //  Debug.Log("chaising");
                         agent.SetDestination(player.transform.position);
                         Animations(2, 0);
                         Attack();
@@ -122,7 +123,7 @@ namespace Scripts.Enemy
                     return false;
             }
 
-            public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+            public  Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
             {
                 Vector3 randDirection = Random.insideUnitSphere * dist;
 
@@ -131,7 +132,9 @@ namespace Scripts.Enemy
                 NavMeshHit navHit;
 
                 NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-
+                 if(Vector3.Distance(player.transform.position,navHit.position)>nearplayer_spawn_distance){
+					 RandomNavSphere(randDirection,wanderRadius,-1);
+				 }
                 return navHit.position;
             }
             /* walk state -1 is idle 
