@@ -10,7 +10,7 @@ public class LitUp : MonoBehaviour
     Camera cam;
     [SerializeField]
     LayerMask lm;
-    Outline outline;
+    Outline outline,had;
     [SerializeField]
     ObjectController oc;
    
@@ -19,8 +19,23 @@ public class LitUp : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
         {
-            outline = hit.transform.gameObject.GetComponent<Outline>();
-            outline.enabled = true;
+            if (hit.transform.gameObject.layer != 0)
+            {
+                had = outline;
+                outline = hit.transform.gameObject.GetComponent<Outline>();
+                if (had != outline)
+                {
+                    had.enabled = false;
+                }
+                outline.enabled = true;
+            }
+            else
+            {
+                if (outline != null)
+                {
+                    outline.enabled = false;
+                }
+            }
         }
 
         else

@@ -66,7 +66,6 @@ namespace Scripts.Player
                     }
                     else
                     {
-                        
                         error_comment.text = "Get all the 5 objects listed to open the door";
                     }
                     ed.Activations();
@@ -93,7 +92,7 @@ namespace Scripts.Player
                     minimap.SetActive(true);
                     map_anim.SetBool("Open", true);
                     tm.ObjectiveList();
-                    error_comment.text = "Should take it , would be of help later";
+          
                 }
 
                

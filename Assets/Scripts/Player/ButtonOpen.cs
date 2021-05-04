@@ -87,6 +87,7 @@ namespace Scripts.Buttons
                 if (hit.transform.CompareTag("Map"))
                 {
                     map.SetActive(true);
+                   comment.text = "Should take it , would be of help later";
                 }
 
                 if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
