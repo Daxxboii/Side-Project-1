@@ -30,7 +30,7 @@ public class escape_door : MonoBehaviour
             {
                 i.SetActive(true);
             }
-            
+         
         }
       //even finger collected
       else if(active && over){

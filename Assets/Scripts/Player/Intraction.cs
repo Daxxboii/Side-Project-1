@@ -92,6 +92,8 @@ namespace Scripts.Player
                     map.SetActive(false);
                     minimap.SetActive(true);
                     map_anim.SetBool("Open", true);
+                    tm.ObjectiveList();
+                    error_comment.text = "Should take it , would be of help later";
                 }
 
                

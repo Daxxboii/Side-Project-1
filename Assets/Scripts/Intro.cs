@@ -10,6 +10,7 @@ public class Intro : MonoBehaviour
     private void Start()
     {
         player.Play();
+        Time.timeScale = 0;
     }
     private void Update()
     {
@@ -21,6 +22,7 @@ public class Intro : MonoBehaviour
         {
             canvas.SetActive(true);
            gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }

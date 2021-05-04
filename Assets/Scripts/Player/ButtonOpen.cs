@@ -124,10 +124,10 @@ namespace Scripts.Buttons
                 map.SetActive(false);
                 comment.text = "";
 
-                if (oc.had != null)
+            /*    if (oc.had != null)
                 {
                     Drop.SetActive(true);
-                }
+                }*/
               /*  if (Player.activeInHierarchy == true)
                 {
                     Unhide.SetActive(false);
