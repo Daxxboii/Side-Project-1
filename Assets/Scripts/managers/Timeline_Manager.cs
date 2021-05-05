@@ -115,9 +115,10 @@ namespace Scripts.Timeline
         }
       public  void ReadFile()
         {
-            text = lines[index++];
+            
          //   Debug.Log(text);
             comments.text = text;
+            text = lines[index++];
         }
         public void Silence()
         {

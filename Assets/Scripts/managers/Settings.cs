@@ -14,7 +14,7 @@ public class Settings : MonoBehaviour
     Slider sensitivity, music;
     public AudioMixer audiom;
 
-    public void Start()
+    public void Awake()
     {
         sensitivity.minValue = 0.5f;
         music.maxValue = 0f;
@@ -40,6 +40,8 @@ public class Settings : MonoBehaviour
         sensitivity.value = senci;
         audiom.SetFloat("Audio", volume);
         PlayerScript.SetSensi(senci);
+        setaudio();
+        SetSencivity();
     }
 
     public void setaudio()
