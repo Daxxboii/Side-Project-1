@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4488400685336971266}
   - component: {fileID: 4488400685336971292}
   - component: {fileID: 4488400685336971265}
+  - component: {fileID: 2637117045873422662}
   m_Layer: 14
   m_Name: Note_Torn_Page 1
   m_TagString: Note
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3642120676756452687}
-  m_LocalRotation: {x: 0.7071067, y: -0.00042575866, z: 0.0004257586, w: 0.70710665}
+  m_LocalRotation: {x: -0.70710665, y: 0.00042578988, z: -0.00042578988, w: -0.70710665}
   m_LocalPosition: {x: 0.00039, y: -0.00003, z: 0.00021}
   m_LocalScale: {x: 18.577793, y: 24.770393, z: 12.385197}
   m_Children: []
@@ -173,3 +174,19 @@ MonoBehaviour:
     written everything in her diary, kept it in the school library\u2026.look there...this
     is the only way you have\u2026.go now\u2026"
   objects: []
+--- !u!114 &2637117045873422662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642120676756452687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  loc: {x: 0.00039, y: -0.00003, z: 0.00021}
+  rot: {x: 90, y: 359.931, z: 0}
+  collider_state: 1

@@ -14,11 +14,10 @@ namespace Scripts.Enemy
             [SerializeField] PlayerScript ps;
             float a;
             public float wanderRadius;
-			public float nearplayer_spawn_distance;
-            public float wanderTimer, fieldOfView = 110f, range;
+		
+            public float wanderTimer, fieldOfView = 110f, chase_range,stoppingdistance;
             Vector3 playerLastInSight;
-            [SerializeField]
-            private Transform target;
+         
             [SerializeField]
             private NavMeshAgent agent;
             // [SerializeField]
@@ -33,7 +32,7 @@ namespace Scripts.Enemy
             private int damage;
             [SerializeField]
             private float attack_distance;
-
+            private bool hit = true;
             public float Cooldown_period;
 
             private Vector3 newPos;
@@ -41,14 +40,16 @@ namespace Scripts.Enemy
             private void Start()
             {
                 agent = GetComponent<NavMeshAgent>();
-               
+                agent.stoppingDistance = stoppingdistance;
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 player = GameObject.FindWithTag("Tracker");
+                agent.destination = player.transform.position;
                 cooldown = false;
             }
-            private void Update()
+            private void FixedUpdate()
             {
-                //  Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+                //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+            //    Debug.Log(agent.destination);
                 if (!cooldown)
                 {
 
@@ -87,9 +88,9 @@ namespace Scripts.Enemy
                                 timer += Time.deltaTime;
                                 if (timer >= wanderTimer)
                                 {
-                                    newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                                        newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
                                     agent.SetDestination(newPos);
-                                    timer = 0;
+                                       timer = 0;
                                 }
                             }
                         }
@@ -104,7 +105,7 @@ namespace Scripts.Enemy
                 if (angle < fieldOfView * 0.5f)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, range))
+                    if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, chase_range))
                     {
                         Debug.DrawRay(transform.position, direction, Color.black);
                         if (hit.transform.gameObject.tag == "Player")
@@ -132,9 +133,7 @@ namespace Scripts.Enemy
                 NavMeshHit navHit;
 
                 NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-                 if(Vector3.Distance(player.transform.position,navHit.position)>nearplayer_spawn_distance){
-					 RandomNavSphere(randDirection,wanderRadius,-1);
-				 }
+               
                 return navHit.position;
             }
             /* walk state -1 is idle 
@@ -149,29 +148,41 @@ namespace Scripts.Enemy
 
             private void Attack()
             {
-                if (ps.isDead == false)
+
+                if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
                 {
-                    if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
+                    if (ps.isDead == false && ps.Health > 25)
                     {
-                        cooldown = true;
-                        agent.isStopped = true;
+                        if (hit)
+                        {
+                            Animations(-1, 1);
+                            cooldown = true;
+                            agent.isStopped = true;
+                            ps.PlayerTakeDamage(damage);
+                            hit = false;
+                            newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+
+                            Invoke("ReActivate", Cooldown_period);
+                        }
+
+                    }
+                    else if (ps.isDead||ps.Health<=25)
+                    {
                         ps.PlayerTakeDamage(damage);
-                        Animations(-1, 1);
-                        Invoke("ReActivate", Cooldown_period);
+                        Animations(2, 2);
+                        //  Debug.Log("kill;");
                     }
                 }
-                else if (ps.isDead)
-                {
-                    Animations(2, 2);
-                    //  Debug.Log("kill;");
-                }
+               
+            
             }
 
             void ReActivate()
             {
+                agent.Warp(newPos);
                 cooldown = false;
                 agent.isStopped = false;
-
+                hit = true;
             }
         }
     }

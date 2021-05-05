@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-
+using UnityEngine.SceneManagement;
 public class AdManager : MonoBehaviour , IUnityAdsListener
 {
+    public GameObject menu;
+    public SaveManager save;
     string mySurfacingId = "Rewarded_Android";
-    bool GameMode = true;
+    public bool GameMode = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,11 @@ public class AdManager : MonoBehaviour , IUnityAdsListener
 
     public void ShowRewardedVideo()
     {
+        menu.SetActive(false);
+        save.Save();
+        PlayerPrefs.SetInt("loadindex", 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
         // Check if UnityAds ready before calling Show method:
         if (Advertisement.IsReady(mySurfacingId))
         {

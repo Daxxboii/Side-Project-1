@@ -12,7 +12,7 @@ public class SaveManager : MonoBehaviour
   
     public bool saved;
     public Serializer[] serializers;
-    
+    public PlayerScript ps;
     private int index;
     public string[] id;
     public bool[] state,collider_state,rigidbodies;
@@ -70,7 +70,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Subtitle_index", tm.index);
         PlayerPrefs.SetInt("Objective_index", tm.objective_index);
         PlayerPrefs.SetInt("Comic_index", comic.comic_index);
-    
+        PlayerPrefs.SetFloat("Health", ps.Health);
        
         PlayerPrefs.SetFloat("Time",cam.time);
   
@@ -152,7 +152,7 @@ public class SaveManager : MonoBehaviour
       rigidbodies =  PlayerPrefsX.GetBoolArray("rigidbodies");
       tm.Current_cutscene =  PlayerPrefs.GetInt("Current_cutscene");
         comic.comic_index = PlayerPrefs.GetInt("Comic_index");
-       
+        ps.Health = PlayerPrefs.GetFloat("Health");
      
       
         cam.time = PlayerPrefs.GetFloat("Time");

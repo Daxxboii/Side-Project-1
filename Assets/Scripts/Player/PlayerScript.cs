@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using System.Threading;
 using Scripts.Objects;
 using Scripts.Enemy.girlHostile;
-
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 namespace Scripts.Player
 {
    
@@ -19,12 +20,14 @@ namespace Scripts.Player
 
         [SerializeField]
         Sprite crouch,stand;
-
+        public GameObject admenu;
         [SerializeField]
         Image Button;
+        public VolumeProfile volume;
+        public float death_timer;
 
 
-         [SerializeField]
+        [SerializeField]
         GirlAiGhost gi;
         [SerializeField] private Camera fpsCam;
         public static event Action<bool, int> PlayCutscene;
@@ -38,24 +41,24 @@ namespace Scripts.Player
 
         // Player settings
         [SerializeField] private float cameraSensitivity, deathAnimationtime;
-        [SerializeField] float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, tempHeight, crouchHight, crawlheight, Health, RegenTimer;
+        [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, tempHeight, crouchHight, crawlheight, Health, RegenTimer;
         private bool isSprinting, isCrouching, IsCrawlling, canSprint;
         private Vector3 move;
         public bool isDead;
         // Touch detection
         private int leftFingerId, rightFingerId;
         private float halfScreenWidth;
-
+         Vignette vig;
         // Camera control
         private Vector2 lookInput;
         private float cameraPitch;
-
+       
         // Player movement
         private Vector2 moveTouchStartPosition;
         private Vector2 moveInput;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();
@@ -68,20 +71,26 @@ namespace Scripts.Player
 
             // only calculate once
             halfScreenWidth = Screen.width / 2;
+            volume.TryGet(out vig);
+            vig.color.Override(Color.black);
         }
 
         // Update is called once per frame
         void Update()
         {
+            Health_Manager();
             if (Health <= 0)
             {
                 gi.Cooldown_period = 0;
                 isDead = true;
                 fpsCam.transform.LookAt(ghost);
-                Invoke("playerDeath", deathAnimationtime);
+              
+                StartCoroutine("Player_death");
+
             }
             if (!isDead)
             {
+               // Regenerate();
                 cameraSensitivity = sensi;
                 GetTouchInput();
 
@@ -266,7 +275,7 @@ namespace Scripts.Player
         {
             
             Health -= hminus;
-            Debug.Log("OWO");
+         //   Debug.Log("OWO");
         }
 
         public void ChangeUI()
@@ -280,9 +289,29 @@ namespace Scripts.Player
                  Button.sprite = stand;
             }
         }
-        void playerDeath()
+      
+        private void Regenerate()
         {
-
+            if(Health <=75)
+            {
+                RegenTimer += Time.deltaTime;
+                Health += RegenTimer;
+                RegenTimer = 0;
+            }
+           
+        }
+        private void Health_Manager()
+        {
+           
+          
+            vig.color.Override(new Color((1-Health/75)/2, 0, 0));
+          
+        }
+        IEnumerator Player_death()
+        {
+            yield return new WaitForSeconds(death_timer);
+            admenu.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 }

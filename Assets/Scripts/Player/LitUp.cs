@@ -14,7 +14,7 @@ public class LitUp : MonoBehaviour
     [SerializeField]
     ObjectController oc;
    
-    void Update()
+    void FixedUpdate()
     {
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
