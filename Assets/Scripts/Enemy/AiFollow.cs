@@ -14,7 +14,7 @@ namespace Scripts.Enemy
             [SerializeField]
              public bool _isVisible;
             [SerializeField]
-            float daimage,follow_distance;
+            public float daimage,follow_distance;
             [SerializeField]
             private GameObject _player;
             [SerializeField]

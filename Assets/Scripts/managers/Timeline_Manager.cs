@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 using Scripts.Objects;
 using Scripts.Buttons;
 using TMPro;
+
 namespace Scripts.Timeline
 
 {
@@ -26,7 +27,7 @@ namespace Scripts.Timeline
         [SerializeField]
 
         GameObject Button;
-
+        public Scripts.Enemy.Principal.AiFollow aiFollow;
        
         public int Current_cutscene;
         [SerializeField]
@@ -48,18 +49,27 @@ namespace Scripts.Timeline
 
         string[] lines, objective_lines;
         double length ,timer;
-
+        public Material princy;
         private void Start()
         {
               lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
             text = objective_lines[objective_index];
             ObjectiveList();
-          
+            if (Current_cutscene > 10)
+            {
+                princy.SetColor("_BaseColor", Color.white);
+                aiFollow.daimage = 50f;
+            }
+            else
+            {
+                princy.SetColor("_BaseColor", Color.black);
+            }
+
         }
         private void FixedUpdate()
         {
-
+           
           /*  if(director.state == PlayState.Playing)
             {
                 timer += Time.deltaTime;
@@ -109,8 +119,14 @@ namespace Scripts.Timeline
             oc.had.SetActive(false);
             oc.had = null;
             Button.SetActive(false);
-          
-
+            if (Current_cutscene > 10)
+            {
+                princy.SetColor("_BaseColor", Color.white);
+            }
+            else
+            {
+                princy.SetColor("_BaseColor", Color.black);
+            }
 
         }
       public  void ReadFile()
