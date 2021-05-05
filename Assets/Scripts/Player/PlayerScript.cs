@@ -309,7 +309,7 @@ namespace Scripts.Player
             var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
             hit_image.color = tempColor;
-            if (tempColor.a <= 50){
+            if (Health < 50){
                 hit_image.sprite = hit_high;
             }
             else

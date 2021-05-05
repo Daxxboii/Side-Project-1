@@ -16,10 +16,6 @@ namespace Scripts.Enemy
             [SerializeField]
             float daimage,follow_distance;
             [SerializeField]
-            private bool _isPlayerHiding;
-            [SerializeField]
-            private bool _isPlayerIdle;
-            [SerializeField]
             private GameObject _player;
             [SerializeField]
             PlayerScript ps;
@@ -36,19 +32,19 @@ namespace Scripts.Enemy
             private bool isAgentOnNavMesh;
             private Vector3 newPos;
             VisiBility vis;
-
+            bool hit = true;
+            public float cool_period;
 
             private Vector3 _randomSpawanLocation;
 
-            [Header("Timer")]
-            [SerializeField]
-            private float _idleWaitTime;
-            [SerializeField]
-            private float _timer;
+       
+    
+           
 
             void Start()
             {
                 _agent = GetComponent<NavMeshAgent>();
+                _agent.stoppingDistance = 1.5f;
                 vis = _player.transform.GetComponent<VisiBility>();
             }
             void Update()
@@ -63,9 +59,24 @@ namespace Scripts.Enemy
                 {
                     if (inAttackRange() < 2f)
                     {
-                        ps.PlayerTakeDamage(daimage);
-                        transform.position = newPos;
+                  
+                        if (hit)
+                        {
+                                Animations(1, 2);
+                                ps.PlayerTakeDamage(daimage);
+                            hit = false;
+                        }
+                        else
+                        {
+                            Animations(0, 0);
+                        }
+                        StartCoroutine("cooldown");
                     }
+                }
+
+                else if (ps.isDead)
+                {
+                    Animations(2, 2);
                 }
             }
             float inAttackRange()
@@ -74,28 +85,10 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
-                ///<summary>
-                ///if player can see 
-                /// Stop!!
-                /// 
-                /// if player can't see and isIdle
-                ///     start timer
-                ///     if timer crossed
-                ///         check distance b/w them
-                ///         if distance is greater than desired disatnce
-                ///             choose random point
-                ///             check if random point is on nav mesh
-                ///             if ramdom point is on nav mesh
-                ///                 teleport to random point
-                ///             else
-                ///                 again check random point
-                ///     set Nav Mesh destination to player
-                ///</summary>
-
                 if (_isVisible == true)
                 {
-                    _agent.enabled = false;
-                    _timer = 0f;
+                  _agent.enabled = false;
+                  Animations(0, 0);
                 }
 
 
@@ -103,31 +96,28 @@ namespace Scripts.Enemy
                 if (_isVisible == false)
                 {
                     _agent.enabled = true;
-
                    
                         float disatnce = Vector3.Distance(transform.position, _player.transform.position);
 
                         if (disatnce > follow_distance)
                         {
                             newPos = GetRandomPointNearPlayer();
-
                             isAgentOnNavMesh = IsAgentOnNavMesh(newPos);
-
                             if (isAgentOnNavMesh == true)
                             {
                             _agent.SetDestination(newPos);
-                        }
+                            Animations(0, 1);
+                            }
                             else
                             {
                                 newPos = GetRandomPointNearPlayer();
                             }
-
-
                         }
                     else
                     {
 
                         _agent.SetDestination(_player.transform.position);
+                        Animations(0, 2);
 
                     }
 
@@ -136,16 +126,7 @@ namespace Scripts.Enemy
             }
         
             
-            private void OnEnable()
-            {
-                PlayerScript.OnPlayerIdle += PlayerIdle;
-            }
-
-            void PlayerIdle(bool idle)
-            {
-                _isPlayerIdle = idle;
-
-            }
+         
 
             Vector3 GetRandomPointNearPlayer()
             {
@@ -169,13 +150,18 @@ namespace Scripts.Enemy
                 return false;
             }
 
-
-            
-
-            private void OnDisable()
+            private void Animations(int hit_state , int walk_state)
             {
-                PlayerScript.OnPlayerIdle -= PlayerIdle;
+                anim.SetInteger("Walk_state", walk_state);
+                anim.SetInteger("Hit_state", hit_state);
             }
+            IEnumerator cooldown()
+            {
+                yield return new WaitForSeconds(cool_period);
+                hit = true;
+            }
+
+         
         }
     }
 }
