@@ -25,7 +25,9 @@ namespace Scripts.Player
         Image Button;
         public VolumeProfile volume;
         public float death_timer;
-
+        public Image hit_image;
+        public Sprite hit_low;
+        public Sprite hit_high;
 
         [SerializeField]
         GirlAiGhost gi;
@@ -60,6 +62,7 @@ namespace Scripts.Player
         // Start is called before the first frame update
         void Start()
         {
+            hit_image.gameObject.SetActive(true);
             TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();
             tempHeight = characterController.height;
@@ -90,7 +93,7 @@ namespace Scripts.Player
             }
             if (!isDead)
             {
-               // Regenerate();
+                Regenerate();
                 cameraSensitivity = sensi;
                 GetTouchInput();
 
@@ -214,14 +217,14 @@ namespace Scripts.Player
            characterController.Move(move * Time.deltaTime * speed);
             
               
-            if (move.x == 0.0f)
+          /*  if (move.x == 0.0f)
             {
                 OnPlayerIdle(true);
             }
             else
             {
                 OnPlayerIdle(false);
-            }
+            }*/
         }
         public void croutch()
         {
@@ -302,10 +305,17 @@ namespace Scripts.Player
         }
         private void Health_Manager()
         {
-           
-          
             vig.color.Override(new Color((1-Health/75)/2, 0, 0));
-          
+            var tempColor = hit_image.color;
+            tempColor.a = (1-Health/75)/2;
+            hit_image.color = tempColor;
+            if (tempColor.a <= 50){
+                hit_image.sprite = hit_high;
+            }
+            else
+            {
+                hit_image.sprite = hit_low;
+            }
         }
         IEnumerator Player_death()
         {

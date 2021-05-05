@@ -160,7 +160,7 @@ namespace Scripts.Enemy
                             agent.isStopped = true;
                             ps.PlayerTakeDamage(damage);
                             hit = false;
-                            newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+                          //  newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
 
                             Invoke("ReActivate", Cooldown_period);
                         }
@@ -179,7 +179,7 @@ namespace Scripts.Enemy
 
             void ReActivate()
             {
-                agent.Warp(newPos);
+              //  agent.Warp(newPos);
                 cooldown = false;
                 agent.isStopped = false;
                 hit = true;

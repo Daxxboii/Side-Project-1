@@ -9,8 +9,11 @@ public class Intro : MonoBehaviour
 
     private void Start()
     {
-        player.Play();
-        Time.timeScale = 0;
+        if (PlayerPrefs.GetInt("loadindex") != 1)
+        {
+            player.Play();
+            Time.timeScale = 0;
+        }
     }
     private void Update()
     {

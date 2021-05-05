@@ -136,7 +136,7 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
-            Debug.Log("load");
+           // Debug.Log("load");
             load_arrays();
             assign();
         }
