@@ -109,7 +109,8 @@ namespace Scripts.Buttons
 
                 else
                 {
-                    Intract.SetActive(false);
+                    /*
+                   Intract.SetActive(false);
                     Pickup.SetActive(false);
                     Drop.SetActive(false);
                     Unhide.SetActive(false);
@@ -119,7 +120,8 @@ namespace Scripts.Buttons
                     note.SetActive(false);
                     Comic.SetActive(false);
                     map.SetActive(false);
-                    comment.text = "";
+                    comment.text = ""; 
+                   */
                 }
 
 
