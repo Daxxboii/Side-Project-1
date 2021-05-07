@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 public class SaveManager : MonoBehaviour
@@ -24,7 +25,7 @@ public class SaveManager : MonoBehaviour
     public void Start()
     {
        //Save();
-       assign_id();
+      // assign_id();
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (PlayerPrefsX.GetBool("Saved"))
@@ -37,15 +38,16 @@ public class SaveManager : MonoBehaviour
 
    void assign_id()
     {
-        serializers = Resources.FindObjectsOfTypeAll<Serializer>();
-       /* id = new string[serializers.Length];
-        foreach (Serializer i in serializers)
-        {
-            serializers[index].Assign_id();
-            id[index] = serializers[index].name;
-            index++;
-        }
-        index = 0;*/
+        serializers = FindObjectsOfType(typeof(Serializer)) as Serializer[];
+       
+        /* id = new string[serializers.Length];
+         foreach (Serializer i in serializers)
+         {
+             serializers[index].Assign_id();
+             id[index] = serializers[index].name;
+             index++;
+         }
+         index = 0;*/
     }
 
     public void Loader(int load_index)
