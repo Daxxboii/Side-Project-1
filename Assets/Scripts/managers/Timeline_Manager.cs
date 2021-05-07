@@ -6,14 +6,14 @@ using UnityEngine.Playables;
 using Scripts.Objects;
 using Scripts.Buttons;
 using TMPro;
-
+using Scripts.Player;
 namespace Scripts.Timeline
 
 {
     public class Timeline_Manager : MonoBehaviour
     {
-       
-       private string text;
+        public PlayerScript ps;
+       private string text,_text;
         [SerializeField]
         TextAsset subtitles,objectives;
         [SerializeField]
@@ -28,7 +28,9 @@ namespace Scripts.Timeline
 
         GameObject Button;
         public Scripts.Enemy.Principal.AiFollow aiFollow;
-       
+        public Scripts.Enemy.girlHostile.GirlAiGhost girl;
+
+
         public int Current_cutscene;
         [SerializeField]
         private TimelineAsset[] timeline_assets;
@@ -54,7 +56,8 @@ namespace Scripts.Timeline
         {
               lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
-            text = objective_lines[objective_index];
+            _text = objective_lines[objective_index];
+            text = lines[index];
             ObjectiveList();
             if (Current_cutscene > 10)
             {
@@ -67,33 +70,24 @@ namespace Scripts.Timeline
             }
 
         }
-        private void FixedUpdate()
-        {
-           
-          /*  if(director.state == PlayState.Playing)
-            {
-                timer += Time.deltaTime;
-        
-                if (length < timer)
-                {
-                    director.Stop();
-                   
-                    timer = 0;
-                }
-            }*/
-          
-        }
+     
 
         public void Translate_Player()
         {
+            ps.gameObject.SetActive(false);
             position = cutscene_player.transform.position;
             rotation = cutscene_player.transform.rotation.eulerAngles;
             cam_rot = cutscene_cam.transform.rotation.eulerAngles;
             position.y -= y_offset;
-
+         //   Debug.Log("ur mom");
+          
             player.transform.position = position;
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
+            ps.gameObject.SetActive(true);
+            girl.agent.enabled = true;
+            aiFollow.enabled = true;
+
         }
         public void Translate_Cutscene()
         {
@@ -108,8 +102,9 @@ namespace Scripts.Timeline
         public void TimeLine_Activator()
         {
 
-          //  Debug.Log(Current_cutscene);
-          
+            //  Debug.Log(Current_cutscene);
+            girl.agent.enabled = false;
+            aiFollow.enabled = false;
 
             director.playableAsset = timeline_assets[Current_cutscene];
             length = director.duration;
@@ -131,10 +126,10 @@ namespace Scripts.Timeline
         }
       public  void ReadFile()
         {
-            
-         //   Debug.Log(text);
-            comments.text = text;
             text = lines[index++];
+            //   Debug.Log(text);
+            comments.text = text;
+           
         }
         public void Silence()
         {
@@ -144,9 +139,9 @@ namespace Scripts.Timeline
         }
         public void ObjectiveList()
         {
-          
-            objective_text.text = text;
-            text = objective_lines[objective_index++];
+            _text = objective_lines[objective_index++];
+            objective_text.text = _text;
+         
 
         }
     }

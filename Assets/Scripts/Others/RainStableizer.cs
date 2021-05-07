@@ -11,7 +11,7 @@ public class RainStableizer : MonoBehaviour
     private float Timerstert, MaxTime;
     [SerializeField]
     RainScript RS;
-    void Update()
+    void FixedUpdate()
     {
         Timerstert += Time.deltaTime;
         if(Timerstert >= MaxTime)

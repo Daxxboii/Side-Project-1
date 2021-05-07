@@ -97,7 +97,7 @@ namespace Scripts.Buttons
 
                 }
                  
-                else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
+                if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
                     comment.text = "I need a tool";
                 }
@@ -106,8 +106,21 @@ namespace Scripts.Buttons
                 {
                     comment.text = "Going there wont be a good idea";
                 }
-              
 
+                else
+                {
+                    Intract.SetActive(false);
+                    Pickup.SetActive(false);
+                    Drop.SetActive(false);
+                    Unhide.SetActive(false);
+                    save.SetActive(false);
+                    Hide.SetActive(false);
+                    Timeline.SetActive(false);
+                    note.SetActive(false);
+                    Comic.SetActive(false);
+                    map.SetActive(false);
+                    comment.text = "";
+                }
 
 
             }

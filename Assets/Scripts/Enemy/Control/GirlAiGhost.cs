@@ -19,10 +19,10 @@ namespace Scripts.Enemy
             Vector3 playerLastInSight;
          
             [SerializeField]
-            private NavMeshAgent agent;
+            public NavMeshAgent agent;
             // [SerializeField]
             private float timer;
-            private GameObject player;
+            public GameObject player;
             [SerializeField]
             private bool cooldown, chasing;
 
@@ -37,12 +37,12 @@ namespace Scripts.Enemy
 
             private Vector3 newPos;
 
-            private void Start()
+            private void Awake()
             {
                 agent = GetComponent<NavMeshAgent>();
                 agent.stoppingDistance = stoppingdistance;
                 //Tracker because gameobject being tracked by navmesh should be grounded
-                player = GameObject.FindWithTag("Tracker");
+              
                 agent.destination = player.transform.position;
                 cooldown = false;
             }

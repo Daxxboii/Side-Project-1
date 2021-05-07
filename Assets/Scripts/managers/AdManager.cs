@@ -14,27 +14,30 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     void Start()
     {
-      
         Advertisement.Initialize(mySurfacingId, true);
     }
    public void Show()
     {
         Advertisement.Show(placement);
+        OnUnityAdsDidFinish(placement, ShowResult.Finished);
     }
 
     public void OnUnityAdsReady(string placementId)
     {
-       
+        Debug.Log("chaddi");
+
     }
 
     public void OnUnityAdsDidError(string message)
     {
-       
+        PlayerPrefs.SetInt("loadindex", 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("chaddi");
     }
 
     public void OnUnityAdsDidStart(string placementId)
     {
-      
+        Debug.Log("chaddi");
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
@@ -46,6 +49,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
         }
         PlayerPrefs.SetInt("loadindex", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("chaddi");
       
     }
 }

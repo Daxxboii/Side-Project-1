@@ -14,7 +14,7 @@ public class LitUp : MonoBehaviour
     [SerializeField]
     ObjectController oc;
    
-    void FixedUpdate()
+    void Update()
     {
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
@@ -40,11 +40,10 @@ public class LitUp : MonoBehaviour
 
         else
         {
-            if (outline != null)
-            {
+           
                 outline.enabled = false;
             }
-        }
+        
         
 
     }

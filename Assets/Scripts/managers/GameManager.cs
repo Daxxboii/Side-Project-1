@@ -121,4 +121,8 @@ public class GameManager : MonoBehaviour
         About_panel.SetActive(false);
         MainMenu.SetActive(true);
     }
+    public void Link()
+    {
+        Application.OpenURL("https://www.lonewolfstudios.info");
+    }
 }

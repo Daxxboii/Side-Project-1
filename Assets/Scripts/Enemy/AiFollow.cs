@@ -62,8 +62,8 @@ namespace Scripts.Enemy
                   
                         if (hit)
                         {
-                                Animations(1, 2);
-                                ps.PlayerTakeDamage(daimage);
+                          Animations(1, 2);
+                           ps.PlayerTakeDamage(daimage);
                             hit = false;
                         }
                         else
@@ -76,7 +76,11 @@ namespace Scripts.Enemy
 
                 else if (ps.isDead)
                 {
-                    Animations(2, 2);
+                    if (inAttackRange() <= 2f)
+                    {
+                        Animations(2, 2);
+                    }
+                    
                 }
             }
             float inAttackRange()
@@ -101,7 +105,8 @@ namespace Scripts.Enemy
 
                         if (disatnce > follow_distance)
                         {
-                            newPos = GetRandomPointNearPlayer();
+                        Debug.Log("not chasing");
+                            newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
                             isAgentOnNavMesh = IsAgentOnNavMesh(newPos);
                             if (isAgentOnNavMesh == true)
                             {
@@ -110,7 +115,7 @@ namespace Scripts.Enemy
                             }
                             else
                             {
-                                newPos = GetRandomPointNearPlayer();
+                                newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
                             }
                         }
                     else
@@ -128,9 +133,14 @@ namespace Scripts.Enemy
             
          
 
-            Vector3 GetRandomPointNearPlayer()
+            Vector3 GetRandomPointNearPlayer(Vector3 origin, float dist, int layermask)
             {
                 _randomSpawanLocation = new Vector3(Random.insideUnitSphere.x * _radius, transform.position.y, Random.insideUnitSphere.z * _radius);
+                _randomSpawanLocation += origin;
+
+                NavMeshHit navHit;
+
+                NavMesh.SamplePosition(_randomSpawanLocation, out navHit, dist, layermask);
 
                 return _randomSpawanLocation;
 

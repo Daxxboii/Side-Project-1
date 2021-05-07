@@ -20,6 +20,7 @@ public class SaveManager : MonoBehaviour
     public ComicManager comic = null;
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
+    public Animator Candle;
     public void Start()
     {
        //Save();
@@ -73,9 +74,10 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetFloat("Health", ps.Health);
        
         PlayerPrefs.SetFloat("Time",cam.time);
-  
+
         PlayerPrefsX.SetBool("Saved", saved);
         PlayerPrefs.Save();
+        Candle.SetBool("Open", true);
     }
 
     void check_state()
