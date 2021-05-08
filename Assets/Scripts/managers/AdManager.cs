@@ -19,18 +19,18 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
    public void Show()
     {
         Advertisement.Show(placement);
-        OnUnityAdsDidFinish(placement, ShowResult.Finished);
+      
     }
 
     public void OnUnityAdsReady(string placementId)
     {
-        Debug.Log("chaddi");
+
 
     }
 
     public void OnUnityAdsDidError(string message)
     {
-        PlayerPrefs.SetInt("loadindex", 1);
+        PlayerPrefs.SetInt("loadindex", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("chaddi");
     }
