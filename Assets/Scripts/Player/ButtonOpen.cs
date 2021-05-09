@@ -99,7 +99,7 @@ namespace Scripts.Buttons
                  
                 if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                    comment.text = "I need a tool";
+                    comment.text = "get something to open door";
                 }
 
                 if (hit.transform.CompareTag("Obstacle"))

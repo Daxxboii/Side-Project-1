@@ -16,8 +16,7 @@ namespace Scripts.Enemy
             public float wanderRadius;
 		
             public float wanderTimer, fieldOfView = 110f, chase_range,stoppingdistance;
-            Vector3 playerLastInSight;
-         
+          
             [SerializeField]
             public NavMeshAgent agent;
             // [SerializeField]
@@ -83,16 +82,15 @@ namespace Scripts.Enemy
                             {
                                 Animations(1, 0);
                             }
+                            agent.SetDestination(newPos);
 
-                            {
-                                timer += Time.deltaTime;
+                            timer += Time.deltaTime;
                                 if (timer >= wanderTimer)
                                 {
-                                        newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-                                    agent.SetDestination(newPos);
-                                       timer = 0;
+                                newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+                                timer = 0;
                                 }
-                            }
+                            
                         }
                     }
                 }
