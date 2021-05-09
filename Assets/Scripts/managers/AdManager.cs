@@ -14,6 +14,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     void Start()
     {
+        Advertisement.AddListener(this);
         Advertisement.Initialize(mySurfacingId, true);
     }
    public void Show()
