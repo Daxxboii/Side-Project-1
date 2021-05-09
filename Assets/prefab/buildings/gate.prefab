@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8084866458317953025}
   - component: {fileID: 7265886356652755539}
   - component: {fileID: 337809754321436049}
-  - component: {fileID: 7286756624955672280}
+  - component: {fileID: 4105402684019944791}
   m_Layer: 0
   m_Name: gate:Mesh
   m_TagString: Untagged
@@ -174,8 +174,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7286756624955672280
-MeshCollider:
+--- !u!65 &4105402684019944791
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -184,10 +184,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2511723810942372844, guid: 30f9ae091e7f1864eb23f4b5599ae651, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 4.4182634, y: 6.8822126, z: 0.1879662}
+  m_Center: {x: 0.7489309, y: 3.4411063, z: -0.18656988}
 --- !u!1 &8966292370933779585
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +198,7 @@ GameObject:
   - component: {fileID: 7695231935905456687}
   - component: {fileID: 139914310431025896}
   - component: {fileID: 8375314789256470200}
-  - component: {fileID: 1065608220322068555}
+  - component: {fileID: 9081647353532982768}
   m_Layer: 0
   m_Name: gate1:Mesh
   m_TagString: Untagged
@@ -268,8 +267,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1065608220322068555
-MeshCollider:
+--- !u!65 &9081647353532982768
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -278,7 +277,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3371640142353532534, guid: 30f9ae091e7f1864eb23f4b5599ae651, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 4.4182634, y: 6.8822126, z: 0.1879662}
+  m_Center: {x: -3.7223907, y: 3.4411063, z: -0.18656988}
