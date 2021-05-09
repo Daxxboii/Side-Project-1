@@ -93,13 +93,12 @@ namespace Scripts.Buttons
                 if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
-                 
 
                 }
                  
                 if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
-                    comment.text = "get something to open door";
+                    comment.text = "get something ";
                 }
 
                 if (hit.transform.CompareTag("Obstacle"))
@@ -107,22 +106,6 @@ namespace Scripts.Buttons
                     comment.text = "Going there wont be a good idea";
                 }
 
-                else
-                {
-                    /*
-                   Intract.SetActive(false);
-                    Pickup.SetActive(false);
-                    Drop.SetActive(false);
-                    Unhide.SetActive(false);
-                    save.SetActive(false);
-                    Hide.SetActive(false);
-                    Timeline.SetActive(false);
-                    note.SetActive(false);
-                    Comic.SetActive(false);
-                    map.SetActive(false);
-                    comment.text = ""; 
-                   */
-                }
 
 
             }

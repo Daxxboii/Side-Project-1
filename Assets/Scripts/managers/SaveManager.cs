@@ -24,8 +24,7 @@ public class SaveManager : MonoBehaviour
     public Animator Candle;
     public void Start()
     {
-       //Save();
-      // assign_id();
+      
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (PlayerPrefsX.GetBool("Saved"))
@@ -36,20 +35,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-   void assign_id()
-    {
-        serializers = FindObjectsOfType(typeof(Serializer)) as Serializer[];
-       
-        /* id = new string[serializers.Length];
-         foreach (Serializer i in serializers)
-         {
-             serializers[index].Assign_id();
-             id[index] = serializers[index].name;
-             index++;
-         }
-         index = 0;*/
-    }
-
+   
     public void Loader(int load_index)
     {
         PlayerPrefs.SetInt("loadindex", load_index);

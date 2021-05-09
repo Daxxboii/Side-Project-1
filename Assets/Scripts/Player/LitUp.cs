@@ -21,13 +21,15 @@ public class LitUp : MonoBehaviour
         {
             if (hit.transform.gameObject.layer != 0)
             {
-                had = outline;
-                outline = hit.transform.gameObject.GetComponent<Outline>();
-                if (had != outline)
-                {
-                    had.enabled = false;
+                if (hit.transform.GetComponent<Outline>() != null){
+                    had = outline;
+                    outline = hit.transform.gameObject.GetComponent<Outline>();
+                    if (had != outline)
+                    {
+                        had.enabled = false;
+                    }
+                    outline.enabled = true;
                 }
-                outline.enabled = true;
             }
             else
             {
@@ -40,9 +42,13 @@ public class LitUp : MonoBehaviour
 
         else
         {
-           
+            if (outline != null)
+            {
                 outline.enabled = false;
             }
+           
+               
+        }
         
         
 

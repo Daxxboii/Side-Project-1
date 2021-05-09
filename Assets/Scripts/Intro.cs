@@ -24,8 +24,9 @@ public class Intro : MonoBehaviour
         else
         {
             canvas.SetActive(true);
-           gameObject.SetActive(false);
             Time.timeScale = 1;
+            gameObject.SetActive(false);
+            
         }
     }
 }

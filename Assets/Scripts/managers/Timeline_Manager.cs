@@ -111,8 +111,12 @@ namespace Scripts.Timeline
             Current_cutscene++;
             director.time = 0;
             director.Play();
-            oc.had.SetActive(false);
-            oc.had = null;
+            if (oc.had != null)
+            {
+                oc.had.SetActive(false);
+                oc.had = null;
+            }
+           
             Button.SetActive(false);
             if (Current_cutscene > 10)
             {
