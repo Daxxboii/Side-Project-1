@@ -59,7 +59,7 @@ namespace Scripts.Timeline
             _text = objective_lines[objective_index];
             text = lines[index];
             ObjectiveList();
-            if (Current_cutscene > 10)
+            if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
                 aiFollow.daimage = 50f;
@@ -70,8 +70,16 @@ namespace Scripts.Timeline
             }
 
         }
-     
 
+        private void FixedUpdate()
+        {
+            if (Current_cutscene >= 10)
+            {
+                aiFollow.angry = true;
+                girl.angry = true;
+            }
+
+        }
         public void Translate_Player()
         {
             ps.gameObject.SetActive(false);
@@ -118,7 +126,7 @@ namespace Scripts.Timeline
             }
            
             Button.SetActive(false);
-            if (Current_cutscene > 10)
+            if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
             }

@@ -9,7 +9,7 @@ namespace Scripts.Enemy
     {
         public class AiFollow : MonoBehaviour
         {
-
+            public bool angry;
             [Header("Variable depending on player")]
             [SerializeField]
              public bool _isVisible;
@@ -49,6 +49,11 @@ namespace Scripts.Enemy
             }
             void Update()
             {
+                if (angry)
+                {
+                    daimage = 75;
+                    _agent.speed = 3.5f;
+                }
                 _isVisible = vis.visible;
                 Movement();
                 Attak();
@@ -89,7 +94,7 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
-                if (_isVisible == true)
+                if (_isVisible == true && !angry)
                 {
                   _agent.enabled = false;
                   Animations(0, 0);
@@ -97,7 +102,7 @@ namespace Scripts.Enemy
 
 
 
-                if (_isVisible == false)
+                if (_isVisible == false || angry)
                 {
                     _agent.enabled = true;
                    

@@ -20916,6 +20916,7 @@ MonoBehaviour:
   Continue_button: {fileID: 0}
   About_Button: {fileID: 0}
   About_panel: {fileID: 0}
+  mode_menu: {fileID: 0}
   delay: 0
 --- !u!1001 &386520442
 PrefabInstance:
@@ -40617,6 +40618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 1910751499}
   wanderRadius: 50
+  angry: 0
   wanderTimer: 20
   fieldOfView: 270
   chase_range: 20
@@ -68093,6 +68095,10 @@ PrefabInstance:
     - target: {fileID: 1888474785, guid: 3dde7076123e1f846a343ff47e001bbd, type: 3}
       propertyPath: _radius
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888474786, guid: 3dde7076123e1f846a343ff47e001bbd, type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2765916234961737644, guid: 3dde7076123e1f846a343ff47e001bbd,
         type: 3}

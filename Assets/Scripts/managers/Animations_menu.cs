@@ -46,4 +46,8 @@ public class Animations_menu : MonoBehaviour
     {
         camera.SetInteger("State", 6);
     }
+    public void Gamemode()
+    {
+        camera.SetInteger("State", 7);
+    }
 }
