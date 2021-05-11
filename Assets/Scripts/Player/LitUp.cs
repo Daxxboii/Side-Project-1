@@ -24,7 +24,7 @@ public class LitUp : MonoBehaviour
                 if (hit.transform.GetComponent<Outline>() != null){
                     had = outline;
                     outline = hit.transform.gameObject.GetComponent<Outline>();
-                    if (had != outline)
+                    if (had != outline && had != null)
                     {
                         had.enabled = false;
                     }
@@ -36,6 +36,7 @@ public class LitUp : MonoBehaviour
                 if (outline != null)
                 {
                     outline.enabled = false;
+                   
                 }
             }
         }
@@ -45,6 +46,7 @@ public class LitUp : MonoBehaviour
             if (outline != null)
             {
                 outline.enabled = false;
+               
             }
            
                

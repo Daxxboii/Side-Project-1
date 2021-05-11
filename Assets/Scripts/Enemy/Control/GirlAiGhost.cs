@@ -16,7 +16,7 @@ namespace Scripts.Enemy
             public float wanderRadius;
             public bool angry;
             public float wanderTimer, fieldOfView = 110f, chase_range,stoppingdistance;
-          
+            public GameObject volume;
             [SerializeField]
             public NavMeshAgent agent;
             // [SerializeField]
@@ -47,7 +47,7 @@ namespace Scripts.Enemy
             }
             private void Update()
             {
-
+                
                 if (!angry)
                 {
                     //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
@@ -67,6 +67,7 @@ namespace Scripts.Enemy
                         {
                             if (chasing)
                             {
+                                volume.SetActive(true);
                                 agent.SetDestination(player.transform.position);
                                 a += Time.deltaTime;
                                 if (a >= 5f)
@@ -77,6 +78,7 @@ namespace Scripts.Enemy
                             }
                             else if (!chasing)
                             {
+                                volume.SetActive(false);
                                 if (Vector3.Distance(transform.position, newPos) < 0.5)
                                 {
                                     Animations(-1, 0);

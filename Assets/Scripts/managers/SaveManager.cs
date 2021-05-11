@@ -11,7 +11,7 @@ using System.Linq;
 public class SaveManager : MonoBehaviour
 {
   
-    public bool saved;
+   
     public Serializer[] serializers;
     public PlayerScript ps;
     private int index;
@@ -44,7 +44,7 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
-        saved = true;
+        
         check_state();
         Save_transforms();
         Save_colliders();
@@ -63,7 +63,7 @@ public class SaveManager : MonoBehaviour
        
         PlayerPrefs.SetFloat("Time",cam.time);
 
-        PlayerPrefsX.SetBool("Saved", saved);
+        PlayerPrefsX.SetBool("Saved", true);
         PlayerPrefs.Save();
         Candle.SetBool("Open", true);
     }
@@ -126,9 +126,11 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
-           // Debug.Log("load");
+            ps.enabled = false;
+           //Debug.Log("load");
             load_arrays();
             assign();
+            ps.enabled = true;
         }
     }
 
@@ -191,10 +193,7 @@ public class SaveManager : MonoBehaviour
        
 
     }
-    public void DeleteAll()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+   
 
 
 }

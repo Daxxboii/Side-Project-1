@@ -12,12 +12,12 @@ public class VisiBility : MonoBehaviour
     [SerializeField]
     GameObject Player;
     RaycastHit hit;
-
+    public float radius;
     public bool visible;
     // Update is called once per frame
     void Update()
     {
-        if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10f, lm))
+        if (Player.activeInHierarchy == true && Physics.SphereCast(cam.transform.position,radius, cam.transform.forward, out hit, 10f, lm))
         {
             visible = true;
         }

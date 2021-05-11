@@ -10,16 +10,19 @@ public class Settings : MonoBehaviour
     public float volume = 0f;
     public float senci = 0.5f;
     public Toggle fog;
-    public GameObject fogs;
+    public GameObject[] fogs;
     [SerializeField]
     Slider sensitivity, music;
     public AudioMixer audiom;
-    public ParticleSystemRenderer fog_system;
+    public ParticleSystemRenderer[] fog_system;
     private void Start()
     {
-      if(PlayerPrefsX.GetBool("Saved"))
+      if(PlayerPrefsX.GetBool("Saved")&& PlayerPrefsX.GetBool("Fogs") != null)
         {
-            fog.isOn = PlayerPrefsX.GetBool("Fogs");
+         
+                fog.isOn = PlayerPrefsX.GetBool("Fogs");
+            
+          
         }
         else
         {
@@ -33,14 +36,16 @@ public class Settings : MonoBehaviour
         {
             if (fog.isOn)
             {
-                fogs.SetActive(true);
+                fogs[0].SetActive(true);
+                fogs[1].SetActive(true);
             }
             else
             {
-                fogs.SetActive(false);
+                fogs[0].SetActive(false);
+                fogs[1].SetActive(false);
             }
         }
-        if (senci != null)
+        if (sensitivity != null)
         {
             sensitivity.minValue = 0.5f;
             if (PlayerPrefs.GetFloat("Senci") != 0)
@@ -90,11 +95,13 @@ public class Settings : MonoBehaviour
         {
             if (fog.isOn)
             {
-                fogs.SetActive(true);
+                fogs[0].SetActive(true);
+                fogs[1].SetActive(true);
             }
             else
             {
-                fogs.SetActive(false);
+                fogs[0].SetActive(false);
+                fogs[1].SetActive(false);
             }
         }
     }
@@ -113,6 +120,8 @@ public class Settings : MonoBehaviour
 
     public void Managefog()
     {
-        fog_system.enabled = !fog_system.enabled;
+        fog_system[0].enabled = !fog_system[0].enabled;
+        fog_system[1].enabled = !fog_system[1].enabled;
+
     }
 }

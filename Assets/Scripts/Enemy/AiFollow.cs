@@ -27,7 +27,7 @@ namespace Scripts.Enemy
             [SerializeField, Tooltip("Radius of Random.insideUnitSpher")]
             private float _radius;
             private NavMeshAgent _agent;
-
+            public GameObject volume;
 
             private bool isAgentOnNavMesh;
             private Vector3 newPos;
@@ -37,9 +37,10 @@ namespace Scripts.Enemy
 
             private Vector3 _randomSpawanLocation;
 
-       
-    
-           
+            float disatnce;
+
+
+
 
             void Start()
             {
@@ -53,6 +54,14 @@ namespace Scripts.Enemy
                 {
                     daimage = 75;
                     _agent.speed = 3.5f;
+                }
+                if (disatnce>follow_distance)
+                {
+                    volume.SetActive(false);
+                }
+                else if(disatnce < follow_distance)
+                {
+                    volume.SetActive(true);
                 }
                 _isVisible = vis.visible;
                 Movement();
@@ -106,7 +115,7 @@ namespace Scripts.Enemy
                 {
                     _agent.enabled = true;
                    
-                        float disatnce = Vector3.Distance(transform.position, _player.transform.position);
+                      disatnce = Vector3.Distance(transform.position, _player.transform.position);
 
                         if (disatnce > follow_distance)
                         {

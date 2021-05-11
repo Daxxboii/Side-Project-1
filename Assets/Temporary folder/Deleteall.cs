@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deleteall : MonoBehaviour
 {
-    // Start is called before the first frame update
+  /*  // Start is called before the first frame update
     void Start()
     {
         PlayerPrefs.DeleteAll();
@@ -14,5 +14,5 @@ public class Deleteall : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }

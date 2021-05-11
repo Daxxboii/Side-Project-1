@@ -93,10 +93,14 @@ namespace Scripts.Timeline
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
             ps.gameObject.SetActive(true);
-            girl.gameObject.SetActive(true);
-            aiFollow.gameObject.SetActive(true);
-            girl.agent.enabled = true;
-            aiFollow.enabled = true;
+            if (Current_cutscene >= 2)
+            {
+                girl.gameObject.SetActive(true);
+                aiFollow.gameObject.SetActive(true);
+                girl.agent.enabled = true;
+                aiFollow.enabled = true;
+            }
+          
 
         }
         public void Translate_Cutscene()
@@ -120,6 +124,7 @@ namespace Scripts.Timeline
                 girl.gameObject.SetActive(false);
                 aiFollow.gameObject.SetActive(false);
             }
+
             director.playableAsset = timeline_assets[Current_cutscene];
            
             Current_cutscene++;
