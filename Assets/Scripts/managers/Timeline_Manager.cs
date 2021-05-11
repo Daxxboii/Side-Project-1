@@ -27,8 +27,8 @@ namespace Scripts.Timeline
         [SerializeField]
 
         GameObject Button;
-        public Scripts.Enemy.Principal.AiFollow aiFollow;
-        public Scripts.Enemy.girlHostile.GirlAiGhost girl;
+        public Enemy.Principal.AiFollow aiFollow;
+        public Enemy.girlHostile.GirlAiGhost girl;
 
 
         public int Current_cutscene;
@@ -50,7 +50,7 @@ namespace Scripts.Timeline
         private Vector3 rotation,cam_rot;
 
         string[] lines, objective_lines;
-        double length ,timer;
+       
         public Material princy;
         private void Start()
         {
@@ -93,6 +93,8 @@ namespace Scripts.Timeline
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
             ps.gameObject.SetActive(true);
+            girl.gameObject.SetActive(true);
+            aiFollow.gameObject.SetActive(true);
             girl.agent.enabled = true;
             aiFollow.enabled = true;
 
@@ -113,9 +115,13 @@ namespace Scripts.Timeline
             //  Debug.Log(Current_cutscene);
             girl.agent.enabled = false;
             aiFollow.enabled = false;
-
+            if (Current_cutscene != 2)
+            {
+                girl.gameObject.SetActive(false);
+                aiFollow.gameObject.SetActive(false);
+            }
             director.playableAsset = timeline_assets[Current_cutscene];
-            length = director.duration;
+           
             Current_cutscene++;
             director.time = 0;
             director.Play();

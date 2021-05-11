@@ -28,7 +28,7 @@ namespace Scripts.Player
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
-
+       
         [SerializeField]
         GirlAiGhost gi;
         [SerializeField] private Camera fpsCam;
@@ -323,5 +323,7 @@ namespace Scripts.Player
             admenu.SetActive(true);
             Time.timeScale = 0;
         }
+
+        
     }
 }

@@ -8,15 +8,54 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     public float volume = 0f;
-    public float senci = 0.0f;
-
+    public float senci = 0.5f;
+    public Toggle fog;
+    public GameObject fogs;
     [SerializeField]
     Slider sensitivity, music;
     public AudioMixer audiom;
-
+    public ParticleSystemRenderer fog_system;
+    private void Start()
+    {
+      if(PlayerPrefsX.GetBool("Saved"))
+        {
+            fog.isOn = PlayerPrefsX.GetBool("Fogs");
+        }
+        else
+        {
+            fog.isOn = true;
+        }
+       
+    }
     public void Awake()
     {
-        sensitivity.minValue = 0.5f;
+        if(fog!= null)
+        {
+            if (fog.isOn)
+            {
+                fogs.SetActive(true);
+            }
+            else
+            {
+                fogs.SetActive(false);
+            }
+        }
+        if (senci != null)
+        {
+            sensitivity.minValue = 0.5f;
+            if (PlayerPrefs.GetFloat("Senci") != 0)
+            {
+                sensitivity.value = PlayerPrefs.GetFloat("Senci");
+            }
+            else
+            {
+                sensitivity.value = senci;
+            }
+            sensitivity.value = senci;
+            PlayerScript.SetSensi(senci);
+            SetSencivity();
+        }
+       
         music.maxValue = 0f;
         music.minValue = -50f;
        if (PlayerPrefs.GetFloat("Volume") != 0)
@@ -27,21 +66,8 @@ public class Settings : MonoBehaviour
         {
             music.value = volume;
         }
-        if (PlayerPrefs.GetFloat("Senci") != 0)
-        {
-            sensitivity.value = PlayerPrefs.GetFloat("Senci");
-        }
-        else
-        {
-            sensitivity.value = senci;
-        }
-
-
-        sensitivity.value = senci;
         audiom.SetFloat("Audio", volume);
-        PlayerScript.SetSensi(senci);
         setaudio();
-        SetSencivity();
     }
 
     public void setaudio()
@@ -58,6 +84,35 @@ public class Settings : MonoBehaviour
         PlayerScript.SetSensi(senci);
         PlayerPrefs.SetFloat("Senci", senci);
     }
-    
-    
+    private void FixedUpdate()
+    {
+        if (fog != null)
+        {
+            if (fog.isOn)
+            {
+                fogs.SetActive(true);
+            }
+            else
+            {
+                fogs.SetActive(false);
+            }
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (fog.isOn)
+        {
+            PlayerPrefsX.SetBool("Fogs", true);
+        }
+        else
+        {
+            PlayerPrefsX.SetBool("Fogs", false);
+        }
+    }
+
+    public void Managefog()
+    {
+        fog_system.enabled = !fog_system.enabled;
+    }
 }
