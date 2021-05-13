@@ -62,7 +62,7 @@ namespace Scripts.Timeline
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
-                aiFollow.daimage = 50f;
+                aiFollow.angry = true;
             }
             else
             {
@@ -93,7 +93,7 @@ namespace Scripts.Timeline
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
             ps.gameObject.SetActive(true);
-            if (Current_cutscene >= 2)
+            if (Current_cutscene > 2)
             {
                 girl.gameObject.SetActive(true);
                 aiFollow.gameObject.SetActive(true);

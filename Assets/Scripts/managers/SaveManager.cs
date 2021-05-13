@@ -6,12 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 
 public class SaveManager : MonoBehaviour
 {
-  
-   
+
+    public CharacterController col;
     public Serializer[] serializers;
     public PlayerScript ps;
     private int index;
@@ -21,7 +22,7 @@ public class SaveManager : MonoBehaviour
     public ComicManager comic = null;
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
-    public Animator Candle;
+   
     public void Start()
     {
       
@@ -39,7 +40,7 @@ public class SaveManager : MonoBehaviour
     public void Loader(int load_index)
     {
         PlayerPrefs.SetInt("loadindex", load_index);
-        PlayerPrefs.Save();
+        PlayerPrefs.Flush();
     }
 
    public  void Save()
@@ -64,8 +65,8 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetFloat("Time",cam.time);
 
         PlayerPrefsX.SetBool("Saved", true);
-        PlayerPrefs.Save();
-        Candle.SetBool("Open", true);
+        PlayerPrefs.Flush();
+       
     }
 
     void check_state()
@@ -126,7 +127,8 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
-          ps.enabled = false;
+             ps.enabled = false;
+            col.enabled = false;
             load_arrays();
             assign();
            
@@ -157,14 +159,15 @@ public class SaveManager : MonoBehaviour
         {
             //Active
             serializers[index].gameObject.SetActive(state[index]);
+           
+            //Location & Rotation
+            serializers[index].gameObject.transform.position = location[index];
+            serializers[index].gameObject.transform.eulerAngles = rotation[index];
             //Collider
             if (serializers[index].gameObject.GetComponent<Collider>() != null)
             {
                 serializers[index].gameObject.GetComponent<Collider>().enabled = collider_state[index];
             }
-            //Location & Rotation
-            serializers[index].gameObject.transform.position = location[index];
-            serializers[index].gameObject.transform.eulerAngles = rotation[index];
             //Rigidbody
             if (serializers[index].gameObject.GetComponent<Rigidbody>() != null)
             {
@@ -177,14 +180,24 @@ public class SaveManager : MonoBehaviour
                     serializers[index].gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
             }
+            if (serializers[index].gameObject.tag == "Player")
+            {
+               // col.gameObject.transform.position = new Vector3(location[index].x, location[index].y, location[index].z);
+                 ps.enabled = true;
+                col.enabled = true;
+            }
 
             index++;
         }
+      
         index = 0;
-        ps.enabled = true;
+      
 
     }
-   
+   public void DeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
 
 }

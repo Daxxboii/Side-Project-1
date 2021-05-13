@@ -8,22 +8,31 @@ public class VisiBility : MonoBehaviour
     [SerializeField]
     Camera cam;
     [SerializeField]
-    LayerMask lm;
-    [SerializeField]
-    GameObject Player;
-    RaycastHit hit;
+    GameObject  principal;
     public float radius;
     public bool visible;
     // Update is called once per frame
     void Update()
     {
-        if (Player.activeInHierarchy == true && Physics.SphereCast(cam.transform.position,radius, cam.transform.forward, out hit, 10f, lm))
+        if (Vector3.Distance(cam.gameObject.transform.position, principal.transform.position) < 15)
         {
-            visible = true;
+            visible = IsTargetVisible(cam, principal);
         }
         else
         {
             visible = false;
         }
+       
+    }
+    bool IsTargetVisible(Camera c, GameObject go)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = go.transform.position;
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) < 0)
+                return false;
+        }
+        return true;
     }
 }

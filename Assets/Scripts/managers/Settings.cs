@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Scripts.Player;
 using UnityEngine.UI;
-
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 public class Settings : MonoBehaviour
 {
     public float volume = 0f;
@@ -17,15 +17,17 @@ public class Settings : MonoBehaviour
     public ParticleSystemRenderer[] fog_system;
     private void Start()
     {
-      if(PlayerPrefsX.GetBool("Saved"))
+        if (fog != null)
         {
+            if (PlayerPrefsX.GetBool("Saved"))
+            {
                 fog.isOn = PlayerPrefsX.GetBool("Fogs");
+            }
+            else
+            {
+                fog.isOn = true;
+            }
         }
-        else
-        {
-            fog.isOn = true;
-        }
-       
     }
     public void Awake()
     {

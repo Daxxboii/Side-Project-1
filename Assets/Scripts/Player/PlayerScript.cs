@@ -38,7 +38,7 @@ namespace Scripts.Player
         
 
         [SerializeField] private Transform cameraTransform, ghost;
-        [SerializeField] private CharacterController characterController;
+        [SerializeField] public CharacterController characterController;
         [SerializeField] private Animator camAnim;
 
         // Player settings

@@ -52,7 +52,7 @@ namespace Scripts.Enemy
             {
                 if (angry)
                 {
-                    daimage = 75;
+                    daimage = 25;
                     _agent.speed = 3.5f;
                 }
                 if (disatnce>follow_distance)
@@ -76,7 +76,11 @@ namespace Scripts.Enemy
                   
                         if (hit)
                         {
-                          Animations(1, 2);
+                        
+                            if (ps.Health - daimage > 0)
+                            {
+                                Animations(1, 2);
+                            }
                            ps.PlayerTakeDamage(daimage);
                             hit = false;
                         }

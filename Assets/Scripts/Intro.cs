@@ -9,7 +9,7 @@ public class Intro : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt("loadindex") != 1)
+        if (PlayerPrefsX.GetBool("Saved") == false )
         {
             player.Play();
             Time.timeScale = 0;

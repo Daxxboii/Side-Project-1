@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using Scripts.Player;
 using UnityEngine.SceneManagement;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 public class AdManager : MonoBehaviour ,IUnityAdsListener
 {
     public GameObject menu;
@@ -10,7 +12,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     string mySurfacingId = "4083073";
     public bool GameMode = true;
     string placement = "Rewarded_Android";
-
+    public PlayerScript ps;
 
     void Start()
     {
@@ -46,7 +48,10 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
         if(showResult == ShowResult.Finished)
         {
             menu.SetActive(false);
+            Time.timeScale = 1;
+            ps.Health = 75;
             save.Save();
+            Debug.Log("sum");
         }
         
         PlayerPrefs.SetInt("loadindex", 1);

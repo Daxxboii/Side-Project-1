@@ -5,7 +5,7 @@ using UnityEngine;
 public class Animations_menu : MonoBehaviour
 {
     [SerializeField]
-    private Animator camera,settings,menu,save_manager;
+    private Animator camera,settings,menu,save_manager,door;
    
    public void _Back()
     {
@@ -19,6 +19,7 @@ public class Animations_menu : MonoBehaviour
     {
         camera.SetInteger("State", 1);
         save_manager.SetBool("Open", true);
+       
     }
 
     public void Settings()
@@ -31,6 +32,7 @@ public class Animations_menu : MonoBehaviour
     public void _Exit()
     {
         camera.SetInteger("State", 3);
+        door.SetBool("Open", true);
     }
     public void _Credits()
     {
@@ -40,6 +42,7 @@ public class Animations_menu : MonoBehaviour
    public void Start_2()
     {
         camera.SetInteger("State", 5);
+        door.SetBool("IsOpen", true);
     }
 
     public void About()
