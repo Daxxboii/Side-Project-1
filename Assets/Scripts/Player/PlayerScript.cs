@@ -81,6 +81,21 @@ namespace Scripts.Player
         // Update is called once per frame
         void Update()
         {
+            if (isCrouching == false)
+            {
+                speed = TempSpeed;
+                if (characterController.height < tempHeight)
+                {
+                    characterController.height += 0.6f;
+                }
+               
+
+            }
+            else
+            {
+                speed = CrouchSpeed;
+                characterController.height = crouchHight;
+            }
             Health_Manager();
             if (Health <= 0)
             {
@@ -229,16 +244,7 @@ namespace Scripts.Player
         public void croutch()
         {
             isCrouching = !isCrouching;
-            if(isCrouching == false)
-            {
-                speed = TempSpeed;
-                characterController.height = tempHeight;
-            }
-            else
-            {
-                speed = CrouchSpeed;
-                characterController.height =crouchHight;
-            }
+          
         }
         public void Crawl()
         {
@@ -252,6 +258,7 @@ namespace Scripts.Player
             {
                 speed = crawlSpeed;
                 characterController.height = crawlheight;
+
             }
         }
         public void Sprint()
@@ -324,6 +331,6 @@ namespace Scripts.Player
             Time.timeScale = 0;
         }
 
-        
+       
     }
 }

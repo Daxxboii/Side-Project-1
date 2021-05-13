@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.299
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031206314, g: 0.0031206314, b: 0.0031206314, a: 0.299}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.299}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8744,6 +8744,11 @@ PrefabInstance:
       propertyPath: ghost
       value: 
       objectReference: {fileID: 1738848795}
+    - target: {fileID: 5235837793348171655, guid: a9cc92c9c522c01418e53f509c7e588c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5235837793348171657, guid: a9cc92c9c522c01418e53f509c7e588c,
         type: 3}
       propertyPath: m_Name
@@ -22289,16 +22294,16 @@ MonoBehaviour:
     - {fileID: 21300000, guid: da2fbb3570c37c94cb17421c53d3e0b2, type: 3}
     - {fileID: 21300000, guid: 7f45fa2b91e0b1746925f7d8c36f64bd, type: 3}
     comic_text:
-    - 
-    - 
+    - He used to play football everyday after school
+    - 'I used to watch him play '
     objective: 0
   - images:
     - {fileID: 21300000, guid: 401a51e6e1ffdc7489012bb05e30a30a, type: 3}
     - {fileID: 21300000, guid: 1b92e6b958f102a4fbc165a4cd99c986, type: 3}
     - {fileID: 21300000, guid: efb755feb9fc576438e76e5e9756ee08, type: 3}
     comic_text:
-    - 
-    - 
+    - We used to eat at the cafeteria
+    - 'I invited him over to watch my play '
     - 
     objective: 1
   - images:
@@ -22306,19 +22311,29 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ef66d42d5ea71ea418ccc538d06dec3b, type: 3}
     - {fileID: 21300000, guid: 3cf48f0a1b9ca73469afe13d9dfa5996, type: 3}
     - {fileID: 21300000, guid: 6ef0a1a6bfb6c5a429a2a41e5b4d7ee9, type: 3}
-    comic_text: []
+    comic_text:
+    - He started following us!!!!!
+    - 'We had to run away from this school '
+    - 
+    - He's...........dead
     objective: 1
   - images:
     - {fileID: 21300000, guid: 49114881d4667584bac6b06b0c6087c0, type: 3}
     - {fileID: 21300000, guid: f91888649d63082478e85739a99d38aa, type: 3}
     - {fileID: 21300000, guid: b24021cd5f4e3ba4faea58a735f37652, type: 3}
-    comic_text: []
+    comic_text:
+    - No one believed me....
+    - i decided to take matters in my own hands
+    - I'll kill him tomorrow
     objective: 1
   - images:
     - {fileID: 21300000, guid: abc84de3dfbc3bb4c9680fb183e764d2, type: 3}
     - {fileID: 21300000, guid: 7a36192e497b36e43a6a5379586b6304, type: 3}
     - {fileID: 21300000, guid: d50de866602113847ae5a5d39b58b219, type: 3}
-    comic_text: []
+    comic_text:
+    - He called me to the court to threaten me
+    - 
+    - We can finally expose him now!!!
     objective: 1
   Panel: {fileID: 1866284721}
   tm: {fileID: 2115900276}
@@ -28387,6 +28402,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 180888620}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &583982484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 583982484, guid: a9cc92c9c522c01418e53f509c7e588c,
+    type: 3}
+  m_PrefabInstance: {fileID: 180888620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &591919549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33661,6 +33682,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 180888620}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &784218096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784218095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1623fb1fab95cc74ba8294df86dbb999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 583982484}
 --- !u!114 &784218098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5800367082617902214, guid: a9cc92c9c522c01418e53f509c7e588c,
@@ -37385,6 +37419,23 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2086667917}
+    - target: {fileID: 1603596783, guid: 649599c20cd3711499c979400ac4782a, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603596783, guid: 649599c20cd3711499c979400ac4782a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 1603596783, guid: 649599c20cd3711499c979400ac4782a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1603596783, guid: 649599c20cd3711499c979400ac4782a, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1682002716, guid: 649599c20cd3711499c979400ac4782a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

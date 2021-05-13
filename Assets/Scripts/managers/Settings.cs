@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     public float volume = 0f;
-    public float senci = 0.5f;
+    public float senci = 5f;
     public Toggle fog;
     public GameObject[] fogs;
     [SerializeField]
@@ -17,12 +17,9 @@ public class Settings : MonoBehaviour
     public ParticleSystemRenderer[] fog_system;
     private void Start()
     {
-      if(PlayerPrefsX.GetBool("Saved")&& PlayerPrefsX.GetBool("Fogs") != null)
+      if(PlayerPrefsX.GetBool("Saved"))
         {
-         
                 fog.isOn = PlayerPrefsX.GetBool("Fogs");
-            
-          
         }
         else
         {
@@ -48,17 +45,7 @@ public class Settings : MonoBehaviour
         if (sensitivity != null)
         {
             sensitivity.minValue = 0.5f;
-            if (PlayerPrefs.GetFloat("Senci") != 0)
-            {
-                sensitivity.value = PlayerPrefs.GetFloat("Senci");
-            }
-            else
-            {
-                sensitivity.value = senci;
-            }
             sensitivity.value = senci;
-            PlayerScript.SetSensi(senci);
-            SetSencivity();
         }
        
         music.maxValue = 0f;
@@ -84,10 +71,8 @@ public class Settings : MonoBehaviour
 
     public void SetSencivity()
     {
-      
-        senci = sensitivity.value;
-        PlayerScript.SetSensi(senci);
-        PlayerPrefs.SetFloat("Senci", senci);
+        PlayerScript.SetSensi(sensitivity.value);
+        PlayerPrefs.SetFloat("Senci", sensitivity.value);
     }
     private void FixedUpdate()
     {

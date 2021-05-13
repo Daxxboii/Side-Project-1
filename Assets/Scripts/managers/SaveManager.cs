@@ -126,11 +126,10 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
-            ps.enabled = false;
-           //Debug.Log("load");
+          ps.enabled = false;
             load_arrays();
             assign();
-            ps.enabled = true;
+           
         }
     }
 
@@ -166,14 +165,6 @@ public class SaveManager : MonoBehaviour
             //Location & Rotation
             serializers[index].gameObject.transform.position = location[index];
             serializers[index].gameObject.transform.eulerAngles = rotation[index];
-            if(serializers[index].gameObject.tag == "Player")
-            {
-                serializers[index].gameObject.GetComponent<PlayerScript>().enabled = false;
-                serializers[index].gameObject.transform.position = location[index];
-                serializers[index].gameObject.transform.eulerAngles = rotation[index];
-                serializers[index].gameObject.GetComponent<PlayerScript>().enabled = true;
-            }
-
             //Rigidbody
             if (serializers[index].gameObject.GetComponent<Rigidbody>() != null)
             {
@@ -190,7 +181,7 @@ public class SaveManager : MonoBehaviour
             index++;
         }
         index = 0;
-       
+        ps.enabled = true;
 
     }
    
