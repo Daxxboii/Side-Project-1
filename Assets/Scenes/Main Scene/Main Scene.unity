@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.299
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.299}
+  m_IndirectSpecularColor: {r: 0.0031206314, g: 0.0031206314, b: 0.0031206314, a: 0.299}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -2761,7 +2761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -3633,7 +3632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -6642,7 +6640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -7477,7 +7474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -7969,7 +7965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -10193,7 +10188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -13064,22 +13058,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 2.2e-44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.66e-43
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.1607306e-13
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 6.43e-43
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -13410,17 +13404,17 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: NaN
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 8e-44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -17188,7 +17182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -18597,7 +18590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -18835,7 +18827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -21799,7 +21790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -26677,22 +26667,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.69e-43
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.08e-43
+      value: 3.2667054e+21
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 346997.84
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 3.293612e-19
+      value: 2.63332e-40
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -30278,7 +30268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -30312,7 +30301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -32844,7 +32832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -34044,7 +34031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -34705,12 +34691,12 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -1.4983833e+21
+      value: 6.83391e-40
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.53e-43
+      value: 1.74e-43
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -38984,7 +38970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -40007,7 +39992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -40328,17 +40312,17 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.948573e-19
+      value: 0.00012923137
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -2.6178294e+30
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.9596e-41
+      value: 1.4513e-40
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -41330,7 +41314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -43552,7 +43535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -44390,7 +44372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -44785,22 +44766,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.1297539e-14
+      value: -2.6904256e-36
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.66e-43
+      value: 6.9e-43
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 8.106779e-12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.66e-43
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -46717,7 +46698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -46965,7 +46945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -47553,7 +47532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -48994,22 +48972,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 6.1254e-41
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1.98e-43
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -50184,7 +50162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -50203,22 +50180,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 2.0309489e+27
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: NaN
+      value: 1.7952988e+25
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 8e-44
+      value: 2.6759e-41
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -51197,7 +51174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -51446,7 +51422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -51983,7 +51958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -52163,7 +52137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -53067,7 +53040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -53204,7 +53176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -56152,7 +56123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -57635,7 +57605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -57677,7 +57646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -58685,7 +58653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -58817,7 +58784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -59145,7 +59111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -60563,7 +60528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -60961,7 +60925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -60980,22 +60943,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.7452e-40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 7e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.598333e+22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 2.337e-42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -63928,7 +63891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -64458,7 +64420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -64966,7 +64927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -65351,17 +65311,17 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -2.9538946e-37
+      value: -2.9235924e-37
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1.3889494e+18
+      value: 182328670
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.7768e-41
+      value: 7.4235e-41
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -66102,7 +66062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -68143,22 +68102,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -2.9235924e-37
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 182328670
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 7.4235e-41
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5905e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -68475,6 +68434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abfed9d830ab6a4b800bcdc90d687ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sm: {fileID: 1762723489}
   col: {fileID: 180888621}
   serializers:
   - {fileID: 1314014233}
@@ -68651,15 +68611,14 @@ MonoBehaviour:
   - {fileID: 1109942015}
   - {fileID: 2032382079}
   ps: {fileID: 1910751499}
-  id: []
+  comic: {fileID: 459706981}
+  tm: {fileID: 2115900276}
+  cam: {fileID: 1145904393}
   state: 
   collider_state: 
   rigidbodies: 
   location: []
   rotation: []
-  comic: {fileID: 459706981}
-  tm: {fileID: 2115900276}
-  cam: {fileID: 1145904393}
 --- !u!1 &1763033897
 GameObject:
   m_ObjectHideFlags: 0
@@ -76750,7 +76709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -78829,7 +78787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -79005,7 +78962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -79036,22 +78992,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -628.1572
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 2200479.8
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.54378e-40
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5905e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -79367,7 +79323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -80829,22 +80784,22 @@ PrefabInstance:
     - target: {fileID: 5016775832036463830, guid: 9237f03aa63ffb543b7a1ef5322ccfea,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: -1.493987e-19
       objectReference: {fileID: 0}
     - target: {fileID: 5016775832036463830, guid: 9237f03aa63ffb543b7a1ef5322ccfea,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 2.374214e+27
       objectReference: {fileID: 0}
     - target: {fileID: 5016775832036463830, guid: 9237f03aa63ffb543b7a1ef5322ccfea,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1e-45
+      value: 3.5784e-41
       objectReference: {fileID: 0}
     - target: {fileID: 5016775832036463830, guid: 9237f03aa63ffb543b7a1ef5322ccfea,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 6591213382285206017, guid: 9237f03aa63ffb543b7a1ef5322ccfea,
         type: 3}
@@ -80927,7 +80882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -80949,7 +80903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -81157,7 +81110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -81912,7 +81864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -82469,7 +82420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -83767,7 +83717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -84560,7 +84509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -86198,7 +86146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -86811,22 +86758,22 @@ PrefabInstance:
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -1.493987e-19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 2.374214e+27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 3.5985e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 828184951151335516, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5905e-41
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 933640051391042642, guid: 54d7db43b11a2e5448d2ac6f0b5f0893,
         type: 3}
@@ -88487,7 +88434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0
@@ -89997,7 +89943,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c41f63612a9344a9a8a987207db5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   loc: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0}
   collider_state: 0

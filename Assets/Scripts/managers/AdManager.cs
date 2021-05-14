@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using Scripts.Player;
 using UnityEngine.SceneManagement;
-using PlayerPrefs = PreviewLabs.PlayerPrefs;
+
 public class AdManager : MonoBehaviour ,IUnityAdsListener
 {
     public GameObject menu;

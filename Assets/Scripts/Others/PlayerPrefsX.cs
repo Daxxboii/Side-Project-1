@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using PlayerPrefs = PreviewLabs.PlayerPrefs;
+
 public class PlayerPrefsX
 {
 	static private int endianDiff1;

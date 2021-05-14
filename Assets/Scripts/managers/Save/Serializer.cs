@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class Serializer : MonoBehaviour
 {
-    [HideInInspector]
-    public string name;
-    private int i;
     public Vector3 loc, rot;
     public bool collider_state;
    
-   public void Assign_id()
-    {
-        name = "#" +gameObject.name+(i++).ToString();
-       
-    }
+   
     public void Assign_transforms()
     {
         loc = transform.position;
@@ -45,14 +38,8 @@ public class Serializer : MonoBehaviour
     {
         if ( gameObject.GetComponent<Rigidbody>() != null)
         {
-            if(gameObject.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.None)
-            {
-                return false;
-            }
-            else
-            {
                 return true;
-            }
+            
         }
         else
         {

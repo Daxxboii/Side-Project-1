@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Scripts.Player;
 using UnityEngine.UI;
-using PlayerPrefs = PreviewLabs.PlayerPrefs;
+
 public class Settings : MonoBehaviour
 {
     public float volume = 0f;
