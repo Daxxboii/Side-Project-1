@@ -265,11 +265,10 @@ public class SaveManager : MonoBehaviour
     Vector3[] VectorToFloat(float[]f,Vector3[] v)
     {
         var counter = 0;
-        foreach(float q in f)
-        {
-           
-
-        }
+       for ( int i = 0; i < v.Length; i += 3)
+		{
+			]
+		}
     }
 
 }
