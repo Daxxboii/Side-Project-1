@@ -117,7 +117,11 @@ namespace Scripts.Timeline
         {
 
             //  Debug.Log(Current_cutscene);
-            girl.agent.enabled = false;
+            if (Current_cutscene == 2)
+            {
+                girl.agent.enabled = false;
+            }
+           
             aiFollow.enabled = false;
             if (Current_cutscene != 2)
             {

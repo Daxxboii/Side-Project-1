@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1291238146}
-  m_IndirectSpecularColor: {r: 0.010436894, g: 0.010436894, b: 0.010436894, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2192,13 +2192,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abfed9d830ab6a4b800bcdc90d687ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sm: {fileID: 405070365}
+  test_text: {fileID: 0}
+  save_panel: {fileID: 0}
   col: {fileID: 0}
   serializers: []
   ps: {fileID: 0}
   comic: {fileID: 0}
   tm: {fileID: 0}
   cam: {fileID: 0}
+  sm:
+    Current_cutscene: 0
+    Subtitle_index: 0
+    Objective_index: 0
+    Comic_index: 0
+    Health: 0
+    Time: 0
+    state: 
+    collider_state: 
+    rigidbodies: 
+    location: []
+    rotation: []
+    saved: 0
   state: 
   collider_state: 
   rigidbodies: 
@@ -8081,7 +8095,7 @@ PrefabInstance:
       objectReference: {fileID: 1735377116}
     - target: {fileID: 1044680667, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1044680667, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -34,6 +34,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     public void OnUnityAdsDidError(string message)
     {
         PlayerPrefs.SetInt("loadindex", 0);
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
        
     }
@@ -48,12 +49,10 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
         if(showResult == ShowResult.Finished)
         {
             menu.SetActive(false);
-            Time.timeScale = 1;
             ps.Health = 75;
             save.Save();
-            Debug.Log("sum");
         }
-        
+        Time.timeScale = 1;
         PlayerPrefs.SetInt("loadindex", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       

@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using TMPro;
 
 
 public class SaveManager : MonoBehaviour
 {
     //referenced
-    public SavePrefab sm;
+    public TextMeshProUGUI test_text;
+    public GameObject save_panel = null;
     public CharacterController col;
     public Serializer[] serializers;
     public PlayerScript ps;
@@ -21,24 +23,28 @@ public class SaveManager : MonoBehaviour
     public Camcorder cam = null;
 
     //temp
-    int[] _state,_collider_state,_rigidbodies;
+    int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
-    
+    [SerializeField]
+    SavePrefab sm;
+
     //local
     private int index, Current_cutscene, Subtitle_index, Objective_index, Comic_index;
-    private float Health,Time;
-    public bool[] state,collider_state,rigidbodies;
-    public Vector3[] location,rotation;
+    private float Health, Time;
+    public List<bool> state, collider_state, rigidbodies = new List<bool>();
+    public List<Vector3> location, rotation =  new List<Vector3>();
     string savepath;
     private bool saved;
 
+   
 
     public void Start()
     {
+      //  Debug.Log(PlayerPrefsX.GetBool("Saved"));
         savepath = Application.persistentDataPath + "/TheChallenge.doxx";
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
-            if (saved)
+            if (PlayerPrefsX.GetBool("Saved"))
             {
                 Load();
             }
@@ -55,11 +61,18 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
+        save_panel.SetActive(true);
+
+        _state = new int[serializers.Length];
+         _collider_state = new int[serializers.Length];
+        _rigidbodies = new int[serializers.Length];
+        _location = new float[(serializers.Length*3)+3];
+        _rotation = new float[(serializers.Length * 3)]; 
         check_state();
         Save_transforms();
         Save_colliders();
         Save_rigidbodies();
-       
+        PlayerPrefsX.SetBool("Saved", true);
        sm. saved = true;
        sm.Current_cutscene = tm.Current_cutscene;
        sm. Subtitle_index = tm.index;
@@ -67,7 +80,11 @@ public class SaveManager : MonoBehaviour
        sm.Comic_index = comic.comic_index;
        sm.Health = ps.Health;
        sm.Time = cam.time;
-
+        _location = VectorToFloat(location, _location);
+        _collider_state = BoolToInt(collider_state, _collider_state);
+        _state = BoolToInt(state, _state);
+        _rotation = VectorToFloat(rotation, _rotation);
+        _rigidbodies = BoolToInt(rigidbodies, _rigidbodies);
 
         sm.state = _state;
         sm.collider_state = _collider_state;
@@ -75,72 +92,68 @@ public class SaveManager : MonoBehaviour
         sm.location = _location;
         sm.rotation = _rotation;
        _Save();
+       
+
     }
 
     void check_state()
     {
-        state = new bool[serializers.Length];
+      state = new List<bool>(); 
         foreach (Serializer i in serializers)
         {
-            if (serializers[index].gameObject.activeSelf)
+
+            if (i.gameObject.activeSelf)
             {
-                state[index] = true;
+                state.Add(true);
             }
             else
             {
-                state[index] = false;
+                state.Add(false);
             }
-          index++;
         }
-        index = 0;
-      _state = BoolToInt(state, _state);
+      
+     
 
     }
     void Save_transforms()
     {
-        location = new Vector3[serializers.Length];
-        rotation = new Vector3[serializers.Length];
+      
+        location=  new List<Vector3>();
+        rotation = new List<Vector3>();
         foreach (Serializer i in serializers)
         {
-            serializers[index].Assign_transforms();
-            location[index] = serializers[index].loc;
-            rotation[index] = serializers[index].rot;
-            index++;
+            i.Assign_transforms();
+            location.Add(i.loc);
+            rotation.Add(i.rot);
         }
-        index = 0;
-        _location = VectorToFloat(location, _location);
-        _rotation = VectorToFloat(rotation, _rotation);
     }
 
     void Save_colliders()
     {
-        collider_state = new bool[serializers.Length];
+        collider_state = new List<bool>();
         foreach (Serializer i in serializers)
         {
-            serializers[index].collider();
-            collider_state[index] = serializers[index].collider_state;
-            index++;
+           i.collider();
+            collider_state.Add(i.collider_state);
         }
-        index = 0;
-        _collider_state = BoolToInt(collider_state, _collider_state);
+       
+       
     }
 
     void Save_rigidbodies()
     {
-        rigidbodies = new bool[serializers.Length];
+        rigidbodies = new List<bool>();
         foreach (Serializer i in serializers)
         {
-            rigidbodies[index] = serializers[index].Rigidbody_Exists();
+            rigidbodies.Add(i.Rigidbody_Exists());
             index++;
         }
-        index = 0;
-        _rigidbodies = BoolToInt(rigidbodies, _rigidbodies);
     }
     public void Load()
     {
-       
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
+           
             _Load();
             ps.enabled = false;
             col.enabled = false;
@@ -153,16 +166,25 @@ public class SaveManager : MonoBehaviour
     void load_arrays()
     {
     //  id = PlayerPrefsX.GetStringArray("id");
-      state =  sm.state;
-      collider_state = sm.collider_state;
-      location = sm.location;
-      rotation =  sm.rotation;
+      _state =  sm.state;
+     _collider_state = sm.collider_state;
+      _location = sm.location;
+      _rotation =  sm.rotation;
     
-        rigidbodies =  sm.rigidbodies;
+        _rigidbodies =  sm.rigidbodies;
       tm.Current_cutscene =  sm.Current_cutscene;
         comic.comic_index = sm.Comic_index;
         ps.Health = sm.Health;
-     
+
+        state = IntToBool(state,_state);
+        collider_state = IntToBool(collider_state, _collider_state);
+        rigidbodies = IntToBool(rigidbodies, _rigidbodies);
+       
+        location = FloatToVector(_location, location);
+        rotation = FloatToVector(_rotation, rotation);
+    
+
+      
       
         cam.time = sm.Time;
        tm.index =  sm.Subtitle_index;
@@ -171,25 +193,27 @@ public class SaveManager : MonoBehaviour
 
     void assign()
     {
+        index = 0;
+       
         foreach(Serializer i in serializers)
         {
             //Active
-            serializers[index].gameObject.SetActive(state[index]);
+           i.gameObject.SetActive(state[index]);
            
             //Location & Rotation
-            serializers[index].gameObject.transform.position = location[index];
-            serializers[index].gameObject.transform.eulerAngles = rotation[index];
+           i.gameObject.transform.position = location[index];
+           i.gameObject.transform.eulerAngles = rotation[index];
             //Collider
-            if (serializers[index].gameObject.GetComponent<Collider>() != null)
+            if (i.gameObject.GetComponent<Collider>() != null)
             {
-                serializers[index].gameObject.GetComponent<Collider>().enabled = collider_state[index];
+                i.gameObject.GetComponent<Collider>().enabled = collider_state[index];
             }
             //Rigidbody
-            if (serializers[index].gameObject.GetComponent<Rigidbody>() != null)
+            if (i.gameObject.GetComponent<Rigidbody>() != null)
             {
-                    serializers[index].gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                   i.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }
-            if (serializers[index].gameObject.tag == "Player")
+            if (i.gameObject.tag == "Player")
             {
                // col.gameObject.transform.position = new Vector3(location[index].x, location[index].y, location[index].z);
                  ps.enabled = true;
@@ -215,11 +239,14 @@ public class SaveManager : MonoBehaviour
         {
             formatter.Serialize(stream, sm);
         }
-        Debug.Log("saved");
+     
+        save_panel.SetActive(false);
+        test_text.text = "Saved";
     }
 
     void _Load()
     {
+        
         if (File.Exists(savepath))
         {
             var formatter = new BinaryFormatter();
@@ -231,25 +258,32 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    float[] VectorToFloat(Vector3[] v ,float[] f)
+    float[] VectorToFloat(List<Vector3> v ,float[] f)
     {
-        var counter = -1;
-        foreach(Vector3 q in v){
-            f[counter++] = q.x;
-            f[counter++] = q.y;
-            f[counter++] = q.z;
+       int counter = -1;
+        Vector3[] temp = v.ToArray();
+
+        //Debug.Log(temp.Length);
+        foreach(Vector3 q in temp)
+        {
+          //  Debug.Log(counter);
+            f[counter+1] = q.x;
+            f[counter+2] = q.y;
+            f[counter+3] = q.z;
+            counter+=3;
         }
-       
+        counter = -1;
 
         return f;
     }
 
-    int[] BoolToInt(bool[] b, int[] i)
+    int[] BoolToInt(List<bool> b, int[] i)
     {
-        var counter = 0;
+      
+        int counter = 0;
         foreach(bool q in b)
         {
-            if (q)
+            if (q == true)
             {
                 i[counter] = 1;
             }
@@ -257,18 +291,40 @@ public class SaveManager : MonoBehaviour
             {
                 i[counter] = 0;
             }
-            counter++;
+            counter+=1;
         }
         return i;
     }
 
-    Vector3[] VectorToFloat(float[]f,Vector3[] v)
+   List<Vector3> FloatToVector(float[]f,List<Vector3> v)
     {
-        var counter = 0;
-       for ( int i = 0; i < v.Length; i += 3)
+       
+        v = new List<Vector3>();
+       int countr = -1;
+       for ( int i = 0; i < serializers.Length; i ++)
 		{
-			]
-		}
+         
+            v.Add(new Vector3(f[countr+1], f[countr + 2], f[countr + 3]));
+            countr += 3;
+        }
+        return v;
     }
 
+   List<bool> IntToBool(List<bool> b , int[] i)
+    {
+        b = new List<bool>();
+        foreach(int q in i)
+        {
+            if (q == 0)
+            {
+                b.Add(false);
+            }
+            else
+            {
+                b.Add(true);
+            }
+          
+        }
+        return b;
+    }
 }

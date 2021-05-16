@@ -9,13 +9,16 @@ public class Intro : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefsX.GetBool("Saved") == false )
-        {
-            player.Play();
-            Time.timeScale = 0;
-        }
+        
+            if (PlayerPrefsX.GetBool("Saved") == false || !PlayerPrefs.HasKey("Saved"))
+            {
+                Debug.Log("Neenu");
+                player.Play();
+                Time.timeScale = 0;
+            }
+        
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (player.isPlaying)
         {

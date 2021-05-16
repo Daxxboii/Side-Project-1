@@ -17,7 +17,7 @@ public class Settings : MonoBehaviour
     public ParticleSystemRenderer[] fog_system;
     private void Start()
     {
-        if (fog != null)
+       if (fog != null)
         {
             if (PlayerPrefsX.GetBool("Saved"))
             {
@@ -93,7 +93,7 @@ public class Settings : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+   private void OnApplicationQuit()
     {
         if (fog.isOn)
         {

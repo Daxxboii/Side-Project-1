@@ -119,10 +119,7 @@ namespace Scripts.Buttons
                     map.SetActive(false);
                     comment.text = "";
                 }
-                else
-                {
-                    comment.text = "";
-                }
+                
 
             }
             else
