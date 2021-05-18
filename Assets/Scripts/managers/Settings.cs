@@ -95,13 +95,16 @@ public class Settings : MonoBehaviour
 
    private void OnApplicationQuit()
     {
-        if (fog.isOn)
+        if (fog != null)
         {
-            PlayerPrefsX.SetBool("Fogs", true);
-        }
-        else
-        {
-            PlayerPrefsX.SetBool("Fogs", false);
+            if (fog.isOn)
+            {
+                PlayerPrefsX.SetBool("Fogs", true);
+            }
+            else
+            {
+                PlayerPrefsX.SetBool("Fogs", false);
+            }
         }
     }
 

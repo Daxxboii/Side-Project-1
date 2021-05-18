@@ -12,9 +12,9 @@ namespace Scripts.Enemy
             public bool angry;
             [Header("Variable depending on player")]
             [SerializeField]
-             public bool _isVisible;
+            public bool _isVisible;
             [SerializeField]
-            public float daimage,follow_distance;
+            public float daimage, follow_distance;
             [SerializeField]
             private GameObject _player;
             [SerializeField]
@@ -23,13 +23,13 @@ namespace Scripts.Enemy
             Animator anim;
             [Header("Variable depending on NavMesh and agent")]
             [SerializeField, Tooltip("set threshold of how big area to sample to check if player is on nav mesh or not.")]
-            private float _agentThreshHold;
+            private float _agentThreshHold, roam_timer;
             [SerializeField, Tooltip("Radius of Random.insideUnitSpher")]
             private float _radius;
             private NavMeshAgent _agent;
             public GameObject volume;
 
-            private bool isAgentOnNavMesh;
+
             private Vector3 newPos;
             VisiBility vis;
             bool hit = true;
@@ -55,11 +55,11 @@ namespace Scripts.Enemy
                     daimage = 25;
                     _agent.speed = 3.5f;
                 }
-                if (disatnce>follow_distance)
+                if (disatnce > follow_distance)
                 {
                     volume.SetActive(false);
                 }
-                else if(disatnce < follow_distance)
+                else if (disatnce < follow_distance)
                 {
                     volume.SetActive(true);
                 }
@@ -73,15 +73,15 @@ namespace Scripts.Enemy
                 {
                     if (inAttackRange() < 2f)
                     {
-                  
+
                         if (hit)
                         {
-                        
+
                             if (ps.Health - daimage > 0)
                             {
                                 Animations(1, 2);
                             }
-                           ps.PlayerTakeDamage(daimage);
+                            ps.PlayerTakeDamage(daimage);
                             hit = false;
                         }
                         else
@@ -98,7 +98,7 @@ namespace Scripts.Enemy
                     {
                         Animations(2, 2);
                     }
-                    
+
                 }
             }
             float inAttackRange()
@@ -107,49 +107,42 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
+
                 if (_isVisible == true && !angry)
                 {
-                  _agent.enabled = false;
-                  Animations(0, 0);
+                    _agent.enabled = false;
+                    Animations(0, 0);
                 }
-
-
-
-                if (_isVisible == false || angry)
+                else if (_isVisible == false)
                 {
+
                     _agent.enabled = true;
-                   
-                      disatnce = Vector3.Distance(transform.position, _player.transform.position);
 
-                        if (disatnce > follow_distance)
-                        {
-                        Debug.Log("not chasing");
-                            newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
-                            isAgentOnNavMesh = IsAgentOnNavMesh(newPos);
-                            if (isAgentOnNavMesh == true)
-                            {
-                            _agent.SetDestination(newPos);
-                            Animations(0, 1);
-                            }
-                            else
-                            {
-                                newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
-                            }
-                        }
-                    else
+                    disatnce = Vector3.Distance(transform.position, _player.transform.position);
+
+                    if (disatnce > follow_distance)
                     {
-
-                        _agent.SetDestination(_player.transform.position);
-                        Animations(0, 2);
-
+                        roam_timer += Time.deltaTime;
+                        if (roam_timer >= 10)
+                        {
+                            newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
+                            Animations(0, 1);
+                            _agent.SetDestination(newPos);
+                            Debug.Log(newPos);
+                            roam_timer = 0;
+                        }
                     }
-
                 }
 
+                else
+                {
+                    Animations(0, 2);
+                    _agent.SetDestination(_player.transform.position);
+                }
             }
-        
-            
-         
+
+
+
 
             Vector3 GetRandomPointNearPlayer(Vector3 origin, float dist, int layermask)
             {
@@ -164,32 +157,22 @@ namespace Scripts.Enemy
 
             }
 
-            private bool IsAgentOnNavMesh(Vector3 agentPos)
-            {
 
-                NavMeshHit hit;
 
-                //check for nearest point in navmesh to agent, within thrwshold
-                if (NavMesh.SamplePosition(agentPos, out hit, _agentThreshHold, NavMesh.AllAreas))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-
-            private void Animations(int hit_state , int walk_state)
+            private void Animations(int hit_state, int walk_state)
             {
                 anim.SetInteger("Walk_state", walk_state);
                 anim.SetInteger("Hit_state", hit_state);
             }
+
             IEnumerator cooldown()
             {
                 yield return new WaitForSeconds(cool_period);
                 hit = true;
             }
 
-         
+
+
         }
     }
 }

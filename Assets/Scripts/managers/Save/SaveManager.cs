@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 using Scripts.Timeline;
 using Scripts.Player;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using TMPro;
-
+using System.Collections;
 
 public class SaveManager : MonoBehaviour
 {
     //referenced
-    public TextMeshProUGUI test_text;
+  
     public GameObject save_panel = null;
     public CharacterController col;
     public Serializer[] serializers;
@@ -29,13 +26,12 @@ public class SaveManager : MonoBehaviour
     SavePrefab sm;
 
     //local
-    private int index, Current_cutscene, Subtitle_index, Objective_index, Comic_index;
-    private float Health, Time;
+    private int index;
+  
     public List<bool> state, collider_state, rigidbodies = new List<bool>();
     public List<Vector3> location, rotation =  new List<Vector3>();
     string savepath;
-    private bool saved;
-
+   
    
 
     public void Start()
@@ -62,46 +58,61 @@ public class SaveManager : MonoBehaviour
    public  void Save()
     {
         save_panel.SetActive(true);
-
+        StartCoroutine("Loading");
         _state = new int[serializers.Length];
          _collider_state = new int[serializers.Length];
         _rigidbodies = new int[serializers.Length];
         _location = new float[(serializers.Length*3)+3];
-        _rotation = new float[(serializers.Length * 3)]; 
+        _rotation = new float[(serializers.Length * 3)];
+       
         check_state();
+       
         Save_transforms();
+       
         Save_colliders();
+       
         Save_rigidbodies();
+      
         PlayerPrefsX.SetBool("Saved", true);
-       sm. saved = true;
-       sm.Current_cutscene = tm.Current_cutscene;
+       
+        sm. saved = true;
+       
+        sm.Current_cutscene = tm.Current_cutscene;
        sm. Subtitle_index = tm.index;
        sm. Objective_index = tm.objective_index;
        sm.Comic_index = comic.comic_index;
        sm.Health = ps.Health;
        sm.Time = cam.time;
+     
         _location = VectorToFloat(location, _location);
+      
         _collider_state = BoolToInt(collider_state, _collider_state);
         _state = BoolToInt(state, _state);
+      
         _rotation = VectorToFloat(rotation, _rotation);
         _rigidbodies = BoolToInt(rigidbodies, _rigidbodies);
-
+     
         sm.state = _state;
         sm.collider_state = _collider_state;
         sm.rigidbodies = _rigidbodies;
         sm.location = _location;
         sm.rotation = _rotation;
-       _Save();
-       
+     
+        _Save();
+     
+     
 
     }
 
     void check_state()
     {
-      state = new List<bool>(); 
+       
+        state = new List<bool>();
+        int p=100;
+      
         foreach (Serializer i in serializers)
         {
-
+            p++;
             if (i.gameObject.activeSelf)
             {
                 state.Add(true);
@@ -110,6 +121,7 @@ public class SaveManager : MonoBehaviour
             {
                 state.Add(false);
             }
+        
         }
       
      
@@ -133,7 +145,7 @@ public class SaveManager : MonoBehaviour
         collider_state = new List<bool>();
         foreach (Serializer i in serializers)
         {
-           i.collider();
+           i._collider();
             collider_state.Add(i.collider_state);
         }
        
@@ -188,7 +200,7 @@ public class SaveManager : MonoBehaviour
       
         cam.time = sm.Time;
        tm.index =  sm.Subtitle_index;
-        tm.objective_index = sm.Objective_index;
+        tm.objective_index = sm.Objective_index-1;
     }
 
     void assign()
@@ -239,9 +251,10 @@ public class SaveManager : MonoBehaviour
         {
             formatter.Serialize(stream, sm);
         }
-     
-        save_panel.SetActive(false);
-        test_text.text = "Saved";
+       
+       
+        PlayerPrefs.Save();
+
     }
 
     void _Load()
@@ -254,7 +267,7 @@ public class SaveManager : MonoBehaviour
             {
                 sm = (SavePrefab)formatter.Deserialize(stream);
             }
-            Debug.Log("Loaded");
+           
         }
     }
 
@@ -326,5 +339,11 @@ public class SaveManager : MonoBehaviour
           
         }
         return b;
+    }
+
+    IEnumerator Loading()
+    {
+        yield return new WaitForSeconds(3);
+        save_panel.SetActive(false);
     }
 }

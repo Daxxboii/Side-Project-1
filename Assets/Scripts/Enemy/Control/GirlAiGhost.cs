@@ -47,69 +47,72 @@ namespace Scripts.Enemy
             }
             private void Update()
             {
-                
-                if (!angry)
+                if (agent.enabled)
                 {
-                    //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
-                    //    Debug.Log(agent.destination);
-                    if (!cooldown)
+                    if (!angry)
                     {
+                        //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+                        //    Debug.Log(agent.destination);
+                        if (!cooldown)
+                        {
 
-                        if (isinFrontOFMe(player))
-                        {
-                            chasing = true;
-                            //  Debug.Log("chaising");
-                            agent.SetDestination(player.transform.position);
-                            Animations(2, 0);
-                            Attack();
-                        }
-                        else if (!isinFrontOFMe(player))
-                        {
-                            if (chasing)
+                            if (isinFrontOFMe(player))
                             {
-                                volume.SetActive(true);
+                                chasing = true;
+                                //  Debug.Log("chaising");
                                 agent.SetDestination(player.transform.position);
-                                a += Time.deltaTime;
-                                if (a >= 5f)
-                                {
-                                    chasing = false;
-                                    a = 0.0f;
-                                }
+                                Animations(2, 0);
+                                Attack();
                             }
-                            else if (!chasing)
+                            else if (!isinFrontOFMe(player))
                             {
-                                volume.SetActive(false);
-                                if (Vector3.Distance(transform.position, newPos) < 0.5)
+                                if (chasing)
                                 {
-                                    Animations(-1, 0);
+                                    volume.SetActive(true);
+                                    agent.SetDestination(player.transform.position);
+                                    a += Time.deltaTime;
+                                    if (a >= 5f)
+                                    {
+                                        chasing = false;
+                                        a = 0.0f;
+                                    }
                                 }
-                                else
+                                else if (!chasing)
                                 {
-                                    Animations(1, 0);
-                                }
-                                agent.SetDestination(newPos);
+                                    volume.SetActive(false);
+                                    if (Vector3.Distance(transform.position, newPos) < 0.5)
+                                    {
+                                        Animations(-1, 0);
+                                    }
+                                    else
+                                    {
+                                        Animations(1, 0);
+                                    }
+                                    agent.SetDestination(newPos);
 
-                                timer += Time.deltaTime;
-                                if (timer >= wanderTimer)
-                                {
-                                    newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-                                    timer = 0;
-                                }
+                                    timer += Time.deltaTime;
+                                    if (timer >= wanderTimer)
+                                    {
+                                        newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+                                        timer = 0;
+                                    }
 
+                                }
                             }
                         }
                     }
-                }
-                if (angry)
-                {
-                    agent.SetDestination(player.transform.position);
-                    if (agent.isStopped)
+                    if (angry)
                     {
-                        Animations(-1, 0);
-                    }
-                    else
-                    {
-                        Animations(1, 0);
+                        agent.SetDestination(player.transform.position);
+                        agent.stoppingDistance = 5;
+                        if (agent.isStopped)
+                        {
+                            Animations(0, 0);
+                        }
+                        else
+                        {
+                            Animations(1, 0);
+                        }
                     }
                 }
             }
@@ -176,8 +179,8 @@ namespace Scripts.Enemy
                             agent.isStopped = true;
                             ps.PlayerTakeDamage(damage);
                             hit = false;
-                          //  newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-
+                            Animations(-1, 0);
+                        
                             Invoke("ReActivate", Cooldown_period);
                         }
 

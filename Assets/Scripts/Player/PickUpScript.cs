@@ -37,7 +37,8 @@ namespace Scripts.Player
                     if (p.PickedUpObject != null)
                     {
                         oc.bring(p.PickedUpObject);
-                       Destroy(p.PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        p.PickedUpObject = null;
                        
                     }
                 }

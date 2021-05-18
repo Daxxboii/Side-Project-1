@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 40;
     }
     public void credits()
     {

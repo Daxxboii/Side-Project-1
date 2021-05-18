@@ -2,34 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 public class Intro : MonoBehaviour
 {
     public VideoPlayer player;
-    public GameObject canvas;
-
+    public LoadLevel load;
+    bool pinged = true;
     private void Start()
     {
-        
             if (PlayerPrefsX.GetBool("Saved") == false || !PlayerPrefs.HasKey("Saved"))
             {
-                Debug.Log("Neenu");
                 player.Play();
-                Time.timeScale = 0;
             }
-        
     }
     private void LateUpdate()
     {
-        if (player.isPlaying)
+        if (!player.isPlaying)
         {
-            canvas.SetActive(false);
+            if (pinged)
+            {
+                load.loadLevel(1);
+            }
+            pinged = false;
+           
         }
-        else
-        {
-            canvas.SetActive(true);
-            Time.timeScale = 1;
-            gameObject.SetActive(false);
-            
-        }
+      
     }
 }

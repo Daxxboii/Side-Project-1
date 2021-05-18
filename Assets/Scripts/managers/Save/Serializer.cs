@@ -14,7 +14,7 @@ public class Serializer : MonoBehaviour
         rot = transform.rotation.eulerAngles;
     }
 
-    public void collider()
+    public void _collider()
     {
         if (gameObject.GetComponent<Collider>()!=null)
         {

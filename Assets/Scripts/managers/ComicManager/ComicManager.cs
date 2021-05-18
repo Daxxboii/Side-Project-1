@@ -1,8 +1,6 @@
 ﻿ using System.Collections;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Scripts.Player;
 using UnityEngine.UI;
 using TMPro;
 using Scripts.Timeline;
@@ -28,7 +26,8 @@ public class ComicManager : MonoBehaviour
     private Timeline_Manager tm;
     [SerializeField]
     private TextMeshProUGUI subs;
-
+    [SerializeField]
+    private GameObject exit;
   //  [HideInInspector]
     public int comic_index, page_index = 0;
 
@@ -46,7 +45,7 @@ public class ComicManager : MonoBehaviour
         {
             tm.ObjectiveList();
         }
-
+        exit.SetActive(false);
     }
     public void Comic_Close()
     {
@@ -67,6 +66,10 @@ public class ComicManager : MonoBehaviour
             Panel.sprite = comics[comic_index].images[page_index];
             subs.text = comics[comic_index].comic_text[page_index];
         }
+        else
+        {
+            exit.SetActive(true);
+        }
     //    Debug.Log(page_index);
     }
     public void Previous()
@@ -75,6 +78,9 @@ public class ComicManager : MonoBehaviour
         {
             page_index--;
         }
+       
+            exit.SetActive(false);
+        
         Panel.sprite = comics[comic_index].images[page_index];
         subs.text = comics[comic_index].comic_text[page_index];
     }
