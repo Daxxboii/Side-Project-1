@@ -42,11 +42,11 @@ namespace Scripts.Player
                        
                     }
                 }
-                else if(hit.collider.tag == "Doll")
+                if(hit.collider.tag == "Doll")
                 {
                     hit.transform.gameObject.SetActive(false);
                 }
-                else if (hit.collider.tag == "Comic")
+               if (hit.collider.tag == "Comic")
                 {
                     hit.transform.gameObject.SetActive(false);
                 }

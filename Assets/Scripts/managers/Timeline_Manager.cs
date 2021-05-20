@@ -40,6 +40,8 @@ namespace Scripts.Timeline
 
         [SerializeField]
         private GameObject player,player_cam;
+
+        public GameObject[] guides;
         [SerializeField]
         private GameObject cutscene_player,cutscene_cam;
 
@@ -68,7 +70,7 @@ namespace Scripts.Timeline
             {
                 princy.SetColor("_BaseColor", Color.black);
             }
-
+           // Translate_Cutscene();
         }
 
         private void FixedUpdate()
@@ -105,12 +107,16 @@ namespace Scripts.Timeline
         }
         public void Translate_Cutscene()
         {
-            position = player.transform.position;
-            rotation = player.transform.rotation.eulerAngles;
-            position.y += y_offset;
+           if (Current_cutscene != 0)
+            {
+                position = guides[Current_cutscene-2].transform.position;
+                rotation = guides[Current_cutscene-2].transform.rotation.eulerAngles;
 
-            cutscene_player.transform.position = position;
-            cutscene_player.transform.eulerAngles = rotation;
+
+                cutscene_player.transform.position = position;
+                cutscene_player.transform.eulerAngles = rotation;
+            }
+          
         }
 
         public void TimeLine_Activator()
@@ -132,7 +138,7 @@ namespace Scripts.Timeline
 
             director.playableAsset = timeline_assets[Current_cutscene];
            
-            Current_cutscene++;
+           
             director.time = 0;
             director.Play();
             if (oc.had != null)
@@ -150,7 +156,7 @@ namespace Scripts.Timeline
             {
                 princy.SetColor("_BaseColor", Color.black);
             }
-
+            Current_cutscene++;
         }
       public  void ReadFile()
         {

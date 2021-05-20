@@ -93,7 +93,7 @@ public class ComicManager : MonoBehaviour
       
         Panel.sprite = comics[comic_index].images[page_index];
         subs.text = comics[comic_index].comic_text[page_index];
-        Time.timeScale = 0f;
+        Time.timeScale = 0.01f;
        
     }
 }

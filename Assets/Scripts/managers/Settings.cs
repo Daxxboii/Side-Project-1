@@ -80,7 +80,7 @@ public class Settings : MonoBehaviour
     {
         if (fog != null)
         {
-            if (fog.isOn)
+            if (fog.isOn )
             {
                 fogs[0].SetActive(true);
                 fogs[1].SetActive(true);
@@ -90,6 +90,8 @@ public class Settings : MonoBehaviour
                 fogs[0].SetActive(false);
                 fogs[1].SetActive(false);
             }
+
+            
         }
     }
 
@@ -105,6 +107,7 @@ public class Settings : MonoBehaviour
             {
                 PlayerPrefsX.SetBool("Fogs", false);
             }
+           
         }
     }
 

@@ -105,7 +105,7 @@ namespace Scripts.Enemy
                     {
                         agent.SetDestination(player.transform.position);
                         agent.stoppingDistance = 5;
-                        if (agent.isStopped)
+                        if (agent.isStopped || Vector3.Distance(player.transform.position,transform.position)<5f)
                         {
                             Animations(0, 0);
                         }
