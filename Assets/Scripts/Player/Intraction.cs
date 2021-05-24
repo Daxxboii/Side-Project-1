@@ -37,6 +37,7 @@ namespace Scripts.Player
         RaycastHit hit;
         [SerializeField]
         TextMeshProUGUI error_comment;
+        public GameObject Ring_Box;
         private void Start()
         {
             Note_panel.SetActive(false);
@@ -56,7 +57,7 @@ namespace Scripts.Player
                 {
                     ed = hit.transform.GetComponent<escape_door>();
                     error_comment.text = "";
-                    if (tm.Current_cutscene == 11)
+                    if (tm.Current_cutscene == 12)
                     {
                         ed.active = true;
                         if (oc.had != null)
@@ -92,7 +93,7 @@ namespace Scripts.Player
                     minimap.SetActive(true);
                     map_anim.SetBool("Open", true);
                     tm.ObjectiveList();
-          
+                    Ring_Box.SetActive(true);
                 }
 
                

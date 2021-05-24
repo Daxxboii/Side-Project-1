@@ -17,7 +17,7 @@ public class ComicManager : MonoBehaviour
 
     [SerializeField]
     Animator load;
-
+    public GameObject player;
     [SerializeField]
     private Comic[] comics;
     [SerializeField]
@@ -30,22 +30,29 @@ public class ComicManager : MonoBehaviour
     private GameObject exit;
   //  [HideInInspector]
     public int comic_index, page_index = 0;
-
+    RaycastHit hit;
+    public LayerMask layer;
     private void Start()
     {
         Panel.sprite = comics[comic_index].images[page_index];
     }
     public void Comic_Open()
     {
-        load.gameObject.SetActive(true);
-        load.SetBool("Open", true);
-        StopCoroutine(Load());
-        StartCoroutine(Load());
-        if (comics[comic_index].objective)
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 6, layer))
         {
-            tm.ObjectiveList();
+            if (hit.transform.gameObject.tag == "Comic" || !player.activeInHierarchy )
+            {
+                load.gameObject.SetActive(true);
+                load.SetBool("Open", true);
+                StopCoroutine(Load());
+                StartCoroutine(Load());
+                if (comics[comic_index].objective)
+                {
+                    tm.ObjectiveList();
+                }
+                exit.SetActive(false);
+            }
         }
-        exit.SetActive(false);
     }
     public void Comic_Close()
     {

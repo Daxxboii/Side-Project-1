@@ -128,17 +128,17 @@ namespace Scripts.Enemy
                             newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
                             Animations(0, 1);
                             _agent.SetDestination(newPos);
-                            Debug.Log(newPos);
                             roam_timer = 0;
                         }
                     }
+                    else
+                    {
+                        Animations(0, 2);
+                        _agent.SetDestination(_player.transform.position);
+                    }
                 }
 
-                else
-                {
-                    Animations(0, 2);
-                    _agent.SetDestination(_player.transform.position);
-                }
+               
             }
 
 

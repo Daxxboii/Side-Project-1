@@ -114,7 +114,7 @@ namespace Scripts.Player
 
                 if (rightFingerId != -1)
                 {
-                    Debug.Log("Rotating");
+                 //   Debug.Log("Rotating");
                     LookAround();
                 }
                 LocoMotion();
@@ -156,13 +156,13 @@ namespace Scripts.Player
                         {
                             // Stop tracking the left finger
                             leftFingerId = -1;
-                            Debug.Log("Stopped tracking left finger");
+                          //  Debug.Log("Stopped tracking left finger");
                         }
                         else if (t.fingerId == rightFingerId)
                         {
                             // Stop tracking the right finger
                             rightFingerId = -1;
-                            Debug.Log("Stopped tracking right finger");
+                         //   Debug.Log("Stopped tracking right finger");
                         }
 
                         break;

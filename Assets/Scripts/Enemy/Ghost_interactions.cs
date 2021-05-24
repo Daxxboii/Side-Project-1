@@ -7,7 +7,7 @@ public class Ghost_interactions : MonoBehaviour
     public LayerMask Intractable;
     public float range;
     RaycastHit hit;
-    private Animator anim;
+    private Animator anim = null;
  
 
     void Update()
@@ -16,6 +16,7 @@ public class Ghost_interactions : MonoBehaviour
         {
             if (hit.collider.tag == "Door")
             {
+                anim = hit.transform.GetComponentInParent<Animator>();
                 InteractWithDoor();
             }
         }

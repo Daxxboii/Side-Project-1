@@ -57,6 +57,8 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
+
+        Debug.Log("saved");
         save_panel.SetActive(true);
         StartCoroutine("Loading");
         _state = new int[serializers.Length];

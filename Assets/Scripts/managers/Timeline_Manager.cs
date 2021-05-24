@@ -175,7 +175,7 @@ namespace Scripts.Timeline
         {
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
-            Debug.Log("objective");
+         //   Debug.Log("objective");
 
         }
     }
