@@ -36,12 +36,20 @@ public class ComicManager : MonoBehaviour
     {
         Panel.sprite = comics[comic_index].images[page_index];
     }
-    public void Comic_Open()
+
+    public void _preOpen()
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 6, layer))
         {
-            if (hit.transform.gameObject.tag == "Comic" || !player.activeInHierarchy )
+            if (hit.transform.gameObject.tag == "Comic" )
             {
+                Comic_Open();
+                hit.transform.gameObject.SetActive(false);
+            }
+        }
+    }
+    public void Comic_Open()
+    {
                 load.gameObject.SetActive(true);
                 load.SetBool("Open", true);
                 StopCoroutine(Load());
@@ -51,8 +59,7 @@ public class ComicManager : MonoBehaviour
                     tm.ObjectiveList();
                 }
                 exit.SetActive(false);
-            }
-        }
+        
     }
     public void Comic_Close()
     {

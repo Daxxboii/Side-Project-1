@@ -15,8 +15,7 @@ namespace Scripts.Player
     {
         //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
         private static float sensi = 10;
-        public static event Action<bool> OnPlayerHiding;
-        public static event Action<bool> OnPlayerIdle;
+      
 
         [SerializeField]
         Sprite crouch,stand;

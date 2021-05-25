@@ -46,10 +46,7 @@ namespace Scripts.Player
                 {
                     hit.transform.gameObject.SetActive(false);
                 }
-               if (hit.collider.tag == "Comic")
-                {
-                    hit.transform.gameObject.SetActive(false);
-                }
+               
 
 
             }

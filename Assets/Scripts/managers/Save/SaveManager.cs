@@ -10,8 +10,8 @@ using System.Collections;
 public class SaveManager : MonoBehaviour
 {
     //referenced
-  
-    public GameObject save_panel = null;
+  [SerializeField]
+    private GameObject save_panel;
     public CharacterController col;
     public Serializer[] serializers;
     public PlayerScript ps;
@@ -36,7 +36,8 @@ public class SaveManager : MonoBehaviour
 
     public void Start()
     {
-      //  Debug.Log(PlayerPrefsX.GetBool("Saved"));
+        
+        //  Debug.Log(PlayerPrefsX.GetBool("Saved"));
         savepath = Application.persistentDataPath + "/TheChallenge.doxx";
         if ( SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -57,9 +58,10 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
-
         Debug.Log("saved");
-        save_panel.SetActive(true);
+       save_panel.SetActive(true);
+        
+      
         StartCoroutine("Loading");
         _state = new int[serializers.Length];
          _collider_state = new int[serializers.Length];
@@ -346,6 +348,9 @@ public class SaveManager : MonoBehaviour
     IEnumerator Loading()
     {
         yield return new WaitForSeconds(3);
-        save_panel.SetActive(false);
+       
+            save_panel.SetActive(false);
+        
+       
     }
 }
