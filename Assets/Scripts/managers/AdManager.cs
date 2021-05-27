@@ -9,7 +9,6 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 {
     [SerializeField]
     private GameObject menu;
-    private SaveManager save;
     string mySurfacingId = "4083073";
     public bool GameMode = true;
     string placement = "Rewarded_Android";
@@ -34,9 +33,9 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidError(string message)
     {
-     /*   PlayerPrefs.SetInt("loadindex", 0);
+     PlayerPrefs.SetInt("loadindex", 0);
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);*/
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
        
     }
 
@@ -47,24 +46,8 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        
-        if(showResult == ShowResult.Finished)
-        {
-            Time.timeScale = 1;
-            if(menu != null)
-            {
-                menu.SetActive(false);
-            }
-            save = GameObject.FindWithTag("SaveManager").GetComponent<SaveManager>(); 
-            ps.Health = 75;
-            save.Save();
-        }
         Time.timeScale = 1;
-        Debug.Log("AD");
         PlayerPrefs.SetInt("loadindex", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      
-      
-      
     }
 }

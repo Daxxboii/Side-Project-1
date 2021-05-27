@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Rendering;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         Application.targetFrameRate = 40;
+        OnDemandRendering.renderFrameInterval = 2;
     }
     public void credits()
     {
@@ -132,5 +133,10 @@ public class GameManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         mode_menu.SetActive(true);
+    }
+
+    public void Load_Credits()
+    {
+        SceneManager.LoadScene(3);
     }
 }

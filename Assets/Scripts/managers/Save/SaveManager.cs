@@ -11,7 +11,7 @@ public class SaveManager : MonoBehaviour
 {
     //referenced
   [SerializeField]
-    private GameObject save_panel;
+    private GameObject save_panel,fps_canvas;
     public CharacterController col;
     public Serializer[] serializers;
     public PlayerScript ps;
@@ -19,6 +19,7 @@ public class SaveManager : MonoBehaviour
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
     public ObjectController oc;
+    public Animator map_cam;
     //temp
     int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
@@ -61,7 +62,7 @@ public class SaveManager : MonoBehaviour
     {
         
        save_panel.SetActive(true);
-        
+        fps_canvas.SetActive(false);
       
         StartCoroutine("Loading");
         _state = new int[serializers.Length];
@@ -191,6 +192,7 @@ public class SaveManager : MonoBehaviour
             temp = new GameObject();
             oc.had = temp;
         }
+        map_cam.SetBool("Open", true);
     //  id = PlayerPrefsX.GetStringArray("id");
       _state =  sm.state;
      _collider_state = sm.collider_state;
@@ -360,7 +362,8 @@ public class SaveManager : MonoBehaviour
         yield return new WaitForSeconds(3);
        
             save_panel.SetActive(false);
-        
-       
+        fps_canvas.SetActive(true);
+
+
     }
 }

@@ -105,6 +105,10 @@ namespace Scripts.Buttons
                 {
                     comment.text = "Going there wont be a good idea";
                 }
+                if (hit.transform.CompareTag("Blackboard"))
+                {
+                    comment.text = "Find something to write with";
+                }
                 if (hit.transform.CompareTag("Untagged"))
                 {
                     Intract.SetActive(false);
