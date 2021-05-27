@@ -42,6 +42,21 @@ namespace Scripts.Player
                        
                     }
                 }
+                if (hit.collider.tag == "Fingie")
+                {
+                    p.PickedUpObject = hit.collider.gameObject;
+                    hit.collider.gameObject.SetActive(false);
+                    hit.collider.enabled = false;
+                    tm.ObjectiveList();
+                    if (p.PickedUpObject != null)
+                    {
+                        oc.bring(p.PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        p.PickedUpObject = null;
+
+                    }
+                  
+                }
                 if(hit.collider.tag == "Doll")
                 {
                     hit.transform.gameObject.SetActive(false);

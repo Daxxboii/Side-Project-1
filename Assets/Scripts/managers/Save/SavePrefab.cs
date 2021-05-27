@@ -8,5 +8,5 @@ public class SavePrefab
     public float Health, Time;
     public int[] state, collider_state, rigidbodies;
     public float[] location, rotation;
-    public bool saved;
+    public bool saved,had;
 }

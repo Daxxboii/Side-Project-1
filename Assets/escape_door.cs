@@ -31,7 +31,7 @@ public class escape_door : MonoBehaviour
             if (!read)
             {
                 note.SetActive(true);
-                read = false;
+                read = true;
                 PlayerPrefsX.SetBool("Read", read);
             }
             anim.SetInteger("State", 1);

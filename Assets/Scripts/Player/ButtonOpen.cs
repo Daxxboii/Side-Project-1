@@ -72,7 +72,7 @@ namespace Scripts.Buttons
                     Unhide.SetActive(false);
 
                 }
-                if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll"))
+                if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll")|| hit.transform.CompareTag("Fingie"))
                 {
                     Pickup.SetActive(true);
                     

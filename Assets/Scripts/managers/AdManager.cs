@@ -9,7 +9,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 {
     [SerializeField]
     private GameObject menu;
-    public SaveManager save;
+    private SaveManager save;
     string mySurfacingId = "4083073";
     public bool GameMode = true;
     string placement = "Rewarded_Android";

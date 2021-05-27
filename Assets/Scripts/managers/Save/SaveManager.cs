@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
-
+using Scripts.Objects;
 public class SaveManager : MonoBehaviour
 {
     //referenced
@@ -18,12 +18,13 @@ public class SaveManager : MonoBehaviour
     public ComicManager comic = null;
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
-
+    public ObjectController oc;
     //temp
     int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
     [SerializeField]
     SavePrefab sm;
+    GameObject temp;
 
     //local
     private int index;
@@ -58,7 +59,7 @@ public class SaveManager : MonoBehaviour
 
    public  void Save()
     {
-        Debug.Log("saved");
+        
        save_panel.SetActive(true);
         
       
@@ -112,11 +113,19 @@ public class SaveManager : MonoBehaviour
     {
        
         state = new List<bool>();
-        int p=100;
+       if(oc.had != null)
+        {
+            sm.had = true;
+            oc.had.SetActive(false);
+        }
+        else
+        {
+            sm.had = false;
+        }
       
         foreach (Serializer i in serializers)
         {
-            p++;
+
             if (i.gameObject.activeSelf)
             {
                 state.Add(true);
@@ -152,8 +161,6 @@ public class SaveManager : MonoBehaviour
            i._collider();
             collider_state.Add(i.collider_state);
         }
-       
-       
     }
 
     void Save_rigidbodies()
@@ -169,18 +176,21 @@ public class SaveManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("loadindex") == 1)
         {
-           
             _Load();
             ps.enabled = false;
             col.enabled = false;
             load_arrays();
             assign();
-           
         }
     }
 
     void load_arrays()
     {
+        if(sm.had == true)
+        {
+            temp = new GameObject();
+            oc.had = temp;
+        }
     //  id = PlayerPrefsX.GetStringArray("id");
       _state =  sm.state;
      _collider_state = sm.collider_state;
