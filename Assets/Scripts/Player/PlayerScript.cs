@@ -58,6 +58,11 @@ namespace Scripts.Player
         private Vector2 moveTouchStartPosition;
         private Vector2 moveInput;
 
+        // Audio 
+        public AudioClip footsteps;
+
+
+
         // Start is called before the first frame update
         void Start()
         {

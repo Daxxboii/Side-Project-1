@@ -13,13 +13,16 @@ public class RainStableizer : MonoBehaviour
     RainScript RS;
     void FixedUpdate()
     {
-        Timerstert += Time.deltaTime;
-        if(Timerstert >= MaxTime)
+        if (!FogActivator.inside)
         {
-            //thunder.Play();
-            RS.RainIntensity = Random.Range(0.1f, 1f);
-            Timerstert = 0.0f;
+            Timerstert += Time.deltaTime;
+            if (Timerstert >= MaxTime)
+            {
+                //thunder.Play();
+                RS.RainIntensity = Random.Range(0.1f, 1f);
+                Timerstert = 0.0f;
 
+            }
         }
     }
 }
