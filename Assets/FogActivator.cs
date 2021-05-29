@@ -5,7 +5,7 @@ using DigitalRuby.RainMaker;
 public class FogActivator : MonoBehaviour
 {
     public RainScript rain;
-    public static bool inside = false;
+    public static bool inside;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -13,10 +13,18 @@ public class FogActivator : MonoBehaviour
             inside = !inside;
             if (inside)
             {
-                rain.RainIntensity = 0.05f;
+                rain.RainIntensity = 0.0f;
             }
           
         }
        
+    }
+
+    private void FixedUpdate()
+    {
+        if (inside)
+        {
+            rain.RainIntensity = 0.0f;
+        }
     }
 }
