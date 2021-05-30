@@ -45,6 +45,12 @@ namespace Scripts.Enemy
                 agent.destination = player.transform.position;
                 cooldown = false;
             }
+
+            private void OnEnable()
+            {
+                agent.destination = player.transform.position;
+                cooldown = false;
+            }
             private void Update()
             {
                 if (agent.enabled)

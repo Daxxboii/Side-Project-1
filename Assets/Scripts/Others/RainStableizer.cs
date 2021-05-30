@@ -11,6 +11,14 @@ public class RainStableizer : MonoBehaviour
     private float Timerstert, MaxTime;
     [SerializeField]
     RainScript RS;
+
+    private void Start()
+    {
+        if (!PlayerPrefsX.GetBool("Saved"))
+        {
+            FogActivator.inside = false;
+        }
+    }
     void FixedUpdate()
     {
         if (!FogActivator.inside)

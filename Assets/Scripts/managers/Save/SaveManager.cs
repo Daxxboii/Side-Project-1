@@ -367,4 +367,9 @@ public class SaveManager : MonoBehaviour
 
 
     }
+
+    public void New()
+    {
+        PlayerPrefsX.SetBool("Saved", false);
+    }
 }

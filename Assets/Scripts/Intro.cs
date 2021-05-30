@@ -8,7 +8,7 @@ public class Intro : MonoBehaviour
     public VideoPlayer player;
     public LoadLevel load;
     bool pinged = true;
-    private void Start()
+    private void Awake()
     {
             if (PlayerPrefsX.GetBool("Saved") == false || !PlayerPrefs.HasKey("Saved"))
             {

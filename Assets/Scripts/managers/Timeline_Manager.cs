@@ -12,6 +12,7 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
+       
         public PlayerScript ps;
        private string text,_text;
         [SerializeField]
