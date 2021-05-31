@@ -60,6 +60,7 @@ namespace Scripts.Player
                 if(hit.collider.tag == "Doll")
                 {
                     hit.transform.gameObject.SetActive(false);
+                    tm.ObjectiveList();
                 }
                
 

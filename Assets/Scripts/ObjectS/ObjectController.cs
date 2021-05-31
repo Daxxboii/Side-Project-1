@@ -26,9 +26,9 @@ namespace Scripts.Objects
             had.transform.SetParent(this.transform);
             had.transform.localPosition = Vector3.zero;
             pickup.transform.localRotation = Quaternion.identity;
-            rb = had.GetComponent<Rigidbody>();
+          /*  rb = had.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezeAll;
-            rb.useGravity = false;
+            rb.useGravity = false;*/
             isHolding = true;
             have = null;
         }
