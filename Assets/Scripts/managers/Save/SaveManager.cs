@@ -194,6 +194,7 @@ public class SaveManager : MonoBehaviour
         }
         map_cam.SetBool("Open", true);
         FogActivator.inside = true;
+      
     //  id = PlayerPrefsX.GetStringArray("id");
       _state =  sm.state;
      _collider_state = sm.collider_state;
