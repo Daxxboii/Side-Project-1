@@ -15,8 +15,7 @@ namespace Scripts.Player
     {
         //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
         private static float sensi = 10;
-      
-
+       
         [SerializeField]
         Sprite crouch,stand;
         public GameObject admenu;
@@ -59,7 +58,8 @@ namespace Scripts.Player
         private Vector2 moveInput;
 
         // Audio 
-        public AudioClip footsteps;
+        public AudioManager AudioM;
+
 
 
 
@@ -213,13 +213,15 @@ namespace Scripts.Player
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
 
-            if (joystick.Direction.x > 0 || joystick.Direction.y > 0)
+            if (joystick.Direction.x != 0 || joystick.Direction.y != 0)
             {
                 camAnim.SetBool("IsMoving", true);
+                AudioM.Player_walk_on_dirt();
             }
             else
             {
                 camAnim.SetBool("IsMoving", false);
+                AudioM.Player_stop();
             }
 
             move = x * transform.right + z * transform.forward;

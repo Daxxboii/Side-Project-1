@@ -22,7 +22,7 @@ public class Settings : MonoBehaviour
             sensitivity.value = senci;
         }
 
-        music.maxValue = 0f;
+        music.maxValue = 20f;
         music.minValue = -50f;
         if (PlayerPrefs.GetFloat("Volume") != 0)
         {

@@ -38,6 +38,7 @@ namespace Scripts.Player
         [SerializeField]
         TextMeshProUGUI error_comment;
         public GameObject Ring_Box;
+        public AudioManager audio;
         private void Start()
         {
             Note_panel.SetActive(false);
@@ -104,6 +105,15 @@ namespace Scripts.Player
         {
             if (it.anim.GetBool("IsOpen") == false)
             {
+               if(it.anim.runtimeAnimatorController.name == "Door_unwrapped")
+                {
+                    audio.Gate_Open();
+                }
+                else
+                {
+                    audio.Gate_Locked();
+                }
+              
                 it.anim.SetBool("IsOpen", true);
                 StartCoroutine(closeDoor());
             }
