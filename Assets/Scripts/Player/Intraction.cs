@@ -50,7 +50,7 @@ namespace Scripts.Player
             if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
             {
                 it.anim = hit.transform.GetComponentInParent<Animator>();
-                if (hit.collider.tag == "Door")
+                if (hit.collider.tag == "Door" || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
                 {
                     IntractWithDoor();
                 }
@@ -88,7 +88,7 @@ namespace Scripts.Player
                         tm.ObjectiveList();
                     }
                 }
-               else if(hit.collider.tag == "Map")
+                else if(hit.collider.tag == "Map")
                 {
                     map.SetActive(false);
                     minimap.SetActive(true);
@@ -96,9 +96,6 @@ namespace Scripts.Player
                     tm.ObjectiveList();
                     Ring_Box.SetActive(true);
                 }
-
-               
-
             }
         }
       void IntractWithDoor()

@@ -49,7 +49,7 @@ namespace Scripts.Buttons
 
             if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
             {
-                if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door"))
+                if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker")|| hit.transform.CompareTag("Door_fence"))
                 {
                     Intract.SetActive(true);
 

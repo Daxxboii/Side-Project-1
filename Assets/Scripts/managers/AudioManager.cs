@@ -13,7 +13,7 @@ public  class AudioManager : MonoBehaviour
     [Header("Clips")]
     public  AudioClip Walk_on_dirt;
     public AudioClip Button;
-    public AudioClip Door_open, Door_locked;
+    public AudioClip Door_open, Door_locked,Door_locker_open,Door_fence_open;
 
 
     [Header("Snapshots")]
@@ -68,5 +68,15 @@ public  class AudioManager : MonoBehaviour
     {
         Interactables.clip = Door_locked;
         Interactables.Play();
+    }
+
+    public void Gate_Fence_Open()
+    {
+
+    }
+
+    public void Gate_locker_Open()
+    {
+
     }
 }
