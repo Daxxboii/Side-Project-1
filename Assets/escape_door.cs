@@ -10,15 +10,15 @@ public class escape_door : MonoBehaviour
     public bool active,over;
     public GameObject note;
     Animator anim;
-    bool read;
+    public bool read;
   
     private void Awake()
     {
        active =  PlayerPrefsX.GetBool("Active");
         over = PlayerPrefsX.GetBool("Bool");
-        read = PlayerPrefsX.GetBool("Read");
+        read = false;
         anim = gameObject.GetComponent<Animator>();
-        Activations();
+       // Activations();
     }
 
    
@@ -32,7 +32,6 @@ public class escape_door : MonoBehaviour
             {
                 note.SetActive(true);
                 read = true;
-                PlayerPrefsX.SetBool("Read", read);
             }
             anim.SetInteger("State", 1);
             foreach (GameObject i in objects)
