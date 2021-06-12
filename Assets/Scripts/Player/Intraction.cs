@@ -13,6 +13,8 @@ namespace Scripts.Player
         [SerializeField]
         Animator map_anim;
         [SerializeField]
+        GameObject minimap_button;
+        [SerializeField]
         ObjectController oc;
         [SerializeField]
         private TextMeshProUGUI note_text;
@@ -92,6 +94,7 @@ namespace Scripts.Player
                 {
                     map.SetActive(false);
                     minimap.SetActive(true);
+                    minimap_button.SetActive(true);
                     map_anim.SetBool("Open", true);
                     tm.ObjectiveList();
                     Ring_Box.SetActive(true);

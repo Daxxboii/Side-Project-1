@@ -20,6 +20,7 @@ public class SaveManager : MonoBehaviour
     public Camcorder cam = null;
     public ObjectController oc;
     public Animator map_cam;
+    public GameObject minimap_button;
     //temp
     int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
@@ -38,7 +39,7 @@ public class SaveManager : MonoBehaviour
 
     public void Start()
     {
-        
+       
         //  Debug.Log(PlayerPrefsX.GetBool("Saved"));
         savepath = Application.persistentDataPath + "/TheChallenge.doxx";
         if ( SceneManager.GetActiveScene().buildIndex == 1)
@@ -51,6 +52,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+  
    
     public void Loader(int load_index)
     {
@@ -193,6 +195,7 @@ public class SaveManager : MonoBehaviour
             oc.had = temp;
         }
         map_cam.SetBool("Open", true);
+        minimap_button.SetActive(true);
         FogActivator.inside = true;
       
     //  id = PlayerPrefsX.GetStringArray("id");

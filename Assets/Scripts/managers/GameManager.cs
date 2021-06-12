@@ -2,11 +2,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
     [SerializeField] int delay;
     private bool over;
+    [Header("Map")]
+    public GameObject map,map_cam,mini_cam;
+    public GameObject Map_button;
+
    
     private void Awake()
     {
@@ -138,5 +143,25 @@ public class GameManager : MonoBehaviour
     public void Load_Credits()
     {
         SceneManager.LoadScene(3);
+    }
+
+    public void Open_map()
+    {
+        FpsCanvas.SetActive(false);
+        map_cam.SetActive(true);
+        map.SetActive(true);
+        Map_button.SetActive(false);
+        mini_cam.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void Close_map()
+    {
+        Time.timeScale = 1;
+        FpsCanvas.SetActive(true);
+        map.SetActive(false);
+        map_cam.SetActive(false);
+        mini_cam.SetActive(true);
+        Map_button.SetActive(true);
     }
 }

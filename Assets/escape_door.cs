@@ -14,11 +14,12 @@ public class escape_door : MonoBehaviour
   
     private void Awake()
     {
+        //false if unsaved
        active =  PlayerPrefsX.GetBool("Active");
         over = PlayerPrefsX.GetBool("Bool");
         read = false;
         anim = gameObject.GetComponent<Animator>();
-       // Activations();
+        Activations();
     }
 
    
@@ -40,8 +41,8 @@ public class escape_door : MonoBehaviour
             }
              
         }
-      //even finger collected
-      else if(active && over){
+    
+        else if(active && over){
             anim.SetInteger("State", 2);
         }
 
