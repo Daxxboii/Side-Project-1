@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int delay;
     private bool over;
     [Header("Map")]
-    public GameObject map,map_cam,mini_cam;
+    public GameObject map,map_cam;
     public GameObject Map_button;
 
    
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         map_cam.SetActive(true);
         map.SetActive(true);
         Map_button.SetActive(false);
-        mini_cam.SetActive(false);
+      
         Time.timeScale = 0;
     }
 
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         FpsCanvas.SetActive(true);
         map.SetActive(false);
         map_cam.SetActive(false);
-        mini_cam.SetActive(true);
+       
         Map_button.SetActive(true);
     }
 }

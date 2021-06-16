@@ -53,7 +53,7 @@ namespace Scripts.Enemy
                 if (angry)
                 {
                     daimage = 25;
-                    _agent.speed = 3.5f;
+                    _agent.speed = 3.3f;
                 }
                 if (disatnce > follow_distance)
                 {
@@ -107,35 +107,41 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
-
-                if (_isVisible == true && !angry)
+                if (hit)
                 {
-                    _agent.enabled = false;
-                    Animations(0, 0);
-                }
-                else if (_isVisible == false)
-                {
-
-                    _agent.enabled = true;
-
-                    disatnce = Vector3.Distance(transform.position, _player.transform.position);
-
-                    if (disatnce > follow_distance)
+                    if (_isVisible == true && !angry)
                     {
-                        roam_timer += Time.deltaTime;
-                        if (roam_timer >= 10)
+                        _agent.enabled = false;
+                        Animations(0, 0);
+                    }
+                    else if (_isVisible == false)
+                    {
+
+                        _agent.enabled = true;
+
+                        disatnce = Vector3.Distance(transform.position, _player.transform.position);
+
+                        if (disatnce > follow_distance)
                         {
-                            newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
-                            Animations(0, 1);
-                            _agent.SetDestination(newPos);
-                            roam_timer = 0;
+                            roam_timer += Time.deltaTime;
+                            if (roam_timer >= 10)
+                            {
+                                newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
+                                Animations(0, 1);
+                                _agent.SetDestination(newPos);
+                                roam_timer = 0;
+                            }
+                        }
+                        else
+                        {
+                            Animations(0, 2);
+                            _agent.SetDestination(_player.transform.position);
                         }
                     }
-                    else
-                    {
-                        Animations(0, 2);
-                        _agent.SetDestination(_player.transform.position);
-                    }
+                }
+                else
+                {
+                    Animations(0, 0);
                 }
 
                

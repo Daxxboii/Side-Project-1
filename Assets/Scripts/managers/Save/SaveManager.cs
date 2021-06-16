@@ -19,7 +19,6 @@ public class SaveManager : MonoBehaviour
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
     public ObjectController oc;
-    public Animator map_cam;
     public GameObject minimap_button;
     //temp
     int[] _state, _collider_state, _rigidbodies;
@@ -194,7 +193,7 @@ public class SaveManager : MonoBehaviour
             temp = new GameObject();
             oc.had = temp;
         }
-        map_cam.SetBool("Open", true);
+      
         minimap_button.SetActive(true);
         FogActivator.inside = true;
       

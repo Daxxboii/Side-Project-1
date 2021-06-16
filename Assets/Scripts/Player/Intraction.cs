@@ -10,8 +10,7 @@ namespace Scripts.Player
 {
     public class Intraction : MonoBehaviour
     {
-        [SerializeField]
-        Animator map_anim;
+      
         [SerializeField]
         GameObject minimap_button;
         [SerializeField]
@@ -27,7 +26,7 @@ namespace Scripts.Player
         [SerializeField]
         Timeline_Manager tm;
         [SerializeField]
-        GameObject Note_panel,map,minimap,fps_canvas;
+        GameObject Note_panel,map,fps_canvas;
         [Serializable]
         private struct IntractionSettings
         {
@@ -93,9 +92,8 @@ namespace Scripts.Player
                 else if(hit.collider.tag == "Map")
                 {
                     map.SetActive(false);
-                    minimap.SetActive(true);
                     minimap_button.SetActive(true);
-                    map_anim.SetBool("Open", true);
+                  
                     tm.ObjectiveList();
                     Ring_Box.SetActive(true);
                 }
