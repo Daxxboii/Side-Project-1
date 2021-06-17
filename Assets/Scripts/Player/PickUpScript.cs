@@ -45,7 +45,7 @@ namespace Scripts.Player
                 if (hit.collider.tag == "Fingie")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
-                    hit.collider.gameObject.SetActive(false);
+                  
                     hit.collider.enabled = false;
                     tm.ObjectiveList();
                     if (p.PickedUpObject != null)
@@ -55,7 +55,7 @@ namespace Scripts.Player
                         p.PickedUpObject = null;
 
                     }
-                  
+                    hit.collider.gameObject.SetActive(false);
                 }
                 if(hit.collider.tag == "Doll")
                 {

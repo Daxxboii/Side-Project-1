@@ -50,6 +50,7 @@ namespace Scripts.Enemy
             {
                 agent.destination = player.transform.position;
                 cooldown = false;
+                Animations(0, 0);
             }
             private void Update()
             {

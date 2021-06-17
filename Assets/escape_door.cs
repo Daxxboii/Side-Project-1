@@ -7,7 +7,7 @@ public class escape_door : MonoBehaviour
     [SerializeField]
     Timeline_Manager tm;
     public GameObject[] objects;
-    public bool active,over;
+    public  bool active,over;
     public GameObject note;
     Animator anim;
     public static bool read =false;

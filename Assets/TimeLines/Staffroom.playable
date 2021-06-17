@@ -115,6 +115,23 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-8806432346070377822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 93b1b5032debd5249a46dbcb604ae4c1, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &-8731205935740141723
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1952,23 +1969,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 7047177089912820840}
---- !u!114 &5102700716101665675
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 126af21b078deb74d809e8388e5fc35c, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
 --- !u!114 &5500472158321378252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2253,10 +2253,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.016666666666666666
+    m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 5102700716101665675}
-    m_Duration: 6.25
+    m_Asset: {fileID: -8806432346070377822}
+    m_Duration: 5.276734693877551
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7725241222384134785}
     m_EaseInDuration: 0
@@ -2320,7 +2320,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: this might hold the door
+    m_DisplayName: Staff_room
   m_Markers:
     m_Objects: []
   m_TrackProperties:

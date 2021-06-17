@@ -47,6 +47,10 @@ public class SaveManager : MonoBehaviour
             {
                 Load();
             }
+            else
+            {
+                
+            }
          
         }
     }
@@ -184,6 +188,10 @@ public class SaveManager : MonoBehaviour
             load_arrays();
             assign();
         }
+        else
+        {
+            escape_door.read = false;
+        }
     }
 
     void load_arrays()
@@ -193,7 +201,6 @@ public class SaveManager : MonoBehaviour
             temp = new GameObject();
             oc.had = temp;
         }
-      
         minimap_button.SetActive(true);
         FogActivator.inside = true;
       
