@@ -4,18 +4,33 @@ using UnityEngine;
 using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
+    public float Environment_sounds_timer;
     [Header("Sources")]
     public AudioSource Footsteps;
     public AudioSource ui;
-    public AudioSource Interactables;
+    public static AudioSource Interactables;
     public AudioSource Enemy;
     public AudioSource pickable;
+    public AudioSource Environment;
 
     [Header("Clips")]
     public AudioClip Walk_on_dirt;
+    public AudioClip  Walk_on_Planks;
+    [Space(30)]
+    [Space(10)]
     public AudioClip Button;
-    public AudioClip Door_open, Door_close, Door_locked, Door_locker_open, Fence_Open, Fence_Close, Note_open, Note_close, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take, princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_growl, girl_chase, girl_hit, girl_kill;
 
+    [Space(10)]
+    public AudioClip Door_open, Door_locked, Door_locker_open, Fence_Open;
+
+    [Space(10)]
+    public AudioClip  Note_open, Note_close, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take;
+
+    [Space(10)]
+    public AudioClip  princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_growl, girl_chase, girl_hit, girl_kill;
+
+    [Space(10)]
+    public AudioClip[] environment_sounds;
 
     [Header("Snapshots")]
     public AudioMixerSnapshot paused;
@@ -23,16 +38,39 @@ public class AudioManager : MonoBehaviour
 
 
     bool walking = true;
+    float timer;
+    int index;
 
     private void Awake()
     {
         Unpaused();
     }
-    public void Player_walk_on_dirt()
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > Environment_sounds_timer)
+        {
+            Random_Sounds();
+            index = Random.Range(0, environment_sounds.Length);
+        //    Debug.Log(index);
+            timer = 0;
+        }
+        
+    }
+    //player
+    public void Player_walk()
     {
         if (walking)
         {
-            Footsteps.clip = Walk_on_dirt;
+            if (FogActivator.inside)
+            {
+                Footsteps.clip = Walk_on_Planks;
+            }
+            else
+            {
+                Footsteps.clip = Walk_on_dirt;
+            }
             Footsteps.Play();
             walking = false;
         }
@@ -42,7 +80,7 @@ public class AudioManager : MonoBehaviour
         Footsteps.Stop();
         walking = true;
     }
-
+    //UI
     public void UI()
     {
         ui.clip = Button;
@@ -59,21 +97,20 @@ public class AudioManager : MonoBehaviour
         unpaused.TransitionTo(0f);
     }
 
+    //Gates
     public void Gate_Open()
     {
         Interactables.clip = Door_open;
         Interactables.Play();
     }
-
-    public void Gate_Close()
-    {
-        Interactables.clip = Door_close;
-        Interactables.Play();
-    }
-
     public void Gate_Locked()
     {
         Interactables.clip = Door_locked;
+        Interactables.Play();
+    }
+    public void Locker_Gate_Open()
+    {
+        Interactables.clip = Door_locker_open;
         Interactables.Play();
     }
 
@@ -83,12 +120,7 @@ public class AudioManager : MonoBehaviour
         Interactables.Play();
     }
 
-    public void Gate_Fence_Close()
-    {
-        Interactables.clip = Fence_Close;
-        Interactables.Play();
-    }
-
+    //notes and comics
     public void Note_Open()
     {
         pickable.clip = Note_open;
@@ -131,6 +163,7 @@ public class AudioManager : MonoBehaviour
         pickable.Play();
     }
 
+    //Enemies
     public void Enemy_Princy_Growl()
     {
         Enemy.clip = princy_growl;
@@ -183,5 +216,12 @@ public class AudioManager : MonoBehaviour
     {
         Enemy.clip = girl_kill;
         Enemy.Play();
+    }
+
+    //Environment
+    public void Random_Sounds()
+    {
+        Environment.clip = environment_sounds[index];
+        Environment.Play();
     }
 }

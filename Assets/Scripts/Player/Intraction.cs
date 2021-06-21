@@ -34,6 +34,7 @@ namespace Scripts.Player
             public LayerMask Intractable;
             public Animator anim;
             public bool IsOpened;
+          
         }
         RaycastHit hit;
         [SerializeField]
@@ -53,7 +54,21 @@ namespace Scripts.Player
                 it.anim = hit.transform.GetComponentInParent<Animator>();
                 if (hit.collider.tag == "Door" || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
                 {
+                    AudioManager.Interactables = hit.transform.GetComponentInParent<AudioSource>();
                     IntractWithDoor();
+                    if(hit.collider.tag == "Door")
+                    {
+                        Door_Wooden();
+                     
+                    }
+                    else if(hit.collider.tag == "Door_locker")
+                    {
+                        Door_Locker();
+                    }
+                    else if(hit.collider.tag == "Door_fence")
+                    {
+                        Door_Fence();
+                    }
                 }
                 if (hit.transform.CompareTag("Escape Door"))
                 {
@@ -101,17 +116,10 @@ namespace Scripts.Player
         }
       void IntractWithDoor()
         {
+          
             if (it.anim.GetBool("IsOpen") == false)
             {
-               if(it.anim.runtimeAnimatorController.name == "Door_unwrapped")
-                {
-                    audio.Gate_Open();
-                }
-                else
-                {
-                    audio.Gate_Locked();
-                }
-              
+               
                 it.anim.SetBool("IsOpen", true);
                 StartCoroutine(closeDoor());
             }
@@ -138,11 +146,29 @@ namespace Scripts.Player
             fps_canvas.SetActive(true);
             Time.timeScale = 1f;
         }
+     
+      void Door_Wooden()
+      {
+            if (it.anim.GetBool("IsOpen") == true)
+            {
+                if (it.anim.runtimeAnimatorController.name == "Door_unwrapped")
+                {
+                    audio.Gate_Open();
 
-      /*  public void Comic()
+                }
+                else
+                {
+                    audio.Gate_Locked();
+                }
+            }
+      }
+       void Door_Fence()
         {
-            Debug.Log(hit.transform.gameObject.name);
-            hit.transform.gameObject.SetActive(false);
-        }*/
+            audio.Gate_Fence_Open();
+        }
+        void Door_Locker()
+        {
+            audio.Locker_Gate_Open();
+        }
     }
 }

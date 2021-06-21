@@ -213,10 +213,14 @@ namespace Scripts.Player
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
 
-            if (joystick.Direction.x != 0 || joystick.Direction.y != 0)
+            if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
                 camAnim.SetBool("IsMoving", true);
-                AudioM.Player_walk_on_dirt();
+                if (!isCrouching)
+                {
+                    AudioM.Player_walk();
+                }
+               
             }
             else
             {
@@ -332,6 +336,7 @@ namespace Scripts.Player
         }
         IEnumerator Player_death()
         {
+            AudioM.Player_stop();
             yield return new WaitForSeconds(death_timer);
             admenu.SetActive(true);
             Time.timeScale = 0;
