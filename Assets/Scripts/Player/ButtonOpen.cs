@@ -93,7 +93,7 @@ namespace Scripts.Buttons
                 if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
-
+                    comment.text = "Interact?";
                 }
                  
                 if ((hit.transform.CompareTag("Timeline") && oc.had == null))

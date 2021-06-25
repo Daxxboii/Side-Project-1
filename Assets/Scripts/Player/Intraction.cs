@@ -36,6 +36,7 @@ namespace Scripts.Player
             public bool IsOpened;
           
         }
+        private bool Open;
         RaycastHit hit;
         [SerializeField]
         TextMeshProUGUI error_comment;
@@ -130,6 +131,7 @@ namespace Scripts.Player
         {
             yield return new WaitForSeconds(it.CloseTime);
             it.anim.SetBool("IsOpen", false);
+            Open = false;
         }
 
        void Note_Open()
@@ -149,17 +151,17 @@ namespace Scripts.Player
      
       void Door_Wooden()
       {
-            if (it.anim.GetBool("IsOpen") == true)
+            if (it.anim.GetBool("IsOpen") == true||!Open)
             {
                 if (it.anim.runtimeAnimatorController.name == "Door_unwrapped")
                 {
                     audio.Gate_Open();
-
                 }
                 else
                 {
                     audio.Gate_Locked();
                 }
+                Open = true;
             }
       }
        void Door_Fence()

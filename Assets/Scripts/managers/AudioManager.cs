@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip Door_open, Door_locked, Door_locker_open, Fence_Open;
 
     [Space(10)]
-    public AudioClip  Note_open, Note_close, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take;
+    public AudioClip  Note_open, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take;
 
     [Space(10)]
     public AudioClip  princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_growl, girl_chase, girl_hit, girl_kill;
@@ -36,10 +36,11 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot paused;
     public AudioMixerSnapshot unpaused;
 
+    public Animator thunder;
 
     bool walking = true;
     float timer;
-    int index;
+    int index,_index;
 
     private void Awake()
     {
@@ -51,9 +52,12 @@ public class AudioManager : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > Environment_sounds_timer)
         {
-            Random_Sounds();
             index = Random.Range(0, environment_sounds.Length);
-        //    Debug.Log(index);
+            if(index != _index)
+            {
+                Random_Sounds();
+            }
+            _index = index;
             timer = 0;
         }
         
@@ -127,11 +131,7 @@ public class AudioManager : MonoBehaviour
         pickable.Play();
     }
 
-    public void Note_Close()
-    {
-        pickable.clip = Note_close;
-        pickable.Play();
-    }
+  
 
     public void Comic_Open()
     {
@@ -223,5 +223,11 @@ public class AudioManager : MonoBehaviour
     {
         Environment.clip = environment_sounds[index];
         Environment.Play();
+        if (index == 1)
+        {
+            thunder.SetTrigger("Open");
+            thunder.ResetTrigger("open");
+        }
+      
     }
 }

@@ -72,7 +72,7 @@ namespace Scripts.Timeline
                 princy.SetColor("_BaseColor", Color.black);
             }
             // Translate_Cutscene();
-            if (Current_cutscene > 2)
+            if (Current_cutscene > 4)
             {
                 girl.gameObject.SetActive(true);
                 aiFollow.gameObject.SetActive(true);
