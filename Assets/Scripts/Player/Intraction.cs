@@ -93,7 +93,6 @@ namespace Scripts.Player
                 {
                   
                     nm = hit.transform.GetComponent<Note_manager>();
-                
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);
                   foreach(GameObject i in nm.objects)

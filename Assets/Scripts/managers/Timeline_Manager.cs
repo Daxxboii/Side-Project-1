@@ -104,7 +104,7 @@ namespace Scripts.Timeline
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
             ps.gameObject.SetActive(true);
-            if (Current_cutscene > 2)
+            if (Current_cutscene > 4)
             {
                 girl.gameObject.SetActive(true);
                 aiFollow.gameObject.SetActive(true);
