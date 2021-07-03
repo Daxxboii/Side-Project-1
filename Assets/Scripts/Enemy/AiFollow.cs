@@ -9,6 +9,9 @@ namespace Scripts.Enemy
     {
         public class AiFollow : MonoBehaviour
         {
+            [SerializeField]
+            private float Time_between_growls,timer;
+            public AudioManager AudioM;
             public bool angry;
             [Header("Variable depending on player")]
             [SerializeField]
@@ -76,7 +79,7 @@ namespace Scripts.Enemy
 
                         if (hit)
                         {
-
+                            AudioM.Enemy_Princy_Atack();
                             if (ps.Health - daimage > 0)
                             {
                                 Animations(1, 2);
@@ -97,6 +100,7 @@ namespace Scripts.Enemy
                     if (inAttackRange() <= 2f)
                     {
                         Animations(2, 2);
+                        AudioM.Enemy_Princy_Int_Kill();
                     }
 
                 }
@@ -113,6 +117,7 @@ namespace Scripts.Enemy
                     {
                         _agent.enabled = false;
                         Animations(0, 0);
+                        Growl();
                     }
                     else if (_isVisible == false)
                     {
@@ -136,6 +141,7 @@ namespace Scripts.Enemy
                         {
                             Animations(0, 2);
                             _agent.SetDestination(_player.transform.position);
+                            Chase();
                         }
                     }
                 }
@@ -176,7 +182,26 @@ namespace Scripts.Enemy
                 yield return new WaitForSeconds(cool_period);
                 hit = true;
             }
-
+            void Growl()
+            {
+                timer += Time.deltaTime;
+                if(timer > Time_between_growls)
+                {
+                    AudioM.Enemy_Princy_Growl();
+                    timer = 0;
+                }
+             //   Debug.Log("Growling;");
+            }
+            void Chase()
+            {
+                timer += Time.deltaTime;
+                if (timer > Time_between_growls)
+                {
+                    Debug.Log("Chasing");
+                    AudioM.Enemy_Princy_chase();
+                    timer = 0;
+                }
+            }
 
 
         }

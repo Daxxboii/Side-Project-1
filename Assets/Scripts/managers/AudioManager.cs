@@ -9,9 +9,13 @@ public class AudioManager : MonoBehaviour
     public AudioSource Footsteps;
     public AudioSource ui;
     public static AudioSource Interactables;
-    public AudioSource Enemy;
+
     public AudioSource pickable;
     public AudioSource Environment;
+    [Header("Enemy")]
+    public AudioSource principal;
+    public AudioSource hammer;
+    public AudioSource girl;
 
     [Header("Clips")]
     public AudioClip Walk_on_dirt;
@@ -166,56 +170,56 @@ public class AudioManager : MonoBehaviour
     //Enemies
     public void Enemy_Princy_Growl()
     {
-        Enemy.clip = princy_growl;
-        Enemy.Play();
+        principal.clip = princy_growl;
+        principal.Play();
     }
 
     public void Enemy_Princy_Atack()
     {
-        Enemy.clip = princy_atack;
-        Enemy.Play();
+        hammer.clip = princy_atack;
+        hammer.Play();
     }
 
     public void Enemy_Princy_Int_Kill()
     {
-        Enemy.clip = princy_int_kill;
-        Enemy.Play();
+        principal.clip = princy_int_kill;
+        principal.Play();
     }
 
     public void Enemy_Princy_Hammer()
     {
-        Enemy.clip = princy_Ham_drag;
-        Enemy.Play();
+        hammer.clip = princy_Ham_drag;
+        hammer.Play();
     }
 
     public void Enemy_Princy_chase()
     {
-        Enemy.clip = princy_chase;
-        Enemy.Play();
+        principal.clip = princy_chase;
+        principal.Play();
     }
 
     public void Enemy_Girl_Growl()
     {
-        Enemy.clip = girl_growl;
-        Enemy.Play();
+        girl.clip = girl_growl;
+        girl.Play();
     }
 
     public void Enemy_Girl_chase()
     {
-        Enemy.clip = girl_chase;
-        Enemy.Play();
+        girl.clip = girl_chase;
+        girl.Play();
     }
 
     public void Enemy_Girl_hit()
     {
-        Enemy.clip = girl_hit;
-        Enemy.Play();
+        girl.clip = girl_hit;
+        girl.Play();
     }
 
     public void Enemy_Girl_kill()
     {
-        Enemy.clip = girl_kill;
-        Enemy.Play();
+        girl.clip = girl_kill;
+        girl.Play();
     }
 
     //Environment
