@@ -22,9 +22,10 @@ namespace Scripts.Buttons
         ObjectController oc;
         [SerializeField]
         Timeline_Manager tm;
+        [SerializeField]
         GameObject pointer;
-
-        public LayerMask interactables;
+        Transform[] pointed;
+       
 
         public RaycastHit hit;
         void Awake()
@@ -181,14 +182,19 @@ namespace Scripts.Buttons
         }
         void Track(GameObject Button)
         {
-            foreach (Transform child in hit.transform)
+            pointed = hit.transform.gameObject.GetComponentsInChildren<Transform>();
+            foreach(Transform child in pointed)
             {
-                if (child.tag == "Tracker")
+                if(child.gameObject.tag == "Tracker")
                 {
-                     pointer = child.gameObject;
+                    pointer = child.gameObject;
                 }
-                   
+             
             }
+          
+                
+              //  Debug.Log(hit.transform.gameObject.name);
+            
             Vector3 pos = Camera.main.WorldToScreenPoint(pointer.transform.position);
             Button.transform.position = pos;
           

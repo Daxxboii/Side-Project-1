@@ -54,15 +54,11 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
+       
         if (timer > Environment_sounds_timer)
         {
-            index = Random.Range(0, environment_sounds.Length);
-            if(index != _index)
-            {
-                Random_Sounds();
-            }
-            _index = index;
-            timer = 0;
+            Random_timer();
+           
         }
         
     }
@@ -225,13 +221,36 @@ public class AudioManager : MonoBehaviour
     //Environment
     public void Random_Sounds()
     {
-        Environment.clip = environment_sounds[index];
-        Environment.Play();
-        if (index == 1)
+        if (FogActivator.inside && index>2)
         {
-            thunder.SetTrigger("Open");
-            thunder.ResetTrigger("open");
+            Environment.clip = environment_sounds[index];
+            Environment.Play();
         }
+       else if (!FogActivator.inside && index > 2)
+        {
+            Random_timer();
+        }
+
+        else {
+            if (index == 1)
+            {
+                thunder.SetTrigger("Open");
+                thunder.ResetTrigger("open");
+            }
+            Environment.clip = environment_sounds[index];
+            Environment.Play();
+        }
+       
       
+    }
+    public void Random_timer()
+    {
+        index = Random.Range(0, environment_sounds.Length);
+        if (index != _index)
+        {
+            Random_Sounds();
+        }
+        _index = index;
+        timer = 0;
     }
 }
