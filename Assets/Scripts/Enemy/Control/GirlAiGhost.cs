@@ -111,8 +111,8 @@ namespace Scripts.Enemy
                     if (angry)
                     {
                         agent.SetDestination(player.transform.position);
-                        agent.stoppingDistance = 5;
-                        if (agent.isStopped || Vector3.Distance(player.transform.position,transform.position)<6f)
+                        agent.stoppingDistance = 15;
+                        if (agent.isStopped || Vector3.Distance(player.transform.position,transform.position)<16f)
                         {
                             Animations(0, 0);
                         }

@@ -12,7 +12,8 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
-       
+        public int delay;
+        public GameObject skip;
         public PlayerScript ps;
        private string text,_text;
         [SerializeField]
@@ -111,6 +112,7 @@ namespace Scripts.Timeline
                 girl.agent.enabled = true;
                 aiFollow.enabled = true;
             }
+            skip.SetActive(false);
           
 
         }
@@ -147,9 +149,8 @@ namespace Scripts.Timeline
 
             director.playableAsset = timeline_assets[Current_cutscene];
            
-           
-            director.time = 0;
-            director.Play();
+         
+
             if (oc.had != null)
             {
                 oc.had.SetActive(false);
@@ -165,6 +166,12 @@ namespace Scripts.Timeline
             {
                 princy.SetColor("_BaseColor", Color.black);
             }
+ 
+            director.time = 0;
+            director.Play();
+            director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+            StartCoroutine("skipper");
+           
             Current_cutscene++;
         }
       public  void ReadFile()
@@ -186,6 +193,23 @@ namespace Scripts.Timeline
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
          //   Debug.Log("objective");
+
+        }
+
+        public void Skip()
+        {
+            skip.SetActive(true);
+        }
+
+        IEnumerator skipper()
+        {
+            yield return new WaitForSeconds(delay);
+            Skip();
+        }
+
+        public void End()
+        {
+            director.playableGraph.GetRootPlayable(0).SetSpeed(5);
 
         }
     }

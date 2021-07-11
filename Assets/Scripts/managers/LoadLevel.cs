@@ -11,15 +11,14 @@ public class LoadLevel : MonoBehaviour
     public void loadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsyncronasly(sceneIndex));
-
     }
     IEnumerator LoadAsyncronasly( int sceneIndex)
     {
-       
+
        
             yield return new WaitForSeconds(delay);
-        
-      
+        Debug.Log("hi");
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         LoadingScreen.SetActive(true);
      
