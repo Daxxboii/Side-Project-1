@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Scripts.Timeline;
 public class AudioManager : MonoBehaviour
 {
+    public Timeline_Manager tm;
     public float Environment_sounds_timer;
     [Header("Sources")]
     public AudioSource Footsteps;
@@ -31,7 +33,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip  Note_open, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take;
 
     [Space(10)]
-    public AudioClip  princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_growl, girl_chase, girl_hit, girl_kill;
+    public AudioClip  princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_chase,  girl_kill;
 
     [Space(10)]
     public AudioClip[] environment_sounds;
@@ -41,7 +43,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot unpaused;
 
     public Animator thunder;
-
+    bool crying;
     bool walking = true;
     float timer;
     int index,_index;
@@ -194,30 +196,24 @@ public class AudioManager : MonoBehaviour
         principal.Play();
     }
 
-    public void Enemy_Girl_Growl()
-    {
-        girl.clip = girl_growl;
-        girl.Play();
-    }
+  
 
     public void Enemy_Girl_chase()
     {
         girl.clip = girl_chase;
         girl.Play();
     }
-
-    public void Enemy_Girl_hit()
-    {
-        girl.clip = girl_hit;
-        girl.Play();
-    }
-
     public void Enemy_Girl_kill()
     {
         girl.clip = girl_kill;
         girl.Play();
+        
     }
 
+    public void Girl_Stop()
+    {
+        girl.Pause();
+    }
     //Environment
     public void Random_Sounds()
     {
@@ -246,9 +242,13 @@ public class AudioManager : MonoBehaviour
     public void Random_timer()
     {
         index = Random.Range(0, environment_sounds.Length);
-        if (index != _index)
+        if (index != _index )
         {
-            Random_Sounds();
+            if(((tm.Current_cutscene < 3) && index > 12))
+            {
+                Random_Sounds();
+            }
+           
         }
         _index = index;
         timer = 0;

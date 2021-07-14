@@ -11,6 +11,7 @@ namespace Scripts.Enemy
     {
         public class GirlAiGhost : MonoBehaviour
         {
+            public AudioManager audioM;
             [SerializeField] PlayerScript ps;
             float a;
             public float wanderRadius;
@@ -33,6 +34,7 @@ namespace Scripts.Enemy
             private float attack_distance;
             private bool hit = true;
             public float Cooldown_period;
+           public bool ded = false;
 
             private Vector3 newPos;
 
@@ -51,6 +53,7 @@ namespace Scripts.Enemy
                 agent.destination = player.transform.position;
                 cooldown = false;
                 Animations(0, 0);
+                
             }
             private void Update()
             {
@@ -70,11 +73,13 @@ namespace Scripts.Enemy
                                 agent.SetDestination(player.transform.position);
                                 Animations(2, 0);
                                 Attack();
+                               
                             }
                             else if (!isinFrontOFMe(player))
                             {
                                 if (chasing)
                                 {
+                                    audioM.Enemy_Girl_chase();
                                     volume.SetActive(true);
                                     agent.SetDestination(player.transform.position);
                                     a += Time.deltaTime;
@@ -86,6 +91,7 @@ namespace Scripts.Enemy
                                 }
                                 else if (!chasing)
                                 {
+                                  audioM.Girl_Stop();
                                     volume.SetActive(false);
                                     if (Vector3.Distance(transform.position, newPos) < 0.5)
                                     {
@@ -195,6 +201,14 @@ namespace Scripts.Enemy
                     else if (ps.isDead||ps.Health<=25)
                     {
                         ps.PlayerTakeDamage(damage);
+                      
+                        if (!ded)
+                        {
+                            audioM.Enemy_Girl_kill();
+                            ded = true;
+                        }
+                       
+                      
                         Animations(2, 2);
                         //  Debug.Log("kill;");
                     }
