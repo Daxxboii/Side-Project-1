@@ -112,7 +112,7 @@ namespace Scripts.Timeline
                 girl.agent.enabled = true;
                 aiFollow.enabled = true;
             }
-            skip.SetActive(false);
+          
           
 
         }
@@ -192,7 +192,8 @@ namespace Scripts.Timeline
          //   Debug.Log(objective_index++);
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
-         //   Debug.Log("objective");
+            skip.SetActive(false);
+            //   Debug.Log("objective");
 
         }
 

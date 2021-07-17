@@ -10,7 +10,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     [SerializeField]
     private GameObject menu;
     string mySurfacingId = "4083073";
-    public bool GameMode = true;
+    public bool GameMode ;
     string placement = "Rewarded_Android";
     public PlayerScript ps;
 

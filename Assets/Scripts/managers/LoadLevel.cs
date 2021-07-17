@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 using UnityEngine.UI;
@@ -8,15 +9,14 @@ public class LoadLevel : MonoBehaviour
     public GameObject LoadingScreen;
     public Slider slider;
     public int delay;
+    public VideoPlayer player;
     public void loadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsyncronasly(sceneIndex));
     }
     IEnumerator LoadAsyncronasly( int sceneIndex)
     {
-
-       
-            yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay);
         Debug.Log("hi");
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -31,5 +31,9 @@ public class LoadLevel : MonoBehaviour
             yield return null;
 
         }
+    }
+   public void Skip()
+    {
+        player.Pause();
     }
 }
