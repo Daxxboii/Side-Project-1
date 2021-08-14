@@ -12,17 +12,27 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     string mySurfacingId = "4083073";
     public bool GameMode ;
     string placement = "Rewarded_Android";
+    string banner_placement = "Banner_Android";
     public PlayerScript ps;
+    public GameObject no_internet,retry;
 
     void Start()
     {
         Advertisement.AddListener(this);
         Advertisement.Initialize(mySurfacingId, true);
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            StartCoroutine(ShowBannerWhenInitialized());
+        }
+        else
+        {
+            Advertisement.Banner.Hide();
+        }
     }
    public void Show()
     {
         Advertisement.Show(placement);
-      
     }
 
     public void OnUnityAdsReady(string placementId)
@@ -32,10 +42,12 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     }
 
     public void OnUnityAdsDidError(string message)
-    {
+    {/*
      PlayerPrefs.SetInt("loadindex", 0);
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);*/
+        no_internet.SetActive(true);
+        retry.SetActive(false);
        
     }
 
@@ -49,5 +61,16 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
         Time.timeScale = 1;
         PlayerPrefs.SetInt("loadindex", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator ShowBannerWhenInitialized()
+    {
+        while (!Advertisement.isInitialized)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+        Advertisement.Banner.Show(banner_placement);
+       
     }
 }
