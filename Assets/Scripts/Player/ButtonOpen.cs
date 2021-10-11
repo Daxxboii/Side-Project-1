@@ -60,67 +60,67 @@ namespace Scripts.Buttons
                     }
 
 
-                    if (hit.transform.CompareTag("Note"))
+                  else  if (hit.transform.CompareTag("Note"))
                     {
                         note.SetActive(true);
                     Track(note);
 
                     }
-                    if (hit.transform.CompareTag("Save"))
+                else if (hit.transform.CompareTag("Save"))
                     {
                         save.SetActive(true);
                     Track(note);
 
                     }
-                    if (hit.transform.CompareTag("Hideable"))
+                else if (hit.transform.CompareTag("Hideable"))
                     {
                         Hide.SetActive(true);
                         Unhide.SetActive(false);
                      
 
                     }
-                    if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
+                else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
                     {
                         Pickup.SetActive(true);
                     Track(Pickup);
 
 
                     }
-                    if (hit.transform.CompareTag("Comic"))
+                else if (hit.transform.CompareTag("Comic"))
                     {
                         Comic.SetActive(true);
                     Track(Comic);
 
                     }
 
-                    if (hit.transform.CompareTag("Map"))
+                else if (hit.transform.CompareTag("Map"))
                     {
                         map.SetActive(true);
                         comment.text = "Should take it , would be of help later";
                     Track(map);
                     }
 
-                    if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
+                else if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                     {
                         Timeline.SetActive(true);
                         comment.text = "Interact?";
                     Track(Timeline);
                     }
 
-                    if ((hit.transform.CompareTag("Timeline") && oc.had == null))
+                else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                     {
                         comment.text = "get something ";
                     }
 
-                    if (hit.transform.CompareTag("Obstacle"))
+                else if (hit.transform.CompareTag("Obstacle"))
                     {
                         comment.text = "Going there wont be a good idea";
                     }
-                    if (hit.transform.CompareTag("Blackboard"))
+                else if (hit.transform.CompareTag("Blackboard"))
                     {
                         comment.text = "Find something to write with";
                     }
-                    if (hit.transform.CompareTag("Untagged"))
+                 if (hit.transform.CompareTag("Untagged"))
                     {
                         Intract.SetActive(false);
                         Pickup.SetActive(false);
@@ -151,18 +151,7 @@ namespace Scripts.Buttons
                 map.SetActive(false);
                 comment.text = "";
 
-            /*    if (oc.had != null)
-                {
-                    Drop.SetActive(true);
-                }*/
-              /*  if (Player.activeInHierarchy == true)
-                {
-                    Unhide.SetActive(false);
-                }
-                else
-                {
-                    Unhide.SetActive(true);
-                } */
+           
             }
 
         }
