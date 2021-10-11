@@ -71,7 +71,7 @@ namespace Scripts.Player
                         Door_Fence();
                     }
                 }
-                if (hit.transform.CompareTag("Escape Door"))
+                else if (hit.transform.CompareTag("Escape Door"))
                 {
                     ed = hit.transform.GetComponent<escape_door>();
                     error_comment.text = "";
@@ -91,7 +91,6 @@ namespace Scripts.Player
                 }
                 else if (hit.collider.tag == "Note")
                 {
-                  
                     nm = hit.transform.GetComponent<Note_manager>();
                     Note_Open();
                     hit.transform.gameObject.SetActive(false);

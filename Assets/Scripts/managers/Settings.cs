@@ -12,6 +12,7 @@ public class Settings : MonoBehaviour
     [SerializeField]
     Slider sensitivity, music;
     public AudioMixer audiom;
+    public PlayerScript Player_Script;
 
     public void Awake()
     {
@@ -45,7 +46,7 @@ public class Settings : MonoBehaviour
 
     public void SetSencivity()
     {
-        PlayerScript.SetSensi(sensitivity.value);
+        Player_Script.SetSensi(sensitivity.value);
         PlayerPrefs.SetFloat("Senci", sensitivity.value);
     }
 }

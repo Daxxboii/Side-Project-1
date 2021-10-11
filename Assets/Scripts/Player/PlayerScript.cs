@@ -15,12 +15,15 @@ namespace Scripts.Player
     {
         //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
         private static float sensi = 10;
-       
-        [SerializeField]
-        Sprite crouch,stand;
+
+        [Header("UI")]
+        [SerializeField] private Sprite crouch;
+        [SerializeField] private Sprite stand;
+        
         public GameObject admenu;
         [SerializeField]
-        Image Button;
+        private Image StandStateButton;
+
         public VolumeProfile volume;
         public float death_timer;
         public Image hit_image;
@@ -28,10 +31,9 @@ namespace Scripts.Player
         public Sprite hit_high;
        
         [SerializeField]
-        GirlAiGhost gi;
+        private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
-        public static event Action<bool, int> PlayCutscene;
-        public static event Action<bool, int> TellStory;
+      
         [SerializeField] private Joystick joystick;
         
 
@@ -40,15 +42,19 @@ namespace Scripts.Player
         [SerializeField] private Animator camAnim;
 
         // Player settings
-        [SerializeField] private float cameraSensitivity, deathAnimationtime;
-        [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, tempHeight, crouchHight, crawlheight, Health, RegenTimer;
+        [SerializeField] private float cameraSensitivity;
+        [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, crouchHight, Health, RegenTimer;
         private bool isSprinting, isCrouching, IsCrawlling, canSprint;
         private Vector3 move;
         public bool isDead;
+
+
         // Touch detection
         private int leftFingerId, rightFingerId;
         private float halfScreenWidth;
          Vignette vig;
+
+
         // Camera control
         private Vector2 lookInput;
         private float cameraPitch;
@@ -69,8 +75,8 @@ namespace Scripts.Player
             hit_image.gameObject.SetActive(true);
             TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();
-            tempHeight = characterController.height;
-            height = characterController.height;
+           // tempHeight = characterController.height;
+          //  height = characterController.height;
             TempSpeed = speed;
             // id = -1 means the finger is not being tracked
             leftFingerId = -1;
@@ -78,6 +84,8 @@ namespace Scripts.Player
 
             // only calculate once
             halfScreenWidth = Screen.width / 2;
+
+            //volume
             volume.TryGet(out vig);
             vig.color.Override(Color.black);
         }
@@ -85,35 +93,12 @@ namespace Scripts.Player
         // Update is called once per frame
         void Update()
         {
-            if (isCrouching == false)
-            {
-                speed = TempSpeed;
-                if (characterController.height < tempHeight)
-                {
-                    characterController.height += 0.6f;
-                }
-               
-
-            }
-            else
-            {
-                speed = CrouchSpeed;
-                characterController.height = crouchHight;
-            }
             Health_Manager();
-            if (Health <= 0)
-            {
-                gi.Cooldown_period = 0;
-                isDead = true;
-                fpsCam.transform.LookAt(ghost);
-              
-                StartCoroutine("Player_death");
-
-            }
+            
             if (!isDead)
             {
                 Regenerate();
-                cameraSensitivity = sensi;
+              
                 GetTouchInput();
 
                 if (rightFingerId != -1)
@@ -125,6 +110,7 @@ namespace Scripts.Player
             }
         }
 
+        #region inputs
         void GetTouchInput()
         {
             // Iterate through all the detected touches
@@ -240,37 +226,28 @@ namespace Scripts.Player
 
          
            characterController.Move(move * Time.deltaTime * speed);
-            
-              
-          /*  if (move.x == 0.0f)
-            {
-                OnPlayerIdle(true);
-            }
-            else
-            {
-                OnPlayerIdle(false);
-            }*/
+         
         }
+        #endregion
         public void croutch()
         {
             isCrouching = !isCrouching;
-          
-        }
-        public void Crawl()
-        {
-            IsCrawlling = !IsCrawlling;
-            if (IsCrawlling == false)
+
+            if (isCrouching == false)
             {
                 speed = TempSpeed;
-                characterController.height = tempHeight;
+            
+                    characterController.height = height;
+                
             }
             else
             {
-                speed = crawlSpeed;
-                characterController.height = crawlheight;
-
+                speed = CrouchSpeed;
+                characterController.height = crouchHight;
             }
         }
+
+       
         public void Sprint()
         {
             if(canSprint == true)
@@ -281,10 +258,13 @@ namespace Scripts.Player
             }
         }
 
-        static public void SetSensi(float S)
+         public void SetSensi(float S)
         {
             sensi = S;
+            cameraSensitivity = sensi;
         }
+
+
         IEnumerator SprintS()
         {
             yield return new WaitForSeconds(3f);
@@ -293,20 +273,18 @@ namespace Scripts.Player
 
         public void PlayerTakeDamage(float hminus)
         {
-            
             Health -= hminus;
-         //   Debug.Log("OWO");
         }
 
         public void ChangeUI()
         {
             if (isCrouching)
             {
-                Button.sprite = crouch;
+                StandStateButton.sprite = crouch;
             }
             else
             {
-                 Button.sprite = stand;
+                 StandStateButton.sprite = stand;
             }
         }
       
@@ -318,14 +296,16 @@ namespace Scripts.Player
                 Health += RegenTimer;
                 RegenTimer = 0;
             }
-           
         }
         private void Health_Manager()
         {
             vig.color.Override(new Color((1-Health/75)/2, 0, 0));
+            //Set Hit Alpha
             var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
             hit_image.color = tempColor;
+
+            //Set Hit Image
             if (Health < 50){
                 hit_image.sprite = hit_high;
             }
@@ -333,15 +313,33 @@ namespace Scripts.Player
             {
                 hit_image.sprite = hit_low;
             }
+            //Death
+            if (Health <= 0)
+            {
+                GirlAI.Cooldown_period = 0;
+                isDead = true;
+                fpsCam.transform.LookAt(ghost);
+
+              //  StartCoroutine("Player_death");
+
+            }
         }
-        IEnumerator Player_death()
+        void Player_death()
         {
             AudioM.Player_stop();
-            yield return new WaitForSeconds(death_timer);
+         //   yield return new WaitForSeconds(death_timer);
             admenu.SetActive(true);
             Time.timeScale = 0;
         }
 
-       
+        private void OnEnable()
+        {
+            AnimationEvents.kill += Player_death;
+        }
+
+        private void OnDisable()
+        {
+            AnimationEvents.kill -= Player_death;
+        }
     }
 }
