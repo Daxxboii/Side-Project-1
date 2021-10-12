@@ -58,9 +58,21 @@ namespace Scripts.Buttons
                         Intract.SetActive(true);
                     Track(Intract);
                     }
+                else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
+                {
+                    Pickup.SetActive(true);
+                    Track(Pickup);
 
 
-                  else  if (hit.transform.CompareTag("Note"))
+                }
+                else if (hit.transform.CompareTag("Comic"))
+                {
+                    Comic.SetActive(true);
+                    Track(Comic);
+
+                }
+
+                else  if (hit.transform.CompareTag("Note"))
                     {
                         note.SetActive(true);
                     Track(note);
@@ -79,19 +91,7 @@ namespace Scripts.Buttons
                      
 
                     }
-                else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
-                    {
-                        Pickup.SetActive(true);
-                    Track(Pickup);
-
-
-                    }
-                else if (hit.transform.CompareTag("Comic"))
-                    {
-                        Comic.SetActive(true);
-                    Track(Comic);
-
-                    }
+              
 
                 else if (hit.transform.CompareTag("Map"))
                     {

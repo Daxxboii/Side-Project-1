@@ -211,7 +211,7 @@ namespace Scripts.Timeline
         public void End()
         {
             director.playableGraph.GetRootPlayable(0).SetSpeed(5);
-
+            skip.SetActive(false);
         }
     }
     
