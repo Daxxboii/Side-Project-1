@@ -12,6 +12,8 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
+        public AdManager adManager;
+        public HintManager hintManager;
         public int delay;
         public GameObject skip;
         public PlayerScript ps;
@@ -112,8 +114,9 @@ namespace Scripts.Timeline
                 girl.agent.enabled = true;
                 aiFollow.enabled = true;
             }
-          
-          
+            HideSkip();
+
+
 
         }
         public void Translate_Cutscene()
@@ -189,9 +192,12 @@ namespace Scripts.Timeline
         }
         public void ObjectiveList()
         {
-         //   Debug.Log(objective_index++);
+            //   Debug.Log(objective_index++);
+            hintManager.index = objective_index;
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
+            adManager.hint_button.SetActive(true);
+            adManager.hint_tracker.SetActive(false);
             skip.SetActive(false);
             //   Debug.Log("objective");
 
@@ -207,10 +213,15 @@ namespace Scripts.Timeline
             yield return new WaitForSeconds(delay);
             Skip();
         }
-
+        // TO fast forward timeline
         public void End()
         {
             director.playableGraph.GetRootPlayable(0).SetSpeed(5);
+            skip.SetActive(false);
+        }
+
+        public void HideSkip()
+        {
             skip.SetActive(false);
         }
     }

@@ -16,11 +16,14 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     public PlayerScript ps;
     public GameObject no_internet,retry;
 
+    public GameObject no_internet_hint,hint_button,hint_tracker;
+
+    public int ad_index;
     void Start()
     {
         Advertisement.AddListener(this);
         Advertisement.Initialize(mySurfacingId, true);
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+     //   Debug.Log(SceneManager.GetActiveScene().buildIndex);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             StartCoroutine(ShowBannerWhenInitialized());
@@ -30,9 +33,16 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
             Advertisement.Banner.Hide();
         }
     }
-   public void Show()
+   public void Show(int a)
     {
+        ad_index = a;
         Advertisement.Show(placement);
+        Time.timeScale = 0;
+    }
+
+    public void Show_hint()
+    {
+
     }
 
     public void OnUnityAdsReady(string placementId)
@@ -42,12 +52,16 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     }
 
     public void OnUnityAdsDidError(string message)
-    {/*
-     PlayerPrefs.SetInt("loadindex", 0);
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);*/
-        no_internet.SetActive(true);
-        retry.SetActive(false);
+    {
+        if (ad_index == 0)
+        {
+            no_internet.SetActive(true);
+            retry.SetActive(false);
+        }
+        else
+        {
+            no_internet_hint.SetActive(true);
+        }
        
     }
 
@@ -58,16 +72,27 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        Time.timeScale = 1;
-        PlayerPrefs.SetInt("loadindex", 1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (ad_index == 0)
+        {
+            Time.timeScale = 1;
+            PlayerPrefs.SetInt("loadindex", 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            no_internet_hint.SetActive(false);
+            hint_tracker.SetActive(true);
+            hint_button.SetActive(false);
+        }
+     
     }
 
     IEnumerator ShowBannerWhenInitialized()
     {
         while (!Advertisement.isInitialized)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(10f);
         }
         Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
         Advertisement.Banner.Show(banner_placement);
