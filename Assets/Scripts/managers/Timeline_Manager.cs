@@ -199,7 +199,7 @@ namespace Scripts.Timeline
             adManager.hint_button.SetActive(true);
             adManager.hint_tracker.SetActive(false);
             skip.SetActive(false);
-            //   Debug.Log("objective");
+            //  Debug.Log("objective");
 
         }
 
