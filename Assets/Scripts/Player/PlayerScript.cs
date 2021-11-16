@@ -3,18 +3,20 @@ using UnityEngine;
 using System;
 using unityCore.Audio;
 using UnityEngine.UI;
-using System.Threading;
-using Scripts.Objects;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 namespace Scripts.Player
 {
    
     public class PlayerScript : MonoBehaviour
     {
-        //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
+       
         private static float sensi = 10;
+
+        //Input
+        [SerializeField] PlayerControls controls;
 
         [Header("UI")]
         [SerializeField] private Sprite crouch;
@@ -33,7 +35,8 @@ namespace Scripts.Player
         [SerializeField]
         private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
-      
+        float mouseX, mouseY;
+
         [SerializeField] private Joystick joystick;
         
 
@@ -44,14 +47,12 @@ namespace Scripts.Player
         // Player settings
         [SerializeField] private float cameraSensitivity;
         [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, crouchHight, Health, RegenTimer;
-        private bool isSprinting, isCrouching, IsCrawlling, canSprint;
+        private bool  isCrouching, canSprint;
         private Vector3 move;
         public bool isDead;
 
 
-        // Touch detection
-        private int leftFingerId, rightFingerId;
-        private float halfScreenWidth;
+        
          Vignette vig;
 
 
@@ -60,30 +61,29 @@ namespace Scripts.Player
         private float cameraPitch;
        
         // Player movement
-        private Vector2 moveTouchStartPosition;
         private Vector2 moveInput;
 
         // Audio 
         public AudioManager AudioM;
 
 
-
+        private void Awake()
+        {
+            controls = new PlayerControls();
+            controls.Controls.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+            controls.Controls.Move.canceled += ctx => moveInput = Vector2.zero;
+            controls.Controls.Rotate.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
+            controls.Controls.Rotate.canceled += ctx => lookInput = Vector2.zero;
+            controls.Controls.Crouch.performed += ctx => croutch();
+        }
 
         // Start is called before the first frame update
         void Start()
         {
             hit_image.gameObject.SetActive(true);
-            TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();
-           // tempHeight = characterController.height;
-          //  height = characterController.height;
             TempSpeed = speed;
-            // id = -1 means the finger is not being tracked
-            leftFingerId = -1;
-            rightFingerId = -1;
 
-            // only calculate once
-            halfScreenWidth = Screen.width / 2;
 
             //volume
             volume.TryGet(out vig);
@@ -98,108 +98,31 @@ namespace Scripts.Player
             if (!isDead)
             {
                 Regenerate();
-              
-                GetTouchInput();
-
-                if (rightFingerId != -1)
-                {
-                 //   Debug.Log("Rotating");
-                    LookAround();
-                }
+                LookAround();
                 LocoMotion();
             }
         }
 
         #region inputs
-        void GetTouchInput()
-        {
-            // Iterate through all the detected touches
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-
-                Touch t = Input.GetTouch(i);
-
-                // Check each touch's phase
-                switch (t.phase)
-                {
-                    case TouchPhase.Began:
-
-                        if (t.position.x < halfScreenWidth && leftFingerId == -1)
-                        {
-                            // Start tracking the left finger if it was not previously being tracked
-                            leftFingerId = t.fingerId;
-
-                            // Set the start position for the movement control finger
-                            moveTouchStartPosition = t.position;
-                        }
-                        else if (t.position.x > halfScreenWidth && rightFingerId == -1)
-                        {
-                            // Start tracking the rightfinger if it was not previously being tracked
-                            rightFingerId = t.fingerId;
-                        }
-
-                        break;
-                    case TouchPhase.Ended:
-                    case TouchPhase.Canceled:
-
-                        if (t.fingerId == leftFingerId)
-                        {
-                            // Stop tracking the left finger
-                            leftFingerId = -1;
-                          //  Debug.Log("Stopped tracking left finger");
-                        }
-                        else if (t.fingerId == rightFingerId)
-                        {
-                            // Stop tracking the right finger
-                            rightFingerId = -1;
-                         //   Debug.Log("Stopped tracking right finger");
-                        }
-
-                        break;
-                    case TouchPhase.Moved:
-
-                        // Get input for looking around
-                        if (t.fingerId == rightFingerId)
-                        {
-                            lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
-                        }
-                        else if (t.fingerId == leftFingerId)
-                        {
-
-                            // calculating the position delta from the start position
-                            moveInput = t.position - moveTouchStartPosition;
-                        }
-
-                        break;
-                    case TouchPhase.Stationary:
-                        // Set the look input to zero if the finger is still
-                        if (t.fingerId == rightFingerId)
-                        {
-                            lookInput = Vector2.zero;
-                        }
-                        break;
-                }
-            }
-        }
+       
 
         void LookAround()
         {
 
-            // vertical (pitch) rotation
-            cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
-            cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
-
-            // horizontal (yaw) rotation
-            transform.Rotate(transform.up, lookInput.x);
+            //Mouse input
+            mouseX += lookInput.x * cameraSensitivity * Time.deltaTime;
+            mouseY += lookInput.y * cameraSensitivity * Time.deltaTime;
+            mouseY = Mathf.Clamp(mouseY, -90f, 90f);
+            transform.eulerAngles = new Vector3(0, mouseX, 0);
+            cameraTransform.transform.localRotation = Quaternion.Euler(-mouseY, 0, 0);
         }
 
         void LocoMotion()
-        {
-            
-            float x = joystick.Horizontal;
-            float z = joystick.Vertical;
+        {   
+            float x = moveInput.x;
+            float z = moveInput.y;
 
-            if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
+            if (moveInput!=Vector2.zero)
             {
                 camAnim.SetBool("IsMoving", true);
                 if (!isCrouching)
@@ -214,18 +137,16 @@ namespace Scripts.Player
                 AudioM.Player_stop();
             }
 
-            move = x * transform.right + z * transform.forward;
-
-            
-
+            move = transform.right * x + transform.forward * z;
 
             if (characterController.isGrounded == false)
             {
-                move += Physics.gravity * Time.deltaTime * 9.5f;
+              //  move += Physics.gravity * Time.deltaTime * 9.5f;
             }
 
-         
+            Debug.Log(x);
            characterController.Move(move * Time.deltaTime * speed);
+          
          
         }
         #endregion
@@ -245,6 +166,8 @@ namespace Scripts.Player
                 speed = CrouchSpeed;
                 characterController.height = crouchHight;
             }
+
+            //ChangeUI();
         }
 
        
@@ -335,11 +258,13 @@ namespace Scripts.Player
         private void OnEnable()
         {
             AnimationEvents.kill += Player_death;
+            controls.Controls.Enable();
         }
 
         private void OnDisable()
         {
             AnimationEvents.kill -= Player_death;
+            controls.Controls.Disable();
         }
     }
 }

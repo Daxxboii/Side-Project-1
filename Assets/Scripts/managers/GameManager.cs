@@ -2,9 +2,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+    public PlayerControls controls;
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
     [SerializeField] int delay;
     private bool over;
@@ -16,9 +18,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+        controls = new PlayerControls();
+        controls.Controls.Escape.performed += ctx => Pause();
+
         Application.targetFrameRate = 100;
         OnDemandRendering.renderFrameInterval = 2;
     }
+
+
     public void credits()
     {
         pauseMenu.SetActive(false);
@@ -163,5 +170,15 @@ public class GameManager : MonoBehaviour
         map_cam.SetActive(false);
        
         Map_button.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        controls.Controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Controls.Disable();
     }
 }
