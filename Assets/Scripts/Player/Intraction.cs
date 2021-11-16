@@ -36,12 +36,29 @@ namespace Scripts.Player
             public bool IsOpened;
           
         }
+
+
+
         private bool Open;
         RaycastHit hit;
         [SerializeField]
         TextMeshProUGUI error_comment;
         public GameObject Ring_Box;
         public AudioManager audio;
+
+
+
+        //pickups
+        
+            public GameObject PickedUpObject;
+        
+        PlayerControls controls;
+
+        private void Awake()
+        {
+            controls = new PlayerControls();
+            controls.Controls.Interact.performed += ctx => PlayerInteraction();
+        }
         private void Start()
         {
             Note_panel.SetActive(false);
@@ -49,9 +66,45 @@ namespace Scripts.Player
 
         public void PlayerInteraction()
         {
-      
+            
             if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
             {
+
+                if (hit.collider.tag == "Key" || hit.collider.tag == "pickup")
+                {
+                    PickedUpObject = hit.collider.gameObject;
+                    hit.collider.enabled = false;
+                    tm.ObjectiveList();
+                    if (PickedUpObject != null)
+                    {
+                        oc.bring(PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        PickedUpObject = null;
+
+                    }
+                }
+                if (hit.collider.tag == "Fingie")
+                {
+                    PickedUpObject = hit.collider.gameObject;
+
+                    hit.collider.enabled = false;
+                    tm.ObjectiveList();
+                    if (PickedUpObject != null)
+                    {
+                        oc.bring(PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        PickedUpObject = null;
+
+                    }
+                    hit.collider.gameObject.SetActive(false);
+                }
+                if (hit.collider.tag == "Doll")
+                {
+                    hit.transform.gameObject.SetActive(false);
+                    tm.ObjectiveList();
+                }
+
+                //Interactable
                 it.anim = hit.transform.GetComponentInParent<Animator>();
                 if (hit.collider.tag == "Door" || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
                 {
@@ -170,5 +223,14 @@ namespace Scripts.Player
         {
             audio.Locker_Gate_Open();
         }
+        private void OnEnable()
+        {
+            controls.Enable();
+        }
+        private void OnDisable()
+        {
+            controls.Disable();
+        }
     }
+   
 }

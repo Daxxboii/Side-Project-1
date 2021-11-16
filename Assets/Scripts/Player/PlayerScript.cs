@@ -141,10 +141,9 @@ namespace Scripts.Player
 
             if (characterController.isGrounded == false)
             {
-              //  move += Physics.gravity * Time.deltaTime * 9.5f;
+                move += Physics.gravity * Time.deltaTime * 9.5f;
             }
 
-            Debug.Log(x);
            characterController.Move(move * Time.deltaTime * speed);
           
          

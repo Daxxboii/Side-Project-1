@@ -53,11 +53,11 @@ namespace Scripts.Buttons
             if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
             {
               
-                    if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
-                    {
-                        Intract.SetActive(true);
+                if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
+                {
+                    Intract.SetActive(true);
                     Track(Intract);
-                    }
+                }
                 else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
                 {
                     Pickup.SetActive(true);
