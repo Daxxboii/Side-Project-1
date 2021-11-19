@@ -12,10 +12,9 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
-        public AdManager adManager;
-        public HintManager hintManager;
+      
         public int delay;
-        public GameObject skip;
+       
         public PlayerScript ps;
        private string text,_text;
         [SerializeField]
@@ -30,7 +29,7 @@ namespace Scripts.Timeline
         ButtonOpen bo;
         [SerializeField]
 
-        GameObject Button;
+   
         public Enemy.Principal.AiFollow aiFollow;
         public Enemy.girlHostile.GirlAiGhost girl;
 
@@ -114,10 +113,6 @@ namespace Scripts.Timeline
                 girl.agent.enabled = true;
                 aiFollow.enabled = true;
             }
-            HideSkip();
-
-
-
         }
         public void Translate_Cutscene()
         {
@@ -160,7 +155,7 @@ namespace Scripts.Timeline
                 oc.had = null;
             }
            
-            Button.SetActive(false);
+          
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
@@ -173,7 +168,6 @@ namespace Scripts.Timeline
             director.time = 0;
             director.Play();
             director.playableGraph.GetRootPlayable(0).SetSpeed(1);
-            StartCoroutine("skipper");
            
             Current_cutscene++;
         }
@@ -193,37 +187,24 @@ namespace Scripts.Timeline
         public void ObjectiveList()
         {
             //   Debug.Log(objective_index++);
-            hintManager.index = objective_index;
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
-            adManager.hint_button.SetActive(true);
-            adManager.hint_tracker.SetActive(false);
-            skip.SetActive(false);
+         
             //   Debug.Log("objective");
 
         }
 
-        public void Skip()
-        {
-            skip.SetActive(true);
-        }
+       
 
-        IEnumerator skipper()
-        {
-            yield return new WaitForSeconds(delay);
-            Skip();
-        }
+      
         // TO fast forward timeline
         public void End()
         {
             director.playableGraph.GetRootPlayable(0).SetSpeed(5);
-            skip.SetActive(false);
+           
         }
 
-        public void HideSkip()
-        {
-            skip.SetActive(false);
-        }
+       
     }
     
 }

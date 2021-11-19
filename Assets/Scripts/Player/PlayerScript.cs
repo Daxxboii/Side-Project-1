@@ -80,6 +80,7 @@ namespace Scripts.Player
         // Start is called before the first frame update
         void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             hit_image.gameObject.SetActive(true);
             characterController = gameObject.GetComponent<CharacterController>();
             TempSpeed = speed;
