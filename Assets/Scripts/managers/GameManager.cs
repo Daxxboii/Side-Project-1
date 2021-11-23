@@ -10,13 +10,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
     [SerializeField] int delay;
     private bool over;
+
+    public static bool map_taken;
     [Header("Map")]
     public GameObject map,map_cam;
     public GameObject Map_button;
 
+    PlayerControls playercontrols;
    
     private void Awake()
     {
+        playercontrols = new PlayerControls();
+        playercontrols.Controls.Map.performed += ctx => Open_map();
         Time.timeScale = 1;
         controls = new PlayerControls();
         controls.Controls.Escape.performed += ctx => Pause();
@@ -63,26 +68,19 @@ public class GameManager : MonoBehaviour
     }
     public void settings2()
     {
-       
-       
-            settingsMenu.SetActive(true);
-
+        settingsMenu.SetActive(true);
             MainMenu.SetActive(false);
-        
     }
     public void BackToPause()
     {
-     
             settingsMenu.SetActive(false);
             pauseMenu.SetActive(true);
-        
     }
     public void BackToPause2()
     {
         SaveMenu.SetActive(false);
             settingsMenu.SetActive(false);
             MainMenu.SetActive(true);
-        
     }
     public void playerDeath()
     {
@@ -154,12 +152,15 @@ public class GameManager : MonoBehaviour
 
     public void Open_map()
     {
-        FpsCanvas.SetActive(false);
-        map_cam.SetActive(true);
-        map.SetActive(true);
-        Map_button.SetActive(false);
-      
-        Time.timeScale = 0;
+        if (map_taken)
+        {
+            FpsCanvas.SetActive(false);
+            map_cam.SetActive(true);
+            map.SetActive(true);
+            Map_button.SetActive(false);
+
+            Time.timeScale = 0;
+        }
     }
 
     public void Close_map()
@@ -181,4 +182,5 @@ public class GameManager : MonoBehaviour
     {
         controls.Controls.Disable();
     }
+   
 }

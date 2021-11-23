@@ -57,6 +57,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""338cd7d3-0524-40f6-b321-2566f3053ee8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -191,6 +199,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a4943ae-a4c9-487c-ad6e-2b749f6285f5"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -243,6 +262,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Controls_Crouch = m_Controls.FindAction("Crouch", throwIfNotFound: true);
         m_Controls_Escape = m_Controls.FindAction("Escape", throwIfNotFound: true);
         m_Controls_Interact = m_Controls.FindAction("Interact", throwIfNotFound: true);
+        m_Controls_Map = m_Controls.FindAction("Map", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -297,6 +317,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Controls_Crouch;
     private readonly InputAction m_Controls_Escape;
     private readonly InputAction m_Controls_Interact;
+    private readonly InputAction m_Controls_Map;
     public struct ControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -306,6 +327,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Controls_Crouch;
         public InputAction @Escape => m_Wrapper.m_Controls_Escape;
         public InputAction @Interact => m_Wrapper.m_Controls_Interact;
+        public InputAction @Map => m_Wrapper.m_Controls_Map;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +352,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnInteract;
+                @Map.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMap;
+                @Map.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMap;
+                @Map.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMap;
             }
             m_Wrapper.m_ControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -349,6 +374,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Map.started += instance.OnMap;
+                @Map.performed += instance.OnMap;
+                @Map.canceled += instance.OnMap;
             }
         }
     }
@@ -387,5 +415,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
 }

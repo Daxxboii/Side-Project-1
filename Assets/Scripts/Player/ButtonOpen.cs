@@ -59,7 +59,7 @@ namespace Scripts.Buttons
 
         void onInteract()
         {
-            if (pointed)
+            if (pointed&&Player.activeInHierarchy)
             {
                 if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence") || hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
                 {

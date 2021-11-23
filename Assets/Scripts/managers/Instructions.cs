@@ -27,7 +27,6 @@ public class Instructions : MonoBehaviour
             index++;
             image.sprite = instructions[index];
         }
-   
     }
 
    public void Previous()
@@ -37,7 +36,6 @@ public class Instructions : MonoBehaviour
             index--;
             image.sprite = instructions[index];
         }
-       
     }
     public void Close()
     {

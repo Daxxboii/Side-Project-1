@@ -19,7 +19,7 @@ public class SaveManager : MonoBehaviour
     public Timeline_Manager tm = null;
     public Camcorder cam = null;
     public ObjectController oc;
-    public GameObject minimap_button;
+   
     //temp
     int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
@@ -201,7 +201,7 @@ public class SaveManager : MonoBehaviour
             temp = new GameObject();
             oc.had = temp;
         }
-        minimap_button.SetActive(true);
+        GameManager.map_taken = true;
         FogActivator.inside = true;
       
     //  id = PlayerPrefsX.GetStringArray("id");

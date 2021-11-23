@@ -11,8 +11,7 @@ namespace Scripts.Player
     public class Intraction : MonoBehaviour
     {
       
-        [SerializeField]
-        GameObject minimap_button;
+      
         [SerializeField]
         ObjectController oc;
         [SerializeField]
@@ -46,6 +45,7 @@ namespace Scripts.Player
         public GameObject Ring_Box;
         public AudioManager audio;
 
+       
 
 
         //pickups
@@ -159,8 +159,7 @@ namespace Scripts.Player
                 else if(hit.collider.tag == "Map")
                 {
                     map.SetActive(false);
-                    minimap_button.SetActive(true);
-                  
+                    GameManager.map_taken = true;
                     tm.ObjectiveList();
                     Ring_Box.SetActive(true);
                 }
