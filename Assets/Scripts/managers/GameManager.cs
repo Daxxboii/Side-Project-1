@@ -6,25 +6,26 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+    //Controls
     public PlayerControls controls;
+
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
     [SerializeField] int delay;
-    private bool over;
 
     public static bool map_taken;
     [Header("Map")]
     public GameObject map,map_cam;
-    public GameObject Map_button;
 
-    PlayerControls playercontrols;
-   
+    public bool pause;
+
     private void Awake()
     {
-        playercontrols = new PlayerControls();
-        playercontrols.Controls.Map.performed += ctx => Open_map();
-        Time.timeScale = 1;
         controls = new PlayerControls();
+        controls.Controls.Map.performed += ctx => Open_map();
+        Time.timeScale = 1;
+        controls.Controls.Escape.performed += ctx =>pause =!pause;
         controls.Controls.Escape.performed += ctx => Pause();
+
 
         Application.targetFrameRate = 100;
         OnDemandRendering.renderFrameInterval = 2;
@@ -51,20 +52,27 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
-        Time.timeScale = 0;
-        pauseMenu.SetActive(true);
-        FpsCanvas.SetActive(false);
-        settingsMenu.SetActive(false);
+        if (pause)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            FpsCanvas.SetActive(false);
+            settingsMenu.SetActive(false);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+            FpsCanvas.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
 
     }
     public void settings()
     {
-
-     
             settingsMenu.SetActive(true);
-
             pauseMenu.SetActive(false);
-        
     }
     public void settings2()
     {
@@ -82,10 +90,6 @@ public class GameManager : MonoBehaviour
             settingsMenu.SetActive(false);
             MainMenu.SetActive(true);
     }
-    public void playerDeath()
-    {
-        
-    }
     public void BackToMenu()
     {
        
@@ -94,12 +98,7 @@ public class GameManager : MonoBehaviour
         MainMenu.SetActive(true);
 
     }
-    public void resume()
-    {
-        Time.timeScale = 1;
-        FpsCanvas.SetActive(true);
-        pauseMenu.SetActive(false);
-    }
+   
     public void back()
     {
         settingsMenu.SetActive(true);
@@ -157,8 +156,6 @@ public class GameManager : MonoBehaviour
             FpsCanvas.SetActive(false);
             map_cam.SetActive(true);
             map.SetActive(true);
-            Map_button.SetActive(false);
-
             Time.timeScale = 0;
         }
     }
@@ -170,7 +167,7 @@ public class GameManager : MonoBehaviour
         map.SetActive(false);
         map_cam.SetActive(false);
        
-        Map_button.SetActive(true);
+      
     }
 
     private void OnEnable()
