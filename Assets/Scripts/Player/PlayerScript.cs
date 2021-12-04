@@ -5,8 +5,6 @@ using unityCore.Audio;
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.InputSystem;
 namespace Scripts.Player
 {
    
@@ -18,16 +16,13 @@ namespace Scripts.Player
         //Input
         [SerializeField] PlayerControls controls;
 
-        [Header("UI")]
-        [SerializeField] private Sprite crouch;
-        [SerializeField] private Sprite stand;
         
-        public GameObject admenu;
-        [SerializeField]
-        private Image StandStateButton;
-
-        public VolumeProfile volume;
+       
+       
+      
         public float death_timer;
+
+        //Damage
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
@@ -53,7 +48,6 @@ namespace Scripts.Player
 
 
         
-         Vignette vig;
 
 
         // Camera control
@@ -84,18 +78,12 @@ namespace Scripts.Player
             hit_image.gameObject.SetActive(true);
             characterController = gameObject.GetComponent<CharacterController>();
             TempSpeed = speed;
-
-
-            //volume
-            volume.TryGet(out vig);
-            vig.color.Override(Color.black);
         }
 
         // Update is called once per frame
         void Update()
         {
             Health_Manager();
-            
             if (!isDead)
             {
                 Regenerate();
@@ -199,18 +187,7 @@ namespace Scripts.Player
             Health -= hminus;
         }
 
-        public void ChangeUI()
-        {
-            if (isCrouching)
-            {
-                StandStateButton.sprite = crouch;
-            }
-            else
-            {
-                 StandStateButton.sprite = stand;
-            }
-        }
-      
+       
         private void Regenerate()
         {
             if(Health <=75)
@@ -222,7 +199,6 @@ namespace Scripts.Player
         }
         private void Health_Manager()
         {
-            vig.color.Override(new Color((1-Health/75)/2, 0, 0));
             //Set Hit Alpha
             var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
@@ -251,7 +227,6 @@ namespace Scripts.Player
         {
             AudioM.Player_stop();
          //   yield return new WaitForSeconds(death_timer);
-            admenu.SetActive(true);
             Time.timeScale = 0;
         }
 

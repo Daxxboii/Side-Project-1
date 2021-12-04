@@ -234,6 +234,93 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Inspection"",
+            ""id"": ""67b28ccf-6651-4f28-9a60-35ac8300a7b3"",
+            ""actions"": [
+                {
+                    ""name"": ""RotateX"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c13ab0b5-aadf-43ad-ad3c-ec5866eb0491"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9d10f1fe-0e72-4ecc-8975-5dd06e51b723"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""153c1dc2-2d33-44d7-a0f6-af9e538505e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.1,behavior=2)""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bc0ad691-c75b-4b19-8efc-b431984547f0"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=15,y=15)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RotateX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36f5052c-50a7-4ee5-b8b8-26a91aa567ce"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RotateX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5ae9be2-c6e4-4c5f-91d7-26a3d56f9cce"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=15,y=15)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RotateY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86f47496-f497-4f4a-afa3-4fe4d95b39bc"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RotateY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a0b0117-39f0-4026-99b3-5acec5411231"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -285,6 +372,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Controls_Escape = m_Controls.FindAction("Escape", throwIfNotFound: true);
         m_Controls_Interact = m_Controls.FindAction("Interact", throwIfNotFound: true);
         m_Controls_Map = m_Controls.FindAction("Map", throwIfNotFound: true);
+        // Inspection
+        m_Inspection = asset.FindActionMap("Inspection", throwIfNotFound: true);
+        m_Inspection_RotateX = m_Inspection.FindAction("RotateX", throwIfNotFound: true);
+        m_Inspection_RotateY = m_Inspection.FindAction("RotateY", throwIfNotFound: true);
+        m_Inspection_Mouse = m_Inspection.FindAction("Mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,6 +495,55 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public ControlsActions @Controls => new ControlsActions(this);
+
+    // Inspection
+    private readonly InputActionMap m_Inspection;
+    private IInspectionActions m_InspectionActionsCallbackInterface;
+    private readonly InputAction m_Inspection_RotateX;
+    private readonly InputAction m_Inspection_RotateY;
+    private readonly InputAction m_Inspection_Mouse;
+    public struct InspectionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public InspectionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RotateX => m_Wrapper.m_Inspection_RotateX;
+        public InputAction @RotateY => m_Wrapper.m_Inspection_RotateY;
+        public InputAction @Mouse => m_Wrapper.m_Inspection_Mouse;
+        public InputActionMap Get() { return m_Wrapper.m_Inspection; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InspectionActions set) { return set.Get(); }
+        public void SetCallbacks(IInspectionActions instance)
+        {
+            if (m_Wrapper.m_InspectionActionsCallbackInterface != null)
+            {
+                @RotateX.started -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateX;
+                @RotateX.performed -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateX;
+                @RotateX.canceled -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateX;
+                @RotateY.started -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateY;
+                @RotateY.performed -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateY;
+                @RotateY.canceled -= m_Wrapper.m_InspectionActionsCallbackInterface.OnRotateY;
+                @Mouse.started -= m_Wrapper.m_InspectionActionsCallbackInterface.OnMouse;
+                @Mouse.performed -= m_Wrapper.m_InspectionActionsCallbackInterface.OnMouse;
+                @Mouse.canceled -= m_Wrapper.m_InspectionActionsCallbackInterface.OnMouse;
+            }
+            m_Wrapper.m_InspectionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @RotateX.started += instance.OnRotateX;
+                @RotateX.performed += instance.OnRotateX;
+                @RotateX.canceled += instance.OnRotateX;
+                @RotateY.started += instance.OnRotateY;
+                @RotateY.performed += instance.OnRotateY;
+                @RotateY.canceled += instance.OnRotateY;
+                @Mouse.started += instance.OnMouse;
+                @Mouse.performed += instance.OnMouse;
+                @Mouse.canceled += instance.OnMouse;
+            }
+        }
+    }
+    public InspectionActions @Inspection => new InspectionActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -438,5 +579,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+    }
+    public interface IInspectionActions
+    {
+        void OnRotateX(InputAction.CallbackContext context);
+        void OnRotateY(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
     }
 }
