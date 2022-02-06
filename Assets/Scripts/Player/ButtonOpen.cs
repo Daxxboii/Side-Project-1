@@ -122,36 +122,14 @@ namespace Scripts.Buttons
                     }
                  if (hit.transform.CompareTag("Untagged"))
                     {
-                        Intract.SetActive(false);
-                        Pickup.SetActive(false);
-                        Drop.SetActive(false);
-                        Unhide.SetActive(false);
-                        save.SetActive(false);
-                        Hide.SetActive(false);
-                        Timeline.SetActive(false);
-                        note.SetActive(false);
-                        Comic.SetActive(false);
-                        map.SetActive(false);
-                        comment.text = "";
+                    close();
                     }
 
                 
             }
             else
             {
-                Intract.SetActive(false);
-                Pickup.SetActive(false);
-                Drop.SetActive(false);
-                Unhide.SetActive(false);
-                save.SetActive(false);
-                Hide.SetActive(false);
-                Timeline.SetActive(false);
-                note.SetActive(false);
-                Comic.SetActive(false);
-                map.SetActive(false);
-                comment.text = "";
-
-           
+                close();
             }
 
         }

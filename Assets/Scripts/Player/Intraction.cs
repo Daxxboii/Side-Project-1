@@ -71,6 +71,20 @@ namespace Scripts.Player
                         Door_Fence();
                     }
                 }
+                else if (hit.collider.tag == "Note")
+                {
+                    nm = hit.transform.GetComponent<Note_manager>();
+                    Note_Open();
+                    hit.transform.gameObject.SetActive(false);
+                    foreach (GameObject i in nm.objects)
+                    {
+                        i.SetActive(true);
+                    }
+                    if (nm.objective)
+                    {
+                        tm.ObjectiveList();
+                    }
+                }
                 else if (hit.transform.CompareTag("Escape Door"))
                 {
                     ed = hit.transform.GetComponent<escape_door>();
@@ -89,20 +103,7 @@ namespace Scripts.Player
                     }
                     ed.Activations();
                 }
-                else if (hit.collider.tag == "Note")
-                {
-                    nm = hit.transform.GetComponent<Note_manager>();
-                    Note_Open();
-                    hit.transform.gameObject.SetActive(false);
-                  foreach(GameObject i in nm.objects)
-                    {
-                        i.SetActive(true);
-                    }
-                    if (nm.objective)
-                    {
-                        tm.ObjectiveList();
-                    }
-                }
+               
                 else if(hit.collider.tag == "Map")
                 {
                     map.SetActive(false);
