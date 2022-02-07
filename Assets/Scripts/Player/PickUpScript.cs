@@ -42,7 +42,7 @@ namespace Scripts.Player
                        
                     }
                 }
-                if (hit.collider.tag == "Fingie")
+                else if (hit.collider.tag == "Fingie")
                 {
                     p.PickedUpObject = hit.collider.gameObject;
                   
@@ -57,14 +57,11 @@ namespace Scripts.Player
                     }
                     hit.collider.gameObject.SetActive(false);
                 }
-                if(hit.collider.tag == "Doll")
+                else if(hit.collider.tag == "Doll")
                 {
                     hit.transform.gameObject.SetActive(false);
                     tm.ObjectiveList();
                 }
-               
-
-
             }
         }
     }
