@@ -11,7 +11,7 @@ namespace Scripts.Buttons
     public class ButtonOpen : MonoBehaviour
     {
         [SerializeField]
-        GameObject Player, Hide, Unhide, Intract, Pickup, Drop, Timeline,Error_comment,note,save,Comic,map;
+        GameObject Player,  Intract, Pickup, Timeline,Error_comment,note,save,Comic,map;
         escape_door ed = null;
         TextMeshProUGUI comment;
         [SerializeField]
@@ -30,13 +30,9 @@ namespace Scripts.Buttons
         public RaycastHit hit;
         void Awake()
         {
-            // Player = GameObject.FindWithTag("Player");
             Pickup.SetActive(false);
             map.SetActive(false);
             Intract.SetActive(false);
-            Hide.SetActive(false);
-            Unhide.SetActive(false);
-            Drop.SetActive(false);
             Comic.SetActive(false);
             note.SetActive(false);
             Pickup.SetActive(false);
@@ -69,7 +65,6 @@ namespace Scripts.Buttons
                 {
                     Comic.SetActive(true);
                     Track(Comic);
-
                 }
 
                 else  if (hit.transform.CompareTag("Note"))
@@ -84,13 +79,7 @@ namespace Scripts.Buttons
                     Track(note);
 
                     }
-                else if (hit.transform.CompareTag("Hideable"))
-                    {
-                        Hide.SetActive(true);
-                        Unhide.SetActive(false);
-                     
-
-                    }
+               
               
 
                 else if (hit.transform.CompareTag("Map"))
@@ -137,10 +126,7 @@ namespace Scripts.Buttons
         {
             Intract.SetActive(false);
             Pickup.SetActive(false);
-            Drop.SetActive(false);
-            Unhide.SetActive(false);
             save.SetActive(false);
-            Hide.SetActive(false);
             Timeline.SetActive(false);
             note.SetActive(false);
             Comic.SetActive(false);

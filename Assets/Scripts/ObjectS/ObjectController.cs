@@ -7,7 +7,7 @@ namespace Scripts.Objects
     public class ObjectController : MonoBehaviour
     {
         [SerializeField]
-        PickUpScript pickup;
+        Intraction pickup;
         public GameObject have, had;
         bool isHolding;
         Rigidbody rb;

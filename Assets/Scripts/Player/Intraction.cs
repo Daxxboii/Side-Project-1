@@ -10,7 +10,7 @@ namespace Scripts.Player
 {
     public class Intraction : MonoBehaviour
     {
-      
+        public GameObject PickedUpObject;
         [SerializeField]
         GameObject minimap_button;
         [SerializeField]
@@ -170,6 +170,46 @@ namespace Scripts.Player
         void Door_Locker()
         {
             audio.Locker_Gate_Open();
+        }
+        public void Pickup()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(FPScam.transform.position, FPScam.transform.forward, out hit, it.range, it.Intractable))
+            {
+                if (hit.collider.tag == "Key" || hit.collider.tag == "pickup")
+                {
+                    PickedUpObject = hit.collider.gameObject;
+                    hit.collider.enabled = false;
+                    tm.ObjectiveList();
+                    if (PickedUpObject != null)
+                    {
+                        oc.bring(PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        PickedUpObject = null;
+
+                    }
+                }
+                else if (hit.collider.tag == "Fingie")
+                {
+                    PickedUpObject = hit.collider.gameObject;
+
+                    hit.collider.enabled = false;
+                    tm.ObjectiveList();
+                    if (PickedUpObject != null)
+                    {
+                        oc.bring(PickedUpObject);
+                        // Destroy(p.PickedUpObject);
+                        PickedUpObject = null;
+
+                    }
+                    hit.collider.gameObject.SetActive(false);
+                }
+                else if (hit.collider.tag == "Doll")
+                {
+                    hit.transform.gameObject.SetActive(false);
+                    tm.ObjectiveList();
+                }
+            }
         }
     }
 }
