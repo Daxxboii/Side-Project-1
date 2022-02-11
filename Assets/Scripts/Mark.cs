@@ -12,17 +12,54 @@ public class Mark : MonoBehaviour
     {
         gameObjects.Clear();
          Renderer[] rend = FindObjectsOfType(typeof(Renderer)) as Renderer[];
+        Material[] originalMats = Resources.FindObjectsOfTypeAll<Material>();
+        for (int i = 0; i < rend.Length; i++)
+        {
+          
+            Material[] mats = rend[i].sharedMaterials;
+            Material[] tempMats = new Material[mats.Length];
+          
+            for (int j = 0; j < originalMats.Length; j++)
+            {
 
-          for (int i = 0; i < rend.Length; i++)
-          {
-              if (rend[i].sharedMaterial.mainTexture == material_to_search)
-              {
-				if (!gameObjects.Contains(rend[i].sharedMaterial))
-				{
-                    gameObjects.Add(rend[i].sharedMaterial);
+                for (int k = 0; k < mats.Length; k++)
+                {
+                    if (mats[k] != null)
+                    {
+
+
+                        if ((originalMats[j].name + " (Instance) (Instance)" == mats[k].name) && mats[k] != null)
+                        {
+
+                            tempMats[k] = originalMats[j];
+
+
+                        }
+
+                        else if ((originalMats[j].name + " (Instance)" == mats[k].name) && mats[k] != null)
+                        {
+                            tempMats[k] = originalMats[j];
+
+                        }
+
+
+                        else if ((originalMats[j].name == mats[k].name) && mats[k] != null)
+                        {
+
+                            tempMats[k] = originalMats[j];
+
+
+                        }
+                    }
                 }
+
             }
-          }
-       
+
+            rend[i].sharedMaterials = tempMats;
+
+
+        }
     }
+
 }
+
