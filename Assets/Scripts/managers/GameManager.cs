@@ -47,21 +47,13 @@ public class GameManager : MonoBehaviour
     }
     public void settings()
     {
-
-     
             settingsMenu.SetActive(true);
-
             pauseMenu.SetActive(false);
-        
     }
     public void settings2()
     {
-       
-       
-            settingsMenu.SetActive(true);
-
-            MainMenu.SetActive(false);
-        
+        settingsMenu.SetActive(true);
+        MainMenu.SetActive(false);
     }
     public void BackToPause()
     {
