@@ -1,0 +1,594 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d41887b1546f5c44ab54e7e65aad3bc, type: 3}
+  m_Name: Basketball
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: 6e811d1ab5ad4a547b775f3597f26db8, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.25024414
+      y: 0.6254883
+      width: 0.15600586
+      height: 0.3125
+    srcObjName: BasetBall Court Room
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.99999994
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 4e3aeeb1258f51c48addc40a1945bd30, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00024414062
+      y: 0.00048828125
+      width: 0.24951172
+      height: 0.49902344
+    srcObjName: BasetBall Court Room
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.53769004
+      height: 0.8362119
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 6e811d1ab5ad4a547b775f3597f26db8, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.6479492
+      y: 0.00048828125
+      width: 0.15112305
+      height: 0.31201172
+    srcObjName: BasetBall Court Room.001
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.96855843
+      height: 0.99999994
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 55d4876d403eac448b1a9bdc17d56f4f, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00024414062
+      y: 0.5004883
+      width: 0.19726562
+      height: 0.46728516
+    srcObjName: BasetBall Court Room.001
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.8269311
+      height: 0.9975866
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 259420bd5db089c4cb60a88ec1723a86, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.6479492
+      y: 0.31347656
+      width: 0.1171875
+      height: 0.15625
+    srcObjName: BasketBall Board
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0.125
+      y: 0
+      width: 0.75
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 7e998cb2883233742a61aee8abbc6d97, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00024414062
+      y: 0.96875
+      width: 0.030761719
+      height: 0.030273438
+    srcObjName: BasketBall Loop
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 7da7228befab56342806e488cc583b0c, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.79956055
+      y: 0.00048828125
+      width: 0.12475586
+      height: 0.24951172
+    srcObjName: Cylinder
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.0006936856
+      y: 0.00045373812
+      width: 0.99905545
+      height: 0.99897707
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: a903fe8e64de34b4aafd0360e4f51270, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.40673828
+      y: 0.6254883
+      width: 0.078125
+      height: 0.15625
+    srcObjName: Railing Small
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0.375
+      y: 0.375
+      width: 0.25
+      height: 0.5
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 87fdd32bb368c284d831e51e704e1349, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.40673828
+      y: 0.6254883
+      width: 0.078125
+      height: 0.15625
+    srcObjName: Railing Small
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0.375
+      y: 0.375
+      width: 0.25
+      height: 0.5
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 7745a47d50c045c47af6187f07d64a5f, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.50024414
+      y: 0.5004883
+      width: 0.078125
+      height: 0.49902344
+    srcObjName: Roof
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.5
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 9aa679f2772ac554d827eb18cf530bc4, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.25024414
+      y: 0.31396484
+      width: 0.24951172
+      height: 0.31054688
+    srcObjName: Stairs
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.96089077
+      height: 0.99464864
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 9aa679f2772ac554d827eb18cf530bc4, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.25024414
+      y: 0.00048828125
+      width: 0.24951172
+      height: 0.3125
+    srcObjName: Stairs.001
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.9558629
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: a719ca92984356d4394cd0d7d888c08b, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.50024414
+      y: 0.00048828125
+      width: 0.1472168
+      height: 0.49902344
+    srcObjName: Roof (2)
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.94263303
+      height: 1
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 18f370fbcd175a34b85d09933c934fe6, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03149414
+      y: 0.96875
+      width: 0.030761719
+      height: 0.030273438
+    srcObjName: Cone_
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 56f4646276da70649b02b41adbc569d4, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03149414
+      y: 0.96875
+      width: 0.030761719
+      height: 0.030273438
+    srcObjName: Lamps.001
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: a4f3b597ac626bf4a806af82a83bb75a, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03149414
+      y: 0.96875
+      width: 0.030761719
+      height: 0.030273438
+    srcObjName: BasketBall Pillar
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 4cb8ee9279107f246b89d7c2265c7760, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.001953125
+      y: 0.001953125
+      width: 0.99609375
+      height: 0.49609375
+    srcObjName: Big glass
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 90a728aa4589fe34bb44ca1a1ef02bbe, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.001953125
+      y: 0.001953125
+      width: 0.99609375
+      height: 0.49609375
+    srcObjName: BasketBall Board
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 8d6a474f69fbed94eb2d8d891c82c331, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.001953125
+      y: 0.5019531
+      width: 0.00390625
+      height: 0.00390625
+    srcObjName: Cone_
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.38053465
+      height: 0.88282156
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: ef0a1449dc6641a4194419add39db1f9, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: 7da7228befab56342806e488cc583b0c, type: 2}
+    - {fileID: 2100000, guid: 6e811d1ab5ad4a547b775f3597f26db8, type: 2}
+    - {fileID: 2100000, guid: 7745a47d50c045c47af6187f07d64a5f, type: 2}
+    - {fileID: 2100000, guid: a719ca92984356d4394cd0d7d888c08b, type: 2}
+    - {fileID: 2100000, guid: 9aa679f2772ac554d827eb18cf530bc4, type: 2}
+    - {fileID: 2100000, guid: a4f3b597ac626bf4a806af82a83bb75a, type: 2}
+    - {fileID: 2100000, guid: 56f4646276da70649b02b41adbc569d4, type: 2}
+    - {fileID: 2100000, guid: 18f370fbcd175a34b85d09933c934fe6, type: 2}
+    - {fileID: 2100000, guid: 7e998cb2883233742a61aee8abbc6d97, type: 2}
+    - {fileID: 2100000, guid: 259420bd5db089c4cb60a88ec1723a86, type: 2}
+    - {fileID: 2100000, guid: a903fe8e64de34b4aafd0360e4f51270, type: 2}
+    - {fileID: 2100000, guid: 87fdd32bb368c284d831e51e704e1349, type: 2}
+    - {fileID: 2100000, guid: 55d4876d403eac448b1a9bdc17d56f4f, type: 2}
+    - {fileID: 2100000, guid: 4e3aeeb1258f51c48addc40a1945bd30, type: 2}
+  - combinedMaterial: {fileID: 2100000, guid: 397a0a802746ca044a39a9126cb76068, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: 4cb8ee9279107f246b89d7c2265c7760, type: 2}
+    - {fileID: 2100000, guid: 90a728aa4589fe34bb44ca1a1ef02bbe, type: 2}
+    - {fileID: 2100000, guid: 8d6a474f69fbed94eb2d8d891c82c331, type: 2}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1
