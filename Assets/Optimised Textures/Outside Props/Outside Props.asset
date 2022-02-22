@@ -18,10 +18,10 @@ MonoBehaviour:
   - material: {fileID: 2100000, guid: a812fbb2d74212c41ba15b87df1a0a96, type: 2}
     atlasRect:
       serializedVersion: 2
-      x: 0.0009765625
-      y: 0.001953125
-      width: 0.625
-      height: 0.0625
+      x: 0.00024414062
+      y: 0.8845215
+      width: 0.15136719
+      height: 0.0087890625
     srcObjName: Tree_2 (1)
     textureArraySliceIdx: -1
     allPropsUseSameTiling: 0
@@ -43,14 +43,43 @@ MonoBehaviour:
       y: -0.06740423
       width: 1.0020714
       height: 1.1433315
-    tilingTreatment: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: a812fbb2d74212c41ba15b87df1a0a96, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00024414062
+      y: 0.8937988
+      width: 0.15112305
+      height: 0.0075683594
+    srcObjName: Tree_1 (2)
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 0
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 0.99973416
+    tilingTreatment: 1
   - material: {fileID: 2100000, guid: d3705d83eb843a34795534544db85ca6, type: 2}
     atlasRect:
       serializedVersion: 2
-      x: 0.0009765625
-      y: 0.068359375
-      width: 0.125
-      height: 0.0625
+      x: 0.9694824
+      y: 0.00024414062
+      width: 0.030029297
+      height: 0.0078125
     srcObjName: Bench_Unwrapped
     textureArraySliceIdx: -1
     allPropsUseSameTiling: 1
@@ -72,14 +101,14 @@ MonoBehaviour:
       y: 0
       width: 0
       height: 0
-    tilingTreatment: 0
+    tilingTreatment: 1
   - material: {fileID: 2100000, guid: 414c63f0874baab408c3aa9460909932, type: 2}
     atlasRect:
       serializedVersion: 2
-      x: 0.0009765625
-      y: 0.13476562
-      width: 0.125
-      height: 0.125
+      x: 0.00024414062
+      y: 0.00024414062
+      width: 0.96875
+      height: 0.82006836
     srcObjName: Bushes
     textureArraySliceIdx: -1
     allPropsUseSameTiling: 0
@@ -101,13 +130,44 @@ MonoBehaviour:
       y: -40.916256
       width: 129.1688
       height: 52.49583
-    tilingTreatment: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 29b3f671e65f56746b133aad2550341e, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00024414062
+      y: 0.8208008
+      width: 0.96875
+      height: 0.06323242
+    srcObjName: Walls
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: -18.45058
+      y: -0.51637673
+      width: 37.90116
+      height: 2.0307426
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
   resultMaterials:
   - combinedMaterial: {fileID: 2100000, guid: 954778d2451e2c74ebdba5063cd74507, type: 2}
-    considerMeshUVs: 0
+    considerMeshUVs: 1
     sourceMaterials:
+    - {fileID: 2100000, guid: a812fbb2d74212c41ba15b87df1a0a96, type: 2}
     - {fileID: 2100000, guid: a812fbb2d74212c41ba15b87df1a0a96, type: 2}
     - {fileID: 2100000, guid: d3705d83eb843a34795534544db85ca6, type: 2}
     - {fileID: 2100000, guid: 414c63f0874baab408c3aa9460909932, type: 2}
+    - {fileID: 2100000, guid: 29b3f671e65f56746b133aad2550341e, type: 2}
   resultMaterialsTexArray: []
   doMultiMaterial: 0
