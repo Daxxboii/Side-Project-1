@@ -13,7 +13,6 @@ namespace Scripts.Timeline
     public class Timeline_Manager : MonoBehaviour
     {
         public AdManager adManager;
-        public HintManager hintManager;
         public int delay;
         public GameObject skip;
         public PlayerScript ps;
@@ -192,7 +191,6 @@ namespace Scripts.Timeline
         public void ObjectiveList()
         {
             //   Debug.Log(objective_index++);
-            hintManager.index = objective_index;
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
             adManager.hint_button.SetActive(true);
