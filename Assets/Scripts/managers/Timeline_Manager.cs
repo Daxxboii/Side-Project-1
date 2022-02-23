@@ -17,7 +17,7 @@ namespace Scripts.Timeline
         public int delay;
         public GameObject skip;
         public PlayerScript ps;
-       private string text,_text;
+        private string text,_text;
         [SerializeField]
         TextAsset subtitles,objectives;
         [SerializeField]
@@ -101,7 +101,6 @@ namespace Scripts.Timeline
             rotation = cutscene_player.transform.rotation.eulerAngles;
             cam_rot = cutscene_cam.transform.rotation.eulerAngles;
             position.y -= y_offset;
-         //   Debug.Log("ur mom");
           
             player.transform.position = position;
             player.transform.eulerAngles = rotation;

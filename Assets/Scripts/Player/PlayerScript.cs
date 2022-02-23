@@ -44,7 +44,7 @@ namespace Scripts.Player
         // Player settings
         [SerializeField] private float cameraSensitivity;
         [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, crouchHight, Health, RegenTimer;
-        private bool isSprinting, isCrouching, IsCrawlling, canSprint;
+        private bool  isCrouching;
         private Vector3 move;
         public bool isDead;
 
@@ -94,7 +94,6 @@ namespace Scripts.Player
         void Update()
         {
             Health_Manager();
-            
             if (!isDead)
             {
                 Regenerate();
@@ -103,7 +102,6 @@ namespace Scripts.Player
 
                 if (rightFingerId != -1)
                 {
-                 //   Debug.Log("Rotating");
                     LookAround();
                 }
                 LocoMotion();
@@ -184,7 +182,6 @@ namespace Scripts.Player
 
         void LookAround()
         {
-
             // vertical (pitch) rotation
             cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
             cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
@@ -248,15 +245,7 @@ namespace Scripts.Player
         }
 
        
-        public void Sprint()
-        {
-            if(canSprint == true)
-            {
-                speed = SprintSpeed;
-                canSprint = false;
-                StartCoroutine(SprintS());
-            }
-        }
+      
 
          public void SetSensi(float S)
         {
@@ -265,11 +254,7 @@ namespace Scripts.Player
         }
 
 
-        IEnumerator SprintS()
-        {
-            yield return new WaitForSeconds(3f);
-            speed = TempSpeed;
-        }
+        
 
         public void PlayerTakeDamage(float hminus)
         {
@@ -319,8 +304,6 @@ namespace Scripts.Player
                 GirlAI.Cooldown_period = 0;
                 isDead = true;
                 fpsCam.transform.LookAt(ghost);
-
-              //  StartCoroutine("Player_death");
 
             }
         }

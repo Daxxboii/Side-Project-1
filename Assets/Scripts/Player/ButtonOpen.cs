@@ -93,7 +93,7 @@ namespace Scripts.Buttons
                     {
                         Timeline.SetActive(true);
                         comment.text = "Interact?";
-                    Track(Timeline);
+                        Track(Timeline);
                     }
 
                 else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
@@ -122,7 +122,7 @@ namespace Scripts.Buttons
             }
 
         }
-      public   void close()
+      public void close()
         {
             Intract.SetActive(false);
             Pickup.SetActive(false);
