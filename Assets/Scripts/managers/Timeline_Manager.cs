@@ -195,22 +195,23 @@ namespace Scripts.Timeline
             objective_text.text = _text;
             adManager.hint_button.SetActive(true);
             adManager.hint_tracker.SetActive(false);
-            skip.SetActive(false);
+            HideSkip();
             //  Debug.Log("objective");
 
         }
 
-        public void Skip()
+        private void ActivateSkip()
         {
             skip.SetActive(true);
         }
 
+        //Called when timeline Starts
         IEnumerator skipper()
         {
             yield return new WaitForSeconds(delay);
-            Skip();
+            ActivateSkip();
         }
-        // TO fast forward timeline
+        // TO fast forward timeline (called when button is used)
         public void End()
         {
             director.playableGraph.GetRootPlayable(0).SetSpeed(5);

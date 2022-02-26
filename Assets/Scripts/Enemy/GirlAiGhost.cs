@@ -16,7 +16,7 @@ namespace Scripts.Enemy
             float chase_timer;
             public float wanderRadius;
             public bool angry;
-            public float wanderTimer, fieldOfView = 110f, chase_range,stoppingdistance;
+            public float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
             public GameObject volume;
             [SerializeField]
             public NavMeshAgent agent;
@@ -41,7 +41,7 @@ namespace Scripts.Enemy
             private void Awake()
             {
                 agent = GetComponent<NavMeshAgent>();
-                agent.stoppingDistance = stoppingdistance;
+                agent.stoppingDistance = agentstoppingdistance;
 
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 agent.destination = player.transform.position;

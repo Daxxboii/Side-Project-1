@@ -8,12 +8,13 @@ using Scripts.Objects;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using AtmosphericHeightFog;
 namespace Scripts.Player
 {
    
     public class PlayerScript : MonoBehaviour
     {
-        //dont touch this ever and i mean it if someone edit this i will kill tharm :angry-emoje:
+      
         private static float sensi = 10;
 
         [Header("UI")]
@@ -29,6 +30,7 @@ namespace Scripts.Player
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
+        public HeightFogGlobal fog;
        
         [SerializeField]
         private GirlAiGhost GirlAI;
@@ -52,7 +54,7 @@ namespace Scripts.Player
         // Touch detection
         private int leftFingerId, rightFingerId;
         private float halfScreenWidth;
-         Vignette vig;
+       
 
 
         // Camera control
@@ -85,9 +87,7 @@ namespace Scripts.Player
             // only calculate once
             halfScreenWidth = Screen.width / 2;
 
-            //volume
-            volume.TryGet(out vig);
-            vig.color.Override(Color.black);
+           
         }
 
         // Update is called once per frame
@@ -195,20 +195,14 @@ namespace Scripts.Player
             
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
-
+            camAnim.SetFloat("WalkSpeed", z);
             if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
                 camAnim.SetBool("IsMoving", true);
-                if (!isCrouching)
-                {
-                    AudioM.Player_walk();
-                }
-               
             }
             else
             {
                 camAnim.SetBool("IsMoving", false);
-                AudioM.Player_stop();
             }
 
             move = x * transform.right + z * transform.forward;
@@ -284,12 +278,11 @@ namespace Scripts.Player
         }
         private void Health_Manager()
         {
-            vig.color.Override(new Color((1-Health/75)/2, 0, 0));
             //Set Hit Alpha
             var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
             hit_image.color = tempColor;
-
+           fog.fogColorDuo =  Mathf.PingPong(Time.time, 1);
             //Set Hit Image
             if (Health < 50){
                 hit_image.sprite = hit_high;
@@ -309,7 +302,7 @@ namespace Scripts.Player
         }
         void Player_death()
         {
-            AudioM.Player_stop();
+           
          //   yield return new WaitForSeconds(death_timer);
             admenu.SetActive(true);
             Time.timeScale = 0;

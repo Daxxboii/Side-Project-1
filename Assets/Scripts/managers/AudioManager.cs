@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
 
     public Animator thunder;
     bool crying;
-    bool walking = true;
+  
     float timer;
     int index,_index;
 
@@ -67,8 +67,6 @@ public class AudioManager : MonoBehaviour
     //player
     public void Player_walk()
     {
-        if (walking)
-        {
             if (FogActivator.inside)
             {
                 Footsteps.clip = Walk_on_Planks;
@@ -78,14 +76,8 @@ public class AudioManager : MonoBehaviour
                 Footsteps.clip = Walk_on_dirt;
             }
             Footsteps.Play();
-            walking = false;
-        }
     }
-    public void Player_stop()
-    {
-        Footsteps.Stop();
-        walking = true;
-    }
+   
     //UI
     public void UI()
     {
