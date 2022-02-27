@@ -6,7 +6,6 @@ using System;
 
 public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
 {
-    public string reference = "";
     public float top = 0;
     public float down = 0;
 
@@ -16,22 +15,8 @@ public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
         this.down = 0;
     }
 
-    public StyledEmissiveIntensityDrawer(string reference)
-    {
-        this.reference = reference;
-        this.top = 0;
-        this.down = 0;
-    }
-
     public StyledEmissiveIntensityDrawer(float top, float down)
     {
-        this.top = top;
-        this.down = down;
-    }
-
-    public StyledEmissiveIntensityDrawer(string reference, float top, float down)
-    {
-        this.reference = reference;
         this.top = top;
         this.down = down;
     }
@@ -43,8 +28,6 @@ public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
             fontSize = 9,
             alignment = TextAnchor.MiddleCenter,
         };
-
-        var internalReference = MaterialEditor.GetMaterialProperty(editor.targets, reference);
 
         Vector4 propVector = prop.vectorValue;
 
@@ -76,7 +59,6 @@ public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
         GUILayout.EndHorizontal();
 
         EditorGUI.showMixedValue = false;
-
         if (EditorGUI.EndChangeCheck())
         {
             if (propVector.w == 0)
@@ -86,11 +68,6 @@ public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
             else if (propVector.w == 1)
             {
                 propVector.x = ConvertEvToLuminance(propVector.z);
-            }
-
-            if (internalReference.displayName != null)
-            {
-                internalReference.floatValue = propVector.x;
             }
 
             prop.vectorValue = propVector;

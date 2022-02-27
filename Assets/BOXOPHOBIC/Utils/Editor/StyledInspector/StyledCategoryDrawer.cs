@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using Boxophobic.Constants;
 
 namespace Boxophobic.StyledGUI
 {
@@ -17,7 +18,9 @@ namespace Boxophobic.StyledGUI
             GUI.enabled = true;
             EditorGUI.indentLevel = 0;
 
-            property.boolValue = StyledGUI.DrawInspectorCategory(a.category, property.boolValue, a.top, a.down, a.colapsable);
+            GUILayout.Space(a.top);
+            StyledGUI.DrawInspectorCategory(a.category);
+            GUILayout.Space(a.down);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
