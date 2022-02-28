@@ -135,6 +135,7 @@ namespace Scripts.Player
 
        void Note_Open()
         {
+
             note_text.text = nm.text;
             Note_panel.SetActive(true);
             fps_canvas.SetActive(false);

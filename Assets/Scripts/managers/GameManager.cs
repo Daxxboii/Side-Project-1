@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
    
     private void Awake()
     {
+        Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
         Application.targetFrameRate = 100;
         OnDemandRendering.renderFrameInterval = 2;

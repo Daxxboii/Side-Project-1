@@ -26,7 +26,7 @@ namespace Scripts.Player
         private Image StandStateButton;
 
         public VolumeProfile volume;
-        public float death_timer;
+      
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
@@ -45,7 +45,8 @@ namespace Scripts.Player
 
         // Player settings
         [SerializeField] private float cameraSensitivity;
-        [SerializeField] public float TempSpeed, speed, CrouchSpeed, crawlSpeed, SprintSpeed, height, crouchHight, Health, RegenTimer;
+        [SerializeField] public float speed, CrouchSpeed, height, crouchHight, Health, RegenTimer;
+        private float TempSpeed;
         private bool  isCrouching;
         private Vector3 move;
         public bool isDead;
@@ -93,7 +94,10 @@ namespace Scripts.Player
         // Update is called once per frame
         void Update()
         {
-            Health_Manager();
+			if (Health < 75)
+			{
+                Health_Manager();
+            }
             if (!isDead)
             {
                 Regenerate();
