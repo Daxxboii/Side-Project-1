@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-using System;
-using unityCore.Audio;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Threading;
-using Scripts.Objects;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using AtmosphericHeightFog;
 namespace Scripts.Player
 {

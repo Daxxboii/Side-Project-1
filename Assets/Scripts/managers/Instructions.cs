@@ -14,9 +14,9 @@ public class Instructions : MonoBehaviour
     {
         if (!PlayerPrefsX.GetBool("Saved"))
         {
-            Time.timeScale = 0;
             Fps_Canvas.SetActive(false);
             panel.SetActive(true);
+            PostProcessingManager.blur = true;
         }
     }
 
@@ -41,7 +41,7 @@ public class Instructions : MonoBehaviour
     }
     public void Close()
     {
-        Time.timeScale = 1;
+        PostProcessingManager.blur = false;
         Fps_Canvas.SetActive(true);
         panel.SetActive(false);
     }

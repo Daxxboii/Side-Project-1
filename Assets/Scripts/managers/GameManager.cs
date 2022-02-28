@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
-        Time.timeScale = 0;
+        PostProcessingManager.blur = true;
         pauseMenu.SetActive(true);
         FpsCanvas.SetActive(false);
         settingsMenu.SetActive(false);
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     }
     public void resume()
     {
-        Time.timeScale = 1;
+        PostProcessingManager.blur = false;
         FpsCanvas.SetActive(true);
         pauseMenu.SetActive(false);
     }

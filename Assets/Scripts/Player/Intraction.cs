@@ -135,18 +135,17 @@ namespace Scripts.Player
 
        void Note_Open()
         {
-
             note_text.text = nm.text;
             Note_panel.SetActive(true);
             fps_canvas.SetActive(false);
-            Time.timeScale = 0f;
+            PostProcessingManager.blur = true;
         }
 
         public void Note_Close()
         {
             Note_panel.SetActive(false);
             fps_canvas.SetActive(true);
-            Time.timeScale = 1f;
+            PostProcessingManager.blur = false;
         }
      
       void Door_Wooden()
