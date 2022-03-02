@@ -12,8 +12,7 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
-        public HeightFogGlobal Fog;
-        public Camera playercam, cutscenecam;
+       
         public AdManager adManager;
         public int delay;
         public GameObject skip;
@@ -176,7 +175,7 @@ namespace Scripts.Timeline
             StartCoroutine("skipper");
            
             Current_cutscene++;
-            Fog.mainCamera = cutscenecam;
+         
         }
       public  void ReadFile()
         {
@@ -199,7 +198,7 @@ namespace Scripts.Timeline
             adManager.hint_button.SetActive(true);
             adManager.hint_tracker.SetActive(false);
             HideSkip();
-            Fog.mainCamera = playercam;
+          
             //  Debug.Log("objective");
 
         }
