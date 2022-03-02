@@ -178,6 +178,7 @@ namespace Scripts.Player
             {
                 if (hit.collider.tag == "Key" || hit.collider.tag == "pickup")
                 {
+                    Debug.Log("Pickup");
                     PickedUpObject = hit.collider.gameObject;
                     hit.collider.enabled = false;
                     tm.ObjectiveList();
