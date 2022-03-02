@@ -15,10 +15,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     string banner_placement = "Banner_Android";
     public PlayerScript ps;
     public GameObject no_internet,retry;
-
-    public GameObject no_internet_hint,hint_button,hint_tracker;
-
-    public int ad_index;
+   
     void Start()
     {
         Advertisement.AddListener(this);
@@ -35,15 +32,11 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
     }
    public void Show(int a)
     {
-        ad_index = a;
         Advertisement.Show(placement);
         Time.timeScale = 0;
     }
 
-    public void Show_hint()
-    {
-
-    }
+  
 
     public void OnUnityAdsReady(string placementId)
     {
@@ -53,16 +46,8 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidError(string message)
     {
-        if (ad_index == 0)
-        {
             no_internet.SetActive(true);
             retry.SetActive(false);
-        }
-        else
-        {
-            no_internet_hint.SetActive(true);
-        }
-       
     }
 
     public void OnUnityAdsDidStart(string placementId)
@@ -72,20 +57,9 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        if (ad_index == 0)
-        {
             Time.timeScale = 1;
             PlayerPrefs.SetInt("loadindex", 1);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            no_internet_hint.SetActive(false);
-            hint_tracker.SetActive(true);
-            hint_button.SetActive(false);
-        }
-     
     }
 
     IEnumerator ShowBannerWhenInitialized()

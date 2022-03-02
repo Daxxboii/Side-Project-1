@@ -195,8 +195,6 @@ namespace Scripts.Timeline
             //   Debug.Log(objective_index++);
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
-            adManager.hint_button.SetActive(true);
-            adManager.hint_tracker.SetActive(false);
             HideSkip();
           
             //  Debug.Log("objective");
