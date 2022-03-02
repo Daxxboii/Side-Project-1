@@ -13,13 +13,17 @@ public class CameraManagerIntroVideo : MonoBehaviour
 	private void Start()
 	{
 		random = Random.Range(0, cameras.Length);
-		foreach(CinemachineVirtualCamera cam in cameras)
+		foreach (CinemachineVirtualCamera cam in cameras)
 		{
-          if(cam == cameras[counter])
+			if (cam == cameras[random])
 			{
 				cam.Priority++;
 			}
-			
+			else
+			{
+				cam.Priority--;
+			}
+
 			counter++;
 		}
 		counter = 0;
@@ -32,9 +36,13 @@ public class CameraManagerIntroVideo : MonoBehaviour
 			random = Random.Range(0, cameras.Length);
 			foreach (CinemachineVirtualCamera cam in cameras)
 			{
-				if (cam == cameras[counter])
+				if (cam == cameras[random])
 				{
 					cam.Priority++;
+				}
+				else
+				{
+					cam.Priority--;
 				}
 				
 				counter++;
