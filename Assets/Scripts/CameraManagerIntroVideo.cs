@@ -40,6 +40,8 @@ public class CameraManagerIntroVideo : MonoBehaviour
 				counter++;
 			}
 			counter = 0;
+			timer = 0;
 		}
+		
 	}
 }
