@@ -17,11 +17,11 @@ public class CameraManagerIntroVideo : MonoBehaviour
 		{
 			if (cam == cameras[random])
 			{
-				cam.Priority++;
+				cam.Priority=1;
 			}
 			else
 			{
-				cam.Priority--;
+				cam.Priority=0;
 			}
 
 			counter++;
@@ -38,11 +38,11 @@ public class CameraManagerIntroVideo : MonoBehaviour
 			{
 				if (cam == cameras[random])
 				{
-					cam.Priority++;
+					cam.Priority=1;
 				}
 				else
 				{
-					cam.Priority--;
+					cam.Priority=0;
 				}
 				
 				counter++;
