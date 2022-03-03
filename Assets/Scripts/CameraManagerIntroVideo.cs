@@ -11,7 +11,7 @@ public class CameraManagerIntroVideo : MonoBehaviour
 	public struct cams
 	{
 		public CinemachineVirtualCamera camera;
-		[Range(0f,30f)]public int Screen_time;
+		[Range(0f,30f)]public float Screen_time;
 	}
 	
 	public GameObject[] wheels;
@@ -20,11 +20,11 @@ public class CameraManagerIntroVideo : MonoBehaviour
 	int counter;
 	[SerializeField]public cams[] Camera_set;
 
-	private List<CinemachineVirtualCamera> all_cameras;
+	public List<CinemachineVirtualCamera> all_cameras;
 
 	private void Start()
 	{
-
+		all_cameras.Clear();
 		
 		foreach(cams c in Camera_set)
 		{
