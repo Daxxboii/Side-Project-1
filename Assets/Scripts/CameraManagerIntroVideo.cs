@@ -1,35 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Cinemachine;
 
 public class CameraManagerIntroVideo : MonoBehaviour
 {
 	public Animator thunder;
-	public CinemachineVirtualCamera[] cameras;
+	[Serializable]
+	public struct cams
+	{
+		public CinemachineVirtualCamera camera;
+		public int Screen_time;
+	}
+	
 	public GameObject[] wheels;
-	public int Timer;
 	float timer;
 	public float wheel_speed;
-	int random,counter;
+	int counter;
+	[SerializeField]public cams[] Camera_set;
+
+	private List<CinemachineVirtualCamera> all_cameras;
 
 	private void Start()
 	{
-		random = Random.Range(0, cameras.Length);
-		foreach (CinemachineVirtualCamera cam in cameras)
-		{
-			if (cam == cameras[random])
-			{
-				cam.Priority=1;
-			}
-			else
-			{
-				cam.Priority=0;
-			}
 
-			counter++;
+		
+		foreach(cams c in Camera_set)
+		{
+			all_cameras.Add(c.camera);
+			c.camera.Priority = 0;
+			
 		}
-		counter = 0;
+		
 	}
 	private void Update()
 	{
@@ -39,29 +42,24 @@ public class CameraManagerIntroVideo : MonoBehaviour
 		}
 
 		timer += Time.deltaTime;
-		
-
-		if (timer > Timer)
+		if (timer > Camera_set[counter].Screen_time)
 		{
-			random = Random.Range(0, cameras.Length);
-			foreach (CinemachineVirtualCamera cam in cameras)
+			foreach(CinemachineVirtualCamera c in all_cameras)
 			{
-				if (cam == cameras[random])
+				if (c == Camera_set[counter].camera)
 				{
-					cam.Priority=1;
-					thunder.SetTrigger("Open");
-				//	thunder.ResetTrigger("Open");
+					c.Priority = 1;
 				}
 				else
 				{
-					cam.Priority=0;
+					c.Priority = 0;
 				}
-				
-				counter++;
 			}
-			counter = 0;
+			counter++;
 			timer = 0;
 		}
+
+		
 		
 	}
 }
