@@ -114,9 +114,6 @@ namespace Scripts.Timeline
                 aiFollow.enabled = true;
             }
             HideSkip();
-
-
-
         }
         public void Translate_Cutscene()
         {
@@ -172,6 +169,7 @@ namespace Scripts.Timeline
             director.time = 0;
             director.Play();
             director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+            //Start Skip Countdown
             StartCoroutine("skipper");
            
             Current_cutscene++;
@@ -182,7 +180,6 @@ namespace Scripts.Timeline
             text = lines[index++];
             //   Debug.Log(text);
             comments.text = text;
-           
         }
         public void Silence()
         {

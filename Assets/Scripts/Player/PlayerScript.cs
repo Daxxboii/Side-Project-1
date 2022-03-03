@@ -300,7 +300,6 @@ namespace Scripts.Player
         }
         void Player_death()
         {
-           
          //   yield return new WaitForSeconds(death_timer);
             admenu.SetActive(true);
             Time.timeScale = 0;

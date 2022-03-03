@@ -27,6 +27,7 @@ namespace Scripts.Player
         Timeline_Manager tm;
         [SerializeField]
         GameObject Note_panel,map,fps_canvas;
+        public SaveManager savemanager;
         [Serializable]
         private struct IntractionSettings
         {
@@ -111,6 +112,7 @@ namespace Scripts.Player
                   
                     tm.ObjectiveList();
                     Ring_Box.SetActive(true);
+                    savemanager.Save();
                 }
             }
         }
