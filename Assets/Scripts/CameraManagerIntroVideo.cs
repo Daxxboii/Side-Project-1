@@ -11,7 +11,7 @@ public class CameraManagerIntroVideo : MonoBehaviour
 	public struct cams
 	{
 		public CinemachineVirtualCamera camera;
-		public int Screen_time;
+		[Range(0f,30f)]public int Screen_time;
 	}
 	
 	public GameObject[] wheels;
