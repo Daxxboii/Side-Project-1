@@ -1,0 +1,352 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.10f1 (ee872746220e) revision 15632167'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 8141 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\2021.2.10f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+Z:/Side-Project-1
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+56992
+Successfully changed project path to: Z:/Side-Project-1
+Z:/Side-Project-1
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 116.06 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.10f1 (ee872746220e)
+[Subsystems] Discovering subsystems at path C:/2021.2.10f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path Z:/Side-Project-1/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1650 SUPER (ID=0x2187)
+    Vendor:   NVIDIA
+    VRAM:     3955 MB
+    Driver:   30.0.15.1165
+Shader 'Custom/RainShader': fallback shader 'Particles/Alpha Blended' not found
+Initialize mono
+Mono path[0] = 'C:/2021.2.10f1/Editor/Data/Managed'
+Mono path[1] = 'C:/2021.2.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/2021.2.10f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56308
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/2021.2.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004740 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 96.99 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.629 seconds
+Domain Reload Profiling:
+	ReloadAssembly (630ms)
+		BeginReloadAssembly (68ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (481ms)
+			LoadAssemblies (66ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (117ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (274ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (97ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (121ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005320 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 111.67 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Package Manager log level set to [2]
+Mono: successfully reloaded assembly
+- Completed reload, in  2.118 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2119ms)
+		BeginReloadAssembly (121ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (1908ms)
+			LoadAssemblies (83ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (267ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (93ms)
+			SetupLoadedEditorAssemblies (1409ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (112ms)
+				BeforeProcessingInitializeOnLoad (120ms)
+				ProcessInitializeOnLoadAttributes (1079ms)
+				ProcessInitializeOnLoadMethodAttributes (78ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Custom/RainShader': fallback shader 'Particles/Alpha Blended' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.42 seconds
+Refreshing native plugins compatible for Editor in 1.54 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4519 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 82 unused Assets / (402.4 KB). Loaded Objects now: 5073.
+Memory consumption went from 215.1 MB to 214.7 MB.
+Total: 5.194100 ms (FindLiveObjects: 0.845800 ms CreateObjectMapping: 0.137700 ms MarkObjects: 4.092600 ms  DeleteObjects: 0.116800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 11173.599296 seconds.
+  path: Assets/Scenes/Main Scene/Main Scene.unity
+  artifactKey: Guid(e11e4af2d06334a41a2ecb7414cd9ca9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Main Scene/Main Scene.unity using Guid(e11e4af2d06334a41a2ecb7414cd9ca9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b28b8ef17066a98c1a467e42527dbb2f') in 0.030253 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Optimised Textures/Basketball
+  artifactKey: Guid(dbee0268640b1f5458dead7ddb956a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Basketball using Guid(dbee0268640b1f5458dead7ddb956a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '290b9605a1710f5aa694c19d9bc3291f') in 0.007453 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.423253 seconds.
+  path: Assets/Optimised Textures/Basketball/Basketball-mat0-_BaseMap-atlas-0.png
+  artifactKey: Guid(b04a6b294005922498773036804c1e90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Basketball/Basketball-mat0-_BaseMap-atlas-0.png using Guid(b04a6b294005922498773036804c1e90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e771581852365ea5a97a4c010b9dd1a2') in 0.069944 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Optimised Textures/Basketball/Basketball-mat0.mat
+  artifactKey: Guid(ef0a1449dc6641a4194419add39db1f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Basketball/Basketball-mat0.mat using Guid(ef0a1449dc6641a4194419add39db1f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1e83eeefd5e356fe6a79afeff5013e9') in 1.411885 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.569800 seconds.
+  path: Assets/Optimised Textures/Basketball/Basketball-mat0-_BaseMap-atlas-0.png
+  artifactKey: Guid(b04a6b294005922498773036804c1e90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Basketball/Basketball-mat0-_BaseMap-atlas-0.png using Guid(b04a6b294005922498773036804c1e90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc4998c8c7768cce3f891c3fddfab811') in 0.036486 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Optimised Textures/Basketball/Basketball-mat0.mat
+  artifactKey: Guid(ef0a1449dc6641a4194419add39db1f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Basketball/Basketball-mat0.mat using Guid(ef0a1449dc6641a4194419add39db1f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f488eecf4a9f4d33e0dc03be03e93bd8') in 0.392903 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1499.896355 seconds.
+  path: Assets/Optimised Textures/Lamp/Lamp.mat
+  artifactKey: Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/Lamp.mat using Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74084bebb0cb9dfdb5abdc35dc83647e') in 0.084036 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Optimised Textures/Lamp/lamp_UV.png
+  artifactKey: Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/lamp_UV.png using Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0a9afc717c0f3387b75ca7ea3641f1d') in 0.022232 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.138787 seconds.
+  path: Assets/Optimised Textures/Lamp/Lamp.mat
+  artifactKey: Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/Lamp.mat using Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '555290de632b182f7a78010c143f39a6') in 0.015302 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Optimised Textures/Lamp/lamp_UV.png
+  artifactKey: Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/lamp_UV.png using Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '090e92d141f66284f47114073e6984f6') in 0.015893 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.022532 seconds.
+  path: Assets/Optimised Textures/Lamp/Lamp.mat
+  artifactKey: Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/Lamp.mat using Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9460d6c16e7633813d7c0f0fcfbc97e9') in 0.016683 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Optimised Textures/Lamp/lamp_UV.png
+  artifactKey: Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/lamp_UV.png using Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b132a672c0b74e7e6dada5317877e90d') in 0.021136 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.382995 seconds.
+  path: Assets/Optimised Textures/Lamp/Lamp.mat
+  artifactKey: Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/Lamp.mat using Guid(7da7228befab56342806e488cc583b0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1255c1b11b07183bd463f5da5aed4ec0') in 0.014945 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Optimised Textures/Lamp/lamp_UV.png
+  artifactKey: Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Lamp/lamp_UV.png using Guid(fc2561e290457c44c89b2fed59d511bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfe466f35c82fdfe5b0fcf875e5c34c4') in 0.014151 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 25.961253 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png
+  artifactKey: Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png using Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2e8f604196b6e60d860632422be77b4') in 0.016679 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat.mat
+  artifactKey: Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat.mat using Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdfb84fe1f76046eaa8e3b81b482c497') in 0.108483 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png
+  artifactKey: Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png using Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fe86a16741eff066d3e67edddf041d8') in 0.016601 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png
+  artifactKey: Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png using Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70ed1d45252232b44b43852d952c03ae') in 0.017075 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png
+  artifactKey: Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png using Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11e0ce1807a2c4c33345659de795b195') in 0.104305 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png
+  artifactKey: Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png using Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12eb6ae85f1c18abee295d5cfb0fb964') in 0.033071 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.462164 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png
+  artifactKey: Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png using Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c173384afc22f090f61ef1fa4e0ea514') in 0.023850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat.mat
+  artifactKey: Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat.mat using Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8212181f5ba55c246fc0476ca594727e') in 0.106282 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png
+  artifactKey: Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png using Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51fe5d4591816120b9578805b6990e4a') in 0.028714 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png
+  artifactKey: Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png using Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e82db016de0992ab2fd3ac6e9410cee2') in 0.024921 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png
+  artifactKey: Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png using Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '045dc303e23ed180c6b9834c11a58fe8') in 0.032540 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png
+  artifactKey: Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png using Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c67a248e1e565a5f9ea0ff6f772447d8') in 0.079736 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.256223 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png
+  artifactKey: Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BaseMap-atlas-0.png using Guid(3c8bf060af91fa44892d6d2e7fe77d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f74205d0c31baa88a38a121078a03096') in 0.063458 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat.mat
+  artifactKey: Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat.mat using Guid(954778d2451e2c74ebdba5063cd74507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a198806dd124153927b7144c99cc077') in 0.227137 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.056436 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png
+  artifactKey: Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MetallicGlossMap-atlas-1.png using Guid(dc87eefa701ace044a5e60a3b79f7640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09b87191093ab124b2b75a6b65ad8fc2') in 0.087935 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png
+  artifactKey: Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_OcclusionMap-atlas-5.png using Guid(a8c9ac367ebb54545aa6c79b4c14b6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89adff14dc674717c2044950aaa70030') in 0.065363 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.025101 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png
+  artifactKey: Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_BumpMap-atlas-3.png using Guid(c39717cfe129a1e4bbb5a8c9f575a9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9b3c5b7c5cf90c62303852f99eb77f2') in 0.065810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png
+  artifactKey: Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Optimised Textures/Outside Props/Outside Props-mat-_MainTex-atlas-10.png using Guid(a3904ab95b3f01b4195a1b87ef6c4e9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41a3eef93b0c0d9446d7fc3328fb78c7') in 0.062610 seconds 
