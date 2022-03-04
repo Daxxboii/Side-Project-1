@@ -170,7 +170,7 @@ namespace Scripts.Timeline
             director.Play();
             director.playableGraph.GetRootPlayable(0).SetSpeed(1);
             //Start Skip Countdown
-            StartCoroutine("skipper");
+            skipper();
            
             Current_cutscene++;
          
@@ -204,9 +204,8 @@ namespace Scripts.Timeline
         }
 
         //Called when timeline Starts
-        IEnumerator skipper()
+        void skipper()
         {
-            yield return new WaitForSeconds(delay);
             ActivateSkip();
         }
         // TO fast forward timeline (called when button is used)
