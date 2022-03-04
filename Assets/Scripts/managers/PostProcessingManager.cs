@@ -13,7 +13,7 @@ public class PostProcessingManager : MonoBehaviour
 	{
 		if (blur && DepthOfField.weight != 1)
 		{
-			DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 1, Time.deltaTime*2);
+			DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 1, Time.deltaTime*4);
 			if (DepthOfField.weight == 1)
 			{
 				Time.timeScale = 0;
@@ -24,7 +24,7 @@ public class PostProcessingManager : MonoBehaviour
 			if (DepthOfField.weight > 0)
 			{
 				Time.timeScale = 1;
-				DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 0, Time.deltaTime*2);
+				DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 0, Time.deltaTime*4);
 			}
 		}
 	}
