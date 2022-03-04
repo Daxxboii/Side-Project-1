@@ -33,6 +33,17 @@ public class CameraManagerIntroVideo : MonoBehaviour
 			
 		}
 		
+		foreach (CinemachineVirtualCamera c in all_cameras)
+		{
+			if (c == Camera_set[counter].camera)
+			{
+				c.Priority = 1;
+			}
+			else
+			{
+				c.Priority = 0;
+			}
+		}
 	}
 	private void Update()
 	{
