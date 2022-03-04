@@ -55,7 +55,8 @@ public class CameraManagerIntroVideo : MonoBehaviour
 		timer += Time.deltaTime;
 		if (timer > Camera_set[counter].Screen_time)
 		{
-			foreach(CinemachineVirtualCamera c in all_cameras)
+			counter++;
+			foreach (CinemachineVirtualCamera c in all_cameras)
 			{
 				if (c == Camera_set[counter].camera)
 				{
@@ -66,7 +67,7 @@ public class CameraManagerIntroVideo : MonoBehaviour
 					c.Priority = 0;
 				}
 			}
-			counter++;
+			
 			timer = 0;
 		}
 
