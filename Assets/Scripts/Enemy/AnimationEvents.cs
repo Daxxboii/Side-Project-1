@@ -10,6 +10,8 @@ public class AnimationEvents : MonoBehaviour
 
     public GirlAiGhost girlAIGhost;
     public AudioManager AudioManager;
+
+   
     public void Invoke_Death()
     {
         kill.Invoke();
@@ -24,4 +26,6 @@ public class AnimationEvents : MonoBehaviour
 	{
         AudioManager.Player_walk();
 	}
+
+   
 }
