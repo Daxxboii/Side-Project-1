@@ -10,7 +10,12 @@ public class LoadLevel : MonoBehaviour
     public Slider slider;
     public int delay;
     public VideoPlayer player;
-    public void loadLevel(int sceneIndex)
+
+	private void Awake()
+	{
+        player.Prepare();
+	}
+	public void loadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsyncronasly(sceneIndex));
     }
