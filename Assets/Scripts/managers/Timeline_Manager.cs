@@ -1,6 +1,4 @@
-﻿ using System.Collections;
-using AtmosphericHeightFog;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Scripts.Objects;

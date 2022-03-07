@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     [Header("Clips")]
     public AudioClip Walk_on_dirt;
     public AudioClip  Walk_on_Planks;
+    public AudioClip Walk_on_tiles;
     [Space(30)]
     [Space(10)]
     public AudioClip Button;
@@ -60,24 +61,30 @@ public class AudioManager : MonoBehaviour
         if (timer > Environment_sounds_timer)
         {
             Random_timer();
-           
         }
         
     }
     //player
-    public void Player_walk()
+    public void Player_walk(int layer)
     {
-            if (FogActivator.inside)
+            if (layer == 0)
             {
                 Footsteps.clip = Walk_on_Planks;
+            FogActivator.inside = true;
             }
-            else
+            else if (layer==1)
             {
                 Footsteps.clip = Walk_on_dirt;
-            }
-            Footsteps.Play();
+            FogActivator.inside = false;
+        }
+	    	else
+		    {
+            Footsteps.clip = Walk_on_tiles;
+            FogActivator.inside = true;
+        }
     }
    
+    
     //UI
     public void UI()
     {

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LitUp : MonoBehaviour
 {
-    
     [SerializeField]
     Camera cam;
     [SerializeField]
