@@ -33,7 +33,7 @@ namespace Scripts.Player
         {
             public float range, CloseTime;
             public LayerMask Intractable;
-            public Animator anim;
+            [HideInInspector] public Animator anim;
             public bool IsOpened;
           
         }
@@ -118,13 +118,13 @@ namespace Scripts.Player
         }
       void IntractWithDoor()
         {
-          
             if (it.anim.GetBool("IsOpen") == false)
             {
-               
                 it.anim.SetBool("IsOpen", true);
                 StartCoroutine(closeDoor());
             }
+
+			
 
         }
 

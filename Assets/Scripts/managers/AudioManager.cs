@@ -70,17 +70,17 @@ public class AudioManager : MonoBehaviour
             if (layer == 0)
             {
                 Footsteps.clip = Walk_on_Planks;
-            FogActivator.inside = true;
+             
             }
             else if (layer==1)
             {
                 Footsteps.clip = Walk_on_dirt;
-            FogActivator.inside = false;
-        }
+           
+            }
 	    	else
 		    {
             Footsteps.clip = Walk_on_tiles;
-            FogActivator.inside = true;
+           
         }
     }
    
@@ -216,12 +216,12 @@ public class AudioManager : MonoBehaviour
     //Environment
     public void Random_Sounds()
     {
-        if (FogActivator.inside && index>2)
+        if (FootSteps.inside && index>2)
         {
             Environment.clip = environment_sounds[index];
             Environment.Play();
         }
-       else if (!FogActivator.inside && index > 2)
+       else if (!FootSteps.inside && index > 2)
         {
             Random_timer();
         }

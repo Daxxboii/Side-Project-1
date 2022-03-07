@@ -202,7 +202,7 @@ public class SaveManager : MonoBehaviour
             oc.had = temp;
         }
         minimap_button.SetActive(true);
-        FogActivator.inside = true;
+        FootSteps.inside = true;
       
     //  id = PlayerPrefsX.GetStringArray("id");
       _state =  sm.state;
