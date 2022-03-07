@@ -52,6 +52,13 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Unpaused();
+        AnimationEvents.Door_open += Gate_Open;
+        AnimationEvents.Door_Locked += Gate_Locked;
+        AnimationEvents.Locker_Door += Locker_Gate_Open;
+        AnimationEvents.Fence_door += Gate_Fence_Open;
+
+
+
     }
 
     private void Update()

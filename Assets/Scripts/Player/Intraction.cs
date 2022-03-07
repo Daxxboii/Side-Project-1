@@ -58,19 +58,6 @@ namespace Scripts.Player
                 {
                     AudioManager.Interactables = hit.transform.GetComponentInParent<AudioSource>();
                     IntractWithDoor();
-                    if(hit.collider.tag == "Door")
-                    {
-                        Door_Wooden();
-                     
-                    }
-                    else if(hit.collider.tag == "Door_locker")
-                    {
-                        Door_Locker();
-                    }
-                    else if(hit.collider.tag == "Door_fence")
-                    {
-                        Door_Fence();
-                    }
                 }
                 else if (hit.collider.tag == "Note")
                 {
@@ -150,29 +137,7 @@ namespace Scripts.Player
             PostProcessingManager.blur = false;
         }
      
-      void Door_Wooden()
-      {
-            if (it.anim.GetBool("IsOpen") == true||!Open)
-            {
-                if (it.anim.runtimeAnimatorController.name == "Door_unwrapped")
-                {
-                    audio.Gate_Open();
-                }
-                else
-                {
-                    audio.Gate_Locked();
-                }
-                Open = true;
-            }
-      }
-       void Door_Fence()
-        {
-            audio.Gate_Fence_Open();
-        }
-        void Door_Locker()
-        {
-            audio.Locker_Gate_Open();
-        }
+    
         public void Pickup()
         {
             RaycastHit hit;

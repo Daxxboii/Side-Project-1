@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1108070738}
   - component: {fileID: 1108070742}
   - component: {fileID: 7908999708432632715}
+  - component: {fileID: 7873151204808560311}
   m_Layer: 14
   m_Name: Net door
   m_TagString: Door_fence
@@ -35,6 +36,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -49.26613, y: -0.37055796, z: -0.09340668}
   m_LocalScale: {x: 2384.7002, y: 676.77344, z: 676.77356}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5771356054813353603}
   m_Father: {fileID: 0}
@@ -59,10 +61,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,6 +92,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &1508657545813345245
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -133,7 +138,7 @@ BoxCollider:
   m_Center: {x: 0.000050019826, y: 0.000093193725, z: 0.0027138558}
 --- !u!95 &1108070735
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,6 +151,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -359,6 +365,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7873151204808560311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929553415572646727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f161e6d84f07f44aa247c7020079639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  girlAIGhost: {fileID: 0}
+  AudioManager: {fileID: 0}
 --- !u!1 &6122393471840121045
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +405,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.000041, y: 0, z: 0.00258}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 506688029786540920}
   m_RootOrder: 0

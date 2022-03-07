@@ -11,7 +11,11 @@ public class AnimationEvents : MonoBehaviour
     public GirlAiGhost girlAIGhost;
     public AudioManager AudioManager;
 
-   
+    public delegate void MakeSound();
+    public static event MakeSound Door_open;
+    public static event MakeSound Door_Locked;
+    public static event MakeSound Locker_Door;
+    public static event MakeSound Fence_door;
     public void Invoke_Death()
     {
         kill.Invoke();
@@ -27,5 +31,23 @@ public class AnimationEvents : MonoBehaviour
         AudioManager.Footsteps.Play();
 	}
 
-   
+   public void Wooden_Door_Open()
+	{
+        Door_open.Invoke();
+	}
+
+    public void Rattle_Door()
+	{
+        Door_Locked.Invoke();
+	}
+
+    public void Locker_Door_open()
+	{
+        Locker_Door.Invoke();
+	}
+
+    public void Fence_door_open()
+	{
+        Fence_door.Invoke();
+	}
 }
