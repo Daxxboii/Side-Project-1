@@ -16,6 +16,10 @@ public class AnimationEvents : MonoBehaviour
     public static event MakeSound Door_Locked;
     public static event MakeSound Locker_Door;
     public static event MakeSound Fence_door;
+    public static event MakeSound thunder;
+    public static event MakeSound girl_spook;
+
+    private int random_int;
     public void Invoke_Death()
     {
         kill.Invoke();
@@ -49,5 +53,20 @@ public class AnimationEvents : MonoBehaviour
     public void Fence_door_open()
 	{
         Fence_door.Invoke();
+	}
+
+    public void Thunder_Sound()
+	{
+        thunder.Invoke();
+	}
+
+    //PickRandom
+    public void PickRandom(int chances)
+	{
+        random_int = Random.Range(0, 10);
+		if (random_int > chances)
+		{
+            girl_spook.Invoke();
+		}
 	}
 }

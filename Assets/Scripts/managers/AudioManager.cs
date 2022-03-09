@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
 {
     public Timeline_Manager tm;
     public float Environment_sounds_timer;
+
+
     [Header("Sources")]
     public AudioSource Footsteps;
     public AudioSource ui;
@@ -14,29 +16,46 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource pickable;
     public AudioSource Environment;
+
+
     [Header("Enemy")]
     public AudioSource principal;
     public AudioSource hammer;
     public AudioSource girl;
 
-    [Header("Clips")]
+    [Header("Footsteps")]
     public AudioClip Walk_on_dirt;
     public AudioClip  Walk_on_Planks;
     public AudioClip Walk_on_tiles;
-    [Space(30)]
-    [Space(10)]
+
+   
     public AudioClip Button;
 
-    [Space(10)]
-    public AudioClip Door_open, Door_locked, Door_locker_open, Fence_Open;
+    [Header("Doors")]
+    public AudioClip Door_open;
+    public AudioClip Door_locked;
+    public AudioClip Door_locker_open;
+    public AudioClip Fence_Open;
 
-    [Space(10)]
-    public AudioClip  Note_open, Comic_open, Comic_close, Comic_nxt, Comic_prev, Map_take;
 
-    [Space(10)]
-    public AudioClip  princy_growl, princy_atack, princy_int_kill, princy_Ham_drag, princy_chase, girl_chase,  girl_kill;
+    [Header("Notes")]
+    public AudioClip  Note_open;
+    public AudioClip Comic_open;
+    public AudioClip Comic_close;
+    public AudioClip Comic_nxt;
+    public AudioClip Comic_prev;
+    public AudioClip Map_take;
 
-    [Space(10)]
+    [Header("Ghosts")]
+    public AudioClip princy_growl;
+    public AudioClip princy_atack;
+    public AudioClip princy_int_kill;
+    public AudioClip princy_Ham_drag;
+    public AudioClip princy_chase;
+    public AudioClip girl_chase;
+    public AudioClip girl_chase2;
+    public AudioClip girl_kill;
+
     public AudioClip[] environment_sounds;
 
     [Header("Snapshots")]
@@ -56,9 +75,8 @@ public class AudioManager : MonoBehaviour
         AnimationEvents.Door_Locked += Gate_Locked;
         AnimationEvents.Locker_Door += Locker_Gate_Open;
         AnimationEvents.Fence_door += Gate_Fence_Open;
-
-
-
+        AnimationEvents.thunder += Play_Thunder;
+        AnimationEvents.girl_spook += Girl_Spook;
     }
 
     private void Update()
@@ -220,30 +238,27 @@ public class AudioManager : MonoBehaviour
     {
         girl.Pause();
     }
-    //Environment
-    public void Random_Sounds()
-    {
-        if (FootSteps.inside && index>2)
-        {
-            Environment.clip = environment_sounds[index];
-            Environment.Play();
-        }
-       else if (!FootSteps.inside && index > 2)
-        {
-            Random_timer();
-        }
 
-        else {
-            if (index == 1)
-            {
-                thunder.SetTrigger("Open");
-                thunder.ResetTrigger("open");
-            }
-            Environment.clip = environment_sounds[index];
-            Environment.Play();
+    public void Girl_Spook()
+	{
+        girl.clip = girl_chase2;
+        girl.Play();
+    }
+    //Environment
+    private void Random_Sounds()
+    {
+        if (index == 1)
+        {
+            thunder.SetTrigger("Open");
         }
-       
-      
+        Environment.clip = environment_sounds[1];
+        Environment.Play();
+    }
+
+    private void Play_Thunder()
+	{
+        Environment.clip = environment_sounds[1];
+        Environment.Play();
     }
     public void Random_timer()
     {

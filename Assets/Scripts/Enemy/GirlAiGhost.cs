@@ -215,7 +215,6 @@ namespace Scripts.Enemy
                             audioM.Enemy_Girl_kill();
                             ded = true;
                         }
-                       
                       //Trigger kill animation
                         Animations(2, 2);
                      
