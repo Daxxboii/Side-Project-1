@@ -3591,7 +3591,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0.00000021989626, z: 7.65e-43, w: 0.00000047362892}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 7.494e-42, w: 1.04e-43}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5709,6 +5709,14 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1915651965}
+    - target: {fileID: 1392633536, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392633538, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1813942880, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5717,6 +5725,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 975330226}
+    - target: {fileID: 1854109378, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1855439697, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

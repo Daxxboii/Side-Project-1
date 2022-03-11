@@ -103,6 +103,20 @@ namespace Scripts.Player
                     LookAround();
                 }
                 LocoMotion();
+                
+                if (isCrouching)
+                {
+                    speed = CrouchSpeed;
+                    characterController.height =Mathf.Lerp(characterController.height, crouchHight,Time.deltaTime);
+                }
+
+                else if (!isCrouching && characterController.height!=height)
+                {
+                    speed = TempSpeed;
+
+                    characterController.height = Mathf.Lerp(characterController.height, height, Time.deltaTime);
+
+                }
             }
         }
 
@@ -221,19 +235,6 @@ namespace Scripts.Player
         public void croutch()
         {
             isCrouching = !isCrouching;
-
-            if (isCrouching == false)
-            {
-                speed = TempSpeed;
-            
-                    characterController.height = height;
-                
-            }
-            else
-            {
-                speed = CrouchSpeed;
-                characterController.height = crouchHight;
-            }
         }
 
        

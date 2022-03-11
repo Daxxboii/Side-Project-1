@@ -94,8 +94,7 @@ public class AudioManager : MonoBehaviour
     {
             if (layer == 0)
             {
-                Footsteps.clip = Walk_on_Planks;
-             
+            Footsteps.clip = Walk_on_Planks;
             }
             else if (layer==1)
             {
@@ -106,7 +105,7 @@ public class AudioManager : MonoBehaviour
 		    {
             Footsteps.clip = Walk_on_tiles;
            
-        }
+            }
     }
    
     
