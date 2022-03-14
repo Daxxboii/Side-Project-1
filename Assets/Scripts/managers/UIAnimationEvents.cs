@@ -22,17 +22,17 @@ public class UIAnimationEvents : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (show_bars && Timeline_camera.fieldOfView!=90f)
+		if (show_bars )
 		{
 			Top.sizeDelta =  Vector2.Lerp(Top.sizeDelta,target,Time.deltaTime*speed);
 			Bottom.sizeDelta = Vector2.Lerp(Bottom.sizeDelta, target, Time.deltaTime*speed);
-			Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 90f, Time.deltaTime * Camera_speed);
+			//Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 90f, Time.deltaTime * Camera_speed);
 		}
-		else if ( !show_bars && Timeline_camera.fieldOfView != 80f)
+		else if (!show_bars && Top.sizeDelta != Vector2.zero)
 		{
 			Top.sizeDelta = Vector2.Lerp(Top.sizeDelta, Vector2.zero, Time.deltaTime*speed);
 			Bottom.sizeDelta = Vector2.Lerp(Bottom.sizeDelta, Vector2.zero, Time.deltaTime*speed);
-			Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 80f, Time.deltaTime * Camera_speed);
+			//Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 80f, Time.deltaTime * Camera_speed);
 		}
 	}
 
