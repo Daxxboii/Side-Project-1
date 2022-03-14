@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     [Header("Map")]
     public GameObject map,map_cam;
     public GameObject Map_button;
-
-   
+    public bool is_Paused;
+    public AudioManager AudioManager;
     private void Awake()
     {
+        is_Paused = false;
         Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
         Application.targetFrameRate = 100;
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour
         FpsCanvas.SetActive(false);
         settingsMenu.SetActive(false);
 
+		if (is_Paused == false)
+		{
+            AudioManager.Paused();
+            is_Paused = true;
+        }
     }
     public void settings()
     {
@@ -84,9 +90,14 @@ public class GameManager : MonoBehaviour
     }
     public void resume()
     {
-        PostProcessingManager.blur = false;
-        FpsCanvas.SetActive(true);
-        pauseMenu.SetActive(false);
+        if (is_Paused)
+        {
+            PostProcessingManager.blur = false;
+            FpsCanvas.SetActive(true);
+            pauseMenu.SetActive(false);
+            AudioManager.Unpaused();
+            is_Paused = false;
+        }
     }
     public void back()
     {

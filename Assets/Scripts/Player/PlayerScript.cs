@@ -21,6 +21,7 @@ namespace Scripts.Player
 
         public VolumeProfile volume;
       
+        [Header("Damage")]
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
@@ -39,7 +40,7 @@ namespace Scripts.Player
 
         // Player settings
         [SerializeField] private float cameraSensitivity;
-        [SerializeField] public float speed, CrouchSpeed, height, crouchHight, Health, RegenTimer;
+        [SerializeField] public float speed,Footsteps_frequency, CrouchSpeed, height, crouchHight, Health, RegenTimer,Crouch_Interpolation_speed;
         private float TempSpeed;
         private bool  isCrouching;
         private Vector3 move;
@@ -56,6 +57,7 @@ namespace Scripts.Player
         private Vector2 lookInput;
         private float cameraPitch;
        
+
         // Player movement
         private Vector2 moveTouchStartPosition;
         private Vector2 moveInput;
@@ -107,15 +109,14 @@ namespace Scripts.Player
                 if (isCrouching)
                 {
                     speed = CrouchSpeed;
-                    characterController.height =Mathf.Lerp(characterController.height, crouchHight,Time.deltaTime);
+                    characterController.height =Mathf.Lerp(characterController.height, crouchHight,Time.deltaTime*Crouch_Interpolation_speed);
                 }
 
                 else if (!isCrouching && characterController.height!=height)
                 {
                     speed = TempSpeed;
 
-                    characterController.height = Mathf.Lerp(characterController.height, height, Time.deltaTime);
-
+                    characterController.height = Mathf.Lerp(characterController.height, height, Time.deltaTime*Crouch_Interpolation_speed);
                 }
             }
         }
@@ -207,7 +208,7 @@ namespace Scripts.Player
             
             float x = joystick.Horizontal;
             float z = joystick.Vertical;
-            camAnim.SetFloat("WalkSpeed", z);
+            camAnim.SetFloat("WalkSpeed", z*Footsteps_frequency);
             if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
                 camAnim.SetBool("IsMoving", true);
