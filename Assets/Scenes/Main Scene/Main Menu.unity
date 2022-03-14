@@ -2916,22 +2916,22 @@ PrefabInstance:
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
@@ -2941,7 +2941,7 @@ PrefabInstance:
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5154428195306441850, guid: 48db2dfb8ce2a0c4da82ce4f9511962d,
         type: 3}
@@ -3527,7 +3527,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 7.494e-42, w: 1.04e-43}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -0.00000014915315}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4535,6 +4535,7 @@ MonoBehaviour:
   map: {fileID: 0}
   map_cam: {fileID: 0}
   Map_button: {fileID: 0}
+  AudioManager: {fileID: 0}
 --- !u!1 &1806253931
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,6 +5607,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 241334876, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 268526421, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5742,9 +5747,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Extra
       objectReference: {fileID: 0}
+    - target: {fileID: 1771372065, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.049000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771372065, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1813942878, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1813942880, guid: 0f9394cdcfb16fd4b905302c9522bc87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

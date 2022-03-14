@@ -31,7 +31,7 @@ namespace Scripts.Enemy
             private float _radius;
             private NavMeshAgent _agent;
             public GameObject volume;
-
+            public float attack_radius;
 
             private Vector3 newPos;
             VisiBility vis;
@@ -74,7 +74,7 @@ namespace Scripts.Enemy
             {
                 if (ps.isDead == false)
                 {
-                    if (inAttackRange() < 2f)
+                    if (inAttackRange() < attack_radius)
                     {
 
                         if (hit)
