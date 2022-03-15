@@ -65,6 +65,7 @@ namespace Scripts.Player
         // Audio 
         public AudioManager AudioM;
 
+        Touch t;
 
 
 
@@ -128,7 +129,7 @@ namespace Scripts.Player
             for (int i = 0; i < Input.touchCount; i++)
             {
 
-                Touch t = Input.GetTouch(i);
+                 t = Input.GetTouch(i);
 
                 // Check each touch's phase
                 switch (t.phase)

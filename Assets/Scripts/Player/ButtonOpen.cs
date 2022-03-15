@@ -48,12 +48,27 @@ namespace Scripts.Buttons
 
             if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
             {
-              
-                    if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
+                if (hit.transform.CompareTag("Untagged"))
+                {
+                    close();
+                }
+
+               else if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
                     {
                         Intract.SetActive(true);
                     Track(Intract);
                     }
+                else if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
+                {
+                    Timeline.SetActive(true);
+                    comment.text = "Interact?";
+                    Track(Timeline);
+                }
+
+                else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
+                {
+                    comment.text = "get something ";
+                }
                 else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
                 {
                     Pickup.SetActive(true);
@@ -73,14 +88,6 @@ namespace Scripts.Buttons
                     Track(note);
 
                     }
-                else if (hit.transform.CompareTag("Save"))
-                    {
-                        save.SetActive(true);
-                    Track(note);
-
-                    }
-               
-              
 
                 else if (hit.transform.CompareTag("Map"))
                     {
@@ -89,32 +96,25 @@ namespace Scripts.Buttons
                     Track(map);
                     }
 
-                else if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
-                    {
-                        Timeline.SetActive(true);
-                        comment.text = "Interact?";
-                        Track(Timeline);
-                    }
-
-                else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
-                    {
-                        comment.text = "get something ";
-                    }
+                
 
                 else if (hit.transform.CompareTag("Obstacle"))
                     {
                         comment.text = "Going there wont be a good idea";
                     }
-                else if (hit.transform.CompareTag("Blackboard"))
-                    {
-                        comment.text = "Find something to write with";
-                    }
-                 if (hit.transform.CompareTag("Untagged"))
-                    {
-                    close();
-                    }
-
                 
+
+                else if (hit.transform.CompareTag("Save"))
+                {
+                    save.SetActive(true);
+                    Track(note);
+
+                }
+                else if (hit.transform.CompareTag("Blackboard"))
+                {
+                    comment.text = "Find something to write with";
+                }
+
             }
             else
             {

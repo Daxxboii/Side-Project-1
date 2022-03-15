@@ -18,8 +18,7 @@ public class LitUp : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
         {
-            if (hit.transform.gameObject.layer != 0)
-            {
+           
                 if (hit.transform.GetComponent<Outline>() != null){
                     had = outline;
                     outline = hit.transform.gameObject.GetComponent<Outline>();
@@ -28,16 +27,9 @@ public class LitUp : MonoBehaviour
                         had.enabled = false;
                     }
                     outline.enabled = true;
+                
                 }
-            }
-            else
-            {
-                if (outline != null)
-                {
-                    outline.enabled = false;
-                   
-                }
-            }
+           
         }
 
         else

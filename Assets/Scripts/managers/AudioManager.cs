@@ -66,7 +66,7 @@ public class AudioManager : MonoBehaviour
     bool crying;
   
     float timer;
-    int index,_index;
+    int index;
 
     private void Awake()
     {
@@ -262,15 +262,14 @@ public class AudioManager : MonoBehaviour
     public void Random_timer()
     {
         index = Random.Range(0, environment_sounds.Length);
-        if (index != _index )
-        {
+        
             if(((tm.Current_cutscene < 3) && index > 12))
             {
                 Random_Sounds();
             }
            
-        }
-        _index = index;
+        
+      
         timer = 0;
     }
 }
