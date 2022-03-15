@@ -76,7 +76,6 @@ namespace Scripts.Enemy
                 {
                     if (inAttackRange() < attack_radius)
                     {
-
                         if (hit)
                         {
                             AudioM.Enemy_Princy_Atack();

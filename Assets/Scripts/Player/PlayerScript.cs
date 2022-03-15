@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-using AtmosphericHeightFog;
 namespace Scripts.Player
 {
    
@@ -19,14 +18,13 @@ namespace Scripts.Player
         [SerializeField]
         private Image StandStateButton;
 
-        public VolumeProfile volume;
-      
+          
         [Header("Damage")]
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
-        public HeightFogGlobal fog;
-       
+        public Volume Damage;
+
         [SerializeField]
         private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
@@ -65,6 +63,8 @@ namespace Scripts.Player
         // Audio 
         public AudioManager AudioM;
 
+        public GameManager gameManager;
+
         Touch t;
         float x, z;
 
@@ -84,14 +84,13 @@ namespace Scripts.Player
 
             // only calculate once
             halfScreenWidth = Screen.width / 2;
-
-           
         }
 
         // Update is called once per frame
         void Update()
         {
-			if (Health < 75)
+
+			if (Health <= 75)
 			{
                 Health_Manager();
             }
@@ -119,6 +118,10 @@ namespace Scripts.Player
 
                     characterController.height = Mathf.Lerp(characterController.height, height, Time.deltaTime*Crouch_Interpolation_speed);
                 }
+            }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                gameManager.Pause();
             }
         }
 
@@ -283,15 +286,17 @@ namespace Scripts.Player
             var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
             hit_image.color = tempColor;
-           fog.fogColorDuo =  Mathf.PingPong(Time.time, 1);
+            Damage.weight = Mathf.PingPong(Time.time, 1f);
             //Set Hit Image
             if (Health < 50){
                 hit_image.sprite = hit_high;
+               
             }
             else
             {
                 hit_image.sprite = hit_low;
             }
+
             //Death
             if (Health <= 0)
             {
@@ -299,6 +304,10 @@ namespace Scripts.Player
                 isDead = true;
                 fpsCam.transform.LookAt(ghost);
 
+            }
+            else if (Health > 70)
+			{
+                Damage.weight = 0;
             }
         }
         void Player_death()
