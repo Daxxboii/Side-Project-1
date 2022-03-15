@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 100;
         OnDemandRendering.renderFrameInterval = 2;
     }
+    public void Retry()
+	{
+        Time.timeScale = 1;
+        PlayerPrefs.SetInt("loadindex", 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void credits()
     {
         pauseMenu.SetActive(false);
