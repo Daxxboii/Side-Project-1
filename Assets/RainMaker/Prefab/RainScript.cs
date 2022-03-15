@@ -23,7 +23,6 @@ namespace DigitalRuby.RainMaker
             // keep rain and mist above the player
             if (RainFallParticleSystem != null)
             {
-              
                     var s = RainFallParticleSystem.shape;
                     s.shapeType = ParticleSystemShapeType.ConeVolume;
                     RainFallParticleSystem.transform.position = Camera.transform.position;

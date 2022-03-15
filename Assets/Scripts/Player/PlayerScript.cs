@@ -66,7 +66,7 @@ namespace Scripts.Player
         public AudioManager AudioM;
 
         Touch t;
-
+        float x, z;
 
 
         // Start is called before the first frame update
@@ -207,31 +207,31 @@ namespace Scripts.Player
         void LocoMotion()
         {
             
-            float x = joystick.Horizontal;
-            float z = joystick.Vertical;
+           x = joystick.Horizontal;
+           z = joystick.Vertical;
+
             camAnim.SetFloat("WalkSpeed", z*Footsteps_frequency);
+            
             if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
                 camAnim.SetBool("IsMoving", true);
+                move = x * transform.right + z * transform.forward;
             }
             else
             {
                 camAnim.SetBool("IsMoving", false);
+                move = Vector3.zero;
             }
 
-            move = x * transform.right + z * transform.forward;
 
-            
-
-
-            if (characterController.isGrounded == false)
+            if (!characterController.isGrounded )
             {
                 move += Physics.gravity * Time.deltaTime * 9.5f;
             }
 
-         
-           characterController.Move(move * Time.deltaTime * speed);
-         
+            characterController.Move(move * Time.deltaTime * speed);
+
+
         }
         #endregion
         public void croutch()
