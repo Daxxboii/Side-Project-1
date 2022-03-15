@@ -10,6 +10,7 @@ public class EndTrigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             tm.TimeLine_Activator();
+            gameObject.SetActive(false);
         }
     }
 }
