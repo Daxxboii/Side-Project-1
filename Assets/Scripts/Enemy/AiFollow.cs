@@ -9,83 +9,117 @@ namespace Scripts.Enemy
     {
         public class AiFollow : MonoBehaviour
         {
-            [SerializeField]
-            private float Time_between_growls,timer;
-            public AudioManager AudioM;
+            [Header("Audio Settings")] 
+            [SerializeField] private AudioManager AudioM;
+            [SerializeField] private float Time_between_growls;
+          
+            [Header("Principal States")]
             public bool angry;
-            [Header("Variable depending on player")]
-            [SerializeField]
-            public bool _isVisible;
-            [SerializeField]
-            public float daimage, follow_distance;
-            [SerializeField]
-            private GameObject _player;
-            [SerializeField]
-            PlayerScript ps;
-            [SerializeField]
-            Animator anim;
-            [Header("Variable depending on NavMesh and agent")]
-            [SerializeField, Tooltip("set threshold of how big area to sample to check if player is on nav mesh or not.")]
-            private float _agentThreshHold, roam_timer;
-            [SerializeField, Tooltip("Radius of Random.insideUnitSpher")]
-            private float _radius;
-            private NavMeshAgent _agent;
-            public GameObject volume;
-            public float attack_radius;
+            bool NotCooling = true;
 
+            [Header("Principal Values")]
+            [SerializeField]private Animator anim;
+            [SerializeField]public NavMeshAgent _agent;
+            [SerializeField]private float follow_distance;
+            [SerializeField]private float attack_radius;
+            [SerializeField] private float Roam_Radius;
+            [SerializeField] private float cool_period;
+            [SerializeField] private float giveup_time;
             private Vector3 newPos;
-            VisiBility vis;
-            bool hit = true;
-            public float cool_period;
-
-            private Vector3 _randomSpawanLocation;
-
-            float disatnce;
+            private Vector3 RandomSpawnLocation;
+            private float Distance_from_player;
+            private float timer,timer2,GiveUpTimer;
+            private float roam_timer;
+            private NavMeshHit navHit;
 
 
-
-
+            [Header("Player")]
+            [SerializeField] private GameObject _player;
+            [SerializeField] private PlayerScript playerScript;
+            [SerializeField] private VisiBility visibility;
             void Start()
             {
-                _agent = GetComponent<NavMeshAgent>();
                 _agent.stoppingDistance = 1.5f;
-                vis = _player.transform.GetComponent<VisiBility>();
             }
             void Update()
             {
-                if (angry)
-                {
-                    daimage = 25;
-                    _agent.speed = 3.3f;
-                }
-                if (disatnce > follow_distance)
-                {
-                    volume.SetActive(false);
-                }
-                else if (disatnce < follow_distance)
-                {
-                    volume.SetActive(true);
-                }
-                _isVisible = vis.visible;
                 Movement();
                 Attak();
             }
+            void Movement()
+            {
+                //Principal is not Chilling
+                if (NotCooling)
+                {
+                    //if principal is angry and in sight
+                    if (visibility.visible == true && !angry)
+                    {
+                        _agent.enabled = false;
+                        Animations(0, 0);
+                        Growl();
+                    }
+
+                    //if principal is not in sight
+                    else 
+                    {
+                        _agent.enabled = true;
+                        Distance_from_player =DetermineDistanceFromPlayer();
+
+                        //Player is not in Catching Range
+                        if (Distance_from_player > follow_distance||GiveUpTimer>giveup_time)
+                        {
+                            roam_timer += Time.deltaTime;
+                            //Change Position Every 10 Seconds
+                            if (roam_timer >= 10)
+                            {
+                                newPos = GetRandomPointNearPlayer(_player.transform.position, Roam_Radius, -1);
+                                Animations(0, 1);
+                                _agent.SetDestination(newPos);
+                                roam_timer = 0;
+                                GiveUpTimer = 0f;
+                            }
+                        }
+                        //Player is in catching Range
+                        else if(Distance_from_player < follow_distance && GiveUpTimer<giveup_time)
+                        {
+                            GiveUpTimer += Time.deltaTime;
+                            Animations(0, 2);
+                            _agent.SetDestination(_player.transform.position);
+                            Chase();
+                        }
+                    }
+                }
+                //Principal is Chilling
+                else
+                {
+                    Animations(0, 0);
+                }
+            }
             void Attak()
             {
-                if (ps.isDead == false)
-                {
-                    if (inAttackRange() < attack_radius)
+                //Direct Kill
+				if (!angry||playerScript.isDead)
+				{
+                    if (DetermineDistanceFromPlayer() < attack_radius)
                     {
-                        if (hit)
+                        Animations(2, 2);
+                        AudioM.Enemy_Princy_Int_Kill();
+                    }
+                }
+                //Player Health is not critical
+                else 
+                {
+                    //Player withing attack Range
+                    if (DetermineDistanceFromPlayer() < attack_radius)
+                    {
+                        //Principal not on cooldown
+                        if (NotCooling)
                         {
                             AudioM.Enemy_Princy_Atack();
-                            if (ps.Health - daimage > 0)
-                            {
-                                Animations(1, 2);
-                            }
-                            ps.PlayerTakeDamage(daimage);
-                            hit = false;
+                            Animations(1, 2);
+                            NotCooling = false;
                         }
+                        //Keep Principal Freezed
                         else
                         {
                             Animations(0, 0);
@@ -93,78 +127,25 @@ namespace Scripts.Enemy
                         StartCoroutine("cooldown");
                     }
                 }
-
-                else if (ps.isDead)
-                {
-                    if (inAttackRange() <= 2f)
-                    {
-                        Animations(2, 2);
-                        AudioM.Enemy_Princy_Int_Kill();
-                    }
-
-                }
             }
-            float inAttackRange()
+
+            
+            float DetermineDistanceFromPlayer()
             {
                 return Vector3.Distance(_player.transform.position, gameObject.transform.position);
             }
-            void Movement()
-            {
-                if (hit)
-                {
-                    if (_isVisible == true && !angry)
-                    {
-                        _agent.enabled = false;
-                        Animations(0, 0);
-                        Growl();
-                    }
-                    else if (_isVisible == false)
-                    {
-
-                        _agent.enabled = true;
-
-                        disatnce = Vector3.Distance(transform.position, _player.transform.position);
-
-                        if (disatnce > follow_distance)
-                        {
-                            roam_timer += Time.deltaTime;
-                            if (roam_timer >= 10)
-                            {
-                                newPos = GetRandomPointNearPlayer(_player.transform.position, _radius, -1);
-                                Animations(0, 1);
-                                _agent.SetDestination(newPos);
-                                roam_timer = 0;
-                            }
-                        }
-                        else
-                        {
-                            Animations(0, 2);
-                            _agent.SetDestination(_player.transform.position);
-                            Chase();
-                        }
-                    }
-                }
-                else
-                {
-                    Animations(0, 0);
-                }
-
-               
-            }
+           
 
 
 
-
+            //Get a point in Navmesh in this distance
             Vector3 GetRandomPointNearPlayer(Vector3 origin, float dist, int layermask)
             {
-                _randomSpawanLocation = new Vector3(Random.insideUnitSphere.x * _radius, transform.position.y, Random.insideUnitSphere.z * _radius);
-                _randomSpawanLocation += origin;
-
-                NavMeshHit navHit;
-
-                NavMesh.SamplePosition(_randomSpawanLocation, out navHit, dist, layermask);
-
-                return _randomSpawanLocation;
+                RandomSpawnLocation = new Vector3(Random.insideUnitSphere.x * Roam_Radius, transform.position.y, Random.insideUnitSphere.z * Roam_Radius);
+                RandomSpawnLocation += origin;
+                NavMesh.SamplePosition(RandomSpawnLocation, out navHit, dist, layermask);
+                RandomSpawnLocation = navHit.position;
+                return RandomSpawnLocation;
 
             }
 
@@ -179,7 +160,7 @@ namespace Scripts.Enemy
             IEnumerator cooldown()
             {
                 yield return new WaitForSeconds(cool_period);
-                hit = true;
+                NotCooling = true;
             }
             void Growl()
             {
@@ -193,12 +174,12 @@ namespace Scripts.Enemy
             }
             void Chase()
             {
-                timer += Time.deltaTime;
-                if (timer > Time_between_growls)
+                timer2 += Time.deltaTime;
+                if (timer2 > Time_between_growls)
                 {
-                    Debug.Log("Chasing");
+                   // Debug.Log("Chasing");
                     AudioM.Enemy_Princy_chase();
-                    timer = 0;
+                    timer2 = 0;
                 }
             }
 

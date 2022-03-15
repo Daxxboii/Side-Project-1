@@ -10,6 +10,7 @@ public class AnimationEvents : MonoBehaviour
 
     public GirlAiGhost girlAIGhost;
     public AudioManager AudioManager;
+    public PlayerScript playerScript;
 
     public delegate void MakeSound();
     public static event MakeSound Door_open;
@@ -68,5 +69,10 @@ public class AnimationEvents : MonoBehaviour
 		{
             girl_spook.Invoke();
 		}
+	}
+
+    public void TakeDamage(float damage)
+	{
+        playerScript.PlayerTakeDamage(damage);
 	}
 }

@@ -2,8 +2,6 @@
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-namespace Scripts.Player
-{
    
     public class PlayerScript : MonoBehaviour
     {
@@ -303,7 +301,6 @@ namespace Scripts.Player
                 GirlAI.Cooldown_period = 0;
                 isDead = true;
                 fpsCam.transform.LookAt(ghost);
-
             }
             else if (Health > 70)
 			{
@@ -327,4 +324,4 @@ namespace Scripts.Player
             AnimationEvents.kill -= Player_death;
         }
     }
-}
+

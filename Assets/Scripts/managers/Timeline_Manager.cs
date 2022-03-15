@@ -158,6 +158,7 @@ namespace Scripts.Timeline
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
+                aiFollow._agent.speed = 3.3f;
             }
             else
             {
