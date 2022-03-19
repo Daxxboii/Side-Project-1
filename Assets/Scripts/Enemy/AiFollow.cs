@@ -39,12 +39,12 @@ namespace Scripts.Enemy
             [SerializeField] private VisiBility visibility;
             void Start()
             {
-                _agent.stoppingDistance = 1.5f;
+                _agent.stoppingDistance = 0.5f;
             }
             void Update()
             {
                 Movement();
-                Attak();
+                Attack();
             }
             void Movement()
             {
@@ -95,7 +95,7 @@ namespace Scripts.Enemy
                     Animations(0, 0);
                 }
             }
-            void Attak()
+            void Attack()
             {
                 //Direct Kill
 				if (!angry||playerScript.isDead)

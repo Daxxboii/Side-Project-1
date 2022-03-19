@@ -10,55 +10,52 @@ namespace Scripts.Timeline
 {
     public class Timeline_Manager : MonoBehaviour
     {
-       
-        public AdManager adManager;
-        public int delay;
-        public GameObject skip;
-        public PlayerScript ps;
+        [Header("Scripts")]
+        [SerializeField] public AdManager adManager;
+        [SerializeField] private ObjectController ObjectControllerScript;
+        [SerializeField] private ButtonOpen ButtonOpenScript;
+        [SerializeField]public PlayerScript _PlayerScript;
+        [SerializeField] public Enemy.Principal.AiFollow aiFollow;
+        [SerializeField]public Enemy.girlHostile.GirlAiGhost girl;
+
+
+        [Header("Buttons")]
+        [SerializeField] public GameObject SkipButton;
+        [SerializeField]private  GameObject Timeline_Button;
+
+
+        [Header("Text & Text Files")]
+        [SerializeField]private TextAsset subtitles,objectives;
+        [SerializeField]private TextMeshProUGUI comments,objective_text;
         private string text,_text;
-        [SerializeField]
-        TextAsset subtitles,objectives;
-        [SerializeField]
-        private TextMeshProUGUI comments,objective_text;
-        
-        public int index,objective_index;
-        [SerializeField]
-        ObjectController oc;
-        [SerializeField]
-        ButtonOpen bo;
-        [SerializeField]
 
-        GameObject Button;
-        public Enemy.Principal.AiFollow aiFollow;
-        public Enemy.girlHostile.GirlAiGhost girl;
+        [Header("Arrays")]
+        [SerializeField]private TimelineAsset[] timeline_assets;
+        [SerializeField]public GameObject[] guides;
 
 
-        public int Current_cutscene;
-        [SerializeField]
-        private TimelineAsset[] timeline_assets;
+        [Header("Components")]
+        [SerializeField]private PlayableDirector director;
+        public Material princy;
 
-        [SerializeField]
-        private PlayableDirector director;
 
-        [SerializeField]
-        private GameObject player,player_cam;
-
-        public GameObject[] guides;
+        [HideInInspector]public int index,objective_index,Current_cutscene;
+        [SerializeField]private GameObject player,player_cam;
+     
         [SerializeField]
         private GameObject cutscene_player,cutscene_cam;
 
-        [SerializeField]
-        private float y_offset;
+        [SerializeField]private float y_offset;
+        [SerializeField] private float skip_speed;
 
         private Vector3 position;
         private Vector3 rotation,cam_rot;
 
         string[] lines, objective_lines;
        
-        public Material princy;
         private void Start()
         {
-              lines = subtitles.text.Split("\n"[0]);
+             lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
            
            
@@ -94,7 +91,7 @@ namespace Scripts.Timeline
         }
         public void Translate_Player()
         {
-            ps.gameObject.SetActive(false);
+            player.SetActive(false);
             position = cutscene_player.transform.position;
             rotation = cutscene_player.transform.rotation.eulerAngles;
             cam_rot = cutscene_cam.transform.rotation.eulerAngles;
@@ -103,7 +100,7 @@ namespace Scripts.Timeline
             player.transform.position = position;
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
-            ps.gameObject.SetActive(true);
+            _PlayerScript.gameObject.SetActive(true);
             if (Current_cutscene > 4)
             {
                 girl.gameObject.SetActive(true);
@@ -148,13 +145,13 @@ namespace Scripts.Timeline
            
          
 
-            if (oc.had != null)
+            if (ObjectControllerScript.had != null)
             {
-                oc.had.SetActive(false);
-                oc.had = null;
+                ObjectControllerScript.had.SetActive(false);
+                ObjectControllerScript.had = null;
             }
            
-            Button.SetActive(false);
+            Timeline_Button.SetActive(false);
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
@@ -188,18 +185,14 @@ namespace Scripts.Timeline
         }
         public void ObjectiveList()
         {
-            //   Debug.Log(objective_index++);
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
             HideSkip();
-          
-            //  Debug.Log("objective");
-
         }
 
         private void ActivateSkip()
         {
-            skip.SetActive(true);
+            SkipButton.SetActive(true);
         }
 
         //Called when timeline Starts
@@ -210,13 +203,13 @@ namespace Scripts.Timeline
         // TO fast forward timeline (called when button is used)
         public void End()
         {
-            director.playableGraph.GetRootPlayable(0).SetSpeed(5);
-            skip.SetActive(false);
+            director.playableGraph.GetRootPlayable(0).SetSpeed(skip_speed);
+            SkipButton.SetActive(false);
         }
 
         public void HideSkip()
         {
-            skip.SetActive(false);
+            SkipButton.SetActive(false);
         }
     }
     
