@@ -25,7 +25,9 @@ namespace Scripts.Buttons
         [SerializeField]
         GameObject pointer;
         Transform[] pointed;
-       
+        Outline outline;
+
+
 
         public RaycastHit hit;
         void Awake()
@@ -53,56 +55,62 @@ namespace Scripts.Buttons
                     close();
                 }
 
-               else if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
-                    {
-                        Intract.SetActive(true);
+                else if (hit.transform.CompareTag("Door") || hit.transform.CompareTag("Escape Door") || hit.transform.CompareTag("Door_locker") || hit.transform.CompareTag("Door_fence"))
+                {
+                    Intract.SetActive(true);
+                    GetOutline();
                     Track(Intract);
-                    }
+                }
                 else if ((hit.transform.CompareTag("Timeline") && oc.had != null) || hit.transform.CompareTag("Timeline_independent"))
                 {
                     Timeline.SetActive(true);
                     comment.text = "Interact?";
+                    GetOutline();
                     Track(Timeline);
                 }
 
                 else if ((hit.transform.CompareTag("Timeline") && oc.had == null))
                 {
                     comment.text = "get something ";
+                    GetOutline();
                 }
                 else if (hit.transform.CompareTag("pickup") || hit.transform.CompareTag("Doll") || hit.transform.CompareTag("Fingie"))
                 {
                     Pickup.SetActive(true);
                     Track(Pickup);
-
+                    GetOutline();
 
                 }
                 else if (hit.transform.CompareTag("Comic"))
                 {
                     Comic.SetActive(true);
                     Track(Comic);
+                    GetOutline();
                 }
 
-                else  if (hit.transform.CompareTag("Note"))
-                    {
-                        note.SetActive(true);
+                else if (hit.transform.CompareTag("Note"))
+                {
+                    note.SetActive(true);
                     Track(note);
+                    GetOutline();
 
-                    }
+                }
 
                 else if (hit.transform.CompareTag("Map"))
-                    {
-                        map.SetActive(true);
-                        comment.text = "Should take it , would be of help later";
+                {
+                    map.SetActive(true);
+                    comment.text = "Should take it , would be of help later";
+                    GetOutline();
                     Track(map);
-                    }
+                }
 
-                
+
 
                 else if (hit.transform.CompareTag("Obstacle"))
-                    {
-                        comment.text = "Going there wont be a good idea";
-                    }
-                
+                {
+                    comment.text = "Going there wont be a good idea";
+                }
+
 
                 else if (hit.transform.CompareTag("Save"))
                 {
@@ -132,6 +140,10 @@ namespace Scripts.Buttons
             Comic.SetActive(false);
             map.SetActive(false);
             comment.text = "";
+			if (outline != null)
+			{
+                outline.enabled = false;
+			}
         }
         void Track(GameObject Button)
         {
@@ -152,6 +164,12 @@ namespace Scripts.Buttons
             Button.transform.position = pos;
           
             
+        }
+
+        void GetOutline()
+		{
+            outline = hit.transform.gameObject.GetComponent<Outline>();
+            outline.enabled = true;
         }
        
     }

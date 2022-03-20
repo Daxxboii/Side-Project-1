@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public AudioManager AudioManager;
     private void Awake()
     {
+        Screen.SetResolution(1280, 720, true);
         Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
         Application.targetFrameRate = 100;
