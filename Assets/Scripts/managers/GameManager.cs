@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(true);
         FpsCanvas.SetActive(false);
         settingsMenu.SetActive(false);
-
-            AudioManager.Paused();
+        AudioManager.UI();
+        AudioManager.Paused();
          
         
     }

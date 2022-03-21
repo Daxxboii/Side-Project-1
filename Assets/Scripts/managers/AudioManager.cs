@@ -250,26 +250,30 @@ public class AudioManager : MonoBehaviour
         {
             thunder.SetTrigger("Open");
         }
-        Environment.clip = environment_sounds[1];
+        Environment.clip = environment_sounds[index];
         Environment.Play();
+      
     }
 
-    private void Play_Thunder()
-	{
-        Environment.clip = environment_sounds[1];
-        Environment.Play();
-    }
+   
     public void Random_timer()
     {
         index = Random.Range(0, environment_sounds.Length);
         
-            if(((tm.Current_cutscene < 3) && index > 12))
+            if(((tm.Current_cutscene < 3) && index == 12))
             {
-                Random_Sounds();
+                Random_timer();
             }
-           
-        
+		else
+        {
+            Random_Sounds();
+        }
       
         timer = 0;
+    }
+    private void Play_Thunder()
+	{
+        Environment.clip = environment_sounds[1];
+        Environment.Play();
     }
 }

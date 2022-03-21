@@ -39,4 +39,5 @@ public class FootSteps : MonoBehaviour
 	{
 		rain.RainIntensity = Random.Range(0.1f, 1f);
 	}
+
 }

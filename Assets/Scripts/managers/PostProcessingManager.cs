@@ -11,10 +11,10 @@ public class PostProcessingManager : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (blur && DepthOfField.weight != 1)
+		if (blur)
 		{
 			DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 1, Time.deltaTime*4);
-			if (DepthOfField.weight == 1)
+			if (DepthOfField.weight >= 0.9)
 			{
 				Time.timeScale = 0;
 			}

@@ -35,8 +35,8 @@ public class AnimationEvents : MonoBehaviour
 	{
         AudioManager.Footsteps.Play();
 	}
-
-   public void Wooden_Door_Open()
+	#region Doors
+	public void Wooden_Door_Open()
 	{
         Door_open.Invoke();
 	}
@@ -55,8 +55,8 @@ public class AnimationEvents : MonoBehaviour
 	{
         Fence_door.Invoke();
 	}
-
-    public void Thunder_Sound()
+	#endregion
+	public void Thunder_Sound()
 	{
         thunder.Invoke();
 	}
@@ -74,5 +74,6 @@ public class AnimationEvents : MonoBehaviour
     public void TakeDamage(float damage)
 	{
         playerScript.PlayerTakeDamage(damage);
+      //  Debug.Log(gameObject.name);
 	}
 }

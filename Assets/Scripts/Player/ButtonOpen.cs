@@ -169,7 +169,10 @@ namespace Scripts.Buttons
         void GetOutline()
 		{
             outline = hit.transform.gameObject.GetComponent<Outline>();
-            outline.enabled = true;
+			if (outline != null)
+			{
+                outline.enabled = true;
+            }
         }
        
     }

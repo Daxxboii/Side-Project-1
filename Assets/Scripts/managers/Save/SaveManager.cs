@@ -47,11 +47,7 @@ public class SaveManager : MonoBehaviour
             {
                 Load();
             }
-            else
-            {
-                
-            }
-         
+           
         }
     }
 
@@ -66,7 +62,8 @@ public class SaveManager : MonoBehaviour
    public  void Save()
     {
         
-       save_panel.SetActive(true);
+         save_panel.SetActive(true);
+        PostProcessingManager.blur = true;
         fps_canvas.SetActive(false);
       
         StartCoroutine("Loading");
@@ -373,6 +370,7 @@ public class SaveManager : MonoBehaviour
         yield return new WaitForSeconds(3);
        
             save_panel.SetActive(false);
+        PostProcessingManager.blur = false;
         fps_canvas.SetActive(true);
 
 

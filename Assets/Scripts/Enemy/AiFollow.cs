@@ -12,14 +12,18 @@ namespace Scripts.Enemy
             [Header("Audio Settings")] 
             [SerializeField] private AudioManager AudioM;
             [SerializeField] private float Time_between_growls;
+            [SerializeField] private float Time_between_Laughter;
+            [SerializeField,Range(0f,10f)] private int Chances_of_laughter;
+            private int random_chances;
           
             [Header("Principal States")]
             public bool angry;
-            bool NotCooling = true;
+            public bool NotCooling = true;
 
             [Header("Principal Values")]
             [SerializeField]private Animator anim;
             [SerializeField]public NavMeshAgent _agent;
+            [SerializeField]private float stopping_distance;
             [SerializeField]private float follow_distance;
             [SerializeField]private float attack_radius;
             [SerializeField] private float Roam_Radius;
@@ -39,7 +43,7 @@ namespace Scripts.Enemy
             [SerializeField] private VisiBility visibility;
             void Start()
             {
-                _agent.stoppingDistance = 0.5f;
+                _agent.stoppingDistance = stopping_distance;
             }
             void Update()
             {
@@ -48,6 +52,8 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
+              //  Debug.Log(Distance_from_player);
+
                 //Principal is not Chilling
                 if (NotCooling)
                 {
@@ -92,6 +98,7 @@ namespace Scripts.Enemy
                 //Principal is Chilling
                 else
                 {
+                    _agent.enabled = false;
                     Animations(0, 0);
                 }
             }
@@ -100,7 +107,7 @@ namespace Scripts.Enemy
                 //Direct Kill
 				if (!angry||playerScript.isDead)
 				{
-                    if (DetermineDistanceFromPlayer() < attack_radius)
+                    if (Distance_from_player < attack_radius)
                     {
                         Animations(2, 2);
                         AudioM.Enemy_Princy_Int_Kill();
@@ -110,7 +117,7 @@ namespace Scripts.Enemy
                 else 
                 {
                     //Player withing attack Range
-                    if (DetermineDistanceFromPlayer() < attack_radius)
+                    if (Distance_from_player < attack_radius)
                     {
                         //Principal not on cooldown
                         if (NotCooling)
@@ -175,10 +182,13 @@ namespace Scripts.Enemy
             void Chase()
             {
                 timer2 += Time.deltaTime;
-                if (timer2 > Time_between_growls)
+                if (timer2 > Time_between_Laughter)
                 {
-                   // Debug.Log("Chasing");
-                    AudioM.Enemy_Princy_chase();
+                    random_chances = Random.Range(0, 10);
+					if (random_chances < Chances_of_laughter)
+					{
+                        AudioM.Enemy_Princy_chase();
+                    }
                     timer2 = 0;
                 }
             }
