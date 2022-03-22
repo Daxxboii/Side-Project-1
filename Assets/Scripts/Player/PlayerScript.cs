@@ -23,8 +23,7 @@ using UnityEngine.Rendering;
         public Sprite hit_high;
         public Volume Damage;
 
-        [SerializeField]
-        private GirlAiGhost GirlAI;
+        [SerializeField]private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
       
         [SerializeField] private Joystick joystick;
@@ -36,7 +35,7 @@ using UnityEngine.Rendering;
 
         // Player settings
         [SerializeField] private float cameraSensitivity;
-        [SerializeField] public float speed,Footsteps_frequency, CrouchSpeed, height, crouchHight, Health, RegenTimer,Crouch_Interpolation_speed;
+        [SerializeField] public float speed,Footsteps_frequency, CrouchSpeed, height,crouchHight, Health,Crouch_Interpolation_speed;
         private float TempSpeed;
         private bool  isCrouching;
         private Vector3 move;
@@ -88,13 +87,12 @@ using UnityEngine.Rendering;
         void Update()
         {
 
-			if (Health <= 75)
+			if (Health <75)
 			{
                 Health_Manager();
-            }
+        }
             if (!isDead)
             {
-                Regenerate();
               
                 GetTouchInput();
 
@@ -211,7 +209,7 @@ using UnityEngine.Rendering;
            x = joystick.Horizontal;
            z = joystick.Vertical;
 
-            camAnim.SetFloat("WalkSpeed", z*Footsteps_frequency);
+            camAnim.SetFloat("WalkSpeed", (z*Footsteps_frequency));
             
             if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
@@ -273,39 +271,42 @@ using UnityEngine.Rendering;
         {
             if(Health <=75)
             {
-                RegenTimer += Time.deltaTime;
-                Health += RegenTimer;
-                RegenTimer = 0;
+                Health += Time.deltaTime*2;
             }
         }
         private void Health_Manager()
         {
-            //Set Hit Alpha
-            var tempColor = hit_image.color;
+            Regenerate();
+           //Set Hit Alpha
+           var tempColor = hit_image.color;
             tempColor.a = (1-Health/75)/2;
             hit_image.color = tempColor;
-            Damage.weight = Mathf.PingPong(Time.time, 1f);
             //Set Hit Image
             if (Health < 50){
                 hit_image.sprite = hit_high;
-               
             }
             else
             {
                 hit_image.sprite = hit_low;
             }
 
-            //Death
-            if (Health <= 0)
+		if (Health > 60)
+		{
+            Damage.weight = Mathf.Lerp(Damage.weight, 0f, Time.deltaTime*3f);
+		}
+		else
+		{
+            Damage.weight = 1;
+
+        }
+        //Death
+        if (Health <= 0)
             {
                 GirlAI.Cooldown_period = 0;
                 isDead = true;
                 fpsCam.transform.LookAt(ghost);
             }
-            else if (Health > 70)
-			{
-                Damage.weight = 0;
-            }
+           
         }
         void Player_death()
         {

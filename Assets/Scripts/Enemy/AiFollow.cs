@@ -29,6 +29,7 @@ namespace Scripts.Enemy
             [SerializeField] private float Roam_Radius;
             [SerializeField] private float cool_period;
             [SerializeField] private float giveup_time;
+            [SerializeField] private GameObject Eye;
             private Vector3 newPos;
             private Vector3 RandomSpawnLocation;
             private float Distance_from_player;
@@ -61,6 +62,7 @@ namespace Scripts.Enemy
                     if (visibility.visible == true && !angry)
                     {
                         _agent.enabled = false;
+                        Eye.SetActive(true);
                         Animations(0, 0);
                         Growl();
                     }
@@ -68,6 +70,7 @@ namespace Scripts.Enemy
                     //if principal is not in sight
                     else 
                     {
+                        Eye.SetActive(false);
                         _agent.enabled = true;
                         Distance_from_player =DetermineDistanceFromPlayer();
 

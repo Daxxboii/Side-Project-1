@@ -20,13 +20,13 @@ namespace Scripts.Enemy
             [SerializeField]private float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
             [SerializeField]private int damage;
             [SerializeField]private float attack_distance;
+            [SerializeField]private float GiveUp_Time;
             [SerializeField]public float Cooldown_period;
             private float chase_timer;
-            private float timer;
-            private int random_int;
+            private float LaughTimer;
 
             [Header("Audio")]
-            [SerializeField,Range(0,10)] private int Chances_of_ChaseSound;
+            [SerializeField,Range(0,10)] private float Time_Between_ChaseSound;
 
             [Header("Components")]
             [SerializeField]public GameObject player; 
@@ -47,6 +47,7 @@ namespace Scripts.Enemy
                 agent = GetComponent<NavMeshAgent>();
                 agent.stoppingDistance = agentstoppingdistance;
 
+
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 agent.destination = player.transform.position;
                 cooldown = false;
@@ -57,7 +58,7 @@ namespace Scripts.Enemy
                 agent.destination = player.transform.position;
                 cooldown = false;
                 Animations(0, 0);
-                
+                newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
             }
             private void Update()
             {
@@ -71,57 +72,40 @@ namespace Scripts.Enemy
                         if (!cooldown)
                         {
                             //if player is in front of girl
-                            if (isinFrontOFMe(player))
+                            if (isinFrontOFMe())
                             {
-                                chasing = true;
-                                agent.SetDestination(player.transform.position);
-                                //Trigger Chase Animation
-                                Animations(2, 0);
-                                Attack();
-                               
-                            }
-
-                            //if player is not in front of girl
-                            else if (!isinFrontOFMe(player))
-                            {
-                                //ig girl is still chasing
                                 if (chasing)
                                 {
-                                    Animations(2, 0);
-                                    random_int = Random.Range(0, 10);
-									if (random_int < Chances_of_ChaseSound)
-									{
-                                        audioM.Enemy_Girl_chase();
-                                    }
+                                    chasing = true;
                                     agent.SetDestination(player.transform.position);
+                                    //Trigger Chase Animation
+                                    Animations(2, 0);
+                                    LaughTimer +=Time.deltaTime;
+                                    if (LaughTimer > Time_Between_ChaseSound)
+                                    {
+                                        audioM.Enemy_Girl_chase();
+                                        LaughTimer = 0f;
+                                    }
+
                                     chase_timer += Time.deltaTime;
-                                    if (chase_timer >= 5f)
+                                    if (chase_timer >= GiveUp_Time)
                                     {
                                         chasing = false;
                                         chase_timer = 0.0f;
                                     }
+                                    Attack();
                                 }
-                                else if (!chasing)
-                                {
-                                  audioM.Girl_Stop();
-                                    if (Vector3.Distance(transform.position, newPos) < 0.5)
-                                    {
-                                        Animations(0, 0);
-                                    }
-                                    else
-                                    {
-                                        Animations(1, 0);
-                                    }
-                                    agent.SetDestination(newPos);
+								else
+								{
+                                    ChangePos();
+								}
+								
+                            }
 
-                                    timer += Time.deltaTime;
-                                    if (timer >= wanderTimer)
-                                    {
-                                        newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-                                        timer = 0;
-                                    }
-
-                                }
+                            //if player is not in front of girl
+                            else 
+                            {
+                                ChangePos();
                             }
                         }
                     }
@@ -140,31 +124,16 @@ namespace Scripts.Enemy
                     }
                 }
             }
-            bool isinFrontOFMe(GameObject player)
+            bool isinFrontOFMe()
             {
-
-                Vector3 direction = player.transform.position - transform.position;
-                float angle = Vector3.Angle(direction, transform.forward);
-                if (angle < fieldOfView * 0.5f)
-                {
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, chase_range))
-                    {
-                        Debug.DrawRay(transform.position, direction, Color.black);
-                        if (hit.transform.gameObject.tag == "Player")
-                        {
-                            return true;
-                        }
-                        else
-                            return false;
-
-                    }
-                    else
-                        return false;
-
-                }
-                else
+				if (Vector3.Distance(player.transform.position, transform.position) > chase_range)
+				{
+                    return true;
+				}
+				else
+				{
                     return false;
+				}
             }
 
             public  Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
@@ -235,6 +204,23 @@ namespace Scripts.Enemy
                 cooldown = false;
                 agent.isStopped = false;
                 hit = true;
+            }
+
+            void ChangePos()
+			{
+                audioM.Girl_Stop();
+                if (Vector3.Distance(transform.position, newPos) < 0.5)
+                {
+                    Animations(0, 0);
+                    newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+                    chasing = true;
+                }
+
+                else
+                {
+                    Animations(1, 0);
+                }
+                agent.SetDestination(newPos);
             }
         }
     }

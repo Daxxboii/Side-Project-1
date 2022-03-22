@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public Timeline_Manager tm;
     public float Environment_sounds_timer;
-
+    public GameObject player;
 
     [Header("Sources")]
     public AudioSource Footsteps;
@@ -251,8 +251,11 @@ public class AudioManager : MonoBehaviour
             thunder.SetTrigger("Open");
         }
         Environment.clip = environment_sounds[index];
-        Environment.Play();
-      
+		if (player.activeInHierarchy)
+		{
+            Environment.Play();
+        }
+
     }
 
    

@@ -5,6 +5,7 @@ public class PostProcessingManager : MonoBehaviour
 {
     [SerializeField] private Volume DepthOfField;
 	public static bool blur;
+	public static bool pauseafterblur=true;
     public static void Blur()
 	{
 		blur = !blur;
@@ -14,7 +15,7 @@ public class PostProcessingManager : MonoBehaviour
 		if (blur)
 		{
 			DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 1, Time.deltaTime*4);
-			if (DepthOfField.weight >= 0.9)
+			if (DepthOfField.weight >= 0.9&&pauseafterblur)
 			{
 				Time.timeScale = 0;
 			}

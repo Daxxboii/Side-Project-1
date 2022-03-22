@@ -14,7 +14,7 @@ public class VisiBility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(cam.gameObject.transform.position, principal.transform.position) < 15)
+        if (Vector3.Distance(cam.gameObject.transform.position, principal.transform.position) < radius)
         {
             visible = IsTargetVisible(cam, principal);
         }

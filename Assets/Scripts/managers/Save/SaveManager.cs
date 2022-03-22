@@ -64,6 +64,7 @@ public class SaveManager : MonoBehaviour
         
          save_panel.SetActive(true);
         PostProcessingManager.blur = true;
+        PostProcessingManager.pauseafterblur = false;
         fps_canvas.SetActive(false);
       
         StartCoroutine("Loading");
@@ -371,6 +372,7 @@ public class SaveManager : MonoBehaviour
        
             save_panel.SetActive(false);
         PostProcessingManager.blur = false;
+        PostProcessingManager.pauseafterblur = true;
         fps_canvas.SetActive(true);
 
 
