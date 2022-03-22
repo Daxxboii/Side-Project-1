@@ -111,6 +111,7 @@ namespace Scripts.Enemy
                     {
                         Animations(2, 2);
                         AudioM.Enemy_Princy_Int_Kill();
+
                     }
                 }
                 //Player Health is not critical

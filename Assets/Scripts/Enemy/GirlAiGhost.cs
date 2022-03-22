@@ -11,33 +11,37 @@ namespace Scripts.Enemy
     {
         public class GirlAiGhost : MonoBehaviour
         {
-            public AudioManager audioM;
-            [SerializeField] PlayerScript ps;
-            float chase_timer;
-            public float wanderRadius;
-            public bool angry;
-            public float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
-            public GameObject volume;
-            [SerializeField]
-            public NavMeshAgent agent;
-            // [SerializeField]
+            [Header("Scripts")]
+            [SerializeField] private AudioManager audioM;
+            [SerializeField] private PlayerScript ps;
+
+            [Header("Variables")]
+            [SerializeField]private float wanderRadius;
+            [SerializeField]private float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
+            [SerializeField]private int damage;
+            [SerializeField]private float attack_distance;
+            [SerializeField]public float Cooldown_period;
+            private float chase_timer;
             private float timer;
-            public GameObject player;
-            [SerializeField]
-            private bool cooldown, chasing;
+            private int random_int;
 
-            [SerializeField]
-            private Animator Girl_animator;
-            [SerializeField]
-            private int damage;
-            [SerializeField]
-            private float attack_distance;
-            private bool hit = true;
-            public float Cooldown_period;
-           public bool ded = false;
+            [Header("Audio")]
+            [SerializeField,Range(0,10)] private int Chances_of_ChaseSound;
 
+            [Header("Components")]
+            [SerializeField]public GameObject player; 
+            [SerializeField] public NavMeshAgent agent;
+            [SerializeField]private Animator Girl_animator;
+
+            [Header("Booleans")]
+            [SerializeField] private bool cooldown;
+            [SerializeField] private bool chasing;
+            [SerializeField] private bool hit = true;
+            [SerializeField] private bool ded = false;
+            [SerializeField] public bool angry;
+           
             private Vector3 newPos;
-
+           
             private void Awake()
             {
                 agent = GetComponent<NavMeshAgent>();
@@ -84,9 +88,11 @@ namespace Scripts.Enemy
                                 if (chasing)
                                 {
                                     Animations(2, 0);
-                                    audioM.Enemy_Girl_chase();
-                                    //Black and white
-                                    volume.SetActive(true);
+                                    random_int = Random.Range(0, 10);
+									if (random_int < Chances_of_ChaseSound)
+									{
+                                        audioM.Enemy_Girl_chase();
+                                    }
                                     agent.SetDestination(player.transform.position);
                                     chase_timer += Time.deltaTime;
                                     if (chase_timer >= 5f)
@@ -98,7 +104,6 @@ namespace Scripts.Enemy
                                 else if (!chasing)
                                 {
                                   audioM.Girl_Stop();
-                                    volume.SetActive(false);
                                     if (Vector3.Distance(transform.position, newPos) < 0.5)
                                     {
                                         Animations(0, 0);
