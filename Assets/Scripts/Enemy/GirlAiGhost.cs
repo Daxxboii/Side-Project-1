@@ -20,7 +20,6 @@ namespace Scripts.Enemy
             [SerializeField]private float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
             [SerializeField]private int damage;
             [SerializeField]private float attack_distance;
-            [SerializeField]private float GiveUp_Time;
             [SerializeField]public float Cooldown_period;
             private float chase_timer;
             private float LaughTimer;
@@ -35,7 +34,7 @@ namespace Scripts.Enemy
 
             [Header("Booleans")]
             [SerializeField] private bool cooldown;
-            [SerializeField] private bool chasing;
+          //  [SerializeField] private bool chasing;
             [SerializeField] private bool hit = true;
             [SerializeField] private bool ded = false;
             [SerializeField] public bool angry;
@@ -74,9 +73,8 @@ namespace Scripts.Enemy
                             //if player is in front of girl
                             if (isinFrontOFMe())
                             {
-                                if (chasing)
-                                {
-                                    chasing = true;
+                                
+                                 
                                     agent.SetDestination(player.transform.position);
                                     //Trigger Chase Animation
                                     Animations(2, 0);
@@ -86,19 +84,9 @@ namespace Scripts.Enemy
                                         audioM.Enemy_Girl_chase();
                                         LaughTimer = 0f;
                                     }
-
-                                    chase_timer += Time.deltaTime;
-                                    if (chase_timer >= GiveUp_Time)
-                                    {
-                                        chasing = false;
-                                        chase_timer = 0.0f;
-                                    }
                                     Attack();
-                                }
-								else
-								{
-                                    ChangePos();
-								}
+                                
+								
 								
                             }
 
@@ -209,11 +197,10 @@ namespace Scripts.Enemy
             void ChangePos()
 			{
                 audioM.Girl_Stop();
-                if (Vector3.Distance(transform.position, newPos) < 0.5)
+                if (Vector3.Distance(transform.position, newPos) < 2)
                 {
                     Animations(0, 0);
                     newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-                    chasing = true;
                 }
 
                 else

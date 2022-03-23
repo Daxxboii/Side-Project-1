@@ -6,11 +6,13 @@ public class VisiBility : MonoBehaviour
 {
 
     [SerializeField]
-    Camera cam;
+    Transform cam;
     [SerializeField]
     GameObject  principal;
-    public float radius;
+    public float radius,sphere_Radius;
+    public LayerMask Layer;
     public bool visible;
+    RaycastHit hit;
     // Update is called once per frame
     void Update()
     {
@@ -24,15 +26,23 @@ public class VisiBility : MonoBehaviour
         }
        
     }
-    bool IsTargetVisible(Camera c, GameObject go)
+    bool IsTargetVisible(Transform c, GameObject go)
     {
-        var planes = GeometryUtility.CalculateFrustumPlanes(c);
-        var point = go.transform.position;
-        foreach (var plane in planes)
+        if(Physics.SphereCast(cam.position,sphere_Radius,transform.forward,out hit, radius, Layer))
         {
-            if (plane.GetDistanceToPoint(point) < 0)
+			if (hit.transform.gameObject == go)
+			{
+                return true;
+            }
+			else
+			{
                 return false;
-        }
-        return true;
+			}
+		}
+		else
+		{
+            return false;
+		}
+       
     }
 }
