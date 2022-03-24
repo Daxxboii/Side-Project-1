@@ -37,7 +37,7 @@ public class FootSteps : MonoBehaviour
 
 	void RandomRain()
 	{
-		rain.RainIntensity = Random.Range(0.1f, 1f);
+		rain.RainIntensity = Random.Range(0.1f, 0.5f);
 	}
 
 }

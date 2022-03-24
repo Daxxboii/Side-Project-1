@@ -9,7 +9,7 @@ public class VisiBility : MonoBehaviour
     Transform cam;
     [SerializeField]
     GameObject  principal;
-    public float radius,sphere_Radius;
+    public float radius;
     public LayerMask Layer;
     public bool visible;
     RaycastHit hit;
@@ -18,7 +18,7 @@ public class VisiBility : MonoBehaviour
     {
         if (Vector3.Distance(cam.gameObject.transform.position, principal.transform.position) < radius)
         {
-            visible = IsTargetVisible(cam, principal);
+            visible = IsTargetVisible(principal);
         }
         else
         {
@@ -26,9 +26,9 @@ public class VisiBility : MonoBehaviour
         }
        
     }
-    bool IsTargetVisible(Transform c, GameObject go)
+    bool IsTargetVisible( GameObject go)
     {
-        if(Physics.SphereCast(cam.position,sphere_Radius,transform.forward,out hit, radius, Layer))
+        if(Physics.Raycast(cam.position,cam.transform.TransformDirection(Vector3.forward), out hit, radius, Layer))
         {
 			if (hit.transform.gameObject == go)
 			{
