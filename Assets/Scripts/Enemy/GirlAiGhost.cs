@@ -16,11 +16,11 @@ namespace Scripts.Enemy
             [SerializeField] private PlayerScript ps;
 
             [Header("Variables")]
-            [SerializeField]private float wanderRadius;
-            [SerializeField]private float wanderTimer, fieldOfView = 110f, chase_range,agentstoppingdistance;
-            [SerializeField]private int damage;
-            [SerializeField]private float attack_distance;
-            [SerializeField]public float Cooldown_period;
+            [SerializeField,Range(0f, 50f)] private float wanderRadius;
+            [SerializeField,Range(0f, 50f)] private float wanderTimer,chase_range,agentstoppingdistance;
+            [SerializeField,Range(0f, 50f)] private int damage;
+            [SerializeField,Range(0f, 50f)] private float attack_distance;
+            [SerializeField,Range(0f, 50f)] public float Cooldown_period;
             private float chase_timer;
             private float LaughTimer;
 
@@ -73,21 +73,11 @@ namespace Scripts.Enemy
                             //if player is in front of girl
                             if (isinFrontOFMe())
                             {
-                                
-                                 
                                     agent.SetDestination(player.transform.position);
                                     //Trigger Chase Animation
                                     Animations(2, 0);
-                                    LaughTimer +=Time.deltaTime;
-                                    if (LaughTimer > Time_Between_ChaseSound)
-                                    {
-                                        audioM.Enemy_Girl_chase();
-                                        LaughTimer = 0f;
-                                    }
+                                    Laugh();
                                     Attack();
-                                
-								
-								
                             }
 
                             //if player is not in front of girl
@@ -97,8 +87,8 @@ namespace Scripts.Enemy
                             }
                         }
                     }
-                    if (angry)
-                    {
+                    else
+                    {/*
                         agent.SetDestination(player.transform.position);
                         agent.stoppingDistance = 15;
                         if (agent.isStopped || Vector3.Distance(player.transform.position,transform.position)<16f)
@@ -108,9 +98,62 @@ namespace Scripts.Enemy
                         else
                         {
                             Animations(1, 0);
-                        }
+                        }*/
                     }
                 }
+            }
+            void ChangePos()
+            {
+                audioM.Girl_Stop();
+                if (Vector3.Distance(transform.position, newPos) < 2)
+                {
+                    Animations(0, 0);
+                    newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
+                }
+
+                else
+                {
+                    Animations(1, 0);
+                }
+                agent.SetDestination(newPos);
+            }
+
+            private void Attack()
+            {
+                //if player is too close
+                if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
+                {
+                    if (ps.isDead == false && ps.Health > 25)
+                    {
+                        if (hit)
+                        {
+                            Animations(2, 1);
+                            cooldown = true;
+                            agent.isStopped = true;
+                            ps.PlayerTakeDamage(damage);
+                            hit = false;
+                            Invoke("ReActivate", Cooldown_period);
+                        }
+
+                    }
+
+                    //If player has low health
+                    else if (ps.isDead || ps.Health <= 25)
+                    {
+                        ps.PlayerTakeDamage(damage);
+
+                        if (!ded)
+                        {
+                            audioM.Enemy_Girl_kill();
+                            ded = true;
+                        }
+                        //Trigger kill animation
+                        Animations(2, 2);
+
+                    }
+                }
+
+
             }
             bool isinFrontOFMe()
             {
@@ -146,45 +189,7 @@ namespace Scripts.Enemy
                 Girl_animator.SetInteger("Walk_State", walk_state);
             }
 
-            private void Attack()
-            {
-                //if player is too close
-                if (Vector3.Distance(player.transform.position, transform.position) < attack_distance)
-                {
-                    if (ps.isDead == false && ps.Health > 25)
-                    {
-                        if (hit)
-                        {
-                            Animations(2, 1);
-                            cooldown = true;
-                            agent.isStopped = true;
-                            ps.PlayerTakeDamage(damage);
-                            hit = false;
-                           
-                        
-                            Invoke("ReActivate", Cooldown_period);
-                        }
-
-                    }
-
-                    //If player has low health
-                    else if (ps.isDead||ps.Health<=25)
-                    {
-                        ps.PlayerTakeDamage(damage);
-                      
-                        if (!ded)
-                        {
-                            audioM.Enemy_Girl_kill();
-                            ded = true;
-                        }
-                      //Trigger kill animation
-                        Animations(2, 2);
-                     
-                    }
-                }
-               
-            
-            }
+         
 
             void ReActivate()
             {
@@ -194,20 +199,21 @@ namespace Scripts.Enemy
                 hit = true;
             }
 
-            void ChangePos()
-			{
-                audioM.Girl_Stop();
-                if (Vector3.Distance(transform.position, newPos) < 2)
-                {
-                    Animations(0, 0);
-                    newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
-                }
+           
 
-                else
+           public void ChangeGirl()
+			{
+                angry = true;
+			}
+
+            void Laugh()
+			{
+                LaughTimer += Time.deltaTime;
+                if (LaughTimer > Time_Between_ChaseSound)
                 {
-                    Animations(1, 0);
+                    audioM.Enemy_Girl_chase();
+                    LaughTimer = 0f;
                 }
-                agent.SetDestination(newPos);
             }
         }
     }

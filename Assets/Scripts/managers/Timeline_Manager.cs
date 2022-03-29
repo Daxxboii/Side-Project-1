@@ -57,13 +57,13 @@ namespace Scripts.Timeline
         {
              lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
-           
-           
             ObjectiveList();
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
                 aiFollow.angry = true;
+                aiFollow.angry = true;
+                girl.ChangeGirl();
             }
             else
             {
@@ -78,16 +78,6 @@ namespace Scripts.Timeline
                 aiFollow.enabled = true;
             }
             text = lines[index];
-        }
-
-        private void FixedUpdate()
-        {
-            if (Current_cutscene >= 10)
-            {
-                aiFollow.angry = true;
-                girl.angry = true;
-            }
-
         }
         public void Translate_Player()
         {

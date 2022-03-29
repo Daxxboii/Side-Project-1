@@ -53,8 +53,6 @@ namespace Scripts.Enemy
             }
             void Movement()
             {
-              //  Debug.Log(Distance_from_player);
-
                 //Principal is not Chilling
                 if (NotCooling)
                 {
