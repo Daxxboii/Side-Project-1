@@ -88,7 +88,6 @@ namespace Scripts.Enemy
                         //Player is in catching Range
                         else
                         {
-                           
                             Animations(0, 2);
                             _agent.SetDestination(_player.transform.position);
                             Chase();

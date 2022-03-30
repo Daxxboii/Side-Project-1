@@ -2,8 +2,9 @@
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-   
-    public class PlayerScript : MonoBehaviour
+using EZCameraShake;
+
+public class PlayerScript : MonoBehaviour
     {
       
         private static float sensi = 10;
@@ -254,7 +255,8 @@ using UnityEngine.Rendering;
         public void PlayerTakeDamage(float hminus)
         {
             Health -= hminus;
-        }
+        CameraShaker.Instance.ShakeOnce(10f, 10f, 0.1f, 1f);
+    }  
 
         public void ChangeUI()
         {
