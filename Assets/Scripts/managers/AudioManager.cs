@@ -263,7 +263,7 @@ public class AudioManager : MonoBehaviour
     {
         index = Random.Range(0, environment_sounds.Length);
         
-            if(((tm.Current_cutscene < 3) && index == 12))
+            if(((tm.Current_cutscene < 3) &&index==13))
             {
                 Random_timer();
             }

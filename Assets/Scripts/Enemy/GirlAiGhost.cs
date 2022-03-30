@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Scripts.Player;
-
+using Cinemachine;
 namespace Scripts.Enemy
 
 {
@@ -17,7 +17,7 @@ namespace Scripts.Enemy
 
             [Header("Variables")]
             [SerializeField,Range(0f, 50f)] private float wanderRadius;
-            [SerializeField,Range(0f, 50f)] private float wanderTimer,chase_range,agentstoppingdistance;
+            [SerializeField,Range(0f, 50f)] private float chase_range,agentstoppingdistance;
             [SerializeField,Range(0f, 50f)] private int damage;
             [SerializeField,Range(0f, 50f)] private float attack_distance;
             [SerializeField,Range(0f, 50f)] public float Cooldown_period;
@@ -25,28 +25,31 @@ namespace Scripts.Enemy
             private float LaughTimer;
 
             [Header("Audio")]
-            [SerializeField,Range(0,10)] private float Time_Between_ChaseSound;
+            [SerializeField,Range(0,50)] private float Time_Between_ChaseSound;
 
             [Header("Components")]
-            [SerializeField]public GameObject player; 
+            [SerializeField] public GameObject player; 
             [SerializeField] public NavMeshAgent agent;
-            [SerializeField]private Animator Girl_animator;
+            [SerializeField] private Animator Girl_animator;
+            [SerializeField] private Material girl_mat;
+            [SerializeField] private GameObject Moths, BoxVolume;
 
             [Header("Booleans")]
             [SerializeField] private bool cooldown;
-          //  [SerializeField] private bool chasing;
-            [SerializeField] private bool hit = true;
+            [SerializeField] private bool chasing;
+            [SerializeField] private bool walking;
+            [SerializeField] private bool ReadyToHit = true;
             [SerializeField] private bool ded = false;
             [SerializeField] public bool angry;
+
+            [Header("Markers")]
+            [SerializeField] private CinemachineDollyCart cart;
            
             private Vector3 newPos;
            
             private void Awake()
             {
-                agent = GetComponent<NavMeshAgent>();
                 agent.stoppingDistance = agentstoppingdistance;
-
-
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 agent.destination = player.transform.position;
                 cooldown = false;
@@ -61,6 +64,7 @@ namespace Scripts.Enemy
             }
             private void Update()
             {
+                Debug.Log(Vector3.Distance(transform.position, player.transform.position));
                 //if agent is active
                 if (agent.enabled)
                 {
@@ -74,9 +78,13 @@ namespace Scripts.Enemy
                             if (isinFrontOFMe())
                             {
                                     agent.SetDestination(player.transform.position);
-                                    //Trigger Chase Animation
+								//Trigger Chase Animation
+								if (!chasing)
+								{
                                     Animations(2, 0);
-                                    Laugh();
+                                    chasing = true;
+                                }
+                                Laugh();
                                     Attack();
                             }
 
@@ -87,35 +95,40 @@ namespace Scripts.Enemy
                             }
                         }
                     }
-                    else
-                    {/*
-                        agent.SetDestination(player.transform.position);
-                        agent.stoppingDistance = 15;
-                        if (agent.isStopped || Vector3.Distance(player.transform.position,transform.position)<16f)
-                        {
-                            Animations(0, 0);
-                        }
-                        else
-                        {
-                            Animations(1, 0);
-                        }*/
-                    }
+					else
+					{
+                        //Float Around
+					}
                 }
             }
             void ChangePos()
             {
+				if (chasing)
+				{
+                    chasing = false;
+				}
                 audioM.Girl_Stop();
-                if (Vector3.Distance(transform.position, newPos) < 2)
+                if (Vector3.Distance(transform.position, newPos) < 3)
                 {
-                    Animations(0, 0);
+					if (walking)
+					{
+                        Animations(0, 0);
+                        walking = false;
+                    }
+
                     newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
                 }
 
                 else
                 {
-                    Animations(1, 0);
+					if (!walking)
+					{
+                        Animations(1, 0);
+                        walking = true;
+                    }
                 }
                 agent.SetDestination(newPos);
+                Debug.Log(Vector3.Distance(transform.position, newPos));
             }
 
             private void Attack()
@@ -125,13 +138,13 @@ namespace Scripts.Enemy
                 {
                     if (ps.isDead == false && ps.Health > 25)
                     {
-                        if (hit)
+                        if (ReadyToHit)
                         {
                             Animations(2, 1);
                             cooldown = true;
                             agent.isStopped = true;
                             ps.PlayerTakeDamage(damage);
-                            hit = false;
+                            ReadyToHit = false;
                             Invoke("ReActivate", Cooldown_period);
                         }
 
@@ -149,7 +162,6 @@ namespace Scripts.Enemy
                         }
                         //Trigger kill animation
                         Animations(2, 2);
-
                     }
                 }
 
@@ -157,7 +169,7 @@ namespace Scripts.Enemy
             }
             bool isinFrontOFMe()
             {
-				if (Vector3.Distance(player.transform.position, transform.position) > chase_range)
+				if (Vector3.Distance(player.transform.position, transform.position) < chase_range)
 				{
                     return true;
 				}
@@ -196,7 +208,7 @@ namespace Scripts.Enemy
               //  agent.Warp(newPos);
                 cooldown = false;
                 agent.isStopped = false;
-                hit = true;
+                ReadyToHit = true;
             }
 
            
@@ -204,9 +216,15 @@ namespace Scripts.Enemy
            public void ChangeGirl()
 			{
                 angry = true;
+                girl_mat.SetColor("_BaseColor", Color.white);
+                Moths.SetActive(true);
+                BoxVolume.SetActive(false);
+                agent.enabled = false;
+                cart.enabled = true;
+                cart.m_Speed = 1;
 			}
 
-            void Laugh()
+           void Laugh()
 			{
                 LaughTimer += Time.deltaTime;
                 if (LaughTimer > Time_Between_ChaseSound)
@@ -215,6 +233,8 @@ namespace Scripts.Enemy
                     LaughTimer = 0f;
                 }
             }
+
+           
         }
     }
 }

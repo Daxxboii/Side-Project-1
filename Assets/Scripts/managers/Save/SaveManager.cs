@@ -276,10 +276,7 @@ public class SaveManager : MonoBehaviour
         {
             formatter.Serialize(stream, sm);
         }
-       
-       
         PlayerPrefs.Save();
-
     }
 
     void _Load()

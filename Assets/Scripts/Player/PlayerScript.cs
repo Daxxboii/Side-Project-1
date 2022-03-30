@@ -11,6 +11,7 @@ using UnityEngine.Rendering;
         [Header("UI")]
         [SerializeField] private Sprite crouch;
         [SerializeField] private Sprite stand;
+        [SerializeField] private GameObject Buttons_Canvas;
         
         public GameObject admenu;
         [SerializeField]
@@ -312,6 +313,7 @@ using UnityEngine.Rendering;
         {
          //   yield return new WaitForSeconds(death_timer);
             admenu.SetActive(true);
+            Buttons_Canvas.SetActive(false);
             Time.timeScale = 0;
         }
 
