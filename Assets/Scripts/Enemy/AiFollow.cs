@@ -28,12 +28,11 @@ namespace Scripts.Enemy
             [SerializeField]private float attack_radius;
             [SerializeField] private float Roam_Radius;
             [SerializeField] private float cool_period;
-            [SerializeField] private float giveup_time;
             [SerializeField] private GameObject Eye;
             private Vector3 newPos;
             private Vector3 RandomSpawnLocation;
             private float Distance_from_player;
-            private float timer,timer2,GiveUpTimer;
+            private float timer,timer2;
             private float roam_timer;
             private NavMeshHit navHit;
 
@@ -73,7 +72,7 @@ namespace Scripts.Enemy
                         Distance_from_player =DetermineDistanceFromPlayer();
 
                         //Player is not in Catching Range
-                        if (Distance_from_player > follow_distance||GiveUpTimer>giveup_time)
+                        if (Distance_from_player > follow_distance)
                         {
                             roam_timer += Time.deltaTime;
                             //Change Position Every 10 Seconds
@@ -83,13 +82,13 @@ namespace Scripts.Enemy
                                 Animations(0, 1);
                                 _agent.SetDestination(newPos);
                                 roam_timer = 0;
-                                GiveUpTimer = 0f;
+                              
                             }
                         }
                         //Player is in catching Range
-                        else if(Distance_from_player < follow_distance && GiveUpTimer<giveup_time)
+                        else
                         {
-                            GiveUpTimer += Time.deltaTime;
+                           
                             Animations(0, 2);
                             _agent.SetDestination(_player.transform.position);
                             Chase();

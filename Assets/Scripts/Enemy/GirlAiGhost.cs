@@ -98,6 +98,7 @@ namespace Scripts.Enemy
 					else
 					{
                         //Float Around
+                        Animations(3, 0);
 					}
                 }
             }
