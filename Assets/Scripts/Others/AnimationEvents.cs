@@ -11,6 +11,7 @@ public class AnimationEvents : MonoBehaviour
     public GirlAiGhost girlAIGhost;
     public AudioManager AudioManager;
     public PlayerScript playerScript;
+    public PostProcessingManager postProcessingManager;
 
     public delegate void MakeSound();
     public static event MakeSound Door_open;
@@ -21,6 +22,7 @@ public class AnimationEvents : MonoBehaviour
     public static event MakeSound girl_spook;
 
     private int random_int;
+    private int index;
     public void Invoke_Death()
     {
         kill.Invoke();
@@ -75,5 +77,14 @@ public class AnimationEvents : MonoBehaviour
 	{
         playerScript.PlayerTakeDamage(damage);
       //  Debug.Log(gameObject.name);
+	}
+    public void Save()
+	{
+        index++;
+		if (index > 3)
+		{
+            postProcessingManager.UnBlur();
+            index = 0;
+		}
 	}
 }

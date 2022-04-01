@@ -43,6 +43,7 @@ namespace Scripts.Player
         TextMeshProUGUI error_comment;
         public GameObject Ring_Box;
         public AudioManager audio;
+        public PostProcessingManager postProcessingManager;
         private void Start()
         {
             Note_panel.SetActive(false);
@@ -127,14 +128,14 @@ namespace Scripts.Player
             note_text.text = nm.text;
             Note_panel.SetActive(true);
             fps_canvas.SetActive(false);
-            PostProcessingManager.blur = true;
+            postProcessingManager.Blur();
         }
 
         public void Note_Close()
         {
             Note_panel.SetActive(false);
             fps_canvas.SetActive(true);
-            PostProcessingManager.blur = false;
+            postProcessingManager.UnBlur();
         }
      
     

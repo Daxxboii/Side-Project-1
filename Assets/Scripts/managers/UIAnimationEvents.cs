@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class UIAnimationEvents : MonoBehaviour
 {
     [Header("UI Animations")]
@@ -9,7 +9,6 @@ public class UIAnimationEvents : MonoBehaviour
 	public RectTransform Bottom;
 	public bool show_bars;
 	private Vector2 target;
-	public float speed,Camera_speed;
 	public Camera Timeline_camera;
 
 	private void Start()
@@ -19,21 +18,24 @@ public class UIAnimationEvents : MonoBehaviour
 	public void Show()
 	{
 		show_bars = !show_bars;
+		Change();
 	}
-	private void Update()
+
+	void Change()
 	{
-		if (show_bars )
+		if (show_bars)
 		{
-			Top.sizeDelta =  Vector2.Lerp(Top.sizeDelta,target,Time.deltaTime*speed);
-			Bottom.sizeDelta = Vector2.Lerp(Bottom.sizeDelta, target, Time.deltaTime*speed);
+			Top.DOSizeDelta(target, 1).SetEase(Ease.InSine);
+			Bottom.DOSizeDelta(target, 1).SetEase(Ease.InSine);
 			//Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 90f, Time.deltaTime * Camera_speed);
 		}
-		else if (!show_bars && Top.sizeDelta != Vector2.zero)
+		else if (!show_bars)
 		{
-			Top.sizeDelta = Vector2.Lerp(Top.sizeDelta, Vector2.zero, Time.deltaTime*speed);
-			Bottom.sizeDelta = Vector2.Lerp(Bottom.sizeDelta, Vector2.zero, Time.deltaTime*speed);
+			Top.DOSizeDelta(Vector2.zero, 1).SetEase(Ease.OutSine);
+			Bottom.DOSizeDelta(Vector2.zero, 1).SetEase(Ease.OutSine);
 			//Timeline_camera.fieldOfView = Mathf.Lerp(Timeline_camera.fieldOfView, 80f, Time.deltaTime * Camera_speed);
 		}
 	}
+	
 
 }

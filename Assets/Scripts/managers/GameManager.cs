@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu, settingsMenu, AreYouSureMenu, GameOverMenu, FpsCanvas, MainMenu,SaveMenu,Continue_button,About_Button,About_panel,mode_menu;
@@ -12,8 +14,13 @@ public class GameManager : MonoBehaviour
     public GameObject map,map_cam;
     public GameObject Map_button;
     public AudioManager AudioManager;
+    public PostProcessingManager PostProcessingManager;
+    private Material Atlas;
+    public Color To_Color,From_Color;
+    public TextMeshProUGUI AnyText;
     private void Awake()
     {
+        Atlas = AnyText.fontSharedMaterial;
         Screen.SetResolution(1280, 720, true);
         Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
@@ -46,8 +53,12 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
-        PostProcessingManager.blur = true;
+        PostProcessingManager.Blur();
+        Atlas.SetColor(ShaderUtilities.ID_FaceColor, From_Color);
+        Atlas.DOColor(To_Color, ShaderUtilities.ID_FaceColor,PostProcessingManager.duration);
+        pauseMenu.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
         pauseMenu.SetActive(true);
+        pauseMenu.transform.DOScale(Vector3.one, PostProcessingManager.duration).SetEase(Ease.InSine);
         FpsCanvas.SetActive(false);
         settingsMenu.SetActive(false);
         AudioManager.UI();
@@ -93,8 +104,7 @@ public class GameManager : MonoBehaviour
     }
     public void resume()
     {
-       
-            PostProcessingManager.blur = false;
+            PostProcessingManager.UnBlur();
             FpsCanvas.SetActive(true);
             pauseMenu.SetActive(false);
             AudioManager.Unpaused();

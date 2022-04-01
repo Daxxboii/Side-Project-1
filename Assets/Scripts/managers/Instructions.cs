@@ -10,13 +10,14 @@ public class Instructions : MonoBehaviour
     public GameObject panel;
     public Image image;
     private int index;
+    public PostProcessingManager postProcessingManager;
     void Start()
     {
         if (!PlayerPrefsX.GetBool("Saved"))
         {
             Fps_Canvas.SetActive(false);
             panel.SetActive(true);
-            PostProcessingManager.blur = true;
+            postProcessingManager.Blur();
         }
     }
 
@@ -41,7 +42,7 @@ public class Instructions : MonoBehaviour
     }
     public void Close()
     {
-        PostProcessingManager.blur = false;
+        postProcessingManager.UnBlur();
         Fps_Canvas.SetActive(true);
         panel.SetActive(false);
     }

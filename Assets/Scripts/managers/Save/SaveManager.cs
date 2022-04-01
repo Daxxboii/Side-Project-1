@@ -20,6 +20,7 @@ public class SaveManager : MonoBehaviour
     public Camcorder cam = null;
     public ObjectController oc;
     public GameObject minimap_button;
+    public PostProcessingManager postProcessingManager;
     //temp
     int[] _state, _collider_state, _rigidbodies;
     float[] _location, _rotation;
@@ -63,8 +64,7 @@ public class SaveManager : MonoBehaviour
     {
         
          save_panel.SetActive(true);
-        PostProcessingManager.blur = true;
-        PostProcessingManager.pauseafterblur = false;
+        postProcessingManager.Blur();
         fps_canvas.SetActive(false);
       
         StartCoroutine("Loading");
@@ -368,8 +368,8 @@ public class SaveManager : MonoBehaviour
         yield return new WaitForSeconds(3);
        
             save_panel.SetActive(false);
-        PostProcessingManager.blur = false;
-        PostProcessingManager.pauseafterblur = true;
+            postProcessingManager.UnBlur();
+      
         fps_canvas.SetActive(true);
 
 

@@ -1,20 +1,19 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-
+using DG.Tweening;
 public class PostProcessingManager : MonoBehaviour
 {
     [SerializeField] private Volume DepthOfField;
-	public static bool blur;
-	public static bool pauseafterblur=true;
-    public static void Blur()
-	{
-		blur = !blur;
-	}
-	private void Update()
+	[SerializeField] public float duration;
+	//public static bool blur;
+	//public static bool pauseafterblur=true;
+  
+	/*private void Update()
 	{
 		if (blur)
 		{
 			DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 1, Time.deltaTime*4);
+			
 			if (DepthOfField.weight >= 0.9&&pauseafterblur)
 			{
 				Time.timeScale = 0;
@@ -28,6 +27,21 @@ public class PostProcessingManager : MonoBehaviour
 				DepthOfField.weight = Mathf.Lerp(DepthOfField.weight, 0, Time.deltaTime*4);
 			}
 		}
+	}*/
+
+	public void Blur()
+	{
+		DOVirtual.Float(0, 1, duration, v =>
+		{
+			DepthOfField.weight = v;
+		}).SetEase(Ease.InSine).OnComplete(() =>{ Time.timeScale = 0f; }); 
+	}
+	public void UnBlur()
+	{
+		DOVirtual.Float(1, 0, duration, v =>
+		{
+			DepthOfField.weight = v;
+		}).SetEase(Ease.OutSine).OnComplete(() => { Time.timeScale = 1f; }).SetUpdate(true);
 	}
 
 }
