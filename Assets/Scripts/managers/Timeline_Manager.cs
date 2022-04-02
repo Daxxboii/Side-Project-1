@@ -5,6 +5,7 @@ using Scripts.Objects;
 using Scripts.Buttons;
 using TMPro;
 using Scripts.Player;
+using DG.Tweening;
 namespace Scripts.Timeline
 
 {
@@ -39,23 +40,29 @@ namespace Scripts.Timeline
         public Material princy;
 
 
-        [HideInInspector]public int index,objective_index,Current_cutscene;
+        [Header("GameObjects")]
         [SerializeField]private GameObject player,player_cam;
-     
-        [SerializeField]
-        private GameObject cutscene_player,cutscene_cam;
+        [SerializeField]private GameObject cutscene_player,cutscene_cam;
+        [HideInInspector]public int index,objective_index,Current_cutscene;
 
+        [Header("Variables")]
         [SerializeField]private float y_offset;
-        [SerializeField] private float skip_speed;
+        [SerializeField]private float skip_speed;
+
+        [Header("UI")]
+        [SerializeField] private RectTransform Top;
+        [SerializeField] private RectTransform Bottom;
+
 
         private Vector3 position;
         private Vector3 rotation,cam_rot;
-
+        private Vector2 target;
         string[] lines, objective_lines;
        
         private void Start()
         {
-             lines = subtitles.text.Split("\n"[0]);
+            target = new Vector2(0f, 50f);
+            lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
             ObjectiveList();
             if (Current_cutscene >= 10)
@@ -91,6 +98,7 @@ namespace Scripts.Timeline
             player.transform.eulerAngles = rotation;
             player_cam.transform.eulerAngles = cam_rot;
             _PlayerScript.gameObject.SetActive(true);
+            Hide_Bars();
             if (Current_cutscene > 4)
             {
                 girl.gameObject.SetActive(true);
@@ -116,8 +124,7 @@ namespace Scripts.Timeline
 
         public void TimeLine_Activator()
         {
-
-            //  Debug.Log(Current_cutscene);
+            ShowBars();
             if (Current_cutscene == 2)
             {
                 girl.agent.enabled = false;
@@ -200,6 +207,18 @@ namespace Scripts.Timeline
         public void HideSkip()
         {
             SkipButton.SetActive(false);
+        }
+
+        void Hide_Bars()
+		{
+            Top.DOSizeDelta(Vector2.zero, 1).SetEase(Ease.OutSine);
+            Bottom.DOSizeDelta(Vector2.zero, 1).SetEase(Ease.OutSine);
+        }
+
+        void ShowBars()
+		{
+            Top.DOSizeDelta(target, 1).SetEase(Ease.InSine);
+            Bottom.DOSizeDelta(target, 1).SetEase(Ease.InSine);
         }
     }
     

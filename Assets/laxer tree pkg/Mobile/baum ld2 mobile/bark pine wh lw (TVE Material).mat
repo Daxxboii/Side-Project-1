@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: bark pine wh lw (TVE Material)
   m_Shader: {fileID: 4800000, guid: d085bd08ca5fe5a4792e19b6523918c1, type: 3}
-  m_ShaderKeywords: TVE_DETAIL_BLEND_REPLACE TVE_DETAIL_MODE_OFF
+  m_ShaderKeywords: TVE_DETAIL_BLEND_REPLACE TVE_DETAIL_MODE_OFF TVE_VERTEX_DATA_BATCHED
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -164,7 +164,7 @@ Material:
     - _TranslucencyShadowValue: 1
     - _VariationGlobalsMessage: 0
     - _VariationMotionMessage: 0
-    - _VertexDataMode: 0
+    - _VertexDataMode: 1
     - _VertexMasksMode: 0
     - _VertexOcclusionMaxValue: 1
     - _VertexOcclusionMinValue: 0

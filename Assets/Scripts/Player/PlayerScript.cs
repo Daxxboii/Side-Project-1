@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
-using EZCameraShake;
 using DG.Tweening;
 public class PlayerScript : MonoBehaviour
     {
@@ -27,7 +26,7 @@ public class PlayerScript : MonoBehaviour
 
         [SerializeField]private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
-      
+        [SerializeField] private Transform Camera_Shake;
         [SerializeField] private Joystick joystick;
         
 
@@ -259,7 +258,8 @@ public class PlayerScript : MonoBehaviour
         public void PlayerTakeDamage(float hminus)
         {
             Health -= hminus;
-            CameraShaker.Instance.ShakeOnce(10f, 10f, 0.1f, 1f);
+        //  CameraShaker.Instance.ShakeOnce(10f, 10f, 0.1f, 1f);
+        Camera_Shake.DOShakePosition(0.5f, 1, 10, 90, false, true) ;
         }  
       
         private void Regenerate()

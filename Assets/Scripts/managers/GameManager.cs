@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
         map_cam.SetActive(true);
         map.SetActive(true);
         Map_button.SetActive(false);
-      
+     
         Time.timeScale = 0;
     }
 
