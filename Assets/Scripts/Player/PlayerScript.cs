@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
 using UnityEngine.Rendering;
 using EZCameraShake;
-
+using DG.Tweening;
 public class PlayerScript : MonoBehaviour
     {
       
@@ -103,19 +103,6 @@ public class PlayerScript : MonoBehaviour
                     LookAround();
                 }
                 LocoMotion();
-                
-                if (isCrouching)
-                {
-                    speed = CrouchSpeed;
-                    characterController.height =Mathf.Lerp(characterController.height, crouchHight,Time.deltaTime*Crouch_Interpolation_speed);
-                }
-
-                else if (!isCrouching && characterController.height!=height)
-                {
-                    speed = TempSpeed;
-
-                    characterController.height = Mathf.Lerp(characterController.height, height, Time.deltaTime*Crouch_Interpolation_speed);
-                }
             }
             if (Input.GetKey(KeyCode.Escape))
             {
@@ -238,8 +225,25 @@ public class PlayerScript : MonoBehaviour
         public void croutch()
         {
             isCrouching = !isCrouching;
+            _crouch();
         }
-
+        void _crouch()
+	{
+        if (isCrouching)
+        {
+            DOVirtual.Float(characterController.height, crouchHight, Crouch_Interpolation_speed, v =>
+            {
+                characterController.height = v;
+            }).SetEase(Ease.InSine).OnComplete(() => { StandStateButton.sprite = crouch;});
+        }
+        else
+        {
+            DOVirtual.Float(characterController.height, height, Crouch_Interpolation_speed, v =>
+            {
+                characterController.height = v;
+            }).SetEase(Ease.InSine).OnComplete(() => { StandStateButton.sprite = stand; });
+        }
+	}
        
       
 
@@ -255,20 +259,8 @@ public class PlayerScript : MonoBehaviour
         public void PlayerTakeDamage(float hminus)
         {
             Health -= hminus;
-        CameraShaker.Instance.ShakeOnce(10f, 10f, 0.1f, 1f);
-    }  
-
-        public void ChangeUI()
-        {
-            if (isCrouching)
-            {
-                StandStateButton.sprite = crouch;
-            }
-            else
-            {
-                 StandStateButton.sprite = stand;
-            }
-        }
+            CameraShaker.Instance.ShakeOnce(10f, 10f, 0.1f, 1f);
+        }  
       
         private void Regenerate()
         {

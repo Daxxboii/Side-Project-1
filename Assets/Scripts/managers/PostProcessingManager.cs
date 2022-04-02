@@ -5,6 +5,7 @@ public class PostProcessingManager : MonoBehaviour
 {
     [SerializeField] private Volume DepthOfField;
 	[SerializeField] public float duration;
+
 	//public static bool blur;
 	//public static bool pauseafterblur=true;
   
@@ -35,6 +36,7 @@ public class PostProcessingManager : MonoBehaviour
 		{
 			DepthOfField.weight = v;
 		}).SetEase(Ease.InSine).OnComplete(() =>{ Time.timeScale = 0f; }); 
+	
 	}
 	public void UnBlur()
 	{
