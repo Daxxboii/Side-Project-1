@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
         Application.targetFrameRate = 100;
-        OnDemandRendering.renderFrameInterval = 2;
+     //   OnDemandRendering.renderFrameInterval = 2;
     }
     public void Retry()
 	{

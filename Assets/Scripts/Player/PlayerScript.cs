@@ -91,7 +91,7 @@ public class PlayerScript : MonoBehaviour
 			if (Health <75)
 			{
                 Health_Manager();
-        }
+            }
             if (!isDead)
             {
               

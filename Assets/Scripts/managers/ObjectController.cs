@@ -9,7 +9,6 @@ namespace Scripts.Objects
         [SerializeField]
         Intraction pickup;
         public GameObject have, had;
-        bool isHolding;
         Rigidbody rb;
         private void FixedUpdate()
         {
@@ -29,7 +28,6 @@ namespace Scripts.Objects
           /*  rb = had.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.useGravity = false;*/
-            isHolding = true;
             have = null;
         }
         public void bring(GameObject o)
@@ -47,7 +45,6 @@ namespace Scripts.Objects
             had = null;
             rb = null;
             have = null;
-            isHolding = false;
         }
       
     }

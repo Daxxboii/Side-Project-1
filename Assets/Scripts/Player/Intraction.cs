@@ -37,12 +37,11 @@ namespace Scripts.Player
             public bool IsOpened;
           
         }
-        private bool Open;
         RaycastHit hit;
         [SerializeField]
         TextMeshProUGUI error_comment;
         public GameObject Ring_Box;
-        public AudioManager audio;
+        public new AudioManager audio;
         public PostProcessingManager postProcessingManager;
         private void Start()
         {
@@ -120,7 +119,6 @@ namespace Scripts.Player
         {
             yield return new WaitForSeconds(it.CloseTime);
             it.anim.SetBool("IsOpen", false);
-            Open = false;
         }
 
        void Note_Open()
