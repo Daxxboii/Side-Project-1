@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 public class Camcorder : MonoBehaviour
 {
 
@@ -12,6 +13,7 @@ public class Camcorder : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
+       // TimeSpan currentTime = TimeSpan.FromMinutes
          minutes = Mathf.FloorToInt(time / 60);
          seconds = Mathf.FloorToInt(time % 60);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);

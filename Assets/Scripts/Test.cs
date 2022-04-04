@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    public Animator[] anims;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anims = FindObjectsOfType<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(TEst());
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+            foreach(Animator a in anims)
+			{
+                a.enabled = false;
+			}
+		}
     }
 
-    IEnumerator TEst()
-	{
-        yield return new WaitForSeconds(5);
-        Debug.Log("try");
-	}
+  
 }
