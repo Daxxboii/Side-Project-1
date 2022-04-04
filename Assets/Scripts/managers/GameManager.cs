@@ -54,18 +54,17 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
+        transform.DOKill();
         PostProcessingManager.Blur();
         Atlas.SetColor(ShaderUtilities.ID_FaceColor, From_Color);
-        Atlas.DOColor(To_Color, ShaderUtilities.ID_FaceColor,PostProcessingManager.duration);
+        Atlas.DOColor(To_Color, ShaderUtilities.ID_FaceColor,PostProcessingManager.duration).SetUpdate(true);
         pauseMenu.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
         pauseMenu.SetActive(true);
-        pauseMenu.transform.DOScale(Vector3.one, PostProcessingManager.duration).SetEase(Ease.InSine);
+        pauseMenu.transform.DOScale(Vector3.one, PostProcessingManager.duration).SetEase(Ease.InSine).SetUpdate(true) ;
         FpsCanvas.SetActive(false);
         settingsMenu.SetActive(false);
         AudioManager.UI();
         AudioManager.Paused();
-         
-        
     }
     public void settings()
     {

@@ -36,8 +36,6 @@ namespace Scripts.Enemy
 
             [Header("Booleans")]
             [SerializeField] private bool cooldown;
-            [SerializeField] private bool chasing;
-            [SerializeField] private bool walking;
             [SerializeField] private bool ReadyToHit = true;
             [SerializeField] private bool ded = false;
             [SerializeField] public bool angry;
@@ -64,7 +62,7 @@ namespace Scripts.Enemy
             }
             private void Update()
             {
-                Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+             //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
                 //if agent is active
                 if (agent.enabled)
                 {
@@ -79,11 +77,10 @@ namespace Scripts.Enemy
                             {
                                     agent.SetDestination(player.transform.position);
 								//Trigger Chase Animation
-								if (!chasing)
-								{
+							
                                     Animations(2, 0);
-                                    chasing = true;
-                                }
+                                   
+                                
                                 Laugh();
                                     Attack();
                             }
@@ -104,32 +101,25 @@ namespace Scripts.Enemy
             }
             void ChangePos()
             {
-				if (chasing)
-				{
-                    chasing = false;
-				}
+			
                 audioM.Girl_Stop();
                 if (Vector3.Distance(transform.position, newPos) < 3)
                 {
-					if (walking)
-					{
+					
                         Animations(0, 0);
-                        walking = false;
-                    }
+                     
 
                     newPos = RandomNavSphere(player.transform.position, wanderRadius, -1);
                 }
 
                 else
                 {
-					if (!walking)
-					{
+					
                         Animations(1, 0);
-                        walking = true;
-                    }
+                     
                 }
                 agent.SetDestination(newPos);
-                Debug.Log(Vector3.Distance(transform.position, newPos));
+            //    Debug.Log(Vector3.Distance(transform.position, newPos));
             }
 
             private void Attack()
