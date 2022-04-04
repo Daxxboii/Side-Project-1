@@ -55,6 +55,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip girl_chase;
     public AudioClip girl_chase2;
     public AudioClip girl_kill;
+    public AudioClip girl_bone_crack;
 
     public AudioClip[] environment_sounds;
 
@@ -77,6 +78,7 @@ public class AudioManager : MonoBehaviour
         AnimationEvents.Fence_door += Gate_Fence_Open;
         AnimationEvents.thunder += Play_Thunder;
         AnimationEvents.girl_spook += Girl_Spook;
+        AnimationEvents.girl_crack += Enemy_Girl_Bones;
     }
 
     private void Update()
@@ -232,6 +234,11 @@ public class AudioManager : MonoBehaviour
         girl.Play();
         
     }
+    public void Enemy_Girl_Bones()
+	{
+        girl.clip = girl_bone_crack;
+        girl.Play();
+	}
 
     public void Girl_Stop()
     {

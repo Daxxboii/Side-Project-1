@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
-        transform.DOKill();
         PostProcessingManager.Blur();
         Atlas.SetColor(ShaderUtilities.ID_FaceColor, From_Color);
         Atlas.DOColor(To_Color, ShaderUtilities.ID_FaceColor,PostProcessingManager.duration).SetUpdate(true);

@@ -20,6 +20,7 @@ public class AnimationEvents : MonoBehaviour
     public static event MakeSound Fence_door;
     public static event MakeSound thunder;
     public static event MakeSound girl_spook;
+    public static event MakeSound girl_crack;
 
     private int random_int;
     private int index;
@@ -66,8 +67,8 @@ public class AnimationEvents : MonoBehaviour
     //PickRandom
     public void PickRandom(int chances)
 	{
-        random_int = Random.Range(0, 10);
-		if (random_int > chances)
+        random_int = Random.Range(0, 30);
+		if (random_int < chances)
 		{
             girl_spook.Invoke();
 		}
@@ -86,5 +87,9 @@ public class AnimationEvents : MonoBehaviour
             postProcessingManager.UnBlur();
             index = 0;
 		}
+	}
+    public void Crack()
+	{
+        girl_crack.Invoke();
 	}
 }
