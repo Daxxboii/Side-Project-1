@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 public class PostProcessingManager : MonoBehaviour
 {
-    [SerializeField] private Volume DepthOfField;
+    [SerializeField] private PostProcessVolume DepthOfField;
 	[SerializeField] public float duration;
 
 	//public static bool blur;

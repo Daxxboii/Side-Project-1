@@ -1,14 +1,13 @@
 /*
 
-// Add the following directives to your shader for directional and noise support
+// Add the following directive
 
 		#include "Assets/BOXOPHOBIC/Atmospheric Height Fog/Core/Library/AtmosphericHeightFog.cginc"
-
 
 // Apply Atmospheric Height Fog to transparent shaders like this
 // Where finalColor is the shader output color, fogParams.rgb is the fog color and fogParams.a is the fog mask
 
-		float4 fogParams = GetAtmosphericHeightFog(IN.worldPos);
+		float4 fogParams = GetAtmosphericHeightFog(i.worldPos);
 		return ApplyAtmosphericHeightFog(finalColor, fogParams);
 
 */
@@ -16,30 +15,34 @@
 #ifndef ATMOSPHERIC_HEIGHT_FOG_INCLUDED
 #define ATMOSPHERIC_HEIGHT_FOG_INCLUDED
 
-#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+#include "UnityCG.cginc"
+#include "UnityShaderVariables.cginc"
 
-half4 AHF_FogColorStart;
-half4 AHF_FogColorEnd;
-half AHF_FogDistanceStart;
-half AHF_FogDistanceEnd;
-half AHF_FogDistanceFalloff;
-half AHF_FogColorDuo;
-half4 AHF_DirectionalColor;
-half3 AHF_DirectionalDir;
-half AHF_DirectionalIntensity;
-half AHF_DirectionalFalloff;
-half3 AHF_FogAxisOption;
-half AHF_FogHeightEnd;
-half AHF_FogHeightStart;
-half AHF_FogHeightFalloff;
-half AHF_FogLayersMode;
-half AHF_NoiseScale;
-half3 AHF_NoiseSpeed;
-half AHF_NoiseDistanceEnd;
-half AHF_NoiseIntensity;
-half AHF_FogIntensity;
-
-
+uniform half _DirectionalCat;
+uniform half _SkyboxCat;
+uniform half _FogCat;
+uniform half _NoiseCat;
+uniform half _FogAxisMode;
+uniform half4 AHF_FogColorStart;
+uniform half4 AHF_FogColorEnd;
+uniform half AHF_FogDistanceStart;
+uniform half AHF_FogDistanceEnd;
+uniform half AHF_FogDistanceFalloff;
+uniform half AHF_FogColorDuo;
+uniform half4 AHF_DirectionalColor;
+uniform half3 AHF_DirectionalDir;
+uniform half AHF_DirectionalIntensity;
+uniform half AHF_DirectionalFalloff;
+uniform half3 AHF_FogAxisOption;
+uniform half AHF_FogHeightEnd;
+uniform half AHF_FogHeightStart;
+uniform half AHF_FogHeightFalloff;
+uniform half AHF_FogLayersMode;
+uniform half AHF_NoiseScale;
+uniform half3 AHF_NoiseSpeed;
+uniform half AHF_NoiseDistanceEnd;
+uniform half AHF_NoiseIntensity;
+uniform half AHF_FogIntensity;
 float4 mod289(float4 x)
 {
 	return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -75,52 +78,53 @@ float4 GetAtmosphericHeightFog(float3 positionWS)
 
 	float3 WorldPosition = positionWS;
 
-	float3 WorldPosition2_g1 = WorldPosition;
-	float temp_output_7_0_g909 = AHF_FogDistanceStart;
-	half FogDistanceMask12_g1 = pow(abs(saturate(((distance(WorldPosition2_g1, _WorldSpaceCameraPos) - temp_output_7_0_g909) / (AHF_FogDistanceEnd - temp_output_7_0_g909)))), AHF_FogDistanceFalloff);
-	float3 lerpResult258_g1 = lerp((AHF_FogColorStart).rgb, (AHF_FogColorEnd).rgb, (saturate((FogDistanceMask12_g1 - 0.5)) * AHF_FogColorDuo));
-	float3 normalizeResult318_g1 = normalize((WorldPosition2_g1 - _WorldSpaceCameraPos));
-	float dotResult145_g1 = dot(normalizeResult318_g1, AHF_DirectionalDir);
-	float DirectionalMask30_g1 = pow(abs(((dotResult145_g1*0.5 + 0.5) * AHF_DirectionalIntensity)), AHF_DirectionalFalloff);
-	float3 lerpResult40_g1 = lerp(lerpResult258_g1, (AHF_DirectionalColor).rgb, DirectionalMask30_g1);
+	float3 WorldPosition2_g915 = WorldPosition;
+	float temp_output_7_0_g920 = AHF_FogDistanceStart;
+	half FogDistanceMask12_g915 = pow(abs(saturate(((distance(WorldPosition2_g915, _WorldSpaceCameraPos) - temp_output_7_0_g920) / (AHF_FogDistanceEnd - temp_output_7_0_g920)))), AHF_FogDistanceFalloff);
+	float3 lerpResult258_g915 = lerp((AHF_FogColorStart).rgb, (AHF_FogColorEnd).rgb, (saturate((FogDistanceMask12_g915 - 0.5)) * AHF_FogColorDuo));
+	float3 normalizeResult318_g915 = normalize((WorldPosition - _WorldSpaceCameraPos));
+	float dotResult145_g915 = dot(normalizeResult318_g915, AHF_DirectionalDir);
+	float temp_output_319_0_g915 = pow(abs(((dotResult145_g915*0.5 + 0.5) * AHF_DirectionalIntensity)), AHF_DirectionalFalloff);
+	float DirectionalMask30_g915 = temp_output_319_0_g915;
+	float3 lerpResult40_g915 = lerp(lerpResult258_g915, (AHF_DirectionalColor).rgb, DirectionalMask30_g915);
 #ifdef AHF_DISABLE_DIRECTIONAL
-	float3 staticSwitch442_g1 = lerpResult258_g1;
+	float3 staticSwitch442_g915 = lerpResult258_g915;
 #else
-	float3 staticSwitch442_g1 = lerpResult40_g1;
+	float3 staticSwitch442_g915 = lerpResult40_g915;
 #endif
-	float3 temp_output_2_0_g908 = staticSwitch442_g1;
-	float3 gammaToLinear3_g908 = FastSRGBToLinear(temp_output_2_0_g908);
+	float3 temp_output_2_0_g918 = staticSwitch442_g915;
+	float3 gammaToLinear3_g918 = GammaToLinearSpace(temp_output_2_0_g918);
 #ifdef UNITY_COLORSPACE_GAMMA
-	float3 staticSwitch1_g908 = temp_output_2_0_g908;
+	float3 staticSwitch1_g918 = temp_output_2_0_g918;
 #else
-	float3 staticSwitch1_g908 = gammaToLinear3_g908;
+	float3 staticSwitch1_g918 = gammaToLinear3_g918;
 #endif
-	float3 temp_output_256_0_g1 = staticSwitch1_g908;
-
-	half3 AHF_FogAxisOption181_g1 = AHF_FogAxisOption;
-	float3 break159_g1 = (WorldPosition2_g1 * AHF_FogAxisOption181_g1);
-	float temp_output_7_0_g910 = AHF_FogHeightEnd;
-	half FogHeightMask16_g1 = pow(abs(saturate((((break159_g1.x + break159_g1.y + break159_g1.z) - temp_output_7_0_g910) / (AHF_FogHeightStart - temp_output_7_0_g910)))), AHF_FogHeightFalloff);
-	float lerpResult328_g1 = lerp((FogDistanceMask12_g1 * FogHeightMask16_g1), saturate((FogDistanceMask12_g1 + FogHeightMask16_g1)), AHF_FogLayersMode);
-	float mulTime204_g1 = _TimeParameters.x * 2.0;
-	float3 temp_output_197_0_g1 = ((WorldPosition2_g1 * (1.0 / AHF_NoiseScale)) + (-AHF_NoiseSpeed * mulTime204_g1));
-	float3 p1_g912 = temp_output_197_0_g1;
-	float localSimpleNoise3D1_g912 = SimpleNoise3D(p1_g912);
-	float temp_output_7_0_g911 = AHF_NoiseDistanceEnd;
-	half NoiseDistanceMask7_g1 = saturate(((distance(WorldPosition2_g1, _WorldSpaceCameraPos) - temp_output_7_0_g911) / (0.0 - temp_output_7_0_g911)));
-	float lerpResult198_g1 = lerp(1.0, (localSimpleNoise3D1_g912*0.5 + 0.5), (NoiseDistanceMask7_g1 * AHF_NoiseIntensity));
-	half NoiseSimplex3D24_g1 = lerpResult198_g1;
+	float3 temp_output_256_0_g915 = staticSwitch1_g918;
+	float3 temp_output_94_86_g914 = temp_output_256_0_g915;
+	half3 AHF_FogAxisOption181_g915 = AHF_FogAxisOption;
+	float3 break159_g915 = (WorldPosition2_g915 * AHF_FogAxisOption181_g915);
+	float temp_output_7_0_g917 = AHF_FogHeightEnd;
+	half FogHeightMask16_g915 = pow(abs(saturate((((break159_g915.x + break159_g915.y + break159_g915.z) - temp_output_7_0_g917) / (AHF_FogHeightStart - temp_output_7_0_g917)))), AHF_FogHeightFalloff);
+	float lerpResult328_g915 = lerp((FogDistanceMask12_g915 * FogHeightMask16_g915), saturate((FogDistanceMask12_g915 + FogHeightMask16_g915)), AHF_FogLayersMode);
+	float mulTime204_g915 = _Time.y * 2.0;
+	float3 temp_output_197_0_g915 = ((WorldPosition2_g915 * (1.0 / AHF_NoiseScale)) + (-AHF_NoiseSpeed * mulTime204_g915));
+	float3 p1_g921 = temp_output_197_0_g915;
+	float localSimpleNoise3D1_g921 = SimpleNoise3D(p1_g921);
+	float temp_output_7_0_g919 = AHF_NoiseDistanceEnd;
+	half NoiseDistanceMask7_g915 = saturate(((distance(WorldPosition2_g915, _WorldSpaceCameraPos) - temp_output_7_0_g919) / (0.0 - temp_output_7_0_g919)));
+	float lerpResult198_g915 = lerp(1.0, (localSimpleNoise3D1_g921*0.5 + 0.5), (NoiseDistanceMask7_g915 * AHF_NoiseIntensity));
+	half NoiseSimplex3D24_g915 = lerpResult198_g915;
 #ifdef AHF_DISABLE_NOISE3D
-	float staticSwitch42_g1 = lerpResult328_g1;
+	float staticSwitch42_g915 = lerpResult328_g915;
 #else
-	float staticSwitch42_g1 = (lerpResult328_g1 * NoiseSimplex3D24_g1);
+	float staticSwitch42_g915 = (lerpResult328_g915 * NoiseSimplex3D24_g915);
 #endif
-	float temp_output_43_0_g1 = (staticSwitch42_g1 * AHF_FogIntensity);
+	float temp_output_43_0_g915 = (staticSwitch42_g915 * AHF_FogIntensity);
+	float temp_output_94_87_g914 = temp_output_43_0_g915;
+	float4 appendResult26 = (float4(temp_output_94_86_g914, temp_output_94_87_g914));
 
-	float3 Color = temp_output_256_0_g1;
-	float Alpha = temp_output_43_0_g1;
 
-	finalColor = float4(Color, Alpha);
+	finalColor = appendResult26;
 	return finalColor;
 }
 
@@ -134,21 +138,5 @@ float4 ApplyAtmosphericHeightFog(float4 color, float4 fog)
 {
 	return float4(lerp(color.rgb, fog.rgb, fog.a), color.a);
 }
-
-// Shader Graph Support
-void GetAtmosphericHeightFog_half(float3 positionWS, out float4 Out)
-{
-	Out = GetAtmosphericHeightFog(positionWS);
-}
-
-void ApplyAtmosphericHeightFog_half(float3 color, float4 fog, out float3 Out)
-{
-	Out = ApplyAtmosphericHeightFog(color, fog);
-}
-
-//void ApplyAtmosphericHeightFog_float(float4 color, float4 fog, out float4 Out)
-//{
-//	Out = ApplyAtmosphericHeightFog(color, fog);
-//}
 
 #endif

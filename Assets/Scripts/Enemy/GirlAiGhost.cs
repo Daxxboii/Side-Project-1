@@ -32,7 +32,7 @@ namespace Scripts.Enemy
             [SerializeField] public NavMeshAgent agent;
             [SerializeField] private Animator Girl_animator;
             [SerializeField] private Material girl_mat;
-            [SerializeField] private GameObject Moths, BoxVolume;
+            [SerializeField] private GameObject Moths;//, BoxVolume;
 
             [Header("Booleans")]
             [SerializeField] private bool cooldown;
@@ -209,7 +209,7 @@ namespace Scripts.Enemy
                 angry = true;
                 girl_mat.SetColor("_BaseColor", Color.white);
                 Moths.SetActive(true);
-                BoxVolume.SetActive(false);
+              //  BoxVolume.SetActive(false);
                 agent.enabled = false;
                 cart.enabled = true;
                 cart.m_Speed = 1;

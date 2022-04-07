@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6038192245334977904}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &652047322
 AudioSource:
@@ -1199,6 +1199,7 @@ MonoBehaviour:
   girlAIGhost: {fileID: 0}
   AudioManager: {fileID: 0}
   playerScript: {fileID: 0}
+  postProcessingManager: {fileID: 0}
 --- !u!1 &3387323130369185460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,69 +1422,6 @@ Transform:
   m_Father: {fileID: 9111657443175423253}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4652953097522181611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4652953097522181610}
-  - component: {fileID: 4652953097522181612}
-  - component: {fileID: 4652953097522181613}
-  m_Layer: 0
-  m_Name: Box Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4652953097522181610
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4652953097522181611}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.17, z: 0}
-  m_LocalScale: {x: 9.353095, y: 3.9750655, z: 9.353095}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6038192245334977904}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4652953097522181612
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4652953097522181611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9949755, y: 0.6867434, z: 1}
-  m_Center: {x: -0.010047811, y: 0.0029553052, z: 0}
---- !u!114 &4652953097522181613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4652953097522181611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 0
-  priority: 5
-  blendDistance: 1
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 61a1245c9f501f945a71317eed7a7bdb, type: 2}
 --- !u!1 &4652953098261034138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2549,6 @@ Transform:
   m_Children:
   - {fileID: 6031189029622246009}
   - {fileID: 8679521574093213293}
-  - {fileID: 4652953097522181610}
   - {fileID: 652047321}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2628,22 +2565,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a42d54d25fbd5849a7b5f4518654e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Time_between_growls: 15
-  timer: 0
   AudioM: {fileID: 0}
+  Time_between_growls: 15
+  Time_between_Laughter: 0
+  Chances_of_laughter: 0
   angry: 0
-  _isVisible: 0
-  daimage: 100
-  follow_distance: 40
-  _player: {fileID: 0}
-  ps: {fileID: 0}
+  NotCooling: 1
   anim: {fileID: 3346785726732542541}
-  _agentThreshHold: 3.1
-  roam_timer: 0
-  _radius: 50
-  volume: {fileID: 4652953097522181611}
+  _agent: {fileID: 0}
+  stopping_distance: 0
+  follow_distance: 40
   attack_radius: 1
+  Roam_Radius: 0
   cool_period: 5
+  Eye: {fileID: 0}
+  _player: {fileID: 0}
+  playerScript: {fileID: 0}
+  visibility: {fileID: 0}
 --- !u!195 &1888474786
 NavMeshAgent:
   m_ObjectHideFlags: 0

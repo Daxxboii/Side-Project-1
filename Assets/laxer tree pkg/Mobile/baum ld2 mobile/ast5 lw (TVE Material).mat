@@ -8,20 +8,36 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ast5 lw (TVE Material)
-  m_Shader: {fileID: 4800000, guid: d085bd08ca5fe5a4792e19b6523918c1, type: 3}
-  m_ShaderKeywords: TVE_ALPHA_CLIP TVE_DETAIL_BLEND_REPLACE TVE_DETAIL_MODE_OFF
-  m_LightmapFlags: 0
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHABLEND_ON
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 3000
   stringTagMap:
     NatureRendererInstancing: true
-    RenderType: AlphaTest
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -45,6 +61,18 @@ Material:
         m_Texture: {fileID: 2800000, guid: 182472b00808f914fa8dc807ff58b574, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SecondAlbedoTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -60,6 +88,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _BumpScale: 1
     - _ColorsMaskMaxValue: 1
     - _ColorsMaskMinValue: 0
     - _ColorsVariationValue: 0
@@ -72,9 +101,11 @@ Material:
     - _DetailMaskMode: 0
     - _DetailMeshValue: 0
     - _DetailMode: 0
+    - _DetailNormalMapScale: 1
     - _DetailNormalValue: 0.5
     - _DetailSpace: 0
     - _DetailTypeMode: 0
+    - _DstBlend: 10
     - _EmissiveCat: 1
     - _EmissiveFlagMode: 0
     - _FadeCameraValue: 1
@@ -87,6 +118,9 @@ Material:
     - _GlobalOverlay: 1
     - _GlobalSize: 0
     - _GlobalWetness: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _GradientCat: 0
     - _GradientMaxValue: 1
     - _GradientMinValue: 0
@@ -110,6 +144,8 @@ Material:
     - _MainNormalValue: 0
     - _MainOcclusionValue: 1
     - _MainSmoothnessValue: 0.5
+    - _Metallic: 0
+    - _Mode: 2
     - _MotionAmplitude_10: 0.05
     - _MotionAmplitude_20: 0.1
     - _MotionAmplitude_32: 0.2
@@ -129,10 +165,12 @@ Material:
     - _NoiseMinValue: 0
     - _NoiseScaleValue: 0.01
     - _OcclusionCat: 1
+    - _OcclusionStrength: 1
     - _OverlayBottomValue: 0.5
     - _OverlayMaskMaxValue: 0.55
     - _OverlayMaskMinValue: 0.45
     - _OverlayVariationValue: 0
+    - _Parallax: 0.02
     - _PerspectiveCat: 0
     - _ReceiveSpace: 0
     - _RenderClip: 1
@@ -150,6 +188,9 @@ Material:
     - _SecondSmoothnessValue: 1
     - _SizeFadeCat: 0
     - _SizeFadeMessage: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 5
     - _SubsurfaceCat: 0
     - _SubsurfaceDiffusion: 3.5648174
     - _SubsurfaceMaskMaxValue: 1
@@ -162,6 +203,7 @@ Material:
     - _TranslucencyNormalValue: 0.1
     - _TranslucencyScatteringValue: 2
     - _TranslucencyShadowValue: 1
+    - _UVSec: 0
     - _VariationGlobalsMessage: 0
     - _VariationMotionMessage: 0
     - _VertexDataMode: 0
@@ -170,6 +212,7 @@ Material:
     - _VertexOcclusionMinValue: 0
     - _VertexRollingMode: 1
     - _VertexVariationMode: 1
+    - _ZWrite: 0
     - _render_cull: 2
     - _render_dst: 0
     - _render_src: 1
@@ -177,7 +220,7 @@ Material:
     - _subsurface_shadow: 1
     - _vertex_pivot_mode: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.15445887, g: 0.3679245, b: 0.16785279, a: 1}
     - _ColorsMaskRemap: {r: 0, g: 0, b: 0, a: 0}
     - _DetailBlendRemap: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

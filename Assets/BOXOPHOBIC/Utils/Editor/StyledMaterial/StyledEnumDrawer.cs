@@ -3,26 +3,22 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Boxophobic.StyledGUI
 {
     public class StyledEnumDrawer : MaterialPropertyDrawer
     {
+        public string file = "";
         public string options = "";
 
         public float top = 0;
         public float down = 0;
 
-        public StyledEnumDrawer(string options)
+        public StyledEnumDrawer(string file, string options, float top, float down)
         {
-            this.options = options;
-
-            this.top = 0;
-            this.down = 0;
-        }
-
-        public StyledEnumDrawer(string options, float top, float down)
-        {
+            this.file = file;
             this.options = options;
 
             this.top = top;
@@ -38,20 +34,52 @@ namespace Boxophobic.StyledGUI
                 wordWrap = true
             };
 
-            string[] enums = options.Split(char.Parse("_"));
+            if (Resources.Load<TextAsset>(file) != null)
+            {
+                var layersPath = AssetDatabase.GetAssetPath(Resources.Load<TextAsset>(file));
+
+                StreamReader reader = new StreamReader(layersPath);
+
+                options = reader.ReadLine();
+
+                reader.Close();
+            }
+
+            string[] enumSplit = options.Split(char.Parse(" "));
+            List<string> enumOptions = new List<string>(enumSplit.Length / 2);
+            List<int> enumIndices = new List<int>(enumSplit.Length / 2);
+
+            for (int i = 0; i < enumSplit.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    enumOptions.Add(enumSplit[i].Replace("_", " "));
+                }
+                else
+                {
+                    enumIndices.Add(int.Parse(enumSplit[i]));
+                }
+            }
 
             GUILayout.Space(top);
 
             int index = (int)prop.floatValue;
+            int realIndex = enumIndices[0];
 
-            index = EditorGUILayout.Popup(prop.displayName, index, enums);
+            for (int i = 0; i < enumIndices.Count; i++)
+            {
+                if (enumIndices[i] == index)
+                {
+                    realIndex = i;
+                }
+            }
 
-            // Debug Value
-            //EditorGUILayout.LabelField(index.ToString());
+            realIndex = EditorGUILayout.Popup(prop.displayName, realIndex, enumOptions.ToArray());
 
-            prop.floatValue = index;
+            //Debug Value
+            //EditorGUILayout.LabelField(enumIndices[realIndex].ToString());
 
-            GUI.enabled = true;
+            prop.floatValue = enumIndices[realIndex];
 
             GUILayout.Space(down);
         }

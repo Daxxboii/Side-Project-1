@@ -107,6 +107,7 @@ public class HeightFogHub : EditorWindow
             if (GUILayout.Button("Install", GUILayout.Height(24)))
             {
                 InstallAsset();
+                SetDefineSymbols();
             }
         }
         else
@@ -201,6 +202,18 @@ public class HeightFogHub : EditorWindow
         AssetDatabase.Refresh();
 
         Debug.Log("[Atmospheric Height Fog] " + pipelineOptions[pipelineIndex] + " package imported in your project!");
+    }
+
+    void SetDefineSymbols()
+    {
+        var defineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+
+        if (!defineSymbols.Contains("ATMOSPHERIC_HEIGHT_FOG"))
+        {
+            defineSymbols += ";ATMOSPHERIC_HEIGHT_FOG;";
+        }
+
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, defineSymbols);
     }
 }
 

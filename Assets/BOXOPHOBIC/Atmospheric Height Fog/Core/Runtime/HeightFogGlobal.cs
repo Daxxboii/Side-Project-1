@@ -177,16 +177,20 @@ namespace AtmosphericHeightFog
             missingMaterial = Resources.Load<Material>("Height Fog Preset");
 
             gameObject.GetComponent<MeshRenderer>().sharedMaterial = globalMaterial;
+
+            Shader.SetGlobalFloat("AHF_Enabled", 1);
         }
 
         void OnEnable()
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
+            Shader.SetGlobalFloat("AHF_Enabled", 0);
         }
 
         void OnDisable()
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Shader.SetGlobalFloat("AHF_Enabled", 0);
         }
 
         void Update()

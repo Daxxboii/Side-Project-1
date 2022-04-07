@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Scripts.Enemy.girlHostile;
-using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 public class PlayerScript : MonoBehaviour
     {
@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour
         public Image hit_image;
         public Sprite hit_low;
         public Sprite hit_high;
-        public Volume Damage;
+        public PostProcessVolume Damage;
 
         [SerializeField]private GirlAiGhost GirlAI;
         [SerializeField] private Camera fpsCam;
