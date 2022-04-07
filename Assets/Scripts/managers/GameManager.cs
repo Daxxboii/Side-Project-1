@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1280, 720, true);
         Resources.UnloadUnusedAssets();
         Time.timeScale = 1;
-        Application.targetFrameRate = 100;
+        Application.targetFrameRate = 30;
       //  Debug.Log(Texture.desiredTextureMemory);
-     //   OnDemandRendering.renderFrameInterval = 2;
+        OnDemandRendering.renderFrameInterval = 2;
     }
     public void Retry()
 	{
