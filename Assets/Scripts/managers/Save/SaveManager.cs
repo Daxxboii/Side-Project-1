@@ -365,7 +365,7 @@ public class SaveManager : MonoBehaviour
 
     IEnumerator Loading()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
        
             save_panel.SetActive(false);
             postProcessingManager.UnBlur();

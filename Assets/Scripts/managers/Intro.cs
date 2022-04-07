@@ -17,7 +17,7 @@ public class Intro : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if ((player.frame) > 0 && (player.isPlaying == false))
+        if ((player.isPlaying == false)&&player.frame>0)
         {
             if (pinged)
             {

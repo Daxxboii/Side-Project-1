@@ -88,12 +88,11 @@ namespace Scripts.Buttons
                     GetOutline();
                 }
 
-                else if (hit.transform.CompareTag("Note"))
+                else if (hit.transform.CompareTag("Note")||hit.transform.CompareTag("Note_Staffroom"))
                 {
                     note.SetActive(true);
                     Track(note);
                     GetOutline();
-
                 }
 
                 else if (hit.transform.CompareTag("Map"))

@@ -27,6 +27,8 @@ namespace Scripts.Player
         Timeline_Manager tm;
         [SerializeField]
         GameObject Note_panel,map,fps_canvas;
+        public bool Candle_bool=false;
+        public GameObject candlePanel;
         public SaveManager savemanager;
         [Serializable]
         private struct IntractionSettings
@@ -59,7 +61,7 @@ namespace Scripts.Player
                     AudioManager.Interactables = hit.transform.GetComponentInParent<AudioSource>();
                     IntractWithDoor();
                 }
-                else if (hit.collider.tag == "Note")
+                else if (hit.collider.tag == "Note" || hit.collider.tag=="Note_Staffroom")
                 {
                     nm = hit.transform.GetComponent<Note_manager>();
                     Note_Open();
@@ -72,6 +74,10 @@ namespace Scripts.Player
                     {
                         tm.ObjectiveList();
                     }
+					if (hit.collider.tag == "Note_Staffroom")
+					{
+                        Candle_bool = true;
+					}
                 }
                 else if (hit.transform.CompareTag("Escape Door"))
                 {
@@ -136,7 +142,14 @@ namespace Scripts.Player
             postProcessingManager.UnBlur();
         }
      
-    
+    public void Show_candle()
+		{
+			if (Candle_bool)
+			{
+                candlePanel.SetActive(true);
+                Candle_bool = false;
+            }
+        }
         public void Pickup()
         {
             RaycastHit hit;
@@ -144,7 +157,7 @@ namespace Scripts.Player
             {
                 if (hit.collider.tag == "Key" || hit.collider.tag == "pickup")
                 {
-                    Debug.Log("Pickup");
+                  //  Debug.Log("Pickup");
                     PickedUpObject = hit.collider.gameObject;
                     hit.collider.enabled = false;
                     tm.ObjectiveList();
