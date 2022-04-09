@@ -52,6 +52,9 @@ namespace Scripts.Timeline
         [Header("UI")]
         [SerializeField] private RectTransform Top;
         [SerializeField] private RectTransform Bottom;
+        [SerializeField] private RectTransform Objectives;
+        [HideInInspector] private Vector2 startposUI, startscaleUI;
+        [SerializeField] private Vector3 endposUI, endScaleUI;
 
 
         private Vector3 position;
@@ -61,6 +64,8 @@ namespace Scripts.Timeline
        
         private void Start()
         {
+            startposUI = Objectives.anchoredPosition;
+            startscaleUI = Objectives.localScale;
             target = new Vector2(0f, 50f);
             lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
@@ -185,6 +190,10 @@ namespace Scripts.Timeline
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
             HideSkip();
+           Objectives.localScale = endScaleUI;
+            Objectives.anchoredPosition = endposUI;
+           Objectives.DOScale(startscaleUI.x, 0.5f).SetUpdate(true).SetEase(Ease.InSine);
+           Objectives.DOAnchorPos(startposUI, 0.5f, false).SetUpdate(true).SetEase(Ease.InSine);
         }
 
         private void ActivateSkip()

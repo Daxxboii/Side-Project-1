@@ -9,14 +9,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ast5 lw (TVE Material)
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON
+  m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap:
     NatureRendererInstancing: true
-    RenderType: Transparent
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -105,7 +105,7 @@ Material:
     - _DetailNormalValue: 0.5
     - _DetailSpace: 0
     - _DetailTypeMode: 0
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EmissiveCat: 1
     - _EmissiveFlagMode: 0
     - _FadeCameraValue: 1
@@ -145,7 +145,7 @@ Material:
     - _MainOcclusionValue: 1
     - _MainSmoothnessValue: 0.5
     - _Metallic: 0
-    - _Mode: 2
+    - _Mode: 1
     - _MotionAmplitude_10: 0.05
     - _MotionAmplitude_20: 0.1
     - _MotionAmplitude_32: 0.2
@@ -190,7 +190,7 @@ Material:
     - _SizeFadeMessage: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SubsurfaceCat: 0
     - _SubsurfaceDiffusion: 3.5648174
     - _SubsurfaceMaskMaxValue: 1
@@ -212,7 +212,7 @@ Material:
     - _VertexOcclusionMinValue: 0
     - _VertexRollingMode: 1
     - _VertexVariationMode: 1
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _render_cull: 2
     - _render_dst: 0
     - _render_src: 1

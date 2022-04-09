@@ -28,7 +28,7 @@ public class VisiBility : MonoBehaviour
     }
     bool IsTargetVisible( GameObject go)
     {
-        if(Physics.Raycast(cam.position,cam.transform.TransformDirection(Vector3.forward), out hit, spherecast_radius, Layer))
+        if(Physics.SphereCast(cam.position,spherecast_radius,cam.transform.TransformDirection(Vector3.forward), out hit, radius, Layer))
         {
 			if (hit.transform.gameObject == go)
 			{
