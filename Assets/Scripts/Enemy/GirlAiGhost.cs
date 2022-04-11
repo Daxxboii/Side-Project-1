@@ -51,6 +51,7 @@ namespace Scripts.Enemy
                 //Tracker because gameobject being tracked by navmesh should be grounded
                 agent.destination = player.transform.position;
                 cooldown = false;
+                girl_mat.color = Color.black;
             }
 
             private void OnEnable()
@@ -64,10 +65,9 @@ namespace Scripts.Enemy
             {
              //   Debug.Log(Vector3.Distance(transform.position, player.transform.position));
                 //if agent is active
-                if (agent.enabled)
-                {
+                
                     //if girl is in chase mode
-                    if (!angry)
+                    if (!angry&&agent.enabled)
                     {
                         //if girl hasnt just attacked
                         if (!cooldown)
@@ -92,12 +92,12 @@ namespace Scripts.Enemy
                             }
                         }
                     }
-					else
+					else if(angry)
 					{
                         //Float Around
                         Animations(3, 0);
 					}
-                }
+                
             }
             void ChangePos()
             {
@@ -207,7 +207,8 @@ namespace Scripts.Enemy
            public void ChangeGirl()
 			{
                 angry = true;
-                girl_mat.SetColor("_BaseColor", Color.white);
+                //  girl_mat.EnableKeyword("_BaseColor");
+                girl_mat.color = Color.white;
                 Moths.SetActive(true);
               //  BoxVolume.SetActive(false);
                 agent.enabled = false;

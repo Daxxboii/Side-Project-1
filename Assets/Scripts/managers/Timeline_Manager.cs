@@ -72,14 +72,14 @@ namespace Scripts.Timeline
             ObjectiveList();
             if (Current_cutscene >= 10)
             {
-                princy.SetColor("_BaseColor", Color.white);
+                princy.color = Color.white;
                 aiFollow.angry = true;
                 aiFollow.angry = true;
                 girl.ChangeGirl();
             }
             else
             {
-                princy.SetColor("_BaseColor", Color.black);
+                princy.color = Color.black;
             }
             // Translate_Cutscene();
             if (Current_cutscene > 4)
@@ -156,14 +156,15 @@ namespace Scripts.Timeline
             Timeline_Button.SetActive(false);
             if (Current_cutscene >= 10)
             {
-                princy.SetColor("_BaseColor", Color.white);
+                princy.color = Color.white;
                 aiFollow.angry = true;
                 aiFollow.angry = true;
                 girl.ChangeGirl();
             }
             else
             {
-                princy.SetColor("_BaseColor", Color.black);
+                 princy.color = Color.black;
+
             }
 
             director.time = 0;
