@@ -212,7 +212,7 @@ namespace Scripts.Enemy
               //  BoxVolume.SetActive(false);
                 agent.enabled = false;
                 cart.enabled = true;
-                cart.m_Speed = 1;
+                cart.m_Speed = 10;
 			}
 
            void Laugh()

@@ -11,6 +11,7 @@ public class VisiBility : MonoBehaviour
     GameObject  principal;
     public float radius,spherecast_radius;
     public LayerMask Layer;
+    public Renderer principalRenderer;
     public bool visible;
     RaycastHit hit;
     // Update is called once per frame
@@ -18,7 +19,8 @@ public class VisiBility : MonoBehaviour
     {
         if (Vector3.Distance(cam.gameObject.transform.position, principal.transform.position) < radius)
         {
-            visible = IsTargetVisible(principal);
+            // visible = IsTargetVisible(principal);
+            visible = principalRenderer.isVisible;
         }
         else
         {
@@ -26,7 +28,7 @@ public class VisiBility : MonoBehaviour
         }
        
     }
-    bool IsTargetVisible( GameObject go)
+  /*  bool IsTargetVisible( GameObject go)
     {
         if(Physics.SphereCast(cam.position,spherecast_radius,cam.transform.TransformDirection(Vector3.forward), out hit, radius, Layer))
         {
@@ -44,5 +46,5 @@ public class VisiBility : MonoBehaviour
             return false;
 		}
        
-    }
+    }*/
 }

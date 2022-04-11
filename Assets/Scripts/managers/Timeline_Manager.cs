@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 using Scripts.Objects;
 using Scripts.Buttons;
 using TMPro;
+using UnityEngine.UI;
 using Scripts.Player;
 using DG.Tweening;
 namespace Scripts.Timeline
@@ -39,7 +40,6 @@ namespace Scripts.Timeline
         [SerializeField]private PlayableDirector director;
         public Material princy;
 
-
         [Header("GameObjects")]
         [SerializeField]private GameObject player,player_cam;
         [SerializeField]private GameObject cutscene_player,cutscene_cam;
@@ -52,9 +52,9 @@ namespace Scripts.Timeline
         [Header("UI")]
         [SerializeField] private RectTransform Top;
         [SerializeField] private RectTransform Bottom;
-        [SerializeField] private RectTransform Objectives;
-        [HideInInspector] private Vector2 startposUI, startscaleUI;
-        [SerializeField] private Vector3 endposUI, endScaleUI;
+        [SerializeField] private Image Objectives;
+      /*  [HideInInspector] private Vector2 startposUI, startscaleUI;
+        [SerializeField] private Vector3 endposUI, endScaleUI;*/
 
 
         private Vector3 position;
@@ -64,8 +64,8 @@ namespace Scripts.Timeline
        
         private void Start()
         {
-            startposUI = Objectives.anchoredPosition;
-            startscaleUI = Objectives.localScale;
+            // startposUI = Objectives.anchoredPosition;
+            //startscaleUI = Objectives.localScale;
             target = new Vector2(0f, 50f);
             lines = subtitles.text.Split("\n"[0]);
             objective_lines = objectives.text.Split("\n"[0]);
@@ -157,13 +157,15 @@ namespace Scripts.Timeline
             if (Current_cutscene >= 10)
             {
                 princy.SetColor("_BaseColor", Color.white);
-                aiFollow._agent.speed = 3.3f;
+                aiFollow.angry = true;
+                aiFollow.angry = true;
+                girl.ChangeGirl();
             }
             else
             {
                 princy.SetColor("_BaseColor", Color.black);
             }
- 
+
             director.time = 0;
             director.Play();
             director.playableGraph.GetRootPlayable(0).SetSpeed(1);
@@ -190,10 +192,14 @@ namespace Scripts.Timeline
             _text = objective_lines[objective_index++];
             objective_text.text = _text;
             HideSkip();
-           Objectives.localScale = endScaleUI;
-            Objectives.anchoredPosition = endposUI;
-           Objectives.DOScale(startscaleUI.x, 0.5f).SetUpdate(true).SetEase(Ease.InSine);
-           Objectives.DOAnchorPos(startposUI, 0.5f, false).SetUpdate(true).SetEase(Ease.InSine);
+            /*  Objectives.localScale = endScaleUI;
+               Objectives.anchoredPosition = endposUI;
+              Objectives.DOScale(startscaleUI.x, 0.5f).SetUpdate(true).SetEase(Ease.InSine);
+              Objectives.DOAnchorPos(startposUI, 0.5f, false).SetUpdate(true).SetEase(Ease.InSine);*/
+            var tempColor = Objectives.color;
+            tempColor.a = 0f;
+            Objectives.color = tempColor;
+            Objectives.DOFade(1, 0.25f).SetEase(Ease.InSine).SetLoops(3, LoopType.Yoyo);
         }
 
         private void ActivateSkip()
