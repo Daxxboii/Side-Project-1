@@ -68,7 +68,7 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
         {
             yield return new WaitForSeconds(10f);
         }
-        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_RIGHT);
+        Advertisement.Banner.SetPosition(BannerPosition.TOP_RIGHT);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Advertisement.Banner.Show(banner_placement);
