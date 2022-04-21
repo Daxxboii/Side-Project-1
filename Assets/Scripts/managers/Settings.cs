@@ -4,50 +4,61 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Scripts.Player;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
-    public float volume = 0f;
-    public float senci = 5f;
-    [SerializeField]
-    Slider sensitivity, music;
+    public static float volume = 0f;
+    public static float senci = 5f;
+    [SerializeField]private Slider sensitivity_Slider, music_Slider;
     public AudioMixer audiom;
     public PlayerScript Player_Script;
 
     public void Awake()
     {
+        music_Slider.maxValue = 20f;
+        music_Slider.minValue = -50f;
 
-        if (sensitivity != null)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            sensitivity.minValue = 0.5f;
-            sensitivity.value = senci;
+
         }
+        else
+        {  
+            sensitivity_Slider.minValue = 0.5f;
+            if (PlayerPrefs.HasKey("Senci"))
+            {
+                sensitivity_Slider.value = PlayerPrefs.GetFloat("Senci");
+            }
+            else
+            {
+              sensitivity_Slider.value = senci;
+            }
+            SetSencivity();
+        }
+       
 
-        music.maxValue = 20f;
-        music.minValue = -50f;
-        if (PlayerPrefs.GetFloat("Volume") != 0)
+        if (PlayerPrefs.HasKey("Volume"))
         {
-            music.value = PlayerPrefs.GetFloat("Volume");
+            music_Slider.value = PlayerPrefs.GetFloat("Volume");
         }
         else
         {
-            music.value = volume;
+            music_Slider.value = volume;
         }
-        audiom.SetFloat("Audio", volume);
         setaudio();
     }
 
     public void setaudio()
     {
-        volume = music.value;
-        audiom.SetFloat("Audio", volume);
-        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("Volume", music_Slider.value);
+        audiom.SetFloat("Audio", music_Slider.value);
     }
 
     public void SetSencivity()
     {
-        Player_Script.SetSensi(sensitivity.value);
-        PlayerPrefs.SetFloat("Senci", sensitivity.value);
+        Player_Script.SetSensi(sensitivity_Slider.value);
+        PlayerPrefs.SetFloat("Senci", sensitivity_Slider.value);
     }
 }
    

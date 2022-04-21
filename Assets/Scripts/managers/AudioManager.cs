@@ -56,6 +56,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip girl_chase2;
     public AudioClip girl_kill;
     public AudioClip girl_bone_crack;
+    public AudioClip spotted;
 
     public AudioClip[] environment_sounds;
 
@@ -248,6 +249,12 @@ public class AudioManager : MonoBehaviour
     public void Girl_Spook()
 	{
         girl.clip = girl_chase2;
+        girl.Play();
+    }
+
+    public void Girl_Spotted()
+    {
+        girl.clip = spotted;
         girl.Play();
     }
     //Environment

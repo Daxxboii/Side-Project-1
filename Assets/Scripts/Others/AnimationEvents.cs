@@ -92,4 +92,9 @@ public class AnimationEvents : MonoBehaviour
 	{
         girl_crack.Invoke();
 	}
+
+    public void Spotted()
+    {
+
+    }
 }

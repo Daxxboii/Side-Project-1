@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
         [SerializeField] private float cameraSensitivity;
         [SerializeField] public float speed,Footsteps_frequency, CrouchSpeed, height,crouchHight, Health,Crouch_Interpolation_speed;
         private float TempSpeed;
-        private bool  isCrouching;
+        [HideInInspector]public bool  isCrouching;
         private Vector3 move;
         public bool isDead;
 

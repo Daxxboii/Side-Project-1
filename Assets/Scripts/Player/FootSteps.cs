@@ -9,14 +9,19 @@ public class FootSteps : MonoBehaviour
 	public static bool inside;
 	public AudioManager AudioManager;
 	public RainScript rain;
+	public PlayerScript ps;
 	private void OnCollisionEnter(Collision other)
 	{
 		//Ground
 		if (other.gameObject.layer == 6)
 		{
-			AudioManager.Player_walk(1);
-			RandomRain();
-			inside = false;
+            if (!ps.isCrouching)
+            {
+             AudioManager.Player_walk(1);
+			 RandomRain();
+			 inside = false;
+            }
+			
 		}
 		//Tiles
 		else if (other.gameObject.layer == 3)

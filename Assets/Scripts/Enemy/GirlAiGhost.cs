@@ -73,15 +73,13 @@ namespace Scripts.Enemy
                         if (!cooldown)
                         {
                             //if player is in front of girl
-                            if (isinFrontOFMe())
+                            if (Vector3.Distance(player.transform.position, transform.position) < chase_range)
                             {
                                     agent.SetDestination(player.transform.position);
 								//Trigger Chase Animation
 							
                                     Animations(2, 0);
-                                   
-                                
-                                Laugh();
+                                    Laugh();
                                     Attack();
                             }
 
@@ -158,17 +156,7 @@ namespace Scripts.Enemy
 
 
             }
-            bool isinFrontOFMe()
-            {
-				if (Vector3.Distance(player.transform.position, transform.position) < chase_range)
-				{
-                    return true;
-				}
-				else
-				{
-                    return false;
-				}
-            }
+         
 
             public  Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
             {
