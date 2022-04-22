@@ -33,6 +33,7 @@ public class PostProcessingManager : MonoBehaviour
 
 	public void Blur()
 	{
+		DOTween.KillAll();
 		DOVirtual.Float(0, 1, duration, v =>
 		{
 			DepthOfField.weight = v;
@@ -41,6 +42,7 @@ public class PostProcessingManager : MonoBehaviour
 	}
 	public void UnBlur()
 	{
+		DOTween.KillAll();
 		DOVirtual.Float(1, 0, duration, v =>
 		{
 			DepthOfField.weight = v;

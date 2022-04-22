@@ -104,13 +104,12 @@ namespace Scripts.Enemy
             void Attack()
             {
                 //Direct Kill
-				if (!angry||playerScript.isDead)
+				if (!angry&&playerScript.isDead)
 				{
                     if (Distance_from_player < attack_radius)
                     {
                         Animations(2, 2);
                         AudioM.Enemy_Princy_Int_Kill();
-
                     }
                 }
                 //Player Health is not critical
