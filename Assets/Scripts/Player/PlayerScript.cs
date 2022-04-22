@@ -73,15 +73,13 @@ public class PlayerScript : MonoBehaviour
             hit_image.gameObject.SetActive(true);
             TempSpeed = speed;
             characterController = gameObject.GetComponent<CharacterController>();
-           // tempHeight = characterController.height;
-          //  height = characterController.height;
             TempSpeed = speed;
             // id = -1 means the finger is not being tracked
             leftFingerId = -1;
             rightFingerId = -1;
 
             // only calculate once
-            halfScreenWidth = Screen.width / 2;
+            halfScreenWidth = 1280 / 2;
         }
 
         // Update is called once per frame
