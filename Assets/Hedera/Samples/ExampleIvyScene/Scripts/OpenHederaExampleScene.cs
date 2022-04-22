@@ -6,8 +6,8 @@ using UnityEditor;
 namespace Hedera {
     public class OpenHederaExampleScene
     {
-            [MenuItem("Hedera/Open HederaExampleScene.unity")]
-            public static void OpenExampleScene () {
+         //   [MenuItem("Hedera/Open HederaExampleScene.unity")]
+          /*  public static void OpenExampleScene () {
                 var scenes = AssetDatabase.FindAssets("HederaExampleScene t:Scene");
                 if ( scenes != null && scenes.Length > 0) {
                     scenes[0] = AssetDatabase.GUIDToAssetPath( scenes[0] );
@@ -18,6 +18,6 @@ namespace Hedera {
                 if ( UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() ) {
                     UnityEditor.SceneManagement.EditorSceneManager.OpenScene( scenes[0], UnityEditor.SceneManagement.OpenSceneMode.Single);
                 }
-            }
+            }*/
     }
 }
