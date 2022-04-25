@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts.Timeline;
 public class EndTrigger : MonoBehaviour
 {
     public Timeline_Manager tm;

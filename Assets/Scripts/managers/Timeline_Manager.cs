@@ -7,9 +7,6 @@ using TMPro;
 using UnityEngine.UI;
 using Scripts.Player;
 using DG.Tweening;
-namespace Scripts.Timeline
-
-{
     public class Timeline_Manager : MonoBehaviour
     {
         [Header("Scripts")]
@@ -17,8 +14,8 @@ namespace Scripts.Timeline
         [SerializeField] private ObjectController ObjectControllerScript;
         [SerializeField] private ButtonOpen ButtonOpenScript;
         [SerializeField]public PlayerScript _PlayerScript;
-        [SerializeField] public Enemy.Principal.AiFollow aiFollow;
-        [SerializeField]public Enemy.girlHostile.GirlAiGhost girl;
+        [SerializeField] public Scripts.Enemy.Principal.AiFollow aiFollow;
+        [SerializeField]public Scripts.Enemy.girlHostile.GirlAiGhost girl;
 
 
         [Header("Buttons")]
@@ -238,5 +235,5 @@ namespace Scripts.Timeline
         }
     }
     
-}
+
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Scripts.Timeline;
 using Scripts.Objects;
 
 namespace Scripts.Player

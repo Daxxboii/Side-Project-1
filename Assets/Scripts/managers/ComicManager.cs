@@ -3,7 +3,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Scripts.Timeline;
 public class ComicManager : MonoBehaviour
 {
 
@@ -28,6 +27,7 @@ public class ComicManager : MonoBehaviour
     private TextMeshProUGUI subs;
     [SerializeField]
     private GameObject exit;
+    public GameObject Buttons;
   //  [HideInInspector]
     public int comic_index, page_index = 0;
     RaycastHit hit;
@@ -43,7 +43,9 @@ public class ComicManager : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Comic" )
             {
+                Buttons.SetActive(false);
                 Comic_Open();
+                
                 hit.transform.gameObject.SetActive(false);
             }
         }
@@ -63,6 +65,7 @@ public class ComicManager : MonoBehaviour
     }
     public void Comic_Close()
     {
+        Buttons.SetActive(true);
         load.gameObject.SetActive(false);
         load.SetBool("Open", false);
         Time.timeScale = 1f;
