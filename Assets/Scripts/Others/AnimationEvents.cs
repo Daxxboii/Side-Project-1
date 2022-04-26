@@ -97,4 +97,14 @@ public class AnimationEvents : MonoBehaviour
     {
 
     }
+
+    public void Chasing()
+    {
+        PlayerScript.is_Being_Chased = true;
+    }
+
+    public void StopChasing()
+    {
+        PlayerScript.is_Being_Chased = false;
+    }
 }

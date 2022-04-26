@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 public class PlayerScript : MonoBehaviour
     {
-      
+    public static bool is_Being_Chased;
 
         [Header("UI")]
         [SerializeField] private Sprite crouch;

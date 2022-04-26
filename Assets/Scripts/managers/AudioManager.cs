@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public Timeline_Manager tm;
-    public float Environment_sounds_timer;
+    [Range(0f,60f)]public float Environment_sounds_timer;
     public GameObject player;
 
     [Header("Sources")]
@@ -274,17 +274,18 @@ public class AudioManager : MonoBehaviour
    
     public void Random_timer()
     {
-        index = Random.Range(0, environment_sounds.Length);
-        
-            if(((tm.Current_cutscene < 3) &&index==13))
+        if (tm.Current_cutscene > 3 && PlayerScript.is_Being_Chased==false)
+        {
+            index = Random.Range(0, environment_sounds.Length);
+            if (((tm.Current_cutscene < 3) && index == 13))
             {
                 Random_timer();
             }
-		else
-        {
-            Random_Sounds();
+            else
+            {
+                Random_Sounds();
+            }
         }
-      
         timer = 0;
     }
     private void Play_Thunder()
