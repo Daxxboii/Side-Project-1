@@ -525,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115490547}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 2.503622, y: 0.17766571, z: 4.351682}
+  m_LocalPosition: {x: 2.682, y: 0.17766571, z: 4.207}
   m_LocalScale: {x: 4.783301, y: 4.783301, z: 4.783301}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -544,13 +544,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 1.2984179
+  m_Intensity: 15
+  m_Range: 2.217174
   m_SpotAngle: 90.718285
   m_InnerSpotAngle: 52.169106
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1067,14 +1067,14 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 9.74
+  m_Color: {r: 1, g: 0.9882353, b: 0.73333335, a: 1}
+  m_Intensity: 10
   m_Range: 0.82278526
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1237,8 +1237,8 @@ ReflectionProbe:
   m_Enabled: 1
   serializedVersion: 2
   m_Type: 0
-  m_Mode: 0
-  m_RefreshMode: 0
+  m_Mode: 1
+  m_RefreshMode: 1
   m_TimeSlicingMode: 0
   m_Resolution: 256
   m_UpdateFrequency: 0
@@ -4276,7 +4276,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.23e-43, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: -6.08e-43, y: 6e-45, z: 1e-45, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5696,6 +5696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8432417a879fed46af3c3f448364560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  senci: 5
   sensitivity_Slider: {fileID: 0}
   music_Slider: {fileID: 0}
   audiom: {fileID: 24100000, guid: 55937a7e60357884da3cd77faf0783b4, type: 2}
