@@ -32,7 +32,6 @@ public class PlayerScript : MonoBehaviour
 
         [SerializeField] private Transform cameraTransform, ghost;
         [SerializeField] public CharacterController characterController;
-        [SerializeField] private Animator camAnim;
 
         // Player settings
         [SerializeField] private float cameraSensitivity;
@@ -64,7 +63,7 @@ public class PlayerScript : MonoBehaviour
         public GameManager gameManager;
 
         Touch t;
-        float x, z;
+        [HideInInspector]public float x, z;
 
 
         // Start is called before the first frame update
@@ -195,16 +194,13 @@ public class PlayerScript : MonoBehaviour
            x = joystick.Horizontal;
            z = joystick.Vertical;
 
-            camAnim.SetFloat("WalkSpeed", (z*Footsteps_frequency));
             
             if (joystick.Direction.x != 0 || joystick.Direction.y != 0 )
             {
-                camAnim.SetBool("IsMoving", true);
                 move = x * transform.right + z * transform.forward;
             }
             else
             {
-                camAnim.SetBool("IsMoving", false);
                 move = Vector3.zero;
             }
 

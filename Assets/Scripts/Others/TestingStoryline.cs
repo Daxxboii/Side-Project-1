@@ -22,5 +22,10 @@ public class TestingStoryline : MonoBehaviour
     {
         girl.SetActive(false);
         Principal.SetActive(false);
+
+    }
+    public void Cutscene()
+    {
+        timeline_Manager.TimeLine_Activator();
     }
 }

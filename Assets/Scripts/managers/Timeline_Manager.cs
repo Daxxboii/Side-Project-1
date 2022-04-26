@@ -9,6 +9,7 @@ using Scripts.Player;
 using DG.Tweening;
     public class Timeline_Manager : MonoBehaviour
     {
+    public TestingStoryline testing_Script;
         [Header("Scripts")]
         [SerializeField] public AdManager adManager;
         [SerializeField] private ObjectController ObjectControllerScript;
@@ -121,7 +122,7 @@ using DG.Tweening;
                 cutscene_player.transform.position = position;
                 cutscene_player.transform.eulerAngles = rotation;
             }
-          
+    //    Invoke("Test", 10f);
         }
 
         public void TimeLine_Activator()
@@ -233,6 +234,11 @@ using DG.Tweening;
             Top.DOSizeDelta(target, 1).SetEase(Ease.InSine);
             Bottom.DOSizeDelta(target, 1).SetEase(Ease.InSine);
         }
+
+    void Test()
+    {
+        TimeLine_Activator();
+    }
     }
     
 
