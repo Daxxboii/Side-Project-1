@@ -6,7 +6,6 @@ using DG.Tweening;
 public class PlayerScript : MonoBehaviour
     {
       
-        private static float sensi = 10;
 
         [Header("UI")]
         [SerializeField] private Sprite crouch;
@@ -240,10 +239,10 @@ public class PlayerScript : MonoBehaviour
        
       
 
-         public void SetSensi(float S)
+         public void SetSensi(float Sensitivity)
         {
-            sensi = S;
-            cameraSensitivity = sensi;
+           
+            cameraSensitivity = Sensitivity;
         }
 
 

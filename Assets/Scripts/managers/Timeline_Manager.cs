@@ -9,7 +9,6 @@ using Scripts.Player;
 using DG.Tweening;
     public class Timeline_Manager : MonoBehaviour
     {
-    public TestingStoryline testing_Script;
         [Header("Scripts")]
         [SerializeField] public AdManager adManager;
         [SerializeField] private ObjectController ObjectControllerScript;

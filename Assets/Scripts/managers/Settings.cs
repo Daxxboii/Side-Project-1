@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Settings : MonoBehaviour
 {
     public static float volume = 0f;
-    public static float senci = 5f;
+    public  float senci = 5f;
     [SerializeField]private Slider sensitivity_Slider, music_Slider;
     public AudioMixer audiom;
     public PlayerScript Player_Script;
@@ -25,14 +25,16 @@ public class Settings : MonoBehaviour
         }
         else
         {  
-            sensitivity_Slider.minValue = 0.5f;
-            if (PlayerPrefs.HasKey("Senci"))
+           // sensitivity_Slider.minValue = 0.5f;
+            if (PlayerPrefs.GetFloat("Senci")!=0)
             {
                 sensitivity_Slider.value = PlayerPrefs.GetFloat("Senci");
+                Debug.Log("1");
             }
             else
             {
               sensitivity_Slider.value = senci;
+                Debug.Log("2");
             }
             SetSencivity();
         }
@@ -53,12 +55,14 @@ public class Settings : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Volume", music_Slider.value);
         audiom.SetFloat("Audio", music_Slider.value);
+        PlayerPrefs.Save();
     }
 
     public void SetSencivity()
     {
         Player_Script.SetSensi(sensitivity_Slider.value);
         PlayerPrefs.SetFloat("Senci", sensitivity_Slider.value);
+        PlayerPrefs.Save();
     }
 }
    
