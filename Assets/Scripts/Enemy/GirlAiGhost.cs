@@ -166,7 +166,7 @@ namespace Scripts.Enemy
 
                 NavMeshHit navHit;
 
-                NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+                NavMesh.SamplePosition(randDirection, out navHit, 5, layermask);
                
                 return navHit.position;
             }
