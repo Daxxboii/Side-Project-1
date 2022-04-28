@@ -120,7 +120,10 @@ namespace Scripts.Buttons
                 {
                     comment.text = "Find something to write with";
                 }
-
+                else
+                {
+                    close();
+                }
             }
             else
             {

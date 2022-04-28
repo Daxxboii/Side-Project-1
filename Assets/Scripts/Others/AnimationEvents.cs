@@ -21,6 +21,7 @@ public class AnimationEvents : MonoBehaviour
     public static event MakeSound thunder;
     public static event MakeSound girl_spook;
     public static event MakeSound girl_crack;
+    public static event MakeSound Footstep;
 
     private int random_int;
     private int index;
@@ -34,9 +35,9 @@ public class AnimationEvents : MonoBehaviour
         girlAIGhost.Animations(0, 0);
     }
 
-    public void FootStep()
+    public static void FootStep()
 	{
-        AudioManager.Footsteps.Play();
+        Footstep.Invoke();
 	}
 	#region Doors
 	public void Wooden_Door_Open()

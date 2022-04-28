@@ -14,8 +14,8 @@ public class escape_door : MonoBehaviour
     private void Start()
     {
         //false if unsaved
-      /* active =  PlayerPrefsX.GetBool("Active");
-        over = PlayerPrefsX.GetBool("Bool");*/
+       active =  PlayerPrefsX.GetBool("Active");
+        over = PlayerPrefsX.GetBool("Bool");
         anim = gameObject.GetComponent<Animator>();
         Activations();
     }
@@ -25,17 +25,18 @@ public class escape_door : MonoBehaviour
     {
         //all objects collected
         if (active && !over)
-        {
+        { 
+            foreach (GameObject i in objects)
+            {
+                i.SetActive(true);
+            }
             if (!read)
             {
                 note.SetActive(true);
                 read = true;
             }
             anim.SetInteger("State", 1);
-            foreach (GameObject i in objects)
-            {
-                i.SetActive(true);
-            }
+           
              
         }
     
@@ -51,7 +52,8 @@ public class escape_door : MonoBehaviour
                 i.SetActive(false);
             }
         }
-        /*PlayerPrefsX.SetBool("Active",active);
-        PlayerPrefsX.SetBool("Over", over);*/
+        PlayerPrefsX.SetBool("Active",active);
+        PlayerPrefsX.SetBool("Over", over);
+        PlayerPrefs.Save();
     }
 }

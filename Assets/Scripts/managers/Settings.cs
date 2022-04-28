@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
-    public static float volume = 0f;
+    public static float volume = 10f;
     public  float senci = 5f;
     [SerializeField]private Slider sensitivity_Slider, music_Slider;
     public AudioMixer audiom;
@@ -29,12 +29,12 @@ public class Settings : MonoBehaviour
             if (PlayerPrefs.GetFloat("Senci")!=0)
             {
                 sensitivity_Slider.value = PlayerPrefs.GetFloat("Senci");
-                Debug.Log("1");
+               
             }
             else
             {
               sensitivity_Slider.value = senci;
-                Debug.Log("2");
+               
             }
             SetSencivity();
         }

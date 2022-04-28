@@ -199,7 +199,7 @@ public class SaveManager : MonoBehaviour
             oc.had = temp;
         }
         minimap_button.SetActive(true);
-        FootSteps.inside = true;
+        Headbob.inside = true;
       
     //  id = PlayerPrefsX.GetStringArray("id");
       _state =  sm.state;

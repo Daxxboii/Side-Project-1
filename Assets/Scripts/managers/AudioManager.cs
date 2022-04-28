@@ -79,8 +79,14 @@ public class AudioManager : MonoBehaviour
         AnimationEvents.thunder += Play_Thunder;
         AnimationEvents.girl_spook += Girl_Spook;
         AnimationEvents.girl_crack += Enemy_Girl_Bones;
+        AnimationEvents.Footstep += _Footsteps;
     }
 
+    private void _Footsteps()
+    {
+        Footsteps.Play();
+      //  Debug.Log("Foot;");
+    }
     private void Update()
     {
         timer += Time.deltaTime;

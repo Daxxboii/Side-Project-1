@@ -21,7 +21,7 @@ namespace Scripts.Player
         [SerializeField]
         Camera FPScam;
         Note_manager nm = null;
-        escape_door ed = null;
+        [SerializeField]escape_door ed = null;
         [SerializeField]
         Timeline_Manager tm;
         [SerializeField]
@@ -80,7 +80,6 @@ namespace Scripts.Player
                 }
                 else if (hit.transform.CompareTag("Escape Door"))
                 {
-                    ed = hit.transform.GetComponent<escape_door>();
                     error_comment.text = "";
                     if (tm.Current_cutscene == 12)
                     {
@@ -92,7 +91,7 @@ namespace Scripts.Player
                     }
                     else
                     {
-                        error_comment.text = "Get all the 5 objects listed to open the door";
+                        error_comment.text = "Get all the 5 belongings to open the door";
                     }
                     ed.Activations();
                 }
@@ -106,6 +105,7 @@ namespace Scripts.Player
                     Ring_Box.SetActive(true);
                     savemanager.Save();
                 }
+                
             }
         }
       void IntractWithDoor()

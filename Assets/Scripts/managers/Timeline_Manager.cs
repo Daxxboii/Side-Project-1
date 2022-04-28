@@ -40,7 +40,7 @@ using DG.Tweening;
         [Header("GameObjects")]
         [SerializeField]private GameObject player,player_cam;
         [SerializeField]private GameObject cutscene_player,cutscene_cam;
-        [HideInInspector]public int index,objective_index,Current_cutscene;
+        [SerializeField]public int index,objective_index,Current_cutscene;
 
         [Header("Variables")]
         [SerializeField]private float y_offset;
@@ -202,7 +202,10 @@ using DG.Tweening;
 
         private void ActivateSkip()
         {
+        if (Current_cutscene != 8)
+        {
             SkipButton.SetActive(true);
+        }
         }
 
         //Called when timeline Starts
