@@ -49,12 +49,14 @@ namespace Scripts.Enemy
             {
                 Movement();
                 Attack();
+               Debug.Log(Distance_from_player);
             }
             void Movement()
             {
                 //Principal is not Chilling
                 if (NotCooling)
                 {
+                    Distance_from_player = DetermineDistanceFromPlayer();
                     //if principal is angry and in sight
                     if (visibility.visible == true && !angry)
                     {
@@ -69,8 +71,6 @@ namespace Scripts.Enemy
                     {
                       //  Eye.SetActive(false);
                         _agent.enabled = true;
-                        Distance_from_player =DetermineDistanceFromPlayer();
-
                         //Player is not in Catching Range
                         if (Distance_from_player > follow_distance)
                         {
@@ -104,7 +104,7 @@ namespace Scripts.Enemy
             void Attack()
             {
                 //Direct Kill
-				if (!angry&&playerScript.isDead)
+				if (!angry)
 				{
                     if (Distance_from_player < attack_radius)
                     {
