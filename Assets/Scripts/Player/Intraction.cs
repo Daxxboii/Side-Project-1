@@ -115,9 +115,6 @@ namespace Scripts.Player
                 it.anim.SetBool("IsOpen", true);
                 StartCoroutine(closeDoor());
             }
-
-			
-
         }
 
         IEnumerator closeDoor()
