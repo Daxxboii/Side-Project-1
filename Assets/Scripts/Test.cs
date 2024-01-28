@@ -8,15 +8,8 @@ public class Test : MonoBehaviour
     public VideoPlayer anims;
     public Material material;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       // material.EnableKeyword("_EmissionMap");
-        anims.Prepare();    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        anims.Prepare();    
     }
-
-  
 }

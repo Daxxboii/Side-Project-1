@@ -23,33 +23,35 @@ public class escape_door : MonoBehaviour
    
     public void Activations()
     {
-        //all objects collected
-        if (active && !over)
-        { 
-            foreach (GameObject i in objects)
-            {
-                i.SetActive(true);
-            }
-            if (!read)
-            {
-                note.SetActive(true);
-                read = true;
-            }
-            anim.SetInteger("State", 1);
-           
-             
-        }
-    
-        else if(active && over){
-            anim.SetInteger("State", 2);
-        }
-
-        else
+        switch (active)
         {
-            note.SetActive(false);
-            foreach (GameObject i in objects)
+            //all objects collected
+            case true when !over:
             {
-                i.SetActive(false);
+                foreach (GameObject i in objects)
+                {
+                    i.SetActive(true);
+                }
+                if (!read)
+                {
+                    note.SetActive(true);
+                    read = true;
+                }
+                anim.SetInteger("State", 1);
+                break;
+            }
+            case true when over:
+                anim.SetInteger("State", 2);
+                break;
+            default:
+            {
+                note.SetActive(false);
+                foreach (GameObject i in objects)
+                {
+                    i.SetActive(false);
+                }
+
+                break;
             }
         }
         PlayerPrefsX.SetBool("Active",active);

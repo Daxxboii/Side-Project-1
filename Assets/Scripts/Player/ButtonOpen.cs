@@ -1,8 +1,5 @@
 ﻿using Scripts.Objects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace Scripts.Buttons
@@ -10,7 +7,7 @@ namespace Scripts.Buttons
     public class ButtonOpen : MonoBehaviour
     {
         [SerializeField]
-        GameObject Player,  Intract, Pickup, Timeline,Error_comment,note,save,Comic,map;
+        private GameObject Player,  Intract, Pickup, Timeline,Error_comment,note,save,Comic,map;
         escape_door ed = null;
         TextMeshProUGUI comment;
         [SerializeField]
@@ -44,7 +41,7 @@ namespace Scripts.Buttons
         }
 
      
-        void Update()
+        private void Update()
         {
 
             if (Player.activeInHierarchy == true && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 6f, lm))
@@ -146,10 +143,10 @@ namespace Scripts.Buttons
                 outline.enabled = false;
 			}
         }
-        void Track(GameObject Button)
+        private void Track(GameObject Button)
         {
             pointed = hit.transform.gameObject.GetComponentsInChildren<Transform>();
-            foreach(Transform child in pointed)
+            foreach(var child in pointed)
             {
                 if(child.gameObject.tag == "Tracker")
                 {
@@ -161,13 +158,13 @@ namespace Scripts.Buttons
                 
               //  Debug.Log(hit.transform.gameObject.name);
             
-            Vector3 pos = Camera.main.WorldToScreenPoint(pointer.transform.position);
+            var pos = Camera.main.WorldToScreenPoint(pointer.transform.position);
             Button.transform.position = pos;
           
             
         }
 
-        void GetOutline()
+        private void GetOutline()
 		{
             outline = hit.transform.gameObject.GetComponent<Outline>();
 			if (outline != null)
