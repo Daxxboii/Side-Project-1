@@ -17,24 +17,20 @@ public class LoadLevel : MonoBehaviour
 	}
 	public void loadLevel(int sceneIndex)
     {
-        StartCoroutine(LoadAsyncronasly(sceneIndex));
+        StartCoroutine(LoadAsync(sceneIndex));
     }
-    IEnumerator LoadAsyncronasly( int sceneIndex)
+    private IEnumerator LoadAsync( int sceneIndex)
     {
         yield return new WaitForSeconds(delay);
-       // Debug.Log("hi");
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        var operation = SceneManager.LoadSceneAsync(sceneIndex);
         LoadingScreen.SetActive(true);
      
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / .9f);
-
+            var progress = Mathf.Clamp01(operation.progress / .9f);
             slider.value = progress;
-
             yield return null;
-
         }
     }
    public void Skip()

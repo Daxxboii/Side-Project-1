@@ -10,25 +10,19 @@ public class Ghost_interactions : MonoBehaviour
     private Animator anim = null;
  
 
-    void Update()
+    private void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range, Intractable))
-        {
-            if (hit.collider.tag == "Door")
-            {
-                anim = hit.transform.GetComponentInParent<Animator>();
-                InteractWithDoor();
-            }
-        }
+        if (!Physics.Raycast(transform.position, transform.forward, out hit, range, Intractable)) return;
+        if (hit.collider.tag != "Door") return;
+        anim = hit.transform.GetComponentInParent<Animator>();
+        InteractWithDoor();
     }
 
     public void InteractWithDoor()
     {
-        if (anim.GetBool("IsOpen") == false)
-        {
-            anim.SetBool("IsOpen", true);
-            StartCoroutine(closeDoor());
-        }
+        if (anim.GetBool("IsOpen") != false) return;
+        anim.SetBool("IsOpen", true);
+        StartCoroutine(closeDoor());
     }
 
     IEnumerator closeDoor()

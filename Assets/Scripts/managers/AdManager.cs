@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 using Scripts.Player;
 using UnityEngine.SceneManagement;
 
-public class AdManager : MonoBehaviour ,IUnityAdsListener
+public class AdManager : MonoBehaviour 
 {
     [SerializeField]
     private GameObject menu;
@@ -18,22 +18,22 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
    
     void Start()
     {
-        Advertisement.AddListener(this);
-        Advertisement.Initialize(mySurfacingId, true);
-     //   Debug.Log(SceneManager.GetActiveScene().buildIndex);
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            StartCoroutine(ShowBannerWhenInitialized());
-        }
-        else
-        {
-            Advertisement.Banner.Hide();
-        }
+     //    Advertisement.AddListener(this);
+     //    Advertisement.Initialize(mySurfacingId, true);
+     // //   Debug.Log(SceneManager.GetActiveScene().buildIndex);
+     //    if (SceneManager.GetActiveScene().buildIndex == 0)
+     //    {
+     //        StartCoroutine(ShowBannerWhenInitialized());
+     //    }
+     //    else
+     //    {
+     //        Advertisement.Banner.Hide();
+     //    }
     }
    public void Show(int a)
     {
-        Advertisement.Show(placement);
-        Time.timeScale = 0;
+        // Advertisement.Show(placement);
+        // Time.timeScale = 0;
     }
 
   
@@ -46,8 +46,8 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidError(string message)
     {
-            no_internet.SetActive(true);
-            retry.SetActive(false);
+            // no_internet.SetActive(true);
+            // retry.SetActive(false);
     }
 
     public void OnUnityAdsDidStart(string placementId)
@@ -57,22 +57,23 @@ public class AdManager : MonoBehaviour ,IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-            Time.timeScale = 1;
-            PlayerPrefs.SetInt("loadindex", 1);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // Time.timeScale = 1;
+            // PlayerPrefs.SetInt("loadindex", 1);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator ShowBannerWhenInitialized()
     {
-        while (!Advertisement.isInitialized)
-        {
-            yield return new WaitForSeconds(10f);
-        }
-        Advertisement.Banner.SetPosition(BannerPosition.TOP_RIGHT);
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Advertisement.Banner.Show(banner_placement);
-        }
-       
+        yield return null;
+        // while (!Advertisement.isInitialized)
+        // {
+        //     yield return new WaitForSeconds(10f);
+        // }
+        // Advertisement.Banner.SetPosition(BannerPosition.TOP_RIGHT);
+        // if (SceneManager.GetActiveScene().buildIndex == 0)
+        // {
+        //     Advertisement.Banner.Show(banner_placement);
+        // }
+
     }
 }

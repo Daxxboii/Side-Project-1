@@ -7,7 +7,6 @@ public class Serializer : MonoBehaviour
     public Vector3 loc, rot;
     public bool collider_state;
    
-   
     public void Assign_transforms()
     {
         loc = transform.position;
@@ -16,34 +15,11 @@ public class Serializer : MonoBehaviour
 
     public void _collider()
     {
-        if (gameObject.GetComponent<Collider>()!=null)
-        {
-            if (gameObject.GetComponent<Collider>().enabled)
-            {
-                collider_state = true;
-            }
-            else
-            {
-                collider_state = false;
-            }
-        }
-
-        else
-        {
-            collider_state = false;
-        }
+        collider_state = gameObject.GetComponent<Collider>()!=null && gameObject.GetComponent<Collider>().enabled;
     }
 
     public bool Rigidbody_Exists()
     {
-        if ( gameObject.GetComponent<Rigidbody>() != null)
-        {
-                return true;
-            
-        }
-        else
-        {
-            return false;
-        }
+        return gameObject.GetComponent<Rigidbody>() != null;
     }
 }

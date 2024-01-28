@@ -28,7 +28,6 @@ namespace Scripts.Enemy
             [SerializeField]private float attack_radius;
             [SerializeField] private float Roam_Radius;
             [SerializeField] private float cool_period;
-           // [SerializeField] private GameObject Eye;
             private Vector3 newPos;
             private Vector3 RandomSpawnLocation;
             private float Distance_from_player;
@@ -41,17 +40,20 @@ namespace Scripts.Enemy
             [SerializeField] private GameObject _player;
             [SerializeField] private PlayerScript playerScript;
             [SerializeField] private VisiBility visibility;
-            void Start()
+
+            private void Start()
             {
                 _agent.stoppingDistance = stopping_distance;
             }
-            void Update()
+
+            private void Update()
             {
                 Movement();
                 Attack();
                Debug.Log(Distance_from_player);
             }
-            void Movement()
+
+            private void Movement()
             {
                 //Principal is not Chilling
                 if (NotCooling)
@@ -101,7 +103,8 @@ namespace Scripts.Enemy
                     Animations(0, 0);
                 }
             }
-            void Attack()
+
+            private void Attack()
             {
                 //Direct Kill
 				if (!angry)
@@ -135,17 +138,14 @@ namespace Scripts.Enemy
                 }
             }
 
-            
-            float DetermineDistanceFromPlayer()
+
+            private float DetermineDistanceFromPlayer()
             {
                 return Vector3.Distance(_player.transform.position, gameObject.transform.position);
             }
-           
-
-
-
+            
             //Get a point in Navmesh in this distance
-            Vector3 GetRandomPointNearPlayer(Vector3 origin, float dist, int layermask)
+            private Vector3 GetRandomPointNearPlayer(Vector3 origin, float dist, int layermask)
             {
                 RandomSpawnLocation = new Vector3(Random.insideUnitSphere.x * Roam_Radius, transform.position.y, Random.insideUnitSphere.z * Roam_Radius);
                 RandomSpawnLocation += origin;
@@ -155,41 +155,36 @@ namespace Scripts.Enemy
 
             }
 
-
-
             private void Animations(int hit_state, int walk_state)
             {
                 anim.SetInteger("Walk_state", walk_state);
                 anim.SetInteger("Hit_state", hit_state);
             }
 
-            IEnumerator cooldown()
+            private IEnumerator cooldown()
             {
                 yield return new WaitForSeconds(cool_period);
                 NotCooling = true;
             }
-            void Growl()
+
+            private void Growl()
             {
                 timer += Time.deltaTime;
-                if(timer > Time_between_growls)
-                {
-                    AudioM.Enemy_Princy_Growl();
-                    timer = 0;
-                }
-             //   Debug.Log("Growling;");
+                if (!(timer > Time_between_growls)) return;
+                AudioM.Enemy_Princy_Growl();
+                timer = 0;
             }
-            void Chase()
+
+            private void Chase()
             {
                 timer2 += Time.deltaTime;
-                if (timer2 > Time_between_Laughter)
+                if (!(timer2 > Time_between_Laughter)) return;
+                random_chances = Random.Range(0, 10);
+                if (random_chances < Chances_of_laughter)
                 {
-                    random_chances = Random.Range(0, 10);
-					if (random_chances < Chances_of_laughter)
-					{
-                        AudioM.Enemy_Princy_chase();
-                    }
-                    timer2 = 0;
+                    AudioM.Enemy_Princy_chase();
                 }
+                timer2 = 0;
             }
 
 
